@@ -1,0 +1,54 @@
+# Mod só de dados: "lowcodefml" é o carregador para mods sem código Java.
+modLoader="lowcodefml"
+loaderVersion="${loader_version_range}"
+license="${mod_license}"
+
+[[mods]]
+modId="${mod_id}"
+version="${mod_version}"
+displayName="${mod_name}"
+authors="${mod_authors}"
+description='''${mod_description}'''
+
+[[dependencies.${mod_id}]]
+    modId="neoforge"
+    type="required"
+    versionRange="[${neo_version},)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.${mod_id}]]
+    modId="minecraft"
+    type="required"
+    versionRange="${minecraft_version_range}"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.${mod_id}]]
+    modId="abandonedmoderncity"
+    type="required"
+    versionRange="[0.1.0,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.${mod_id}]]
+    modId="tacz"
+    type="required"
+    versionRange="[1.2.0,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.${mod_id}]]
+    modId="lrtactical"
+    type="required"
+    versionRange="[0.4.3,)"
+    ordering="NONE"
+    side="BOTH"
+
+# First Aid é opcional: as entradas dele ficam em arquivos com a condição neoforge:mod_loaded.
+[[dependencies.${mod_id}]]
+    modId="firstaid"
+    type="optional"
+    versionRange="[1.3.5,)"
+    ordering="NONE"
+    side="BOTH"
