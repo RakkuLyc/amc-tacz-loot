@@ -3,10 +3,10 @@
   "conditions": [
     {
       "condition": "neoforge:loot_table_id",
-      "loot_table_id": "abandonedmoderncity:chests/building_large/chest"
+      "loot_table_id": "abandonedmoderncity:chests/police_station/barrel_hard"
     }
   ],
-  "table": "amctaczloot:test/firstaid",
+  "table": "amctaczloot:police_station/barrel_hard_firstaid",
   "neoforge:conditions": [
     {
       "type": "neoforge:mod_loaded",

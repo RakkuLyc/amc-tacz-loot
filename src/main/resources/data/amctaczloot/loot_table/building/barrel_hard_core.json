@@ -1,0 +1,40 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:loot_table",
+          "value": "amctaczloot:pick/gun_default",
+          "weight": 12,
+          "quality": 3
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "amctaczloot:pick/ammo_default",
+          "weight": 45,
+          "quality": 11
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "amctaczloot:pick/att",
+          "weight": 24,
+          "quality": 6
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "amctaczloot:pick/lr",
+          "weight": 30,
+          "quality": 8
+        },
+        {
+          "type": "minecraft:empty",
+          "weight": 889,
+          "quality": -28
+        }
+      ],
+      "bonus_rolls": 0.0
+    }
+  ]
+}

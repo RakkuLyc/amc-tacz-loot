@@ -1,0 +1,16 @@
+{
+  "type": "neoforge:add_table",
+  "conditions": [
+    {
+      "condition": "neoforge:loot_table_id",
+      "loot_table_id": "abandonedmoderncity:chests/police_station/chest"
+    }
+  ],
+  "table": "amctaczloot:police_station/chest_firstaid",
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "firstaid"
+    }
+  ]
+}

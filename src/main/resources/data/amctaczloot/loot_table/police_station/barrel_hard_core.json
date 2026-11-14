@@ -1,0 +1,40 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:loot_table",
+          "value": "amctaczloot:pick/gun_police",
+          "weight": 60,
+          "quality": 15
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "amctaczloot:pick/ammo_police",
+          "weight": 120,
+          "quality": 30
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "amctaczloot:pick/att",
+          "weight": 70,
+          "quality": 18
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "amctaczloot:pick/lr",
+          "weight": 35,
+          "quality": 9
+        },
+        {
+          "type": "minecraft:empty",
+          "weight": 715,
+          "quality": -72
+        }
+      ],
+      "bonus_rolls": 0.0
+    }
+  ]
+}

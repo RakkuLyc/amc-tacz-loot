@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:loot_table",
+          "value": "amctaczloot:pick/lr",
+          "weight": 30,
+          "quality": 8
+        },
+        {
+          "type": "minecraft:empty",
+          "weight": 970,
+          "quality": -8
+        }
+      ],
+      "bonus_rolls": 0.2
+    }
+  ]
+}

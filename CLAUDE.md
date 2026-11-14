@@ -15,7 +15,9 @@ First Aid e da LesRaisins. Mod id `amctaczloot`. Recomeçado do zero em 13 Nov 2
 
 ## Decisões do usuário (13 Nov 2026)
 - Só o pacote padrão do TACZ (70 armas); o Gunpowder Revolution (`hamster`) fica de fora por ora.
-- Armas/munição/attachments em `building` e `building_large`; **a delegacia recebe mais armas** (ver pendência).
+- Armas/munição/attachments em `building` e `building_large`; **a delegacia recebe mais armas**: o AMC ganhou o tema `police_station` (commit `27ae583` do AMC, 13 Nov 2026).
+- Cura: farmácia bastante; casas, oficinas e postos um pouco; oficinas também com pouca munição.
+- **Vasos (`pot`) não recebem nada** (ver fatos).
 - TACZ, LesRaisins e AMC são obrigatórios; **só o First Aid é opcional** (`neoforge:mod_loaded`).
 - Loot generoso, mas sem abundância. Toda tabela com `weight`, `quality` e `rolls`/`bonus_rolls` para a Sorte funcionar.
 - Repositório: mesmo nome (`RakkuLyc/amc-tacz-loot`), novo e vazio.
@@ -28,19 +30,29 @@ First Aid e da LesRaisins. Mod id `amctaczloot`. Recomeçado do zero em 13 Nov 2
   (`GunItemBuilder`) grava `GunId`, `GunFireMode` (nome do enum em maiúsculas: `SEMI`/`AUTO`/`BURST`),
   `GunCurrentAmmoCount`, `HasBulletInBarrel` e `HeatAmount`. Catálogo (70 armas com tipo, munição e modos de tiro;
   25 munições; 128 attachments) em `docs/tacz_catalog.json`, gerado por `tools/tacz_catalog.py`.
-  Excluir do loot os attachments `oem_*` e `*_default` (equipamento de fábrica; **hipótese** pelo nome, não testado).
+  Itens elegíveis = os que têm receita na mesa de armeiro do pacote padrão (`craftable` no catálogo: 70 armas, 25 munições,
+  104 de 128 attachments; ficam de fora `oem_*`, `*_default` e variantes embutidas). Critério objetivo, não pelo nome.
   Os JSON de dados do jar têm comentários `/* */` (o parser do catálogo trata); `minigun` não tem `ammo_amount`.
   **Não verificado:** se uma arma só com `GunId`+`GunFireMode` (sem `GunCurrentAmmoCount`) atira e recarrega no jogo.
-- LesRaisins: itens de cura são `lrtactical:consumable` com `custom_data.ConsumableId = "lrtactical:<id>"`
-  (`blood_pack`, `ibuprofen`, `condensed_milk`, `vaseline`, `surv12`, `goldenstar`, `cms`, `carfak`, `amoxycillin`, `ai2`).
+- LesRaisins: itens de cura são `lrtactical:consumable` com `custom_data.ConsumableId = "lrtactical:<id>"`.
+  Cura > 0 (`docs/lr_catalog.json`): `ai2`, `amoxycillin`, `blood_pack`, `carfak`, `cms`, `goldenstar`, `ibuprofen`, `surv12`,
+  `vaseline`; `condensed_milk` só dá fome (fora do loot de cura). Os com durabilidade (`max_durability` > 0) saem 1 por vez.
 - First Aid: itens normais `firstaid:` `plaster`, `bandage`, `painkillers`, `morphine`, `morphine_injector`,
   `adrenaline_injector`, `defibrillator`.
 - Item de mod opcional: a **tabela** e o **GLM** que o citam precisam de `"neoforge:conditions":[{"type":"neoforge:mod_loaded","modid":"firstaid"}]`;
   sem o First Aid o servidor sobe normalmente (testado).
-- Sorte: o AMC usa `setLootTable(chave, seed)` (carregamento preguiçoso, lê `player.getLuck()` ao abrir); vaso
-  (`DecoratedPotBlockEntity`) também é `RandomizableContainer`. `random_chance` ignora Sorte: não usar para decidir
-  se há loot. O comando `/loot` do console **não aplica Sorte** (`LootCommand` não a usa; confirmado no bytecode): testes por RCON são sempre com Sorte 0. Usar entrada `minecraft:empty` com `quality` negativo e itens com `quality` positivo + `bonus_rolls`.
-- A delegacia (63 containers) usa o tema `building`, igual a outros prédios; **não existe tema `police_station`** no AMC.
+- Sorte (bytecode do Minecraft 1.21.1): peso efetivo = `floor(weight + quality*Sorte)`; rolagens = `rolls + floor(bonus_rolls*Sorte)`.
+  `bonus_rolls` < 1 não faz nada na Sorte I; `quality` é a alavanca que responde já na Sorte I. O AMC usa `setLootTable(chave, seed)`
+  (carregamento preguiçoso: lê `player.getLuck()` ao abrir baús e barris). `random_chance` ignora Sorte: não usar para decidir
+  se há loot; usar `minecraft:empty` com `quality` negativo. O `/loot` do console **não aplica Sorte** (`LootCommand` não a usa):
+  testes por RCON são sempre com Sorte 0; Sorte > 0 só por conta analítica e no jogo (`/effect give @s minecraft:luck`).
+- **Vasos**: `DecoratedPotBlockEntity.getTheItem()` chama `unpackLootTable(null)` (sem jogador, **sem Sorte**), e quando a tabela
+  gera mais itens que espaços o Minecraft não preenche nada (`"Tried to over-fill a container"`): num vaso (1 espaço) isso
+  esvaziaria também o item do AMC. Por isso o mod não injeta em vasos.
+- Entrada aninhada `minecraft:loot_table` com `value` = id de tabela ou tabela inline funciona (testado; é como a arma vem
+  com sua munição). Entradas compostas (group etc.) não têm peso.
+- A delegacia (63 containers) tem o tema próprio `police_station` no AMC (mesmas tabelas vanilla de `building`). Containers por
+  estrutura e tipo medidos no jogo: `docs/containers.json` (`tools/measure_containers.py`; confere com o total do AMC).
 
 ## Como testar
 - Build: `JAVA_HOME=/usr/lib/jvm/java-21-openjdk ./gradlew build -Dorg.gradle.java.installations.paths=$JAVA_HOME`
@@ -49,3 +61,14 @@ First Aid e da LesRaisins. Mod id `amctaczloot`. Recomeçado do zero em 13 Nov 2
   jar do AMC; `run/server.properties` com RCON (porta 25575, senha `teste`); `./gradlew runServer` (mesmas opções);
   `python3 -I tools/rcon.py "setblock 0 100 0 minecraft:chest" "loot insert 0 100 0 loot <tabela>" "data get block 0 100 0 Items"`;
   `... tools/rcon.py stop`. (`run/` não é versionado.)
+
+## Gerador (`tools/gen_loot.py`)
+- `python3 -I tools/gen_loot.py` imprime a **prévia** (esperado por estrutura, Sorte 0 a 3; chance de um baú ter algo do mod);
+  `--write` apaga e reescreve `src/main/resources/data/amctaczloot` e `global_loot_modifiers.json` e roda as verificações
+  de consistência. **Todos os números ficam no bloco do topo do script** (chances em ‰ por tema/tier, Sorte, raridade das armas).
+- Estrutura gerada: `<tema>/<tier>_core.json` (arma+munição, munição solta, attachment, cura LesRaisins; TACZ+LesRaisins) e
+  `<tema>/<tier>_firstaid.json` (cura First Aid, com `neoforge:mod_loaded`); tabelas de escolha em `pick/`; um GLM
+  `neoforge:add_table` por tabela, filtrado por `neoforge:loot_table_id`. Temas: building, building_large, police_station,
+  pharmacy, house, workshop, gas_station; tiers chest, chest_hard, barrel, barrel_hard (sem pot).
+- Validação (13 Nov 2026): servidor real com AMC+TACZ+LesRaisins+First Aid, `tools/sample_loot.py <tema> <tier> [N]` amostra
+  centenas de baús: médias observadas batem com a prévia (Sorte 0). Dados: `tools/tacz_catalog.py`, `tools/lr_catalog.py`.

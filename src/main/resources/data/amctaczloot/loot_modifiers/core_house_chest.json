@@ -1,0 +1,10 @@
+{
+  "type": "neoforge:add_table",
+  "conditions": [
+    {
+      "condition": "neoforge:loot_table_id",
+      "loot_table_id": "abandonedmoderncity:chests/house/chest"
+    }
+  ],
+  "table": "amctaczloot:house/chest_core"
+}

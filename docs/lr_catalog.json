@@ -1,0 +1,100 @@
+{
+ "ai2": {
+  "heal": 12.0,
+  "food": null,
+  "stack_size": 2,
+  "max_durability": 0,
+  "use_duration": 93,
+  "cooldown_category": "lrtactical:medical",
+  "effects": null
+ },
+ "amoxycillin": {
+  "heal": 2.0,
+  "food": null,
+  "stack_size": 1,
+  "max_durability": 8,
+  "use_duration": 145,
+  "cooldown_category": "lrtactical:medical",
+  "effects": null
+ },
+ "blood_pack": {
+  "heal": 8.0,
+  "food": 4,
+  "stack_size": 2,
+  "max_durability": 0,
+  "use_duration": 93,
+  "cooldown_category": "lrtactical:medical",
+  "effects": [
+   null
+  ]
+ },
+ "carfak": {
+  "heal": 12.0,
+  "food": null,
+  "stack_size": 1,
+  "max_durability": 0,
+  "use_duration": 121,
+  "cooldown_category": "lrtactical:medical",
+  "effects": null
+ },
+ "cms": {
+  "heal": 4.0,
+  "food": null,
+  "stack_size": 1,
+  "max_durability": 5,
+  "use_duration": 259,
+  "cooldown_category": "lrtactical:medical",
+  "effects": null
+ },
+ "condensed_milk": {
+  "heal": null,
+  "food": 6,
+  "stack_size": 4,
+  "max_durability": null,
+  "use_duration": 109,
+  "cooldown_category": "lrtactical:food",
+  "effects": [
+   null
+  ]
+ },
+ "goldenstar": {
+  "heal": 1.0,
+  "food": null,
+  "stack_size": 1,
+  "max_durability": 8,
+  "use_duration": 112,
+  "cooldown_category": "lrtactical:medical",
+  "effects": [
+   null
+  ]
+ },
+ "ibuprofen": {
+  "heal": 2.0,
+  "food": null,
+  "stack_size": 1,
+  "max_durability": 4,
+  "use_duration": 50,
+  "cooldown_category": "lrtactical:medical",
+  "effects": null
+ },
+ "surv12": {
+  "heal": 6.0,
+  "food": null,
+  "stack_size": 1,
+  "max_durability": 15,
+  "use_duration": 160,
+  "cooldown_category": "lrtactical:medical",
+  "effects": null
+ },
+ "vaseline": {
+  "heal": 1.0,
+  "food": null,
+  "stack_size": 1,
+  "max_durability": 6,
+  "use_duration": 57,
+  "cooldown_category": "lrtactical:medical",
+  "effects": [
+   null
+  ]
+ }
+}

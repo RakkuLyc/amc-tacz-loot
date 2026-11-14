@@ -6,5 +6,5 @@
       "loot_table_id": "abandonedmoderncity:chests/building_large/chest"
     }
   ],
-  "table": "amctaczloot:test/core"
+  "table": "amctaczloot:building_large/chest_core"
 }

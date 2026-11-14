@@ -1,0 +1,448 @@
+{
+ "abandoned_crash_building": {
+  "theme": "building_large",
+  "tiers": {
+   "barrel": 133,
+   "chest": 68
+  },
+  "total": 201
+ },
+ "abandoned_garage_house": {
+  "theme": "house",
+  "tiers": {
+   "barrel": 10,
+   "chest": 6
+  },
+  "total": 16
+ },
+ "abandoned_glass_house": {
+  "theme": "house",
+  "tiers": {
+   "barrel": 13,
+   "chest": 9
+  },
+  "total": 22
+ },
+ "abandoned_green_tower": {
+  "theme": "building_large",
+  "tiers": {
+   "barrel": 73,
+   "chest": 62
+  },
+  "total": 135
+ },
+ "abandoned_house": {
+  "theme": "house",
+  "tiers": {
+   "barrel": 46,
+   "chest": 10,
+   "chest_hard": 1
+  },
+  "total": 57
+ },
+ "abandoned_large_house": {
+  "theme": "house",
+  "tiers": {
+   "barrel": 20,
+   "chest": 4,
+   "pot": 1
+  },
+  "total": 25
+ },
+ "abandoned_mansion": {
+  "theme": "house",
+  "tiers": {
+   "barrel": 21,
+   "barrel_hard": 2,
+   "chest": 4,
+   "chest_hard": 1,
+   "pot": 1
+  },
+  "total": 29
+ },
+ "abandoned_modern_garage_house": {
+  "theme": "house",
+  "tiers": {
+   "barrel": 17,
+   "chest": 12
+  },
+  "total": 29
+ },
+ "abandoned_modern_house": {
+  "theme": "house",
+  "tiers": {
+   "barrel": 35,
+   "chest": 18,
+   "chest_hard": 1
+  },
+  "total": 54
+ },
+ "abandoned_police_station": {
+  "theme": "police_station",
+  "tiers": {
+   "barrel": 29,
+   "barrel_hard": 5,
+   "chest": 21,
+   "chest_hard": 8
+  },
+  "total": 63
+ },
+ "abandoned_pool_house": {
+  "theme": "house",
+  "tiers": {
+   "barrel": 20,
+   "chest": 12,
+   "pot": 2
+  },
+  "total": 34
+ },
+ "abandoned_ramp_building": {
+  "theme": "building_large",
+  "tiers": {
+   "barrel": 242,
+   "chest": 157
+  },
+  "total": 399
+ },
+ "abandoned_small_building": {
+  "theme": "building",
+  "tiers": {
+   "barrel": 23,
+   "chest": 19
+  },
+  "total": 42
+ },
+ "abandoned_suburban_house": {
+  "theme": "house",
+  "tiers": {
+   "barrel": 20,
+   "chest": 11
+  },
+  "total": 31
+ },
+ "abandoned_tower_house": {
+  "theme": "house",
+  "tiers": {
+   "barrel": 23,
+   "chest": 17,
+   "pot": 2
+  },
+  "total": 42
+ },
+ "abandoned_victorian_house": {
+  "theme": "house",
+  "tiers": {
+   "barrel": 21,
+   "chest": 15,
+   "pot": 4
+  },
+  "total": 40
+ },
+ "abandoned_wide_building": {
+  "theme": "building_large",
+  "tiers": {
+   "barrel": 116,
+   "chest": 133
+  },
+  "total": 249
+ },
+ "apartment_building": {
+  "theme": "building",
+  "tiers": {
+   "chest": 10
+  },
+  "total": 10
+ },
+ "apocalyptic_building_57x45": {
+  "theme": "building",
+  "tiers": {
+   "barrel": 30,
+   "barrel_hard": 7,
+   "chest": 33,
+   "chest_hard": 3
+  },
+  "total": 73
+ },
+ "bluish_building": {
+  "theme": "building",
+  "tiers": {
+   "barrel": 3,
+   "chest": 14,
+   "chest_hard": 1
+  },
+  "total": 18
+ },
+ "brutalist_u_building_75x58": {
+  "theme": "building_large",
+  "tiers": {
+   "barrel": 259,
+   "chest": 168,
+   "pot": 9
+  },
+  "total": 436
+ },
+ "gas_station_blue": {
+  "theme": "gas_station",
+  "tiers": {
+   "barrel": 26,
+   "chest": 4,
+   "pot": 2
+  },
+  "total": 32
+ },
+ "gas_station_green": {
+  "theme": "gas_station",
+  "tiers": {
+   "barrel": 26,
+   "chest": 4,
+   "pot": 2
+  },
+  "total": 32
+ },
+ "gas_station_purple": {
+  "theme": "gas_station",
+  "tiers": {
+   "barrel": 26,
+   "chest": 4,
+   "pot": 2
+  },
+  "total": 32
+ },
+ "gas_station_red": {
+  "theme": "gas_station",
+  "tiers": {
+   "barrel": 26,
+   "chest": 4,
+   "pot": 2
+  },
+  "total": 32
+ },
+ "gas_station_small_blue": {
+  "theme": "gas_station",
+  "tiers": {
+   "barrel": 3,
+   "chest": 1
+  },
+  "total": 4
+ },
+ "gas_station_small_green": {
+  "theme": "gas_station",
+  "tiers": {
+   "barrel": 3,
+   "chest": 1
+  },
+  "total": 4
+ },
+ "gas_station_small_purple": {
+  "theme": "gas_station",
+  "tiers": {
+   "barrel": 3,
+   "chest": 1
+  },
+  "total": 4
+ },
+ "gas_station_small_red": {
+  "theme": "gas_station",
+  "tiers": {
+   "barrel": 3,
+   "chest": 1
+  },
+  "total": 4
+ },
+ "gas_station_small_yellow": {
+  "theme": "gas_station",
+  "tiers": {
+   "barrel": 3,
+   "chest": 1
+  },
+  "total": 4
+ },
+ "gas_station_yellow": {
+  "theme": "gas_station",
+  "tiers": {
+   "barrel": 26,
+   "chest": 4,
+   "pot": 2
+  },
+  "total": 32
+ },
+ "pharmacy_blue": {
+  "theme": "pharmacy",
+  "tiers": {
+   "barrel": 15,
+   "chest": 2,
+   "pot": 5
+  },
+  "total": 22
+ },
+ "pharmacy_green": {
+  "theme": "pharmacy",
+  "tiers": {
+   "barrel": 15,
+   "chest": 2,
+   "pot": 5
+  },
+  "total": 22
+ },
+ "pharmacy_large_blue": {
+  "theme": "pharmacy",
+  "tiers": {
+   "barrel": 19,
+   "chest": 4,
+   "pot": 9
+  },
+  "total": 32
+ },
+ "pharmacy_large_green": {
+  "theme": "pharmacy",
+  "tiers": {
+   "barrel": 19,
+   "chest": 4,
+   "pot": 9
+  },
+  "total": 32
+ },
+ "pharmacy_large_purple": {
+  "theme": "pharmacy",
+  "tiers": {
+   "barrel": 19,
+   "chest": 4,
+   "pot": 9
+  },
+  "total": 32
+ },
+ "pharmacy_large_red": {
+  "theme": "pharmacy",
+  "tiers": {
+   "barrel": 19,
+   "chest": 4,
+   "pot": 9
+  },
+  "total": 32
+ },
+ "pharmacy_large_yellow": {
+  "theme": "pharmacy",
+  "tiers": {
+   "barrel": 19,
+   "chest": 4,
+   "pot": 9
+  },
+  "total": 32
+ },
+ "pharmacy_purple": {
+  "theme": "pharmacy",
+  "tiers": {
+   "barrel": 15,
+   "chest": 2,
+   "pot": 5
+  },
+  "total": 22
+ },
+ "pharmacy_red": {
+  "theme": "pharmacy",
+  "tiers": {
+   "barrel": 15,
+   "chest": 2,
+   "pot": 5
+  },
+  "total": 22
+ },
+ "pharmacy_yellow": {
+  "theme": "pharmacy",
+  "tiers": {
+   "barrel": 15,
+   "chest": 2,
+   "pot": 5
+  },
+  "total": 22
+ },
+ "post_apocalyptic_mansion": {
+  "theme": "house",
+  "tiers": {
+   "barrel": 7,
+   "chest": 21
+  },
+  "total": 28
+ },
+ "skeleton_building_31x29": {
+  "theme": "building",
+  "tiers": {
+   "barrel": 1,
+   "chest": 16
+  },
+  "total": 17
+ },
+ "tower": {
+  "theme": "building_large",
+  "tiers": {
+   "barrel": 149,
+   "chest": 29,
+   "pot": 37
+  },
+  "total": 215
+ },
+ "workshop_medium_blue_black": {
+  "theme": "workshop",
+  "tiers": {
+   "barrel": 61,
+   "chest": 1
+  },
+  "total": 62
+ },
+ "workshop_medium_yellow_blue": {
+  "theme": "workshop",
+  "tiers": {
+   "barrel": 61,
+   "chest": 1
+  },
+  "total": 62
+ },
+ "workshop_medium_yellow_red": {
+  "theme": "workshop",
+  "tiers": {
+   "barrel": 61,
+   "chest": 1
+  },
+  "total": 62
+ },
+ "workshop_small_blue": {
+  "theme": "workshop",
+  "tiers": {
+   "barrel": 39,
+   "chest": 2
+  },
+  "total": 41
+ },
+ "workshop_small_green": {
+  "theme": "workshop",
+  "tiers": {
+   "barrel": 39,
+   "chest": 2
+  },
+  "total": 41
+ },
+ "workshop_small_purple": {
+  "theme": "workshop",
+  "tiers": {
+   "barrel": 39,
+   "chest": 2
+  },
+  "total": 41
+ },
+ "workshop_small_red": {
+  "theme": "workshop",
+  "tiers": {
+   "barrel": 39,
+   "chest": 2
+  },
+  "total": 41
+ },
+ "workshop_small_yellow": {
+  "theme": "workshop",
+  "tiers": {
+   "barrel": 39,
+   "chest": 2
+  },
+  "total": 41
+ }
+}
