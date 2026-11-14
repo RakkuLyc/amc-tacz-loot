@@ -18,6 +18,11 @@ First Aid e da LesRaisins. Mod id `amctaczloot`. Recomeçado do zero em 13 Nov 2
 - Armas/munição/attachments em `building` e `building_large`; **a delegacia recebe mais armas**: o AMC ganhou o tema `police_station` (commit `27ae583` do AMC, 13 Nov 2026).
 - Cura: farmácia bastante; casas, oficinas e postos um pouco; oficinas também com pouca munição.
 - **Vasos (`pot`) não recebem nada** (ver fatos).
+- **Sem itens vanilla úteis (14 Nov 2026):** as tabelas do mod nunca tiveram item vanilla; os vanilla dos containers vinham das tabelas
+  do próprio AMC (94 tipos). O mod agora **sobrescreve as 42 tabelas do AMC** (mesmos caminhos, `data/abandonedmoderncity/loot_table/chests/`)
+  só com **sucata**, a mesma lista em todos os temas: stick, wheat/beetroot/melon/pumpkin seeds, rotten_flesh, bone, paper, bowl,
+  glass_bottle, spider_eye. Quantidade (bloco `JUNK_SHAPE` do gerador): baú 2–4 pilhas, barril/vaso 30% de ter 1–2 (vaso 1); tiers
+  `_hard` iguais (o prêmio vem do mod). Sem efeito de Sorte. Escolha do usuário entre mudar o AMC, sobrescrever pelo mod ou deixar.
 - TACZ, LesRaisins e AMC são obrigatórios; **só o First Aid é opcional** (`neoforge:mod_loaded`).
 - Loot generoso, mas sem abundância. Toda tabela com `weight`, `quality` e `rolls`/`bonus_rolls` para a Sorte funcionar.
 - Repositório: mesmo nome (`RakkuLyc/amc-tacz-loot`), novo e vazio (antigo apagado e recriado em 14 Nov 2026).
@@ -64,7 +69,7 @@ First Aid e da LesRaisins. Mod id `amctaczloot`. Recomeçado do zero em 13 Nov 2
 - Cura: comuns (ibuprofen, blood_pack, vaseline; plaster, bandage) saem mais que as raras (ai2, carfak; defibrillator).
 - Sorte: `quality` = 25% da chance base por nível (×1,25 / ×1,5 / ×1,75 nas Sortes I/II/III); `bonus_rolls` só nos baús
   difíceis (0,34: Sorte III) e comuns (0,2: Sorte V). Delegacia 5,7 → 7,1 → 8,3 → 11,9 armas.
-- Todos esses valores estão no bloco do topo de `tools/gen_loot.py`; mudar um número = editar a linha, `--write`, build.
+- Todos esses valores (inclusive a sucata) estão no bloco do topo de `tools/gen_loot.py`; mudar um número = editar a linha, `--write`, build.
 
 ## Como testar
 - **Sorte de verdade só no jogo, abrindo containers reais** (o `/loot` nem o console aplicam Sorte): `/amcs spawn police_station
@@ -90,3 +95,8 @@ First Aid e da LesRaisins. Mod id `amctaczloot`. Recomeçado do zero em 13 Nov 2
   pharmacy, house, workshop, gas_station; tiers chest, chest_hard, barrel, barrel_hard (sem pot).
 - Validação (13 Nov 2026): servidor real com AMC+TACZ+LesRaisins+First Aid, `tools/sample_loot.py <tema> <tier> [N]` amostra
   centenas de baús: médias observadas batem com a prévia (Sorte 0). Dados: `tools/tacz_catalog.py`, `tools/lr_catalog.py`.
+- Sobrescrita das tabelas do AMC: `mods.toml` declara `ordering="AFTER"` para o AMC (o mod carrega depois, então os seus arquivos de
+  mesmo caminho prevalecem). **Testado (14 Nov 2026):** com o jar do AMC original (tabelas vanilla antigas) na pasta `mods`, 1.680
+  amostras de baús/barris dos 7 temas deram só sucata + itens do mod. **Não testado:** sem o `ordering` (não sei se é necessário) e
+  os vasos (arquivos gerados, não amostrados). A ordem entre mods não é uma garantia do Minecraft: se outro mod também sobrescrever
+  essas tabelas, o resultado depende da ordem de carga. As verificações do gerador falham se surgir qualquer item vanilla fora da lista de sucata.

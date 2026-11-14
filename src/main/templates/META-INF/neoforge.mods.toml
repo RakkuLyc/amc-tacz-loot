@@ -28,7 +28,7 @@ description='''${mod_description}'''
     modId="abandonedmoderncity"
     type="required"
     versionRange="[0.1.0,)"
-    ordering="NONE"
+    ordering="AFTER"  # carrega depois do AMC: as tabelas deste mod (mesmos caminhos) prevalecem
     side="BOTH"
 
 [[dependencies.${mod_id}]]

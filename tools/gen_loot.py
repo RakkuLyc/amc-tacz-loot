@@ -12,10 +12,12 @@ Como a Sorte entra (confirmado no bytecode do Minecraft 1.21.1):
   peso efetivo de uma entrada = floor(weight + quality * Sorte)   (nunca menos que 0)
   rolagens de um pool         = rolls + floor(bonus_rolls * Sorte)
 Por isso: `quality` é a alavanca que responde já na Sorte I; `bonus_rolls` abaixo de 1 só age de Sorte II/III em diante.
-Vasos (pot) ficam de fora: o Minecraft chama unpackLootTable(null) neles (sem Sorte) e, se a tabela gera mais itens
+Sucata: o mod também SOBRESCREVE as 42 tabelas do AMC (data/abandonedmoderncity/loot_table/chests/...) só com sucata,
+para não restar item vanilla útil; o mod carrega DEPOIS do AMC (mods.toml, ordering AFTER).
+Vasos (pot) ficam de fora dos prêmios: o Minecraft chama unpackLootTable(null) neles (sem Sorte) e, se a tabela gera mais itens
 que espaços, o container fica VAZIO ("Tried to over-fill a container"); um vaso tem 1 espaço.
 """
-import json, math, os, shutil, sys
+import json, math, os, re, shutil, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
@@ -68,6 +70,15 @@ LR_W = dict(ibuprofen=(10, 1, 1), blood_pack=(8, 1, 1), vaseline=(8, 1, 1), gold
             amoxycillin=(5, 1, 1), surv12=(4, 1, 1), ai2=(2, 1, 1), carfak=(2, 1, 1))
 FA_W = dict(plaster=(12, 1, 3), bandage=(12, 1, 2), painkillers=(8, 1, 1), morphine=(4, 1, 1),
             morphine_injector=(3, 1, 1), adrenaline_injector=(2, 1, 1), defibrillator=(1, 1, 1))
+# SUCATA: o mod sobrescreve as 42 tabelas do AMC (mesmos caminhos) para que NÃO reste nenhum item vanilla útil nos containers.
+# Só entra aqui o que tem pouca ou nenhuma utilidade: nome -> (peso, mín, máx). A mesma lista em todos os temas.
+JUNK = dict(stick=(12, 1, 6), wheat_seeds=(10, 1, 4), beetroot_seeds=(8, 1, 4), melon_seeds=(8, 1, 4),
+            pumpkin_seeds=(8, 1, 4), rotten_flesh=(10, 1, 3), bone=(8, 1, 3), paper=(8, 1, 4), bowl=(6, 1, 2),
+            glass_bottle=(6, 1, 2), spider_eye=(4, 1, 1))
+# quanto de sucata por container: (chance de ter algo em ‰, mín, máx de pilhas). Sem efeito de Sorte (sucata não é prêmio).
+# Os tiers _hard têm a mesma sucata: o prêmio dos difíceis vem do mod, não de mais sucata.
+JUNK_SHAPE = {"chest": (1000, 2, 4), "chest_hard": (1000, 2, 4), "barrel": (300, 1, 2), "barrel_hard": (300, 1, 2),
+              "pot": (300, 1, 1), "pot_hard": (300, 1, 1)}
 # categorias da tabela principal (TACZ + LesRaisins, obrigatórios) e da tabela do First Aid (opcional)
 CORE_CATS = ("gun", "ammo", "att", "lr")
 LUCKS = (0, 1, 2, 3)
@@ -186,6 +197,22 @@ def pick_tables():
     return out
 
 
+def junk_tables():
+    """Tabelas do AMC sobrescritas, só com sucata. Nome 'tema/tier' -> JSON (namespace abandonedmoderncity)."""
+    ents = []
+    for i, (w, lo, hi) in JUNK.items():
+        e = {"type": "minecraft:item", "name": "minecraft:" + i, "weight": w}
+        if hi > 1: e["functions"] = [count(lo, hi)]
+        ents.append(e)
+    out = {}
+    for theme in RATES:
+        for tier, (chance, lo, hi) in JUNK_SHAPE.items():
+            p = {"rolls": lo if lo == hi else {"type": "minecraft:uniform", "min": lo, "max": hi}, "bonus_rolls": 0.0, "entries": ents}
+            if chance < 1000: p["conditions"] = [{"condition": "minecraft:random_chance", "chance": chance / 1000}]
+            out["%s/%s" % (theme, tier)] = table([p])
+    return out
+
+
 def weights(rates):
     """(weight, quality) por categoria + empty, somando 1000 em Sorte 0 e mantendo ~1000 com Sorte (quality do empty
     é o negativo da soma das outras)."""
@@ -282,7 +309,9 @@ def preview():
 # ---------------------------------------------------------------- escrita + verificações
 def write():
     base = os.path.join(OUT, MOD)
-    if os.path.isdir(base): shutil.rmtree(base)
+    amc_dir = os.path.join(OUT, AMC)
+    for d in (base, amc_dir):
+        if os.path.isdir(d): shutil.rmtree(d)
     gl = os.path.join(OUT, "neoforge/loot_modifiers/global_loot_modifiers.json")
     def w(path, obj):
         os.makedirs(os.path.dirname(path), exist_ok=True)
@@ -291,6 +320,8 @@ def write():
     for n, (t, _) in pick_tables().items(): tables[n] = t
     for n, t in main_tables().items(): tables[n] = t
     for n, t in tables.items(): w("%s/loot_table/%s.json" % (base, n), t)
+    junk = junk_tables()
+    for n, t in junk.items(): w("%s/loot_table/chests/%s.json" % (amc_dir, n), t)
     for n in main_tables():
         theme, rest = n.split("/"); tier, kind = rest.rsplit("_", 1)
         g = {"type": "neoforge:add_table",
@@ -300,11 +331,11 @@ def write():
         glms["%s_%s_%s" % (kind, theme, tier)] = g
     for n, g in glms.items(): w("%s/loot_modifiers/%s.json" % (base, n), g)
     w(gl, {"replace": False, "entries": ["%s:%s" % (MOD, n) for n in glms]})
-    check(base, gl, tables, glms)
-    print("escrito: %d tabelas, %d loot modifiers" % (len(tables), len(glms)))
+    check(base, gl, tables, glms, junk)
+    print("escrito: %d tabelas, %d loot modifiers, %d tabelas do AMC sobrescritas (só sucata)" % (len(tables), len(glms), len(junk)))
 
 
-def check(base, gl, tables, glms):
+def check(base, gl, tables, glms, junk):
     """Verificações de consistência dos arquivos gerados; encerra com erro se algo estiver errado."""
     errs = []
     listed = json.load(open(gl))["entries"]
@@ -323,6 +354,13 @@ def check(base, gl, tables, glms):
         if "pot" in n: errs.append("tabela de vaso gerada: " + n)
         for ref in [x for x in s.split('"') if x.startswith(MOD + ":pick/")]:
             if ref.split(":")[1] not in tables: errs.append("tabela de escolha inexistente: " + ref)
+    # nenhum item vanilla fora da lista de sucata, em NENHUMA tabela gerada (mod + sobrescritas do AMC)
+    allowed = {"minecraft:" + i for i in JUNK}
+    for n, t in list(tables.items()) + [("amc:" + k, v) for k, v in junk.items()]:
+        for name in re.findall(r'"name": "(minecraft:[a-z_0-9]+)"', json.dumps(t)):
+            if name not in allowed: errs.append("item vanilla fora da sucata em %s: %s" % (n, name))
+    expect = {"%s/%s" % (th, ti) for th in RATES for ti in ("chest", "chest_hard", "barrel", "barrel_hard", "pot", "pot_hard")}
+    if set(junk) != expect: errs.append("tabelas do AMC sobrescritas != as 42 do AMC")
     for g, v in TZ["guns"].items():
         if v["ammo"].split(":")[1] not in TZ["ammo"]: errs.append("munição da arma %s fora do catálogo" % g)
     if errs:
