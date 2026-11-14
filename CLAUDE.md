@@ -20,7 +20,7 @@ First Aid e da LesRaisins. Mod id `amctaczloot`. Recomeçado do zero em 13 Nov 2
 - **Vasos (`pot`) não recebem nada** (ver fatos).
 - TACZ, LesRaisins e AMC são obrigatórios; **só o First Aid é opcional** (`neoforge:mod_loaded`).
 - Loot generoso, mas sem abundância. Toda tabela com `weight`, `quality` e `rolls`/`bonus_rolls` para a Sorte funcionar.
-- Repositório: mesmo nome (`RakkuLyc/amc-tacz-loot`), novo e vazio.
+- Repositório: mesmo nome (`RakkuLyc/amc-tacz-loot`), novo e vazio (antigo apagado e recriado em 14 Nov 2026).
 
 ## Fatos verificados (nos jars/log, não de memória)
 - Injeção: GLM nativo `neoforge:add_table` + condição `neoforge:loot_table_id` (campo `loot_table_id`); registrado em
@@ -33,7 +33,8 @@ First Aid e da LesRaisins. Mod id `amctaczloot`. Recomeçado do zero em 13 Nov 2
   Itens elegíveis = os que têm receita na mesa de armeiro do pacote padrão (`craftable` no catálogo: 70 armas, 25 munições,
   104 de 128 attachments; ficam de fora `oem_*`, `*_default` e variantes embutidas). Critério objetivo, não pelo nome.
   Os JSON de dados do jar têm comentários `/* */` (o parser do catálogo trata); `minigun` não tem `ammo_amount`.
-  **Não verificado:** se uma arma só com `GunId`+`GunFireMode` (sem `GunCurrentAmmoCount`) atira e recarrega no jogo.
+  **Verificado pelo usuário no jogo (13 Nov 2026):** uma arma só com `GunId`+`GunFireMode` atira e a munição/attachment/cura funcionam.
+  **Não verificado:** as armas geradas agora também levam `GunCurrentAmmoCount: 0` e `HasBulletInBarrel: false`; recarregar com a munição que vem junto está por testar.
 - LesRaisins: itens de cura são `lrtactical:consumable` com `custom_data.ConsumableId = "lrtactical:<id>"`.
   Cura > 0 (`docs/lr_catalog.json`): `ai2`, `amoxycillin`, `blood_pack`, `carfak`, `cms`, `goldenstar`, `ibuprofen`, `surv12`,
   `vaseline`; `condensed_milk` só dá fome (fora do loot de cura). Os com durabilidade (`max_durability` > 0) saem 1 por vez.
@@ -54,7 +55,24 @@ First Aid e da LesRaisins. Mod id `amctaczloot`. Recomeçado do zero em 13 Nov 2
 - A delegacia (63 containers) tem o tema próprio `police_station` no AMC (mesmas tabelas vanilla de `building`). Containers por
   estrutura e tipo medidos no jogo: `docs/containers.json` (`tools/measure_containers.py`; confere com o total do AMC).
 
+## Números aprovados pelo usuário (13 Nov 2026, "Aprovo")
+- Esperado por estrutura (Sorte 0), armas / pilhas de munição: delegacia 5,7 / 13,5; brutalista 4,1 / 15,5; rampa 3,8 / 14,5;
+  larga 2,9 / 10,6; crash 1,8 / 6,8; torre verde 1,4 / 5,3; torre 1,1 / 4,7; apocalíptico 1,4 / 4,8; prédios pequenos 0,3–0,7.
+- Raridade das armas por tipo (peso): padrão pistol 10, smg 6, shotgun 6, rifle 4, dmr 2, sniper 1,5, mg 1, rpg 0,3; delegacia
+  pistol 8, smg 8, shotgun 8, rifle 6, dmr 2,5, sniper 1,5, mg 1, rpg 0,3 (rpg7, m320 e minigun entram, bem raros; munição
+  .50 BMG, 40mm e foguete ×0,15–0,4). A arma vem **descarregada**, com 1 a 2 pentes do calibre junto.
+- Cura: comuns (ibuprofen, blood_pack, vaseline; plaster, bandage) saem mais que as raras (ai2, carfak; defibrillator).
+- Sorte: `quality` = 25% da chance base por nível (×1,25 / ×1,5 / ×1,75 nas Sortes I/II/III); `bonus_rolls` só nos baús
+  difíceis (0,34: Sorte III) e comuns (0,2: Sorte V). Delegacia 5,7 → 7,1 → 8,3 → 11,9 armas.
+- Todos esses valores estão no bloco do topo de `tools/gen_loot.py`; mudar um número = editar a linha, `--write`, build.
+
 ## Como testar
+- **Sorte de verdade só no jogo, abrindo containers reais** (o `/loot` nem o console aplicam Sorte): `/amcs spawn police_station
+  abandoned_police_station` duas vezes, longe uma da outra; abrir os baús de uma sem efeito e os da outra com
+  `/effect give @s minecraft:luck infinite 2`; comparar com a prévia (ruído grande numa só estrutura: procura-se diferença clara).
+- Chunks gerados antes de uma mudança no AMC guardam os ids antigos das tabelas (o id é gravado ao colocar o container);
+  containers já abertos não têm mais tabela. Testar em mundo novo ou com `/amcs spawn`.
+- O jar do AMC precisa ser o reconstruído com o tema `police_station` (mesmo número de versão 0.1.0 do antigo: substituir).
 - Build: `JAVA_HOME=/usr/lib/jvm/java-21-openjdk ./gradlew build -Dorg.gradle.java.installations.paths=$JAVA_HOME`
   (o Java padrão do sistema é o 27, novo demais para o Gradle).
 - Servidor de teste: copiar para `run/mods/` os jars de `../AbandonedModernCity/libs` (TACZ, First Aid, LesRaisins) e o
