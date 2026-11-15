@@ -77,6 +77,9 @@ HEAL_LR = dict(vaseline=195, ibuprofen=190, amoxycillin=180, goldenstar=170, blo
 HEAL_CLASS = dict(vaseline="Comum", ibuprofen="Comum", amoxycillin="Comum", goldenstar="Comum",
                   blood_pack="Incomum", carfak="Incomum", ai2="Incomum", cms="Incomum", surv12="Raro")
 PHARMACY_MULT = {"Comum": 1.0, "Incomum": 2.0, "Raro": 2.0}
+# Fator geral sobre as chances de cura LesRaisins acima (15 Nov 2026: "exagerei um pouco" -> opção C, tudo x0,5). Vale por cima do
+# multiplicador da farmácia. Não mexe no leite, no pão nem no First Aid. Valores resultantes arredondados em ‰ (ex.: 19,5% -> 9,8%).
+HEAL_SCALE = 0.5
 # COMIDA: chance por container (‰) e quantidade; themes=None = todos os temas. O pão é vanilla (exceção explícita do usuário) e só em casas.
 FOOD = dict(condensed_milk=dict(p=80, lo=2, hi=4, themes=None), bread=dict(p=200, lo=4, hi=12, themes=("house",)))
 FA_W = dict(plaster=(12, 1, 3), bandage=(12, 1, 2), painkillers=(8, 1, 1), morphine=(4, 1, 1),
@@ -225,7 +228,7 @@ def item_chances(theme):
     out = []
     for i, p in HEAL_LR.items():
         m = PHARMACY_MULT[HEAL_CLASS[i]] if theme == "pharmacy" else 1.0
-        out.append(("lr", i, min(1000, round(p * m))))
+        out.append(("lr", i, max(1, min(1000, int(p * m * HEAL_SCALE + 0.5)))))
     for i, f in FOOD.items():
         if f["themes"] is None or theme in f["themes"]: out.append(("food", i, f["p"]))
     return out

@@ -170,3 +170,14 @@ First Aid e da LesRaisins. Mod id `amctaczloot`. Recomeçado do zero em 13 Nov 2
 - Monte Carlo (Sorte 0): green tower ~100 curas LR (comuns 67 / incomuns 30 / SURV12 3,6), 7,3 pilhas de leite; rampa 439; casa 63 curas e
   ~91 unidades de pão; farmácia grande 33,6. **Escala ~27× a anterior (3,6 curas na green tower)**; risco de estouro de container só em
   dispenser/dropper (9 espaços): ~1 em 125.000–250.000 containers (o container fica vazio se estourar).
+
+## Opção C: cura LesRaisins x0,5 (15 Nov 2026)
+- Feedback: uma farmácia grande deu ~34 itens de cura (previsto ~41 com LR+First Aid+leite; não foi azar). Escolha do usuário: **tudo x0,5**
+  nas chances de cura LesRaisins (`HEAL_SCALE = 0.5`, aplicado por cima do multiplicador da farmácia; arredondado em ‰).
+- Chances por container agora: vaseline 9,8%, ibuprofen 9,5%, amoxicillin 9,0%, golden star 8,5% (Comuns); blood pack 4,5%, CAR 4,3%, AI-2 4,0%,
+  CMS 3,5% (Incomuns); SURV12 2,0% (Raro). Soma 0,55 por container. **Farmácia**: Incomuns e Raro com o ×2 antigo, então voltam aos valores
+  anteriores ao x0,5: blood pack 9,0%, CAR 8,5%, AI-2 8,0%, CMS 7,0%, SURV12 4,0%; Comuns como nos outros lugares (soma 0,733). Leite 8%, pão
+  20% (só casas) e First Aid **inalterados**.
+- Validado no servidor: prédio (3.000 baús) vaseline 9,7%, SURV12 1,9%; farmácia (2.500) incomuns 6,8–9,1%, SURV12 4,4%; casa pão 20,6%.
+- Monte Carlo (Sorte 0), curas LesRaisins: green tower 50 (39–62); brutalista 126; rampa 220; delegacia 35; casa 31; oficina 34; posto 17;
+  farmácia grande 16,9 (11–24); farmácia pequena 12,4 (7–18). Antes da mudança de 15 Nov eram 3,6 na green tower e 3,6 na farmácia grande.

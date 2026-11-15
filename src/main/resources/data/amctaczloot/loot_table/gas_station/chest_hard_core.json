@@ -17,13 +17,13 @@
               }
             }
           ],
-          "weight": 195,
-          "quality": 49
+          "weight": 98,
+          "quality": 24
         },
         {
           "type": "minecraft:empty",
-          "weight": 805,
-          "quality": -49
+          "weight": 902,
+          "quality": -24
         }
       ],
       "bonus_rolls": 0.0
@@ -44,13 +44,13 @@
               }
             }
           ],
-          "weight": 190,
-          "quality": 48
+          "weight": 95,
+          "quality": 24
         },
         {
           "type": "minecraft:empty",
-          "weight": 810,
-          "quality": -48
+          "weight": 905,
+          "quality": -24
         }
       ],
       "bonus_rolls": 0.0
@@ -67,60 +67,6 @@
               "components": {
                 "minecraft:custom_data": {
                   "ConsumableId": "lrtactical:amoxycillin"
-                }
-              }
-            }
-          ],
-          "weight": 180,
-          "quality": 45
-        },
-        {
-          "type": "minecraft:empty",
-          "weight": 820,
-          "quality": -45
-        }
-      ],
-      "bonus_rolls": 0.0
-    },
-    {
-      "rolls": 1,
-      "entries": [
-        {
-          "type": "minecraft:item",
-          "name": "lrtactical:consumable",
-          "functions": [
-            {
-              "function": "minecraft:set_components",
-              "components": {
-                "minecraft:custom_data": {
-                  "ConsumableId": "lrtactical:goldenstar"
-                }
-              }
-            }
-          ],
-          "weight": 170,
-          "quality": 42
-        },
-        {
-          "type": "minecraft:empty",
-          "weight": 830,
-          "quality": -42
-        }
-      ],
-      "bonus_rolls": 0.0
-    },
-    {
-      "rolls": 1,
-      "entries": [
-        {
-          "type": "minecraft:item",
-          "name": "lrtactical:consumable",
-          "functions": [
-            {
-              "function": "minecraft:set_components",
-              "components": {
-                "minecraft:custom_data": {
-                  "ConsumableId": "lrtactical:blood_pack"
                 }
               }
             }
@@ -147,7 +93,7 @@
               "function": "minecraft:set_components",
               "components": {
                 "minecraft:custom_data": {
-                  "ConsumableId": "lrtactical:carfak"
+                  "ConsumableId": "lrtactical:goldenstar"
                 }
               }
             }
@@ -174,18 +120,72 @@
               "function": "minecraft:set_components",
               "components": {
                 "minecraft:custom_data": {
+                  "ConsumableId": "lrtactical:blood_pack"
+                }
+              }
+            }
+          ],
+          "weight": 45,
+          "quality": 11
+        },
+        {
+          "type": "minecraft:empty",
+          "weight": 955,
+          "quality": -11
+        }
+      ],
+      "bonus_rolls": 0.0
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "lrtactical:consumable",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "ConsumableId": "lrtactical:carfak"
+                }
+              }
+            }
+          ],
+          "weight": 43,
+          "quality": 11
+        },
+        {
+          "type": "minecraft:empty",
+          "weight": 957,
+          "quality": -11
+        }
+      ],
+      "bonus_rolls": 0.0
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "lrtactical:consumable",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
                   "ConsumableId": "lrtactical:ai2"
                 }
               }
             }
           ],
-          "weight": 80,
-          "quality": 20
+          "weight": 40,
+          "quality": 10
         },
         {
           "type": "minecraft:empty",
-          "weight": 920,
-          "quality": -20
+          "weight": 960,
+          "quality": -10
         }
       ],
       "bonus_rolls": 0.0
@@ -206,13 +206,13 @@
               }
             }
           ],
-          "weight": 70,
-          "quality": 18
+          "weight": 35,
+          "quality": 9
         },
         {
           "type": "minecraft:empty",
-          "weight": 930,
-          "quality": -18
+          "weight": 965,
+          "quality": -9
         }
       ],
       "bonus_rolls": 0.0
@@ -233,13 +233,13 @@
               }
             }
           ],
-          "weight": 40,
-          "quality": 10
+          "weight": 20,
+          "quality": 5
         },
         {
           "type": "minecraft:empty",
-          "weight": 960,
-          "quality": -10
+          "weight": 980,
+          "quality": -5
         }
       ],
       "bonus_rolls": 0.0
