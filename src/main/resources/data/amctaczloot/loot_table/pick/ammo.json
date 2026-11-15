@@ -20,58 +20,12 @@
               "function": "minecraft:set_count",
               "count": {
                 "type": "minecraft:uniform",
-                "min": 6,
-                "max": 18
-              }
-            }
-          ],
-          "weight": 8001
-        },
-        {
-          "type": "minecraft:item",
-          "name": "tacz:ammo",
-          "functions": [
-            {
-              "function": "minecraft:set_components",
-              "components": {
-                "minecraft:custom_data": {
-                  "AmmoId": "tacz:338"
-                }
-              }
-            },
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 5,
-                "max": 15
-              }
-            }
-          ],
-          "weight": 167
-        },
-        {
-          "type": "minecraft:item",
-          "name": "tacz:ammo",
-          "functions": [
-            {
-              "function": "minecraft:set_components",
-              "components": {
-                "minecraft:custom_data": {
-                  "AmmoId": "tacz:545x39"
-                }
-              }
-            },
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 10,
+                "min": 14,
                 "max": 30
               }
             }
           ],
-          "weight": 858
+          "weight": 1
         },
         {
           "type": "minecraft:item",
@@ -81,7 +35,7 @@
               "function": "minecraft:set_components",
               "components": {
                 "minecraft:custom_data": {
-                  "AmmoId": "tacz:762x39"
+                  "AmmoId": "tacz:22wmr"
                 }
               }
             },
@@ -89,12 +43,12 @@
               "function": "minecraft:set_count",
               "count": {
                 "type": "minecraft:uniform",
-                "min": 10,
-                "max": 30
+                "min": 26,
+                "max": 53
               }
             }
           ],
-          "weight": 1272
+          "weight": 1
         },
         {
           "type": "minecraft:item",
@@ -104,7 +58,7 @@
               "function": "minecraft:set_components",
               "components": {
                 "minecraft:custom_data": {
-                  "AmmoId": "tacz:556x45"
+                  "AmmoId": "tacz:300blk"
                 }
               }
             },
@@ -112,81 +66,12 @@
               "function": "minecraft:set_count",
               "count": {
                 "type": "minecraft:uniform",
-                "min": 10,
-                "max": 30
+                "min": 20,
+                "max": 42
               }
             }
           ],
-          "weight": 3274
-        },
-        {
-          "type": "minecraft:item",
-          "name": "tacz:ammo",
-          "functions": [
-            {
-              "function": "minecraft:set_components",
-              "components": {
-                "minecraft:custom_data": {
-                  "AmmoId": "tacz:9mm"
-                }
-              }
-            },
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 10,
-                "max": 30
-              }
-            }
-          ],
-          "weight": 5331
-        },
-        {
-          "type": "minecraft:item",
-          "name": "tacz:ammo",
-          "functions": [
-            {
-              "function": "minecraft:set_components",
-              "components": {
-                "minecraft:custom_data": {
-                  "AmmoId": "tacz:50ae"
-                }
-              }
-            },
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 8,
-                "max": 24
-              }
-            }
-          ],
-          "weight": 1066
-        },
-        {
-          "type": "minecraft:item",
-          "name": "tacz:ammo",
-          "functions": [
-            {
-              "function": "minecraft:set_components",
-              "components": {
-                "minecraft:custom_data": {
-                  "AmmoId": "tacz:357mag"
-                }
-              }
-            },
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 8,
-                "max": 24
-              }
-            }
-          ],
-          "weight": 1066
+          "weight": 1
         },
         {
           "type": "minecraft:item",
@@ -204,12 +89,12 @@
               "function": "minecraft:set_count",
               "count": {
                 "type": "minecraft:uniform",
-                "min": 8,
-                "max": 24
+                "min": 19,
+                "max": 40
               }
             }
           ],
-          "weight": 2258
+          "weight": 1
         },
         {
           "type": "minecraft:item",
@@ -227,35 +112,12 @@
               "function": "minecraft:set_count",
               "count": {
                 "type": "minecraft:uniform",
-                "min": 6,
-                "max": 18
-              }
-            }
-          ],
-          "weight": 986
-        },
-        {
-          "type": "minecraft:item",
-          "name": "tacz:ammo",
-          "functions": [
-            {
-              "function": "minecraft:set_components",
-              "components": {
-                "minecraft:custom_data": {
-                  "AmmoId": "tacz:45acp"
-                }
-              }
-            },
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 10,
+                "min": 14,
                 "max": 30
               }
             }
           ],
-          "weight": 4765
+          "weight": 1
         },
         {
           "type": "minecraft:item",
@@ -265,7 +127,7 @@
               "function": "minecraft:set_components",
               "components": {
                 "minecraft:custom_data": {
-                  "AmmoId": "tacz:46x30"
+                  "AmmoId": "tacz:338"
                 }
               }
             },
@@ -273,12 +135,12 @@
               "function": "minecraft:set_count",
               "count": {
                 "type": "minecraft:uniform",
-                "min": 10,
-                "max": 30
+                "min": 12,
+                "max": 25
               }
             }
           ],
-          "weight": 1333
+          "weight": 1
         },
         {
           "type": "minecraft:item",
@@ -288,7 +150,7 @@
               "function": "minecraft:set_components",
               "components": {
                 "minecraft:custom_data": {
-                  "AmmoId": "tacz:50bmg"
+                  "AmmoId": "tacz:357mag"
                 }
               }
             },
@@ -296,35 +158,12 @@
               "function": "minecraft:set_count",
               "count": {
                 "type": "minecraft:uniform",
-                "min": 5,
-                "max": 15
+                "min": 19,
+                "max": 40
               }
             }
           ],
-          "weight": 200
-        },
-        {
-          "type": "minecraft:item",
-          "name": "tacz:ammo",
-          "functions": [
-            {
-              "function": "minecraft:set_components",
-              "components": {
-                "minecraft:custom_data": {
-                  "AmmoId": "tacz:792x57"
-                }
-              }
-            },
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 6,
-                "max": 18
-              }
-            }
-          ],
-          "weight": 167
+          "weight": 1
         },
         {
           "type": "minecraft:item",
@@ -343,11 +182,11 @@
               "count": {
                 "type": "minecraft:uniform",
                 "min": 2,
-                "max": 3
+                "max": 5
               }
             }
           ],
-          "weight": 22
+          "weight": 1
         },
         {
           "type": "minecraft:item",
@@ -357,7 +196,7 @@
               "function": "minecraft:set_components",
               "components": {
                 "minecraft:custom_data": {
-                  "AmmoId": "tacz:300blk"
+                  "AmmoId": "tacz:45_70"
                 }
               }
             },
@@ -365,12 +204,173 @@
               "function": "minecraft:set_count",
               "count": {
                 "type": "minecraft:uniform",
-                "min": 8,
+                "min": 19,
+                "max": 40
+              }
+            }
+          ],
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tacz:ammo",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "AmmoId": "tacz:45acp"
+                }
+              }
+            },
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 24,
+                "max": 50
+              }
+            }
+          ],
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tacz:ammo",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "AmmoId": "tacz:46x30"
+                }
+              }
+            },
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 24,
+                "max": 50
+              }
+            }
+          ],
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tacz:ammo",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "AmmoId": "tacz:500mag"
+                }
+              }
+            },
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 17,
+                "max": 35
+              }
+            }
+          ],
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tacz:ammo",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "AmmoId": "tacz:50ae"
+                }
+              }
+            },
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 19,
+                "max": 40
+              }
+            }
+          ],
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tacz:ammo",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "AmmoId": "tacz:50bmg"
+                }
+              }
+            },
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 12,
                 "max": 25
               }
             }
           ],
-          "weight": 286
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tacz:ammo",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "AmmoId": "tacz:545x39"
+                }
+              }
+            },
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 24,
+                "max": 50
+              }
+            }
+          ],
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tacz:ammo",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "AmmoId": "tacz:556x45"
+                }
+              }
+            },
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 24,
+                "max": 50
+              }
+            }
+          ],
+          "weight": 1
         },
         {
           "type": "minecraft:item",
@@ -388,35 +388,12 @@
               "function": "minecraft:set_count",
               "count": {
                 "type": "minecraft:uniform",
-                "min": 10,
-                "max": 30
+                "min": 24,
+                "max": 50
               }
             }
           ],
-          "weight": 1333
-        },
-        {
-          "type": "minecraft:item",
-          "name": "tacz:ammo",
-          "functions": [
-            {
-              "function": "minecraft:set_components",
-              "components": {
-                "minecraft:custom_data": {
-                  "AmmoId": "tacz:762x54"
-                }
-              }
-            },
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 10,
-                "max": 30
-              }
-            }
-          ],
-          "weight": 367
+          "weight": 1
         },
         {
           "type": "minecraft:item",
@@ -434,12 +411,104 @@
               "function": "minecraft:set_count",
               "count": {
                 "type": "minecraft:uniform",
-                "min": 10,
+                "min": 24,
+                "max": 50
+              }
+            }
+          ],
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tacz:ammo",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "AmmoId": "tacz:762x39"
+                }
+              }
+            },
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 24,
+                "max": 50
+              }
+            }
+          ],
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tacz:ammo",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "AmmoId": "tacz:762x54"
+                }
+              }
+            },
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 24,
+                "max": 50
+              }
+            }
+          ],
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tacz:ammo",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "AmmoId": "tacz:792x57"
+                }
+              }
+            },
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 14,
                 "max": 30
               }
             }
           ],
-          "weight": 572
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tacz:ammo",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "AmmoId": "tacz:9mm"
+                }
+              }
+            },
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 24,
+                "max": 50
+              }
+            }
+          ],
+          "weight": 1
         },
         {
           "type": "minecraft:item",
@@ -458,80 +527,11 @@
               "count": {
                 "type": "minecraft:uniform",
                 "min": 2,
-                "max": 3
+                "max": 5
               }
             }
           ],
-          "weight": 22
-        },
-        {
-          "type": "minecraft:item",
-          "name": "tacz:ammo",
-          "functions": [
-            {
-              "function": "minecraft:set_components",
-              "components": {
-                "minecraft:custom_data": {
-                  "AmmoId": "tacz:45_70"
-                }
-              }
-            },
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 8,
-                "max": 24
-              }
-            }
-          ],
-          "weight": 84
-        },
-        {
-          "type": "minecraft:item",
-          "name": "tacz:ammo",
-          "functions": [
-            {
-              "function": "minecraft:set_components",
-              "components": {
-                "minecraft:custom_data": {
-                  "AmmoId": "tacz:500mag"
-                }
-              }
-            },
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 7,
-                "max": 21
-              }
-            }
-          ],
-          "weight": 266
-        },
-        {
-          "type": "minecraft:item",
-          "name": "tacz:ammo",
-          "functions": [
-            {
-              "function": "minecraft:set_components",
-              "components": {
-                "minecraft:custom_data": {
-                  "AmmoId": "tacz:22wmr"
-                }
-              }
-            },
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 10,
-                "max": 32
-              }
-            }
-          ],
-          "weight": 533
+          "weight": 1
         }
       ]
     }

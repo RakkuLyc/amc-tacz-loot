@@ -35,14 +35,14 @@
       "entries": [
         {
           "type": "minecraft:loot_table",
-          "value": "amctaczloot:pick/ammo_police",
-          "weight": 100,
-          "quality": 25
+          "value": "amctaczloot:pick/ammo",
+          "weight": 200,
+          "quality": 50
         },
         {
           "type": "minecraft:empty",
-          "weight": 900,
-          "quality": -25
+          "weight": 800,
+          "quality": -50
         }
       ],
       "bonus_rolls": 0.0

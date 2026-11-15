@@ -7,8 +7,8 @@
         {
           "type": "minecraft:loot_table",
           "value": "amctaczloot:pick/gun_default",
-          "weight": 333,
-          "quality": 83
+          "weight": 200,
+          "quality": 50
         },
         {
           "type": "minecraft:loot_table",
@@ -24,8 +24,8 @@
         },
         {
           "type": "minecraft:empty",
-          "weight": 527,
-          "quality": -119
+          "weight": 660,
+          "quality": -86
         }
       ],
       "bonus_rolls": 0.34
@@ -35,14 +35,14 @@
       "entries": [
         {
           "type": "minecraft:loot_table",
-          "value": "amctaczloot:pick/ammo_default",
-          "weight": 433,
-          "quality": 108
+          "value": "amctaczloot:pick/ammo",
+          "weight": 866,
+          "quality": 216
         },
         {
           "type": "minecraft:empty",
-          "weight": 567,
-          "quality": -108
+          "weight": 134,
+          "quality": -216
         }
       ],
       "bonus_rolls": 0.34

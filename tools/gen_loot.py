@@ -35,14 +35,14 @@ ROLLS = {"chest": (1, 0.2), "chest_hard": (1, 0.34), "barrel": (1, 0.0), "barrel
 # chance (‰) por rolagem de cada categoria, por tema e tier.  gun = arma (sem munição junto), ammo = pilha de munição (pool próprio),
 # att = attachment, lr = cura LesRaisins, fa = cura First Aid (tabela à parte, só se o First Aid estiver instalado)
 RATES = {
-    "building":       {"chest": dict(gun=200, ammo=260, att=40, lr=40, fa=40),         # 1 arma a cada 5 baús
-                       "chest_hard": dict(gun=333, ammo=433, att=70, lr=70, fa=70),     # 1 arma a cada 3 baús difíceis
-                       "barrel": dict(gun=6, ammo=31, att=12, lr=15, fa=15),
-                       "barrel_hard": dict(gun=12, ammo=57, att=24, lr=30, fa=30)},
-    "police_station": {"chest": dict(gun=250, ammo=400, att=90, lr=50, fa=50),          # 1 arma a cada 4 baús
-                       "chest_hard": dict(gun=333, ammo=583, att=160, lr=80, fa=80),    # 1 arma a cada 3 baús difíceis
-                       "barrel": dict(gun=30, ammo=100, att=40, lr=20, fa=20),
-                       "barrel_hard": dict(gun=60, ammo=180, att=70, lr=35, fa=35)},
+    "building":       {"chest": dict(gun=120, ammo=520, att=40, lr=40, fa=40),         # 1 arma a cada 8,3 baús; munição em 52%
+                       "chest_hard": dict(gun=200, ammo=866, att=70, lr=70, fa=70),     # 1 arma a cada 5 baús difíceis; munição 86,6%
+                       "barrel": dict(gun=4, ammo=62, att=12, lr=15, fa=15),
+                       "barrel_hard": dict(gun=7, ammo=114, att=24, lr=30, fa=30)},
+    "police_station": {"chest": dict(gun=250, ammo=800, att=90, lr=50, fa=50),          # armas inalteradas: 1 a cada 4 baús; munição 80%
+                       "chest_hard": dict(gun=333, ammo=1000, att=160, lr=80, fa=80),   # 1 arma a cada 3 baús difíceis; munição sempre (teto)
+                       "barrel": dict(gun=30, ammo=200, att=40, lr=20, fa=20),
+                       "barrel_hard": dict(gun=60, ammo=360, att=70, lr=35, fa=35)},
     "pharmacy":       {"chest": dict(lr=300, fa=300), "chest_hard": dict(lr=400, fa=400),
                        "barrel": dict(lr=120, fa=120), "barrel_hard": dict(lr=200, fa=200)},
     "house":          {"chest": dict(lr=30, fa=30), "chest_hard": dict(lr=60, fa=60),
@@ -59,7 +59,9 @@ GUN_TYPE_W = {
     "police":  dict(pistol=8, smg=8, shotgun=8, rifle=6, dmr=2.5, sniper=1.5, mg=1, rpg=0.3),
 }
 GUN_PROFILE = {"police_station": "police"}          # os demais temas usam "default"
-AMMO_RARE = {"50bmg": 0.4, "40mm": 0.15, "rpg_rocket": 0.15, "338": 0.5, "45_70": 0.5, "500mag": 0.5}  # fator no peso
+# MUNIÇÃO (escolha do usuário, 14 Nov 2026): todos os calibres que têm alguma arma no pacote padrão têm a MESMA raridade
+# (peso 1); a quantidade por pilha é proporcional à pilha máxima do calibre, tomando o 9mm como referência (24 a 50 balas).
+AMMO_REF = ("9mm", 24, 50)
 # (a arma NÃO traz munição junto: a munição é um sorteio separado, calibre pela raridade das armas que o usam)
 ATT_TYPE_W = dict(scope=4, muzzle=4, grip=3, stock=3, extended_mag=4, laser=2)   # peso do tipo de attachment
 # itens de cura: (peso, mín, máx)
@@ -106,11 +108,15 @@ def gun_weights(profile):
     return {g: max(1, round(tw[v["type"]] * 1000 / n[v["type"]])) for g, v in guns.items()}
 
 
-def ammo_weights(profile):
-    w = {}
-    for g, gw in gun_weights(profile).items():
-        c = TZ["guns"][g]["ammo"].split(":")[1]; w[c] = w.get(c, 0) + gw
-    return {c: max(1, round(x * AMMO_RARE.get(c, 1.0))) for c, x in w.items()}
+def ammo_weights(profile=None):
+    """Calibres que têm ao menos uma arma elegível, todos com o mesmo peso (7.62x25 e 6.8x51 Fury não têm arma: ficam de fora)."""
+    return {c: 1 for c in sorted({v["ammo"].split(":")[1] for v in eligible_guns().values()})}
+
+
+def ammo_range(c):
+    """Mín e máx de balas por pilha: proporcional à pilha máxima, com o 9mm de referência (AMMO_REF)."""
+    ref, lo9, hi9 = AMMO_REF; base = TZ["ammo"][ref]["stack"]; st = TZ["ammo"][c]["stack"] or 30
+    lo = max(1, round(lo9 * st / base)); return lo, max(lo, round(hi9 * st / base))
 
 
 def att_weights():
@@ -134,9 +140,8 @@ def e_gun(g):
         GunId="tacz:" + g, GunFireMode=TZ["guns"][g]["fire_mode"][0], GunCurrentAmmoCount=0, HasBulletInBarrel=False)]}
 
 
-def e_ammo(c, lo=None, hi=None):
-    stack = TZ["ammo"][c]["stack"] or 30
-    lo = lo if lo else max(2, stack // 6); hi = hi if hi else max(3, stack // 2)
+def e_ammo(c):
+    lo, hi = ammo_range(c)
     return {"type": "minecraft:item", "name": "tacz:ammo", "functions": [custom(AmmoId="tacz:" + c), count(lo, hi)]}
 
 
@@ -175,7 +180,7 @@ def pick_tables():
     for prof in ("default", "police"):
         gw = gun_weights(prof)
         out["pick/gun_" + prof] = (table([pool([with_w(e_gun(g), w) for g, w in gw.items()])]), None)
-        out["pick/ammo_" + prof] = (table([pool([with_w(e_ammo(c), w) for c, w in ammo_weights(prof).items()])]), None)
+        out["pick/ammo"] = (table([pool([with_w(e_ammo(c), w) for c, w in ammo_weights().items()])]), None)
     out["pick/att"] = (table([pool([with_w(e_att(a), w) for a, w in att_weights().items()])]), None)
     out["pick/lr"] = (table([pool([with_w(e_lr(i, lo, hi), w) for i, (w, lo, hi) in LR_W.items()])]), None)
     out["pick/fa"] = (table([pool([with_w(e_fa(i, lo, hi), w) for i, (w, lo, hi) in FA_W.items()])],
@@ -221,8 +226,9 @@ def main_tables():
                 if not part: continue
                 ent = []
                 for c, (w, q) in weights(part).items():
+                    if c == "empty" and w <= 0: continue          # chance 100%: sem entrada vazia (peso 0 não vale)
                     if c == "empty": e = {"type": "minecraft:empty"}
-                    else: e = {"type": "minecraft:loot_table", "value": "%s:pick/%s" % (MOD, {"gun": "gun_" + prof, "ammo": "ammo_" + prof, "att": "att", "lr": "lr"}[c])}
+                    else: e = {"type": "minecraft:loot_table", "value": "%s:pick/%s" % (MOD, {"gun": "gun_" + prof, "ammo": "ammo", "att": "att", "lr": "lr"}[c])}
                     ent.append({**e, "weight": w, "quality": q})
                 pools.append(pool(ent, rolls, bonus))
             out["%s/%s_core" % (theme, tier)] = table(pools)

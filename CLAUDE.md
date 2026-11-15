@@ -125,3 +125,18 @@ First Aid e da LesRaisins. Mod id `amctaczloot`. Recomeçado do zero em 13 Nov 2
   com arma só 26% têm alguma munição (= a chance geral) e só 3% a do calibre da arma (antes 100%).
 - Referência: a munição do Apocalypse Loot (Lost Cities) é ~8–14× maior por baú e tem faixa de raridade 14:1 (a nossa é ~270:1);
   o usuário escolheu manter a nossa opção B. Simulação de 20 baús em `run/tmp/simulate_ammo.py` (não versionada).
+
+## Proposta C aplicada (15 Nov 2026) — substitui a raridade/quantidade de munição e as taxas de arma dos prédios
+- Feedback do usuário (screenshot da green tower: 14 armas, ~10 pilhas visíveis): armas ok, pouca munição. O inventário **funde pilhas
+  iguais**, então a contagem de pilhas na tela engana (9mm 55 > máx 50 de uma pilha).
+- **Raridade da munição igual** para todos os calibres que têm arma (23; `7.62x25` e `6.8x51 Fury` não têm arma e ficam fora).
+  **Quantidade por pilha** proporcional à pilha máxima, 9mm de referência 24–50 (`AMMO_REF`): pilha 60 → 24–50; 64 → 26–53; 50 → 20–42;
+  48 → 19–40; 42 → 17–35; 36 → 14–30; 30 → 12–25; 6 (40mm, foguete) → 2–5. Uma só tabela `pick/ammo` (sem perfil de arma).
+- **Armas dos prédios −40%** (baú comum 12% = 1 a cada 8,3; difícil 20% = 1 a cada 5; barris 0,4% / 0,7%). **Delegacia inalterada nas
+  armas** (25% / 33,3%, barris 3% / 6%). **Munição ×2** em prédio e delegacia: prédio baú 52%, difícil 86,6%, barris 6,2% / 11,4%;
+  delegacia baú 80%, **difícil 100% (teto, sem entrada `empty`: peso 0 não é válido)**, barris 20% / 36%. Oficina e demais temas inalterados.
+- Interpretação assumida: "deixe a quantidade de balas úteis como está" = manter os tamanhos de pilha definidos; os fatores −40% / ×2 foram
+  proposta minha (aprovada). Antes: green tower 18,1 armas / 408 balas / 16,7 úteis por arma; agora (esperado) 10,9 armas / 47,3 pilhas /
+  ~1.350 balas / ~40 úteis por arma; delegacia 9,4 armas, 33,3 pilhas.
+- Validado no servidor (Sorte 0): armas e munição por baú batem (prédio 0,120 e 0,542; delegacia 0,244 e 0,811; difícil 1,000); 23 calibres,
+  fatias 3,6–5,0% (esperado 4,35%); balas por pilha dentro dos intervalos acima. A seção "Munição (opção B)" acima ficou superada neste ponto.
