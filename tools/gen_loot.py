@@ -108,6 +108,9 @@ GEAR = dict(m67=dict(item="throwable", key="ThrowableId", p=92, lo=3, hi=5), rgn
             c4=dict(item="throwable", key="ThrowableId", p=30, lo=1, hi=1), dagger=dict(item="melee", key="MeleeWeaponId", p=20, lo=1, hi=1),
             karambit=dict(item="melee", key="MeleeWeaponId", p=20, lo=1, hi=1), baseball_bat=dict(item="melee", key="MeleeWeaponId", p=20, lo=1, hi=1))
 GEAR_EXCLUDED_THEMES = ("pharmacy",)
+# Multiplicador por tema e tipo de item (pedido do usuário, 16 Nov 2026): na delegacia as chances dos THROWABLE (M67, RGN e C4) dobram. As armas brancas
+# ficam iguais em todos os temas (as casas já as têm, como todos os temas menos a farmácia).
+GEAR_THEME_MULT = {"police_station": {"throwable": 2.0}}
 # SUCATA: o mod sobrescreve as 42 tabelas do AMC (mesmos caminhos) para que NÃO reste nenhum item vanilla útil nos containers.
 # Só entra aqui o que tem pouca ou nenhuma utilidade: nome -> (peso, mín, máx). A mesma lista em todos os temas.
 JUNK = dict(stick=(12, 1, 6), wheat_seeds=(10, 1, 4), beetroot_seeds=(8, 1, 4), melon_seeds=(8, 1, 4),
@@ -256,7 +259,9 @@ def item_chances(theme):
     for i, f in FOOD.items():
         if f["themes"] is None or theme in f["themes"]: out.append(("food", i, f["p"]))
     if theme not in GEAR_EXCLUDED_THEMES:
-        for i, d in GEAR.items(): out.append(("gear", i, d["p"]))
+        for i, d in GEAR.items():
+            m = GEAR_THEME_MULT.get(theme, {}).get(d["item"], 1.0)
+            out.append(("gear", i, min(1000, round(d["p"] * m))))
     return out
 
 

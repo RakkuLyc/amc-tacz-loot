@@ -26,8 +26,8 @@ First Aid e da LesRaisins. Mod id `amctaczloot`. Recomeçado do zero em 13 Nov 2
   amoxicillin e golden star **9,2% cada, mesma chance** (Comuns; 184‰ antes do x0,5 = média dos 4 antigos, total dos Comuns inalterado); blood pack 4,5%, CAR 4,3%, AI-2 4,0%, CMS 3,5% (Incomuns); SURV12 2,0% (Raro) (CAR 4,3% = 4,25% arredondado em ‰).
   **Farmácia**: Incomuns e Raro ×2 sobre esses valores (blood pack 9,0%, CAR 8,5%, AI-2 8,0%, CMS 7,0%, SURV12 4,0%). Fator geral `HEAL_SCALE = 0.5`.
 - **Comida**: leite condensado 8% por container em todos os temas (2–4 unidades); pão 20% só em casas (4–12). Itens de cura First Aid e comida **não** mudaram com o ×0,5.
-- **Equipamento LesRaisins** (chance de CADA item por container, independente; todos os temas **exceto farmácia**, delegacia igual aos demais): M67 Grenade 9,2% (**3 a 5**),
-  RGN Grenade 4,1% (**2 a 4**), C4 Sticky Bomb 3,0% (1), Dagger / Karambit / Baseball Bat 2,0% cada (1, durabilidade cheia). Itens: `lrtactical:throwable` (`ThrowableId`) e
+- **Equipamento LesRaisins** (chance de CADA item por container, independente; todos os temas **exceto farmácia**; **na delegacia as chances dos throwable dobram**): M67 Grenade 9,2% (**3 a 5**; delegacia 18,4%),
+  RGN Grenade 4,1% (**2 a 4**; delegacia 8,2%), C4 Sticky Bomb 3,0% (1; delegacia 6,0%), Dagger / Karambit / Baseball Bat 2,0% cada (1, durabilidade cheia). Itens: `lrtactical:throwable` (`ThrowableId`) e
   `lrtactical:melee` (`MeleeWeaponId`). O detonator **não** entra no loot (o C4 o entrega ao ser arremessado, confirmado pelo usuário). smoke/flash/molotov/flash shield de fora.
 - **First Aid** (opcional, tabela própria com `neoforge:mod_loaded`; chance de CADA item por container, independente, a mesma em todos os temas exceto farmácia):
   plaster 15% (4–14 unidades, "Muito comum"); bandage 9,2% (2–10), adrenaline injector 9,2%, painkillers 9,2% (Comuns, mesma chance dos comuns LR);
@@ -262,3 +262,9 @@ First Aid e da LesRaisins. Mod id `amctaczloot`. Recomeçado do zero em 13 Nov 2
 - Validado (prédio, 4.000 baús): M67 8,7% (3–5), RGN 4,6% (2–4), C4 3,0%, armas brancas 1,8–2,2%; farmácia 0 itens; 0 erros de carga.
 - Monte Carlo (Sorte 0): 100 baús ≈ 37 M67 (18–57), 12 RGN, 3 C4, 2 de cada arma branca (65% de chance de conseguir as 3); green tower ≈ 34 M67, 11 RGN, 2,7 C4, 5,5 armas brancas; rampa ≈ 147 M67.
   Risco de estourar dispenser/dropper (9 espaços): ~1 em 1.200 no barril difícil da delegacia, 1 em 2.500 no barril da delegacia, 1 em 8.800 no barril de prédio.
+
+## Delegacia com throwable ×2 (16 Nov 2026)
+- Pedido: "na delegacia, dobre as chances dos throwable" (M67, RGN, C4; `GEAR_THEME_MULT = {"police_station": {"throwable": 2.0}}`) e "coloque itens melee nas casas também".
+  **As armas brancas já saíam nas casas** (regra: todos os temas menos a farmácia, 2% cada); nada foi alterado nelas, o usuário foi avisado e recebeu uma tabela de multiplicadores.
+- Validado (3.000 baús): delegacia M67 17,8%, RGN 8,9%, C4 6,1%, armas brancas 1,7–2,1%; casa e prédio inalterados; 0 erros de carga. Delegacia inteira (63 containers): ~46 M67, ~15,5 RGN, ~3,8 C4.
+- Risco de estourar dispenser/dropper (9 espaços) na delegacia: ~1 em 1.200 (barril) e 1 em 610 (barril difícil).
