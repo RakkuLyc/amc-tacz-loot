@@ -66,6 +66,12 @@ GUN_PROFILE = {"police_station": "police"}          # os demais temas usam "defa
 # tudo igual; com 0.0, só pela popularidade. (Com poucas armas achadas, calibres todos iguais deixavam ~24% da munição útil.)
 AMMO_REF = ("9mm", 24, 50)
 AMMO_MIX_UNIFORM = 0.5
+# Cada vez que um container "ganha munição" (chance por tier em RATES["ammo"]) saem AMMO_STACKS sorteios de calibre (1 a 3 pilhas; o mesmo
+# calibre pode repetir: uma tabela não garante "sem repetir"), cada pilha com AMMO_SIZE do tamanho anterior (9mm 24-50 -> 12-25), para o TOTAL
+# de balas continuar igual (média de pilhas x AMMO_SIZE = 1: 2,0 x 0,5). Pedido do usuário: de 1 a 3 pilhas, não sempre 2 a 3 (antes: 2-3 x 0,4). Escolha do usuário (opção C, 15 Nov 2026). O Minecraft ainda divide as pilhas
+# em pedaços espalhados em slots aleatórios ao abrir o container (shuffleAndSplitItems), então as balas já aparecem soltas pelos slots.
+AMMO_STACKS = (1, 3)
+AMMO_SIZE = 0.5
 # (a arma NÃO traz munição junto: a munição é um sorteio separado, calibre pela raridade das armas que o usam)
 ATT_TYPE_W = dict(scope=4, muzzle=4, grip=3, stock=3, extended_mag=4, laser=2)   # peso do tipo de attachment
 # itens de cura: (peso, mín, máx)
@@ -137,7 +143,7 @@ def ammo_weights(profile="default"):
 def ammo_range(c):
     """Mín e máx de balas por pilha: proporcional à pilha máxima, com o 9mm de referência (AMMO_REF)."""
     ref, lo9, hi9 = AMMO_REF; base = TZ["ammo"][ref]["stack"]; st = TZ["ammo"][c]["stack"] or 30
-    lo = max(1, round(lo9 * st / base)); return lo, max(lo, round(hi9 * st / base))
+    lo = max(1, int(lo9 * st / base * AMMO_SIZE + 0.5)); return lo, max(lo, int(hi9 * st / base * AMMO_SIZE + 0.5))
 
 
 def att_weights():
@@ -201,7 +207,8 @@ def pick_tables():
     for prof in ("default", "police"):
         gw = gun_weights(prof)
         out["pick/gun_" + prof] = (table([pool([with_w(e_gun(g), w) for g, w in gw.items()])]), None)
-        out["pick/ammo_" + prof] = (table([pool([with_w(e_ammo(c), w) for c, w in ammo_weights(prof).items()])]), None)
+        out["pick/ammo_" + prof] = (table([pool([with_w(e_ammo(c), w) for c, w in ammo_weights(prof).items()],
+                                                {"type": "minecraft:uniform", "min": AMMO_STACKS[0], "max": AMMO_STACKS[1]})]), None)
     out["pick/att"] = (table([pool([with_w(e_att(a), w) for a, w in att_weights().items()])]), None)
     out["pick/fa"] = (table([pool([with_w(e_fa(i, lo, hi), w) for i, (w, lo, hi) in FA_W.items()])],
                             [{"type": "neoforge:mod_loaded", "modid": "firstaid"}]), None)
@@ -304,7 +311,7 @@ def expected(theme, tier, luck):
         tot = sum(eff(w, q, luck) for w, q in wq.values())
         for c in part:
             p = eff(*wq[c], luck) / tot if tot else 0
-            avg = {"fa": sum(w * (lo + hi) / 2 for w, lo, hi in FA_W.values()) / sum(w for w, _, _ in FA_W.values())}.get(c, 1)
+            avg = {"ammo": sum(AMMO_STACKS) / 2, "fa": sum(w * (lo + hi) / 2 for w, lo, hi in FA_W.values()) / sum(w for w, _, _ in FA_W.values())}.get(c, 1)
             res[c] += r * p * avg
     for kind, i, p0 in item_chances(theme):           # um sorteio por item (rolagem única, sem bonus)
         q = max(1, round(p0 * LUCK_QUALITY)); a = eff(p0, q, luck); e0 = eff(1000 - p0, -q, luck)

@@ -19,7 +19,8 @@ First Aid e da LesRaisins. Mod id `amctaczloot`. Recomeçado do zero em 13 Nov 2
   Arma cai sem munição, descarregada.
 - **Munição** (pool próprio): baú de prédio 52,0%, difícil 86,6%, barris 6,2% / 11,4%; delegacia baú 80,0%, difícil 100,0% (teto), barris 20,0% / 36,0%.
   Calibre: metade igual para os 23 calibres com arma + metade pela popularidade das armas (ex. prédio: 12g 11,9%, 9mm 10,8%, .45 ACP 9,3%; mais raros ~2,4%).
-  Balas por pilha proporcionais à pilha máxima (9mm 24–50 com pilha 60; 12g 14–30; .308 19–40; 40mm e foguete 2–5).
+  **Cada acerto de munição dá 1 a 3 pilhas de calibres sorteados** (o mesmo calibre pode repetir), com balas por pilha proporcionais à pilha máxima e
+  50% do tamanho antigo para o total não mudar (9mm 12–25 com pilha 60; 12g 7–15; .308 10–20; 40mm e foguete 1–3). `AMMO_STACKS`, `AMMO_SIZE`.
 - **Cura LesRaisins** (chance de CADA item por container, independente; mesma em todos os temas exceto farmácia): vaseline, ibuprofen,
   amoxicillin e golden star **9,2% cada, mesma chance** (Comuns; 184‰ antes do x0,5 = média dos 4 antigos, total dos Comuns inalterado); blood pack 4,5%, CAR 4,3%, AI-2 4,0%, CMS 3,5% (Incomuns); SURV12 2,0% (Raro) (CAR 4,3% = 4,25% arredondado em ‰).
   **Farmácia**: Incomuns e Raro ×2 sobre esses valores (blood pack 9,0%, CAR 8,5%, AI-2 8,0%, CMS 7,0%, SURV12 4,0%). Fator geral `HEAL_SCALE = 0.5`.
@@ -208,3 +209,19 @@ First Aid e da LesRaisins. Mod id `amctaczloot`. Recomeçado do zero em 13 Nov 2
 - Validado no servidor (Sorte 0): prédio (4.000 baús) comuns 8,8–9,9%; farmácia (3.000) 9,2–10,5%. Lição: **sempre mandar `tools/rcon.py stop` ao
   fim de um teste**; um servidor esquecido faz o próximo falhar com "FAILED TO BIND TO PORT" e o amostrador mede o servidor antigo sem aviso
   (aconteceu uma vez; o teste foi refeito). Para ver se há servidor aberto use `pgrep -f '[b]ootstraplauncher'` (o `pgrep` simples conta o próprio comando).
+
+## Munição em 1 a 3 pilhas de calibres diferentes (opção C, 15 Nov 2026)
+- Descoberta: no baú **real** o Minecraft já divide cada pilha em vários pedaços espalhados em slots aleatórios (`shuffleAndSplitItems`, só
+  quando há slots livres); o `/loot insert` dos testes NÃO faz isso. Antes da mudança um baú com munição tinha **1 calibre só em ~5 pedaços**
+  (~6 balas cada). Então "balas soltas espalhadas" já existia; o que faltava era mais de um calibre por baú.
+- Apocalypse Loot (referência): pool próprio de munição, cada rolagem = 1 pilha de um calibre por peso, 1–3 rolagens (2–5 nas tabelas mais ricas),
+  `bonus_rolls` 1,0, calibre pode repetir, pilhas grandes (9mm 21–57), sem truque de pilhas pequenas (conta com a divisão do Minecraft).
+- Escolha do usuário: **opção C** = a chance de o container ter munição não mudou (prédio baú 52% etc.), mas cada acerto sorteia calibres de
+  `pick/ammo_*` com `rolls` uniforme **1 a 3** (primeiro 2–3, depois o usuário pediu 1–3), pilhas a **50%** do tamanho para manter o total de balas
+  (2,0 pilhas x 0,5 = 1; com 2–3 pilhas seria 0,4). A escolha dos 50% foi minha (manter o total); se o usuário preferir 40% o total cai ~20%.
+- Validado no baú real (preenchimento real forçado com `execute if items`, 800 baús de prédio): 54% com munição; calibres diferentes por baú
+  com munição: 1 (37%), 2 (34%), 3 (29%), média 1,9; ~8 pedaços por baú; 16,4 balas por baú (esperado 15,7). Delegacia (500): 80% com munição,
+  22,9 balas (esperado 24,0). Risco de container de 9 espaços estourar (dispenser/dropper): 1 em 77.000 a 500.000.
+- Para testar o preenchimento real: `setblock ... chest{LootTable:"...",LootTableSeed:1L}` + `execute if items block ... container.0 minecraft:stone`
+  + `data get block ... Items`. **O Minecraft do Prism Launcher do usuário aparece como `bootstraplauncher` no `pgrep`: nunca matar; para saber se o
+  servidor de teste está aberto, use a porta 25575 (`ss -ltn`).**
