@@ -13,7 +13,25 @@ Mod **só de dados** (NeoForge 1.21.1, `modLoader="lowcodefml"`, sem Java) que i
 (`abandonedmoderncity:chests/<tema>/<chest|barrel|pot>[_hard]`): armas, munições e attachments do TACZ, itens de cura do
 First Aid e da LesRaisins. Mod id `amctaczloot`. Recomeçado do zero em 13 Nov 2026 (a versão anterior foi apagada).
 
-## Decisões do usuário (13 Nov 2026)
+## ESTADO ATUAL (15 Nov 2026) — o que está valendo; as seções abaixo desta são HISTÓRICO e podem citar números já substituídos
+- **Armas** (chance por baú comum / difícil, Sorte 0): prédio 12,0% / 20,0% (1 a cada 8,3 / 5 baús), barris 0,4% / 0,7%; delegacia 25,0% / 33,3%
+  (1 a cada 4 / 3), barris 3,0% / 6,0%. Tipos: pistola 10, smg 6, escopeta 6, fuzil 4, dmr 2, sniper 1,5, mg 1, rpg 0,3 (delegacia: smg/escopeta 8, fuzil 6).
+  Arma cai sem munição, descarregada.
+- **Munição** (pool próprio): baú de prédio 52,0%, difícil 86,6%, barris 6,2% / 11,4%; delegacia baú 80,0%, difícil 100,0% (teto), barris 20,0% / 36,0%.
+  Calibre: metade igual para os 23 calibres com arma + metade pela popularidade das armas (ex. prédio: 12g 11,9%, 9mm 10,8%, .45 ACP 9,3%; mais raros ~2,4%).
+  Balas por pilha proporcionais à pilha máxima (9mm 24–50 com pilha 60; 12g 14–30; .308 19–40; 40mm e foguete 2–5).
+- **Cura LesRaisins** (chance de CADA item por container, independente; mesma em todos os temas exceto farmácia): vaseline 9,8%, ibuprofen 9,5%,
+  amoxicillin 9,0%, golden star 8,5% (Comuns); blood pack 4,5%, CAR 4,3%, AI-2 4,0%, CMS 3,5% (Incomuns); SURV12 2,0% (Raro) (CAR 4,3% = 4,25% arredondado em ‰).
+  **Farmácia**: Incomuns e Raro ×2 sobre esses valores (blood pack 9,0%, CAR 8,5%, AI-2 8,0%, CMS 7,0%, SURV12 4,0%). Fator geral `HEAL_SCALE = 0.5`.
+- **Comida**: leite condensado 8% por container em todos os temas (2–4 unidades); pão 20% só em casas (4–12). Itens de cura First Aid e comida **não** mudaram com o ×0,5.
+- **First Aid** (opcional; chance por container baú / difícil / barril / barril difícil, em %): building 4,0/7,0/1,5/3,0; police_station 5,0/8,0/2,0/3,5; pharmacy 30,0/40,0/12,0/20,0; house 3,0/6,0/1,0/2,0; workshop 2,0/4,0/0,8/1,5; gas_station 3,0/6,0/1,0/2,0. **Ainda varia por tema/tier: pergunta aberta ao usuário
+  se a regra "mesma chance em todos os lugares" vale para o First Aid.**
+- **Sucata** vanilla (stick, 4 sementes, carne podre, osso, papel, tigela, garrafa, olho de aranha) nas 36 tabelas do AMC sobrescritas; sem itens vanilla úteis (única exceção: pão).
+- **Vasos** não recebem nada do mod. Temas: building, police_station, pharmacy, house, workshop, gas_station (o AMC removeu `building_large`).
+- **Ferramentas**: `gen_loot.py` (prévia / `--write`), `sample_items.py` (chance por item num servidor de teste; use este), `sample_loot.py` (categorias de arma/munição;
+  a coluna `lr` conta o leite como LesRaisins e **não bate** com `expected()["lr"]`: dá falso desvio), `measure_containers.py`, `tacz_catalog.py`, `lr_catalog.py`.
+
+## HISTÓRICO — Decisões do usuário (13 Nov 2026)
 - Só o pacote padrão do TACZ (70 armas); o Gunpowder Revolution (`hamster`) fica de fora por ora.
 - Armas/munição/attachments em `building` (o tema `building_large` foi removido do AMC em 14 Nov 2026, commit `72d07b3`); **a delegacia recebe mais armas**: o AMC ganhou o tema `police_station` (commit `27ae583` do AMC, 13 Nov 2026).
 - Cura: farmácia bastante; casas, oficinas e postos um pouco; oficinas também com pouca munição.
@@ -79,6 +97,7 @@ First Aid e da LesRaisins. Mod id `amctaczloot`. Recomeçado do zero em 13 Nov 2
 - O jar do AMC precisa ser o reconstruído com o tema `police_station` (mesmo número de versão 0.1.0 do antigo: substituir).
 - Build: `JAVA_HOME=/usr/lib/jvm/java-21-openjdk ./gradlew build -Dorg.gradle.java.installations.paths=$JAVA_HOME`
   (o Java padrão do sistema é o 27, novo demais para o Gradle).
+- Para medir chance por item, use `python3 -I tools/sample_items.py <tema/tier> [N] [filtro]` (o `sample_loot.py` só serve para arma/munição).
 - Servidor de teste: copiar para `run/mods/` os jars de `../AbandonedModernCity/libs` (TACZ, First Aid, LesRaisins) e o
   jar do AMC; `run/server.properties` com RCON (porta 25575, senha `teste`); `./gradlew runServer` (mesmas opções);
   `python3 -I tools/rcon.py "setblock 0 100 0 minecraft:chest" "loot insert 0 100 0 loot <tabela>" "data get block 0 100 0 Items"`;
