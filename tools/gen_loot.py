@@ -78,6 +78,10 @@ AMMO_SIZE = 1.0
 # arma do mesmo tema e tipo de container. Qual attachment sai: peso por CLASSE (Comum/Incomum/Raro/Épico), calculada por tools/att_rarity.py a partir de dois fatores
 # (quantas armas aceitam o attachment e seus atributos) e gravada em docs/attachments_rarity.json.
 ATT_FRACTION_OF_GUN = 0.8
+# MUNIÇÃO JÁ NA ARMA (pedido do usuário, 16 Nov 2026): toda arma nasce com GUN_SPAWN_AMMO_FRACTION do pente cheio (ammo_amount do TACZ), arredondado para CIMA
+# (pente de 1 -> 1; 17 -> 9), exceto as de GUN_SPAWN_AMMO_EXCLUDED (minigun: sem tamanho de pente definido; nasce como antes, com 0).
+GUN_SPAWN_AMMO_FRACTION = 0.5
+GUN_SPAWN_AMMO_EXCLUDED = ("minigun",)
 ATT_CLASS_W = {"Comum": 8, "Incomum": 4, "Raro": 2, "Épico": 1}
 for _th in RATES.values():
     for _r in _th.values():
@@ -196,9 +200,16 @@ def count(lo, hi):
     return {"function": "minecraft:set_count", "count": lo if lo == hi else {"type": "minecraft:uniform", "min": lo, "max": hi}}
 
 
+def gun_spawn_ammo(g):
+    """Balas no pente com que a arma nasce (GunCurrentAmmoCount)."""
+    mag = TZ["guns"][g]["mag"]
+    if g in GUN_SPAWN_AMMO_EXCLUDED or not mag: return 0
+    return int(mag * GUN_SPAWN_AMMO_FRACTION + 0.5)
+
+
 def e_gun(g):
     return {"type": "minecraft:item", "name": "tacz:modern_kinetic_gun", "functions": [custom(
-        GunId="tacz:" + g, GunFireMode=TZ["guns"][g]["fire_mode"][0], GunCurrentAmmoCount=0, HasBulletInBarrel=False)]}
+        GunId="tacz:" + g, GunFireMode=TZ["guns"][g]["fire_mode"][0], GunCurrentAmmoCount=gun_spawn_ammo(g), HasBulletInBarrel=False)]}
 
 
 def e_ammo(c):

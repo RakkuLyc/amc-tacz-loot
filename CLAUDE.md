@@ -16,7 +16,7 @@ First Aid e da LesRaisins. Mod id `amctaczloot`. Recomeçado do zero em 13 Nov 2
 ## ESTADO ATUAL (15 Nov 2026) — o que está valendo; as seções abaixo desta são HISTÓRICO e podem citar números já substituídos
 - **Armas** (chance por baú comum / difícil, Sorte 0): prédio 12,0% / 20,0% (1 a cada 8,3 / 5 baús), barris 0,4% / 0,7%; delegacia 25,0% / 33,3%
   (1 a cada 4 / 3), barris 3,0% / 6,0%. Tipos: pistola 10, smg 6, escopeta 6, fuzil 4, dmr 2, sniper 1,5, mg 1, rpg 0,3 (delegacia: smg/escopeta 8, fuzil 6).
-  Arma cai sem munição, descarregada.
+  Arma cai **com 50% do pente cheio** (`GunCurrentAmmoCount` = ammo_amount x 0,5 arredondado para cima: 17 -> 9, pente de 1 -> 1; `HasBulletInBarrel` = false), **exceto a minigun** (sem pente definido, nasce com 0).
 - **Attachments** (aprovado em 16 Nov 2026): a chance de QUALQUER attachment por container é **0,8 da chance de arma** do mesmo tema/tipo (`ATT_FRACTION_OF_GUN`): prédio baú 9,6%, difícil 16%,
   barris 0,3% / 0,6%; delegacia 20% / 26,6% / 2,4% / 4,8%. Qual sai: peso por **classe** (Comum 8, Incomum 4, Raro 2, Épico 1) sobre os 104 attachments fabricáveis, classes em
   `docs/attachments_rarity.json` (gerado por `tools/att_rarity.py <tacz.jar>`: 50% quantas armas aceitam o attachment (peso real do loot) + 50% atributos (zoom, recuo, precisão, nível do pente,
@@ -290,3 +290,10 @@ First Aid e da LesRaisins. Mod id `amctaczloot`. Recomeçado do zero em 13 Nov 2
   muzzle_brake_timeless50, laser_peq6, stock_heavy_spas_12, stock_tactical_spas_12. Os pesos dos atributos e os cortes 40/30/20/10 são julgamento meu (aprovados pelo usuário).
 - Validado no servidor: prédio (8.000 baús) 9,6% com attachment, classes 67,8/22,2/8,1/1,9% (esperado 65,6/24,2/8,2/2,0); por item 0,155/0,069/0,037/0,019%; delegacia (3.000) 19,9%
   (Épicos saíram abaixo do esperado, amostra pequena). Se o catálogo do TACZ mudar, rode `tools/att_rarity.py` (o gerador falha se as classes estiverem desatualizadas).
+
+## Armas nascem com 50% do pente (16 Nov 2026)
+- Pedido: "todas as armas, com exceção da minigun, passam a já spawnar com 50% do pente cheio". `GUN_SPAWN_AMMO_FRACTION = 0.5`, `GUN_SPAWN_AMMO_EXCLUDED = ("minigun",)`, `gun_spawn_ammo()`.
+  Pente = `ammo_amount` do TACZ (`docs/tacz_catalog.json`); só a minigun não tem. Arredondamento para CIMA (escolha minha): 22 armas têm pente ímpar; 4 têm pente de 1
+  (lonetrail, m320, rpg7, springfield1873) e nascem carregadas com 1. A bala na câmara (`HasBulletInBarrel`) continua false.
+- Validado no servidor: 1.280 armas amostradas (as 70 apareceram), todas com a contagem esperada; minigun 0; 0 erros de carga. **Não testado no jogo:** se o TACZ aceita atirar com o pente a 50% sem bala na câmara.
+- Isso interage com o pool de munição: a arma já traz balas, mas a munição de reserva continua sorteada à parte.
