@@ -64,7 +64,7 @@ First Aid e da LesRaisins. Mod id `amctaczloot`. Recomeçado do zero em 13 Nov 2
 - (Os totais por estrutura aprovados em 13 Nov foram substituídos pela mudança de 14 Nov, abaixo; as raridades e a Sorte continuam.)
 - Raridade das armas por tipo (peso): padrão pistol 10, smg 6, shotgun 6, rifle 4, dmr 2, sniper 1,5, mg 1, rpg 0,3; delegacia
   pistol 8, smg 8, shotgun 8, rifle 6, dmr 2,5, sniper 1,5, mg 1, rpg 0,3 (rpg7, m320 e minigun entram, bem raros; munição
-  .50 BMG, 40mm e foguete ×0,15–0,4). A arma vem **descarregada**, com 1 a 2 pentes do calibre junto.
+  .50 BMG, 40mm e foguete ×0,15–0,4). A arma vem **descarregada**, e **sem** munição junto (mudou em 14 Nov, abaixo).
 - Cura: comuns (ibuprofen, blood_pack, vaseline; plaster, bandage) saem mais que as raras (ai2, carfak; defibrillator).
 - Sorte: `quality` = 25% da chance base por nível (×1,25 / ×1,5 / ×1,75 nas Sortes I/II/III); `bonus_rolls` só nos baús
   difíceis (0,34: Sorte III) e comuns (0,2: Sorte V). Delegacia 5,7 → 7,1 → 8,3 → 11,9 armas.
@@ -88,7 +88,7 @@ First Aid e da LesRaisins. Mod id `amctaczloot`. Recomeçado do zero em 13 Nov 2
 - `python3 -I tools/gen_loot.py` imprime a **prévia** (esperado por estrutura, Sorte 0 a 3; chance de um baú ter algo do mod);
   `--write` apaga e reescreve `src/main/resources/data/amctaczloot` e `global_loot_modifiers.json` e roda as verificações
   de consistência. **Todos os números ficam no bloco do topo do script** (chances em ‰ por tema/tier, Sorte, raridade das armas).
-- Estrutura gerada: `<tema>/<tier>_core.json` (arma+munição, munição solta, attachment, cura LesRaisins; TACZ+LesRaisins) e
+- Estrutura gerada: `<tema>/<tier>_core.json` (2 pools independentes: arma/attachment/cura LesRaisins e munição; TACZ+LesRaisins) e
   `<tema>/<tier>_firstaid.json` (cura First Aid, com `neoforge:mod_loaded`); tabelas de escolha em `pick/`; um GLM
   `neoforge:add_table` por tabela, filtrado por `neoforge:loot_table_id`. Temas: building, police_station,
   pharmacy, house, workshop, gas_station; tiers chest, chest_hard, barrel, barrel_hard (sem pot).
@@ -112,3 +112,16 @@ First Aid e da LesRaisins. Mod id `amctaczloot`. Recomeçado do zero em 13 Nov 2
   O mais próximo é a probabilidade: na delegacia (Sorte 0) chance de pelo menos 4 armas 99%, 5: 98%, 6: 94%, 8: 76%.
 - Consequência (a vigiar): o total por prédio subiu muito (brutalista ~46 armas, rampa ~33, torre ~14, apartamentos ~2),
   porque os prédios têm centenas de baús. Se for demais, baixar `gun` em `RATES["building"]` (1 em 7 = 143‰).
+
+## Munição (opção B, escolhida pelo usuário em 14 Nov 2026)
+- Pedido: a munição **não** vem mais junto da arma; é aleatória, com raridade por calibre conforme as armas que o usam.
+  Implementado: a tabela do núcleo tem **2 pools independentes** (arma/attachment/cura LR; e munição). `pick/gun_*` agora só tem armas.
+- Calibre: peso = soma das raridades (por tipo de arma) das armas que usam o calibre, com redutor extra em .50 BMG/.338/.45-70/.500
+  mag (×0,4–0,5) e 40mm/foguete (×0,15) — `ammo_weights()`. Mais comuns: 12g ~20%, 9mm ~18%, .45 ACP ~15% (prédio).
+- Quantidade = **o mesmo total de munição de antes** (solta + a que vinha com a arma): baú de prédio 26%, difícil 43,3%;
+  delegacia 40% / 58,3%; barris de prédio 3,1% / 5,7%, de delegacia 10% / 18%; oficina inalterada (4% / 7%, barril 1,5% / 3%).
+  Pilha: de 1/6 a 1/2 da pilha cheia do calibre (ex. 9mm 10–30 balas). Sorte: `quality` como as demais categorias.
+- Validado no servidor (3.000 baús de prédio): 0,270 pilhas/baú (esp. 0,260); calibres batem com a fatia esperada; dos baús
+  com arma só 26% têm alguma munição (= a chance geral) e só 3% a do calibre da arma (antes 100%).
+- Referência: a munição do Apocalypse Loot (Lost Cities) é ~8–14× maior por baú e tem faixa de raridade 14:1 (a nossa é ~270:1);
+  o usuário escolheu manter a nossa opção B. Simulação de 20 baús em `run/tmp/simulate_ammo.py` (não versionada).

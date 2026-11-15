@@ -5,4048 +5,1264 @@
       "rolls": 1,
       "entries": [
         {
-          "type": "minecraft:loot_table",
-          "weight": 1143,
-          "value": {
-            "type": "minecraft:chest",
-            "pools": [
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:modern_kinetic_gun",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "GunId": "tacz:aa12",
-                            "GunFireMode": "SEMI",
-                            "GunCurrentAmmoCount": 0,
-                            "HasBulletInBarrel": false
-                          }
-                        }
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:ammo",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "AmmoId": "tacz:12g"
-                          }
-                        }
-                      },
-                      {
-                        "function": "minecraft:set_count",
-                        "count": {
-                          "type": "minecraft:uniform",
-                          "min": 8,
-                          "max": 16
-                        }
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 167,
-          "value": {
-            "type": "minecraft:chest",
-            "pools": [
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:modern_kinetic_gun",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "GunId": "tacz:ai_awp",
-                            "GunFireMode": "SEMI",
-                            "GunCurrentAmmoCount": 0,
-                            "HasBulletInBarrel": false
-                          }
-                        }
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:ammo",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "AmmoId": "tacz:338"
-                          }
-                        }
-                      },
-                      {
-                        "function": "minecraft:set_count",
-                        "count": {
-                          "type": "minecraft:uniform",
-                          "min": 5,
-                          "max": 10
-                        }
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 286,
-          "value": {
-            "type": "minecraft:chest",
-            "pools": [
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:modern_kinetic_gun",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "GunId": "tacz:ak12",
-                            "GunFireMode": "AUTO",
-                            "GunCurrentAmmoCount": 0,
-                            "HasBulletInBarrel": false
-                          }
-                        }
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:ammo",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "AmmoId": "tacz:545x39"
-                          }
-                        }
-                      },
-                      {
-                        "function": "minecraft:set_count",
-                        "count": {
-                          "type": "minecraft:uniform",
-                          "min": 30,
-                          "max": 60
-                        }
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 286,
-          "value": {
-            "type": "minecraft:chest",
-            "pools": [
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:modern_kinetic_gun",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "GunId": "tacz:ak47",
-                            "GunFireMode": "AUTO",
-                            "GunCurrentAmmoCount": 0,
-                            "HasBulletInBarrel": false
-                          }
-                        }
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:ammo",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "AmmoId": "tacz:762x39"
-                          }
-                        }
-                      },
-                      {
-                        "function": "minecraft:set_count",
-                        "count": {
-                          "type": "minecraft:uniform",
-                          "min": 30,
-                          "max": 60
-                        }
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 286,
-          "value": {
-            "type": "minecraft:chest",
-            "pools": [
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:modern_kinetic_gun",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "GunId": "tacz:ak74m",
-                            "GunFireMode": "AUTO",
-                            "GunCurrentAmmoCount": 0,
-                            "HasBulletInBarrel": false
-                          }
-                        }
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:ammo",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "AmmoId": "tacz:545x39"
-                          }
-                        }
-                      },
-                      {
-                        "function": "minecraft:set_count",
-                        "count": {
-                          "type": "minecraft:uniform",
-                          "min": 30,
-                          "max": 60
-                        }
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 286,
-          "value": {
-            "type": "minecraft:chest",
-            "pools": [
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:modern_kinetic_gun",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "GunId": "tacz:aug",
-                            "GunFireMode": "AUTO",
-                            "GunCurrentAmmoCount": 0,
-                            "HasBulletInBarrel": false
-                          }
-                        }
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:ammo",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "AmmoId": "tacz:556x45"
-                          }
-                        }
-                      },
-                      {
-                        "function": "minecraft:set_count",
-                        "count": {
-                          "type": "minecraft:uniform",
-                          "min": 30,
-                          "max": 60
-                        }
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 533,
-          "value": {
-            "type": "minecraft:chest",
-            "pools": [
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:modern_kinetic_gun",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "GunId": "tacz:b93r",
-                            "GunFireMode": "BURST",
-                            "GunCurrentAmmoCount": 0,
-                            "HasBulletInBarrel": false
-                          }
-                        }
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:ammo",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "AmmoId": "tacz:9mm"
-                          }
-                        }
-                      },
-                      {
-                        "function": "minecraft:set_count",
-                        "count": {
-                          "type": "minecraft:uniform",
-                          "min": 20,
-                          "max": 40
-                        }
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 533,
-          "value": {
-            "type": "minecraft:chest",
-            "pools": [
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:modern_kinetic_gun",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "GunId": "tacz:cz75",
-                            "GunFireMode": "AUTO",
-                            "GunCurrentAmmoCount": 0,
-                            "HasBulletInBarrel": false
-                          }
-                        }
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:ammo",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "AmmoId": "tacz:9mm"
-                          }
-                        }
-                      },
-                      {
-                        "function": "minecraft:set_count",
-                        "count": {
-                          "type": "minecraft:uniform",
-                          "min": 16,
-                          "max": 32
-                        }
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 1143,
-          "value": {
-            "type": "minecraft:chest",
-            "pools": [
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:modern_kinetic_gun",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "GunId": "tacz:db_long",
-                            "GunFireMode": "SEMI",
-                            "GunCurrentAmmoCount": 0,
-                            "HasBulletInBarrel": false
-                          }
-                        }
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:ammo",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "AmmoId": "tacz:12g"
-                          }
-                        }
-                      },
-                      {
-                        "function": "minecraft:set_count",
-                        "count": {
-                          "type": "minecraft:uniform",
-                          "min": 2,
-                          "max": 4
-                        }
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 1143,
-          "value": {
-            "type": "minecraft:chest",
-            "pools": [
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:modern_kinetic_gun",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "GunId": "tacz:db_short",
-                            "GunFireMode": "BURST",
-                            "GunCurrentAmmoCount": 0,
-                            "HasBulletInBarrel": false
-                          }
-                        }
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:ammo",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "AmmoId": "tacz:12g"
-                          }
-                        }
-                      },
-                      {
-                        "function": "minecraft:set_count",
-                        "count": {
-                          "type": "minecraft:uniform",
-                          "min": 2,
-                          "max": 4
-                        }
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 533,
-          "value": {
-            "type": "minecraft:chest",
-            "pools": [
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:modern_kinetic_gun",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "GunId": "tacz:deagle",
-                            "GunFireMode": "SEMI",
-                            "GunCurrentAmmoCount": 0,
-                            "HasBulletInBarrel": false
-                          }
-                        }
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:ammo",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "AmmoId": "tacz:50ae"
-                          }
-                        }
-                      },
-                      {
-                        "function": "minecraft:set_count",
-                        "count": {
-                          "type": "minecraft:uniform",
-                          "min": 7,
-                          "max": 14
-                        }
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 533,
-          "value": {
-            "type": "minecraft:chest",
-            "pools": [
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:modern_kinetic_gun",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "GunId": "tacz:deagle_golden",
-                            "GunFireMode": "SEMI",
-                            "GunCurrentAmmoCount": 0,
-                            "HasBulletInBarrel": false
-                          }
-                        }
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:ammo",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "AmmoId": "tacz:357mag"
-                          }
-                        }
-                      },
-                      {
-                        "function": "minecraft:set_count",
-                        "count": {
-                          "type": "minecraft:uniform",
-                          "min": 9,
-                          "max": 18
-                        }
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 200,
-          "value": {
-            "type": "minecraft:chest",
-            "pools": [
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:modern_kinetic_gun",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "GunId": "tacz:fn_evolys",
-                            "GunFireMode": "AUTO",
-                            "GunCurrentAmmoCount": 0,
-                            "HasBulletInBarrel": false
-                          }
-                        }
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:ammo",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "AmmoId": "tacz:308"
-                          }
-                        }
-                      },
-                      {
-                        "function": "minecraft:set_count",
-                        "count": 48
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 286,
-          "value": {
-            "type": "minecraft:chest",
-            "pools": [
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:modern_kinetic_gun",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "GunId": "tacz:fn_fal",
-                            "GunFireMode": "SEMI",
-                            "GunCurrentAmmoCount": 0,
-                            "HasBulletInBarrel": false
-                          }
-                        }
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:ammo",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "AmmoId": "tacz:308"
-                          }
-                        }
-                      },
-                      {
-                        "function": "minecraft:set_count",
-                        "count": {
-                          "type": "minecraft:uniform",
-                          "min": 20,
-                          "max": 40
-                        }
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 286,
-          "value": {
-            "type": "minecraft:chest",
-            "pools": [
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:modern_kinetic_gun",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "GunId": "tacz:g36k",
-                            "GunFireMode": "AUTO",
-                            "GunCurrentAmmoCount": 0,
-                            "HasBulletInBarrel": false
-                          }
-                        }
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:ammo",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "AmmoId": "tacz:556x45"
-                          }
-                        }
-                      },
-                      {
-                        "function": "minecraft:set_count",
-                        "count": {
-                          "type": "minecraft:uniform",
-                          "min": 30,
-                          "max": 60
-                        }
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 533,
-          "value": {
-            "type": "minecraft:chest",
-            "pools": [
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:modern_kinetic_gun",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "GunId": "tacz:glock_17",
-                            "GunFireMode": "SEMI",
-                            "GunCurrentAmmoCount": 0,
-                            "HasBulletInBarrel": false
-                          }
-                        }
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:ammo",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "AmmoId": "tacz:9mm"
-                          }
-                        }
-                      },
-                      {
-                        "function": "minecraft:set_count",
-                        "count": {
-                          "type": "minecraft:uniform",
-                          "min": 17,
-                          "max": 34
-                        }
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 286,
-          "value": {
-            "type": "minecraft:chest",
-            "pools": [
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:modern_kinetic_gun",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "GunId": "tacz:hcar",
-                            "GunFireMode": "AUTO",
-                            "GunCurrentAmmoCount": 0,
-                            "HasBulletInBarrel": false
-                          }
-                        }
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:ammo",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "AmmoId": "tacz:30_06"
-                          }
-                        }
-                      },
-                      {
-                        "function": "minecraft:set_count",
-                        "count": {
-                          "type": "minecraft:uniform",
-                          "min": 20,
-                          "max": 36
-                        }
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 286,
-          "value": {
-            "type": "minecraft:chest",
-            "pools": [
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:modern_kinetic_gun",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "GunId": "tacz:hk416d",
-                            "GunFireMode": "AUTO",
-                            "GunCurrentAmmoCount": 0,
-                            "HasBulletInBarrel": false
-                          }
-                        }
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:ammo",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "AmmoId": "tacz:556x45"
-                          }
-                        }
-                      },
-                      {
-                        "function": "minecraft:set_count",
-                        "count": {
-                          "type": "minecraft:uniform",
-                          "min": 30,
-                          "max": 60
-                        }
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 286,
-          "value": {
-            "type": "minecraft:chest",
-            "pools": [
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:modern_kinetic_gun",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "GunId": "tacz:hk_g3",
-                            "GunFireMode": "SEMI",
-                            "GunCurrentAmmoCount": 0,
-                            "HasBulletInBarrel": false
-                          }
-                        }
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:ammo",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "AmmoId": "tacz:308"
-                          }
-                        }
-                      },
-                      {
-                        "function": "minecraft:set_count",
-                        "count": {
-                          "type": "minecraft:uniform",
-                          "min": 20,
-                          "max": 40
-                        }
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 533,
-          "value": {
-            "type": "minecraft:chest",
-            "pools": [
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:modern_kinetic_gun",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "GunId": "tacz:hk_mk23",
-                            "GunFireMode": "SEMI",
-                            "GunCurrentAmmoCount": 0,
-                            "HasBulletInBarrel": false
-                          }
-                        }
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:ammo",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "AmmoId": "tacz:45acp"
-                          }
-                        }
-                      },
-                      {
-                        "function": "minecraft:set_count",
-                        "count": {
-                          "type": "minecraft:uniform",
-                          "min": 12,
-                          "max": 24
-                        }
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 1333,
-          "value": {
-            "type": "minecraft:chest",
-            "pools": [
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:modern_kinetic_gun",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "GunId": "tacz:hk_mp5a5",
-                            "GunFireMode": "AUTO",
-                            "GunCurrentAmmoCount": 0,
-                            "HasBulletInBarrel": false
-                          }
-                        }
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:ammo",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "AmmoId": "tacz:9mm"
-                          }
-                        }
-                      },
-                      {
-                        "function": "minecraft:set_count",
-                        "count": {
-                          "type": "minecraft:uniform",
-                          "min": 30,
-                          "max": 60
-                        }
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 1333,
-          "value": {
-            "type": "minecraft:chest",
-            "pools": [
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:modern_kinetic_gun",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "GunId": "tacz:hk_mp7a1",
-                            "GunFireMode": "AUTO",
-                            "GunCurrentAmmoCount": 0,
-                            "HasBulletInBarrel": false
-                          }
-                        }
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:ammo",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "AmmoId": "tacz:46x30"
-                          }
-                        }
-                      },
-                      {
-                        "function": "minecraft:set_count",
-                        "count": {
-                          "type": "minecraft:uniform",
-                          "min": 20,
-                          "max": 40
-                        }
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 167,
-          "value": {
-            "type": "minecraft:chest",
-            "pools": [
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:modern_kinetic_gun",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "GunId": "tacz:hm50b",
-                            "GunFireMode": "SEMI",
-                            "GunCurrentAmmoCount": 0,
-                            "HasBulletInBarrel": false
-                          }
-                        }
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:ammo",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "AmmoId": "tacz:50bmg"
-                          }
-                        }
-                      },
-                      {
-                        "function": "minecraft:set_count",
-                        "count": {
-                          "type": "minecraft:uniform",
-                          "min": 10,
-                          "max": 20
-                        }
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 167,
-          "value": {
-            "type": "minecraft:chest",
-            "pools": [
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:modern_kinetic_gun",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "GunId": "tacz:kar98",
-                            "GunFireMode": "SEMI",
-                            "GunCurrentAmmoCount": 0,
-                            "HasBulletInBarrel": false
-                          }
-                        }
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:ammo",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "AmmoId": "tacz:792x57"
-                          }
-                        }
-                      },
-                      {
-                        "function": "minecraft:set_count",
-                        "count": {
-                          "type": "minecraft:uniform",
-                          "min": 4,
-                          "max": 8
-                        }
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 533,
-          "value": {
-            "type": "minecraft:chest",
-            "pools": [
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:modern_kinetic_gun",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "GunId": "tacz:lonetrail",
-                            "GunFireMode": "SEMI",
-                            "GunCurrentAmmoCount": 0,
-                            "HasBulletInBarrel": false
-                          }
-                        }
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:ammo",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "AmmoId": "tacz:30_06"
-                          }
-                        }
-                      },
-                      {
-                        "function": "minecraft:set_count",
-                        "count": {
-                          "type": "minecraft:uniform",
-                          "min": 1,
-                          "max": 2
-                        }
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 1143,
-          "value": {
-            "type": "minecraft:chest",
-            "pools": [
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:modern_kinetic_gun",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "GunId": "tacz:m1014",
-                            "GunFireMode": "SEMI",
-                            "GunCurrentAmmoCount": 0,
-                            "HasBulletInBarrel": false
-                          }
-                        }
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:ammo",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "AmmoId": "tacz:12g"
-                          }
-                        }
-                      },
-                      {
-                        "function": "minecraft:set_count",
-                        "count": {
-                          "type": "minecraft:uniform",
-                          "min": 6,
-                          "max": 12
-                        }
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 167,
-          "value": {
-            "type": "minecraft:chest",
-            "pools": [
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:modern_kinetic_gun",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "GunId": "tacz:m107",
-                            "GunFireMode": "SEMI",
-                            "GunCurrentAmmoCount": 0,
-                            "HasBulletInBarrel": false
-                          }
-                        }
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:ammo",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "AmmoId": "tacz:50bmg"
-                          }
-                        }
-                      },
-                      {
-                        "function": "minecraft:set_count",
-                        "count": {
-                          "type": "minecraft:uniform",
-                          "min": 10,
-                          "max": 20
-                        }
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 286,
-          "value": {
-            "type": "minecraft:chest",
-            "pools": [
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:modern_kinetic_gun",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "GunId": "tacz:m16a1",
-                            "GunFireMode": "AUTO",
-                            "GunCurrentAmmoCount": 0,
-                            "HasBulletInBarrel": false
-                          }
-                        }
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:ammo",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "AmmoId": "tacz:556x45"
-                          }
-                        }
-                      },
-                      {
-                        "function": "minecraft:set_count",
-                        "count": {
-                          "type": "minecraft:uniform",
-                          "min": 20,
-                          "max": 40
-                        }
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 286,
-          "value": {
-            "type": "minecraft:chest",
-            "pools": [
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:modern_kinetic_gun",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "GunId": "tacz:m16a4",
-                            "GunFireMode": "BURST",
-                            "GunCurrentAmmoCount": 0,
-                            "HasBulletInBarrel": false
-                          }
-                        }
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:ammo",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "AmmoId": "tacz:556x45"
-                          }
-                        }
-                      },
-                      {
-                        "function": "minecraft:set_count",
-                        "count": {
-                          "type": "minecraft:uniform",
-                          "min": 30,
-                          "max": 60
-                        }
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 500,
-          "value": {
-            "type": "minecraft:chest",
-            "pools": [
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:modern_kinetic_gun",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "GunId": "tacz:m1866",
-                            "GunFireMode": "AUTO",
-                            "GunCurrentAmmoCount": 0,
-                            "HasBulletInBarrel": false
-                          }
-                        }
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:ammo",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "AmmoId": "tacz:45acp"
-                          }
-                        }
-                      },
-                      {
-                        "function": "minecraft:set_count",
-                        "count": {
-                          "type": "minecraft:uniform",
-                          "min": 5,
-                          "max": 10
-                        }
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 1143,
-          "value": {
-            "type": "minecraft:chest",
-            "pools": [
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:modern_kinetic_gun",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "GunId": "tacz:m1897",
-                            "GunFireMode": "AUTO",
-                            "GunCurrentAmmoCount": 0,
-                            "HasBulletInBarrel": false
-                          }
-                        }
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:ammo",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "AmmoId": "tacz:12g"
-                          }
-                        }
-                      },
-                      {
-                        "function": "minecraft:set_count",
-                        "count": {
-                          "type": "minecraft:uniform",
-                          "min": 5,
-                          "max": 10
-                        }
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 533,
-          "value": {
-            "type": "minecraft:chest",
-            "pools": [
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:modern_kinetic_gun",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "GunId": "tacz:m1911",
-                            "GunFireMode": "SEMI",
-                            "GunCurrentAmmoCount": 0,
-                            "HasBulletInBarrel": false
-                          }
-                        }
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:ammo",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "AmmoId": "tacz:45acp"
-                          }
-                        }
-                      },
-                      {
-                        "function": "minecraft:set_count",
-                        "count": {
-                          "type": "minecraft:uniform",
-                          "min": 7,
-                          "max": 14
-                        }
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 200,
-          "value": {
-            "type": "minecraft:chest",
-            "pools": [
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:modern_kinetic_gun",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "GunId": "tacz:m249",
-                            "GunFireMode": "AUTO",
-                            "GunCurrentAmmoCount": 0,
-                            "HasBulletInBarrel": false
-                          }
-                        }
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:ammo",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "AmmoId": "tacz:556x45"
-                          }
-                        }
-                      },
-                      {
-                        "function": "minecraft:set_count",
-                        "count": 60
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 150,
-          "value": {
-            "type": "minecraft:chest",
-            "pools": [
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:modern_kinetic_gun",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "GunId": "tacz:m320",
-                            "GunFireMode": "SEMI",
-                            "GunCurrentAmmoCount": 0,
-                            "HasBulletInBarrel": false
-                          }
-                        }
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:ammo",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "AmmoId": "tacz:40mm"
-                          }
-                        }
-                      },
-                      {
-                        "function": "minecraft:set_count",
-                        "count": {
-                          "type": "minecraft:uniform",
-                          "min": 1,
-                          "max": 2
-                        }
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 286,
-          "value": {
-            "type": "minecraft:chest",
-            "pools": [
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:modern_kinetic_gun",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "GunId": "tacz:m4a1",
-                            "GunFireMode": "AUTO",
-                            "GunCurrentAmmoCount": 0,
-                            "HasBulletInBarrel": false
-                          }
-                        }
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:ammo",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "AmmoId": "tacz:556x45"
-                          }
-                        }
-                      },
-                      {
-                        "function": "minecraft:set_count",
-                        "count": {
-                          "type": "minecraft:uniform",
-                          "min": 30,
-                          "max": 60
-                        }
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 167,
-          "value": {
-            "type": "minecraft:chest",
-            "pools": [
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:modern_kinetic_gun",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "GunId": "tacz:m700",
-                            "GunFireMode": "SEMI",
-                            "GunCurrentAmmoCount": 0,
-                            "HasBulletInBarrel": false
-                          }
-                        }
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:ammo",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "AmmoId": "tacz:30_06"
-                          }
-                        }
-                      },
-                      {
-                        "function": "minecraft:set_count",
-                        "count": {
-                          "type": "minecraft:uniform",
-                          "min": 5,
-                          "max": 10
-                        }
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 1143,
-          "value": {
-            "type": "minecraft:chest",
-            "pools": [
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:modern_kinetic_gun",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "GunId": "tacz:m870",
-                            "GunFireMode": "SEMI",
-                            "GunCurrentAmmoCount": 0,
-                            "HasBulletInBarrel": false
-                          }
-                        }
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:ammo",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "AmmoId": "tacz:12g"
-                          }
-                        }
-                      },
-                      {
-                        "function": "minecraft:set_count",
-                        "count": {
-                          "type": "minecraft:uniform",
-                          "min": 5,
-                          "max": 10
-                        }
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 167,
-          "value": {
-            "type": "minecraft:chest",
-            "pools": [
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:modern_kinetic_gun",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "GunId": "tacz:m95",
-                            "GunFireMode": "SEMI",
-                            "GunCurrentAmmoCount": 0,
-                            "HasBulletInBarrel": false
-                          }
-                        }
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:ammo",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "AmmoId": "tacz:50bmg"
-                          }
-                        }
-                      },
-                      {
-                        "function": "minecraft:set_count",
-                        "count": {
-                          "type": "minecraft:uniform",
-                          "min": 5,
-                          "max": 10
-                        }
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 533,
-          "value": {
-            "type": "minecraft:chest",
-            "pools": [
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:modern_kinetic_gun",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "GunId": "tacz:m9a4",
-                            "GunFireMode": "SEMI",
-                            "GunCurrentAmmoCount": 0,
-                            "HasBulletInBarrel": false
-                          }
-                        }
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:ammo",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "AmmoId": "tacz:9mm"
-                          }
-                        }
-                      },
-                      {
-                        "function": "minecraft:set_count",
-                        "count": {
-                          "type": "minecraft:uniform",
-                          "min": 17,
-                          "max": 34
-                        }
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 286,
-          "value": {
-            "type": "minecraft:chest",
-            "pools": [
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:modern_kinetic_gun",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "GunId": "tacz:mcx_spear_lt",
-                            "GunFireMode": "AUTO",
-                            "GunCurrentAmmoCount": 0,
-                            "HasBulletInBarrel": false
-                          }
-                        }
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:ammo",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "AmmoId": "tacz:300blk"
-                          }
-                        }
-                      },
-                      {
-                        "function": "minecraft:set_count",
-                        "count": {
-                          "type": "minecraft:uniform",
-                          "min": 30,
-                          "max": 50
-                        }
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 200,
-          "value": {
-            "type": "minecraft:chest",
-            "pools": [
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:modern_kinetic_gun",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "GunId": "tacz:minigun",
-                            "GunFireMode": "AUTO",
-                            "GunCurrentAmmoCount": 0,
-                            "HasBulletInBarrel": false
-                          }
-                        }
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:ammo",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "AmmoId": "tacz:308"
-                          }
-                        }
-                      },
-                      {
-                        "function": "minecraft:set_count",
-                        "count": 48
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 500,
-          "value": {
-            "type": "minecraft:chest",
-            "pools": [
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:modern_kinetic_gun",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "GunId": "tacz:mk14",
-                            "GunFireMode": "SEMI",
-                            "GunCurrentAmmoCount": 0,
-                            "HasBulletInBarrel": false
-                          }
-                        }
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:ammo",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "AmmoId": "tacz:308"
-                          }
-                        }
-                      },
-                      {
-                        "function": "minecraft:set_count",
-                        "count": {
-                          "type": "minecraft:uniform",
-                          "min": 10,
-                          "max": 20
-                        }
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 286,
-          "value": {
-            "type": "minecraft:chest",
-            "pools": [
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:modern_kinetic_gun",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "GunId": "tacz:mk18",
-                            "GunFireMode": "AUTO",
-                            "GunCurrentAmmoCount": 0,
-                            "HasBulletInBarrel": false
-                          }
-                        }
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:ammo",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "AmmoId": "tacz:556x45"
-                          }
-                        }
-                      },
-                      {
-                        "function": "minecraft:set_count",
-                        "count": {
-                          "type": "minecraft:uniform",
-                          "min": 30,
-                          "max": 60
-                        }
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 167,
-          "value": {
-            "type": "minecraft:chest",
-            "pools": [
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:modern_kinetic_gun",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "GunId": "tacz:mrad",
-                            "GunFireMode": "SEMI",
-                            "GunCurrentAmmoCount": 0,
-                            "HasBulletInBarrel": false
-                          }
-                        }
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:ammo",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "AmmoId": "tacz:338"
-                          }
-                        }
-                      },
-                      {
-                        "function": "minecraft:set_count",
-                        "count": {
-                          "type": "minecraft:uniform",
-                          "min": 10,
-                          "max": 20
-                        }
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 533,
-          "value": {
-            "type": "minecraft:chest",
-            "pools": [
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:modern_kinetic_gun",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "GunId": "tacz:p320",
-                            "GunFireMode": "SEMI",
-                            "GunCurrentAmmoCount": 0,
-                            "HasBulletInBarrel": false
-                          }
-                        }
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:ammo",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "AmmoId": "tacz:45acp"
-                          }
-                        }
-                      },
-                      {
-                        "function": "minecraft:set_count",
-                        "count": {
-                          "type": "minecraft:uniform",
-                          "min": 12,
-                          "max": 24
-                        }
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 1333,
-          "value": {
-            "type": "minecraft:chest",
-            "pools": [
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:modern_kinetic_gun",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "GunId": "tacz:p90",
-                            "GunFireMode": "AUTO",
-                            "GunCurrentAmmoCount": 0,
-                            "HasBulletInBarrel": false
-                          }
-                        }
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:ammo",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "AmmoId": "tacz:57x28"
-                          }
-                        }
-                      },
-                      {
-                        "function": "minecraft:set_count",
-                        "count": {
-                          "type": "minecraft:uniform",
-                          "min": 50,
-                          "max": 60
-                        }
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 200,
-          "value": {
-            "type": "minecraft:chest",
-            "pools": [
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:modern_kinetic_gun",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "GunId": "tacz:pkm",
-                            "GunFireMode": "AUTO",
-                            "GunCurrentAmmoCount": 0,
-                            "HasBulletInBarrel": false
-                          }
-                        }
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:ammo",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "AmmoId": "tacz:762x54"
-                          }
-                        }
-                      },
-                      {
-                        "function": "minecraft:set_count",
-                        "count": 60
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 286,
-          "value": {
-            "type": "minecraft:chest",
-            "pools": [
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:modern_kinetic_gun",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "GunId": "tacz:qbz_191",
-                            "GunFireMode": "AUTO",
-                            "GunCurrentAmmoCount": 0,
-                            "HasBulletInBarrel": false
-                          }
-                        }
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:ammo",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "AmmoId": "tacz:58x42"
-                          }
-                        }
-                      },
-                      {
-                        "function": "minecraft:set_count",
-                        "count": {
-                          "type": "minecraft:uniform",
-                          "min": 30,
-                          "max": 60
-                        }
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 286,
-          "value": {
-            "type": "minecraft:chest",
-            "pools": [
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:modern_kinetic_gun",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "GunId": "tacz:qbz_95",
-                            "GunFireMode": "AUTO",
-                            "GunCurrentAmmoCount": 0,
-                            "HasBulletInBarrel": false
-                          }
-                        }
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:ammo",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "AmmoId": "tacz:58x42"
-                          }
-                        }
-                      },
-                      {
-                        "function": "minecraft:set_count",
-                        "count": {
-                          "type": "minecraft:uniform",
-                          "min": 30,
-                          "max": 60
-                        }
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 286,
-          "value": {
-            "type": "minecraft:chest",
-            "pools": [
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:modern_kinetic_gun",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "GunId": "tacz:qr_24",
-                            "GunFireMode": "AUTO",
-                            "GunCurrentAmmoCount": 0,
-                            "HasBulletInBarrel": false
-                          }
-                        }
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:ammo",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "AmmoId": "tacz:545x39"
-                          }
-                        }
-                      },
-                      {
-                        "function": "minecraft:set_count",
-                        "count": {
-                          "type": "minecraft:uniform",
-                          "min": 32,
-                          "max": 60
-                        }
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 533,
-          "value": {
-            "type": "minecraft:chest",
-            "pools": [
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:modern_kinetic_gun",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "GunId": "tacz:rhino357",
-                            "GunFireMode": "SEMI",
-                            "GunCurrentAmmoCount": 0,
-                            "HasBulletInBarrel": false
-                          }
-                        }
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:ammo",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "AmmoId": "tacz:357mag"
-                          }
-                        }
-                      },
-                      {
-                        "function": "minecraft:set_count",
-                        "count": {
-                          "type": "minecraft:uniform",
-                          "min": 6,
-                          "max": 12
-                        }
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 150,
-          "value": {
-            "type": "minecraft:chest",
-            "pools": [
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:modern_kinetic_gun",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "GunId": "tacz:rpg7",
-                            "GunFireMode": "SEMI",
-                            "GunCurrentAmmoCount": 0,
-                            "HasBulletInBarrel": false
-                          }
-                        }
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:ammo",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "AmmoId": "tacz:rpg_rocket"
-                          }
-                        }
-                      },
-                      {
-                        "function": "minecraft:set_count",
-                        "count": {
-                          "type": "minecraft:uniform",
-                          "min": 1,
-                          "max": 2
-                        }
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 200,
-          "value": {
-            "type": "minecraft:chest",
-            "pools": [
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:modern_kinetic_gun",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "GunId": "tacz:rpk",
-                            "GunFireMode": "AUTO",
-                            "GunCurrentAmmoCount": 0,
-                            "HasBulletInBarrel": false
-                          }
-                        }
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:ammo",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "AmmoId": "tacz:762x39"
-                          }
-                        }
-                      },
-                      {
-                        "function": "minecraft:set_count",
-                        "count": {
-                          "type": "minecraft:uniform",
-                          "min": 40,
-                          "max": 60
-                        }
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 286,
-          "value": {
-            "type": "minecraft:chest",
-            "pools": [
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:modern_kinetic_gun",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "GunId": "tacz:scar_h",
-                            "GunFireMode": "SEMI",
-                            "GunCurrentAmmoCount": 0,
-                            "HasBulletInBarrel": false
-                          }
-                        }
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:ammo",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "AmmoId": "tacz:308"
-                          }
-                        }
-                      },
-                      {
-                        "function": "minecraft:set_count",
-                        "count": {
-                          "type": "minecraft:uniform",
-                          "min": 20,
-                          "max": 40
-                        }
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 286,
-          "value": {
-            "type": "minecraft:chest",
-            "pools": [
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:modern_kinetic_gun",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "GunId": "tacz:scar_l",
-                            "GunFireMode": "AUTO",
-                            "GunCurrentAmmoCount": 0,
-                            "HasBulletInBarrel": false
-                          }
-                        }
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:ammo",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "AmmoId": "tacz:556x45"
-                          }
-                        }
-                      },
-                      {
-                        "function": "minecraft:set_count",
-                        "count": {
-                          "type": "minecraft:uniform",
-                          "min": 30,
-                          "max": 60
-                        }
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 500,
-          "value": {
-            "type": "minecraft:chest",
-            "pools": [
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:modern_kinetic_gun",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "GunId": "tacz:scar_mk20",
-                            "GunFireMode": "SEMI",
-                            "GunCurrentAmmoCount": 0,
-                            "HasBulletInBarrel": false
-                          }
-                        }
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:ammo",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "AmmoId": "tacz:308"
-                          }
-                        }
-                      },
-                      {
-                        "function": "minecraft:set_count",
-                        "count": {
-                          "type": "minecraft:uniform",
-                          "min": 10,
-                          "max": 20
-                        }
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 500,
-          "value": {
-            "type": "minecraft:chest",
-            "pools": [
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:modern_kinetic_gun",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "GunId": "tacz:sks_tactical",
-                            "GunFireMode": "SEMI",
-                            "GunCurrentAmmoCount": 0,
-                            "HasBulletInBarrel": false
-                          }
-                        }
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:ammo",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "AmmoId": "tacz:762x39"
-                          }
-                        }
-                      },
-                      {
-                        "function": "minecraft:set_count",
-                        "count": {
-                          "type": "minecraft:uniform",
-                          "min": 10,
-                          "max": 20
-                        }
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 1143,
-          "value": {
-            "type": "minecraft:chest",
-            "pools": [
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:modern_kinetic_gun",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "GunId": "tacz:spas_12",
-                            "GunFireMode": "SEMI",
-                            "GunCurrentAmmoCount": 0,
-                            "HasBulletInBarrel": false
-                          }
-                        }
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:ammo",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "AmmoId": "tacz:12g"
-                          }
-                        }
-                      },
-                      {
-                        "function": "minecraft:set_count",
-                        "count": {
-                          "type": "minecraft:uniform",
-                          "min": 5,
-                          "max": 10
-                        }
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 500,
-          "value": {
-            "type": "minecraft:chest",
-            "pools": [
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:modern_kinetic_gun",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "GunId": "tacz:spr15hb",
-                            "GunFireMode": "SEMI",
-                            "GunCurrentAmmoCount": 0,
-                            "HasBulletInBarrel": false
-                          }
-                        }
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:ammo",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "AmmoId": "tacz:556x45"
-                          }
-                        }
-                      },
-                      {
-                        "function": "minecraft:set_count",
-                        "count": {
-                          "type": "minecraft:uniform",
-                          "min": 15,
-                          "max": 30
-                        }
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 167,
-          "value": {
-            "type": "minecraft:chest",
-            "pools": [
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:modern_kinetic_gun",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "GunId": "tacz:springfield1873",
-                            "GunFireMode": "SEMI",
-                            "GunCurrentAmmoCount": 0,
-                            "HasBulletInBarrel": false
-                          }
-                        }
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:ammo",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "AmmoId": "tacz:45_70"
-                          }
-                        }
-                      },
-                      {
-                        "function": "minecraft:set_count",
-                        "count": {
-                          "type": "minecraft:uniform",
-                          "min": 1,
-                          "max": 2
-                        }
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 167,
-          "value": {
-            "type": "minecraft:chest",
-            "pools": [
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:modern_kinetic_gun",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "GunId": "tacz:svd",
-                            "GunFireMode": "SEMI",
-                            "GunCurrentAmmoCount": 0,
-                            "HasBulletInBarrel": false
-                          }
-                        }
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:ammo",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "AmmoId": "tacz:762x54"
-                          }
-                        }
-                      },
-                      {
-                        "function": "minecraft:set_count",
-                        "count": {
-                          "type": "minecraft:uniform",
-                          "min": 10,
-                          "max": 20
-                        }
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 533,
-          "value": {
-            "type": "minecraft:chest",
-            "pools": [
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:modern_kinetic_gun",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "GunId": "tacz:taurus500",
-                            "GunFireMode": "SEMI",
-                            "GunCurrentAmmoCount": 0,
-                            "HasBulletInBarrel": false
-                          }
-                        }
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:ammo",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "AmmoId": "tacz:500mag"
-                          }
-                        }
-                      },
-                      {
-                        "function": "minecraft:set_count",
-                        "count": {
-                          "type": "minecraft:uniform",
-                          "min": 5,
-                          "max": 10
-                        }
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 533,
-          "value": {
-            "type": "minecraft:chest",
-            "pools": [
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:modern_kinetic_gun",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "GunId": "tacz:taurus943",
-                            "GunFireMode": "SEMI",
-                            "GunCurrentAmmoCount": 0,
-                            "HasBulletInBarrel": false
-                          }
-                        }
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:ammo",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "AmmoId": "tacz:22wmr"
-                          }
-                        }
-                      },
-                      {
-                        "function": "minecraft:set_count",
-                        "count": {
-                          "type": "minecraft:uniform",
-                          "min": 8,
-                          "max": 16
-                        }
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 533,
-          "value": {
-            "type": "minecraft:chest",
-            "pools": [
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:modern_kinetic_gun",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "GunId": "tacz:tec_9",
-                            "GunFireMode": "AUTO",
-                            "GunCurrentAmmoCount": 0,
-                            "HasBulletInBarrel": false
-                          }
-                        }
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:ammo",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "AmmoId": "tacz:9mm"
-                          }
-                        }
-                      },
-                      {
-                        "function": "minecraft:set_count",
-                        "count": {
-                          "type": "minecraft:uniform",
-                          "min": 20,
-                          "max": 40
-                        }
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 533,
-          "value": {
-            "type": "minecraft:chest",
-            "pools": [
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:modern_kinetic_gun",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "GunId": "tacz:timeless50",
-                            "GunFireMode": "SEMI",
-                            "GunCurrentAmmoCount": 0,
-                            "HasBulletInBarrel": false
-                          }
-                        }
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:ammo",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "AmmoId": "tacz:50ae"
-                          }
-                        }
-                      },
-                      {
-                        "function": "minecraft:set_count",
-                        "count": {
-                          "type": "minecraft:uniform",
-                          "min": 8,
-                          "max": 16
-                        }
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 286,
-          "value": {
-            "type": "minecraft:chest",
-            "pools": [
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:modern_kinetic_gun",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "GunId": "tacz:type_81",
-                            "GunFireMode": "AUTO",
-                            "GunCurrentAmmoCount": 0,
-                            "HasBulletInBarrel": false
-                          }
-                        }
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:ammo",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "AmmoId": "tacz:762x39"
-                          }
-                        }
-                      },
-                      {
-                        "function": "minecraft:set_count",
-                        "count": {
-                          "type": "minecraft:uniform",
-                          "min": 30,
-                          "max": 60
-                        }
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 1333,
-          "value": {
-            "type": "minecraft:chest",
-            "pools": [
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:modern_kinetic_gun",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "GunId": "tacz:ump45",
-                            "GunFireMode": "AUTO",
-                            "GunCurrentAmmoCount": 0,
-                            "HasBulletInBarrel": false
-                          }
-                        }
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:ammo",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "AmmoId": "tacz:45acp"
-                          }
-                        }
-                      },
-                      {
-                        "function": "minecraft:set_count",
-                        "count": {
-                          "type": "minecraft:uniform",
-                          "min": 25,
-                          "max": 50
-                        }
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 286,
-          "value": {
-            "type": "minecraft:chest",
-            "pools": [
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:modern_kinetic_gun",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "GunId": "tacz:urgi",
-                            "GunFireMode": "AUTO",
-                            "GunCurrentAmmoCount": 0,
-                            "HasBulletInBarrel": false
-                          }
-                        }
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:ammo",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "AmmoId": "tacz:556x45"
-                          }
-                        }
-                      },
-                      {
-                        "function": "minecraft:set_count",
-                        "count": {
-                          "type": "minecraft:uniform",
-                          "min": 30,
-                          "max": 60
-                        }
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 1333,
-          "value": {
-            "type": "minecraft:chest",
-            "pools": [
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:modern_kinetic_gun",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "GunId": "tacz:uzi",
-                            "GunFireMode": "AUTO",
-                            "GunCurrentAmmoCount": 0,
-                            "HasBulletInBarrel": false
-                          }
-                        }
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:ammo",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "AmmoId": "tacz:9mm"
-                          }
-                        }
-                      },
-                      {
-                        "function": "minecraft:set_count",
-                        "count": {
-                          "type": "minecraft:uniform",
-                          "min": 20,
-                          "max": 40
-                        }
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 1333,
-          "value": {
-            "type": "minecraft:chest",
-            "pools": [
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:modern_kinetic_gun",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "GunId": "tacz:vector45",
-                            "GunFireMode": "AUTO",
-                            "GunCurrentAmmoCount": 0,
-                            "HasBulletInBarrel": false
-                          }
-                        }
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "rolls": 1,
-                "entries": [
-                  {
-                    "type": "minecraft:item",
-                    "name": "tacz:ammo",
-                    "functions": [
-                      {
-                        "function": "minecraft:set_components",
-                        "components": {
-                          "minecraft:custom_data": {
-                            "AmmoId": "tacz:45acp"
-                          }
-                        }
-                      },
-                      {
-                        "function": "minecraft:set_count",
-                        "count": {
-                          "type": "minecraft:uniform",
-                          "min": 20,
-                          "max": 40
-                        }
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
+          "type": "minecraft:item",
+          "name": "tacz:modern_kinetic_gun",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "GunId": "tacz:aa12",
+                  "GunFireMode": "SEMI",
+                  "GunCurrentAmmoCount": 0,
+                  "HasBulletInBarrel": false
+                }
+              }
+            }
+          ],
+          "weight": 1143
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tacz:modern_kinetic_gun",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "GunId": "tacz:ai_awp",
+                  "GunFireMode": "SEMI",
+                  "GunCurrentAmmoCount": 0,
+                  "HasBulletInBarrel": false
+                }
+              }
+            }
+          ],
+          "weight": 167
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tacz:modern_kinetic_gun",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "GunId": "tacz:ak12",
+                  "GunFireMode": "AUTO",
+                  "GunCurrentAmmoCount": 0,
+                  "HasBulletInBarrel": false
+                }
+              }
+            }
+          ],
+          "weight": 286
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tacz:modern_kinetic_gun",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "GunId": "tacz:ak47",
+                  "GunFireMode": "AUTO",
+                  "GunCurrentAmmoCount": 0,
+                  "HasBulletInBarrel": false
+                }
+              }
+            }
+          ],
+          "weight": 286
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tacz:modern_kinetic_gun",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "GunId": "tacz:ak74m",
+                  "GunFireMode": "AUTO",
+                  "GunCurrentAmmoCount": 0,
+                  "HasBulletInBarrel": false
+                }
+              }
+            }
+          ],
+          "weight": 286
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tacz:modern_kinetic_gun",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "GunId": "tacz:aug",
+                  "GunFireMode": "AUTO",
+                  "GunCurrentAmmoCount": 0,
+                  "HasBulletInBarrel": false
+                }
+              }
+            }
+          ],
+          "weight": 286
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tacz:modern_kinetic_gun",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "GunId": "tacz:b93r",
+                  "GunFireMode": "BURST",
+                  "GunCurrentAmmoCount": 0,
+                  "HasBulletInBarrel": false
+                }
+              }
+            }
+          ],
+          "weight": 533
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tacz:modern_kinetic_gun",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "GunId": "tacz:cz75",
+                  "GunFireMode": "AUTO",
+                  "GunCurrentAmmoCount": 0,
+                  "HasBulletInBarrel": false
+                }
+              }
+            }
+          ],
+          "weight": 533
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tacz:modern_kinetic_gun",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "GunId": "tacz:db_long",
+                  "GunFireMode": "SEMI",
+                  "GunCurrentAmmoCount": 0,
+                  "HasBulletInBarrel": false
+                }
+              }
+            }
+          ],
+          "weight": 1143
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tacz:modern_kinetic_gun",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "GunId": "tacz:db_short",
+                  "GunFireMode": "BURST",
+                  "GunCurrentAmmoCount": 0,
+                  "HasBulletInBarrel": false
+                }
+              }
+            }
+          ],
+          "weight": 1143
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tacz:modern_kinetic_gun",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "GunId": "tacz:deagle",
+                  "GunFireMode": "SEMI",
+                  "GunCurrentAmmoCount": 0,
+                  "HasBulletInBarrel": false
+                }
+              }
+            }
+          ],
+          "weight": 533
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tacz:modern_kinetic_gun",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "GunId": "tacz:deagle_golden",
+                  "GunFireMode": "SEMI",
+                  "GunCurrentAmmoCount": 0,
+                  "HasBulletInBarrel": false
+                }
+              }
+            }
+          ],
+          "weight": 533
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tacz:modern_kinetic_gun",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "GunId": "tacz:fn_evolys",
+                  "GunFireMode": "AUTO",
+                  "GunCurrentAmmoCount": 0,
+                  "HasBulletInBarrel": false
+                }
+              }
+            }
+          ],
+          "weight": 200
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tacz:modern_kinetic_gun",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "GunId": "tacz:fn_fal",
+                  "GunFireMode": "SEMI",
+                  "GunCurrentAmmoCount": 0,
+                  "HasBulletInBarrel": false
+                }
+              }
+            }
+          ],
+          "weight": 286
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tacz:modern_kinetic_gun",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "GunId": "tacz:g36k",
+                  "GunFireMode": "AUTO",
+                  "GunCurrentAmmoCount": 0,
+                  "HasBulletInBarrel": false
+                }
+              }
+            }
+          ],
+          "weight": 286
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tacz:modern_kinetic_gun",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "GunId": "tacz:glock_17",
+                  "GunFireMode": "SEMI",
+                  "GunCurrentAmmoCount": 0,
+                  "HasBulletInBarrel": false
+                }
+              }
+            }
+          ],
+          "weight": 533
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tacz:modern_kinetic_gun",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "GunId": "tacz:hcar",
+                  "GunFireMode": "AUTO",
+                  "GunCurrentAmmoCount": 0,
+                  "HasBulletInBarrel": false
+                }
+              }
+            }
+          ],
+          "weight": 286
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tacz:modern_kinetic_gun",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "GunId": "tacz:hk416d",
+                  "GunFireMode": "AUTO",
+                  "GunCurrentAmmoCount": 0,
+                  "HasBulletInBarrel": false
+                }
+              }
+            }
+          ],
+          "weight": 286
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tacz:modern_kinetic_gun",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "GunId": "tacz:hk_g3",
+                  "GunFireMode": "SEMI",
+                  "GunCurrentAmmoCount": 0,
+                  "HasBulletInBarrel": false
+                }
+              }
+            }
+          ],
+          "weight": 286
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tacz:modern_kinetic_gun",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "GunId": "tacz:hk_mk23",
+                  "GunFireMode": "SEMI",
+                  "GunCurrentAmmoCount": 0,
+                  "HasBulletInBarrel": false
+                }
+              }
+            }
+          ],
+          "weight": 533
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tacz:modern_kinetic_gun",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "GunId": "tacz:hk_mp5a5",
+                  "GunFireMode": "AUTO",
+                  "GunCurrentAmmoCount": 0,
+                  "HasBulletInBarrel": false
+                }
+              }
+            }
+          ],
+          "weight": 1333
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tacz:modern_kinetic_gun",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "GunId": "tacz:hk_mp7a1",
+                  "GunFireMode": "AUTO",
+                  "GunCurrentAmmoCount": 0,
+                  "HasBulletInBarrel": false
+                }
+              }
+            }
+          ],
+          "weight": 1333
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tacz:modern_kinetic_gun",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "GunId": "tacz:hm50b",
+                  "GunFireMode": "SEMI",
+                  "GunCurrentAmmoCount": 0,
+                  "HasBulletInBarrel": false
+                }
+              }
+            }
+          ],
+          "weight": 167
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tacz:modern_kinetic_gun",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "GunId": "tacz:kar98",
+                  "GunFireMode": "SEMI",
+                  "GunCurrentAmmoCount": 0,
+                  "HasBulletInBarrel": false
+                }
+              }
+            }
+          ],
+          "weight": 167
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tacz:modern_kinetic_gun",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "GunId": "tacz:lonetrail",
+                  "GunFireMode": "SEMI",
+                  "GunCurrentAmmoCount": 0,
+                  "HasBulletInBarrel": false
+                }
+              }
+            }
+          ],
+          "weight": 533
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tacz:modern_kinetic_gun",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "GunId": "tacz:m1014",
+                  "GunFireMode": "SEMI",
+                  "GunCurrentAmmoCount": 0,
+                  "HasBulletInBarrel": false
+                }
+              }
+            }
+          ],
+          "weight": 1143
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tacz:modern_kinetic_gun",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "GunId": "tacz:m107",
+                  "GunFireMode": "SEMI",
+                  "GunCurrentAmmoCount": 0,
+                  "HasBulletInBarrel": false
+                }
+              }
+            }
+          ],
+          "weight": 167
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tacz:modern_kinetic_gun",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "GunId": "tacz:m16a1",
+                  "GunFireMode": "AUTO",
+                  "GunCurrentAmmoCount": 0,
+                  "HasBulletInBarrel": false
+                }
+              }
+            }
+          ],
+          "weight": 286
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tacz:modern_kinetic_gun",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "GunId": "tacz:m16a4",
+                  "GunFireMode": "BURST",
+                  "GunCurrentAmmoCount": 0,
+                  "HasBulletInBarrel": false
+                }
+              }
+            }
+          ],
+          "weight": 286
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tacz:modern_kinetic_gun",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "GunId": "tacz:m1866",
+                  "GunFireMode": "AUTO",
+                  "GunCurrentAmmoCount": 0,
+                  "HasBulletInBarrel": false
+                }
+              }
+            }
+          ],
+          "weight": 500
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tacz:modern_kinetic_gun",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "GunId": "tacz:m1897",
+                  "GunFireMode": "AUTO",
+                  "GunCurrentAmmoCount": 0,
+                  "HasBulletInBarrel": false
+                }
+              }
+            }
+          ],
+          "weight": 1143
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tacz:modern_kinetic_gun",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "GunId": "tacz:m1911",
+                  "GunFireMode": "SEMI",
+                  "GunCurrentAmmoCount": 0,
+                  "HasBulletInBarrel": false
+                }
+              }
+            }
+          ],
+          "weight": 533
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tacz:modern_kinetic_gun",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "GunId": "tacz:m249",
+                  "GunFireMode": "AUTO",
+                  "GunCurrentAmmoCount": 0,
+                  "HasBulletInBarrel": false
+                }
+              }
+            }
+          ],
+          "weight": 200
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tacz:modern_kinetic_gun",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "GunId": "tacz:m320",
+                  "GunFireMode": "SEMI",
+                  "GunCurrentAmmoCount": 0,
+                  "HasBulletInBarrel": false
+                }
+              }
+            }
+          ],
+          "weight": 150
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tacz:modern_kinetic_gun",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "GunId": "tacz:m4a1",
+                  "GunFireMode": "AUTO",
+                  "GunCurrentAmmoCount": 0,
+                  "HasBulletInBarrel": false
+                }
+              }
+            }
+          ],
+          "weight": 286
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tacz:modern_kinetic_gun",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "GunId": "tacz:m700",
+                  "GunFireMode": "SEMI",
+                  "GunCurrentAmmoCount": 0,
+                  "HasBulletInBarrel": false
+                }
+              }
+            }
+          ],
+          "weight": 167
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tacz:modern_kinetic_gun",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "GunId": "tacz:m870",
+                  "GunFireMode": "SEMI",
+                  "GunCurrentAmmoCount": 0,
+                  "HasBulletInBarrel": false
+                }
+              }
+            }
+          ],
+          "weight": 1143
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tacz:modern_kinetic_gun",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "GunId": "tacz:m95",
+                  "GunFireMode": "SEMI",
+                  "GunCurrentAmmoCount": 0,
+                  "HasBulletInBarrel": false
+                }
+              }
+            }
+          ],
+          "weight": 167
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tacz:modern_kinetic_gun",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "GunId": "tacz:m9a4",
+                  "GunFireMode": "SEMI",
+                  "GunCurrentAmmoCount": 0,
+                  "HasBulletInBarrel": false
+                }
+              }
+            }
+          ],
+          "weight": 533
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tacz:modern_kinetic_gun",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "GunId": "tacz:mcx_spear_lt",
+                  "GunFireMode": "AUTO",
+                  "GunCurrentAmmoCount": 0,
+                  "HasBulletInBarrel": false
+                }
+              }
+            }
+          ],
+          "weight": 286
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tacz:modern_kinetic_gun",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "GunId": "tacz:minigun",
+                  "GunFireMode": "AUTO",
+                  "GunCurrentAmmoCount": 0,
+                  "HasBulletInBarrel": false
+                }
+              }
+            }
+          ],
+          "weight": 200
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tacz:modern_kinetic_gun",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "GunId": "tacz:mk14",
+                  "GunFireMode": "SEMI",
+                  "GunCurrentAmmoCount": 0,
+                  "HasBulletInBarrel": false
+                }
+              }
+            }
+          ],
+          "weight": 500
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tacz:modern_kinetic_gun",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "GunId": "tacz:mk18",
+                  "GunFireMode": "AUTO",
+                  "GunCurrentAmmoCount": 0,
+                  "HasBulletInBarrel": false
+                }
+              }
+            }
+          ],
+          "weight": 286
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tacz:modern_kinetic_gun",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "GunId": "tacz:mrad",
+                  "GunFireMode": "SEMI",
+                  "GunCurrentAmmoCount": 0,
+                  "HasBulletInBarrel": false
+                }
+              }
+            }
+          ],
+          "weight": 167
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tacz:modern_kinetic_gun",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "GunId": "tacz:p320",
+                  "GunFireMode": "SEMI",
+                  "GunCurrentAmmoCount": 0,
+                  "HasBulletInBarrel": false
+                }
+              }
+            }
+          ],
+          "weight": 533
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tacz:modern_kinetic_gun",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "GunId": "tacz:p90",
+                  "GunFireMode": "AUTO",
+                  "GunCurrentAmmoCount": 0,
+                  "HasBulletInBarrel": false
+                }
+              }
+            }
+          ],
+          "weight": 1333
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tacz:modern_kinetic_gun",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "GunId": "tacz:pkm",
+                  "GunFireMode": "AUTO",
+                  "GunCurrentAmmoCount": 0,
+                  "HasBulletInBarrel": false
+                }
+              }
+            }
+          ],
+          "weight": 200
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tacz:modern_kinetic_gun",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "GunId": "tacz:qbz_191",
+                  "GunFireMode": "AUTO",
+                  "GunCurrentAmmoCount": 0,
+                  "HasBulletInBarrel": false
+                }
+              }
+            }
+          ],
+          "weight": 286
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tacz:modern_kinetic_gun",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "GunId": "tacz:qbz_95",
+                  "GunFireMode": "AUTO",
+                  "GunCurrentAmmoCount": 0,
+                  "HasBulletInBarrel": false
+                }
+              }
+            }
+          ],
+          "weight": 286
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tacz:modern_kinetic_gun",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "GunId": "tacz:qr_24",
+                  "GunFireMode": "AUTO",
+                  "GunCurrentAmmoCount": 0,
+                  "HasBulletInBarrel": false
+                }
+              }
+            }
+          ],
+          "weight": 286
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tacz:modern_kinetic_gun",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "GunId": "tacz:rhino357",
+                  "GunFireMode": "SEMI",
+                  "GunCurrentAmmoCount": 0,
+                  "HasBulletInBarrel": false
+                }
+              }
+            }
+          ],
+          "weight": 533
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tacz:modern_kinetic_gun",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "GunId": "tacz:rpg7",
+                  "GunFireMode": "SEMI",
+                  "GunCurrentAmmoCount": 0,
+                  "HasBulletInBarrel": false
+                }
+              }
+            }
+          ],
+          "weight": 150
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tacz:modern_kinetic_gun",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "GunId": "tacz:rpk",
+                  "GunFireMode": "AUTO",
+                  "GunCurrentAmmoCount": 0,
+                  "HasBulletInBarrel": false
+                }
+              }
+            }
+          ],
+          "weight": 200
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tacz:modern_kinetic_gun",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "GunId": "tacz:scar_h",
+                  "GunFireMode": "SEMI",
+                  "GunCurrentAmmoCount": 0,
+                  "HasBulletInBarrel": false
+                }
+              }
+            }
+          ],
+          "weight": 286
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tacz:modern_kinetic_gun",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "GunId": "tacz:scar_l",
+                  "GunFireMode": "AUTO",
+                  "GunCurrentAmmoCount": 0,
+                  "HasBulletInBarrel": false
+                }
+              }
+            }
+          ],
+          "weight": 286
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tacz:modern_kinetic_gun",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "GunId": "tacz:scar_mk20",
+                  "GunFireMode": "SEMI",
+                  "GunCurrentAmmoCount": 0,
+                  "HasBulletInBarrel": false
+                }
+              }
+            }
+          ],
+          "weight": 500
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tacz:modern_kinetic_gun",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "GunId": "tacz:sks_tactical",
+                  "GunFireMode": "SEMI",
+                  "GunCurrentAmmoCount": 0,
+                  "HasBulletInBarrel": false
+                }
+              }
+            }
+          ],
+          "weight": 500
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tacz:modern_kinetic_gun",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "GunId": "tacz:spas_12",
+                  "GunFireMode": "SEMI",
+                  "GunCurrentAmmoCount": 0,
+                  "HasBulletInBarrel": false
+                }
+              }
+            }
+          ],
+          "weight": 1143
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tacz:modern_kinetic_gun",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "GunId": "tacz:spr15hb",
+                  "GunFireMode": "SEMI",
+                  "GunCurrentAmmoCount": 0,
+                  "HasBulletInBarrel": false
+                }
+              }
+            }
+          ],
+          "weight": 500
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tacz:modern_kinetic_gun",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "GunId": "tacz:springfield1873",
+                  "GunFireMode": "SEMI",
+                  "GunCurrentAmmoCount": 0,
+                  "HasBulletInBarrel": false
+                }
+              }
+            }
+          ],
+          "weight": 167
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tacz:modern_kinetic_gun",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "GunId": "tacz:svd",
+                  "GunFireMode": "SEMI",
+                  "GunCurrentAmmoCount": 0,
+                  "HasBulletInBarrel": false
+                }
+              }
+            }
+          ],
+          "weight": 167
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tacz:modern_kinetic_gun",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "GunId": "tacz:taurus500",
+                  "GunFireMode": "SEMI",
+                  "GunCurrentAmmoCount": 0,
+                  "HasBulletInBarrel": false
+                }
+              }
+            }
+          ],
+          "weight": 533
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tacz:modern_kinetic_gun",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "GunId": "tacz:taurus943",
+                  "GunFireMode": "SEMI",
+                  "GunCurrentAmmoCount": 0,
+                  "HasBulletInBarrel": false
+                }
+              }
+            }
+          ],
+          "weight": 533
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tacz:modern_kinetic_gun",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "GunId": "tacz:tec_9",
+                  "GunFireMode": "AUTO",
+                  "GunCurrentAmmoCount": 0,
+                  "HasBulletInBarrel": false
+                }
+              }
+            }
+          ],
+          "weight": 533
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tacz:modern_kinetic_gun",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "GunId": "tacz:timeless50",
+                  "GunFireMode": "SEMI",
+                  "GunCurrentAmmoCount": 0,
+                  "HasBulletInBarrel": false
+                }
+              }
+            }
+          ],
+          "weight": 533
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tacz:modern_kinetic_gun",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "GunId": "tacz:type_81",
+                  "GunFireMode": "AUTO",
+                  "GunCurrentAmmoCount": 0,
+                  "HasBulletInBarrel": false
+                }
+              }
+            }
+          ],
+          "weight": 286
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tacz:modern_kinetic_gun",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "GunId": "tacz:ump45",
+                  "GunFireMode": "AUTO",
+                  "GunCurrentAmmoCount": 0,
+                  "HasBulletInBarrel": false
+                }
+              }
+            }
+          ],
+          "weight": 1333
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tacz:modern_kinetic_gun",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "GunId": "tacz:urgi",
+                  "GunFireMode": "AUTO",
+                  "GunCurrentAmmoCount": 0,
+                  "HasBulletInBarrel": false
+                }
+              }
+            }
+          ],
+          "weight": 286
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tacz:modern_kinetic_gun",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "GunId": "tacz:uzi",
+                  "GunFireMode": "AUTO",
+                  "GunCurrentAmmoCount": 0,
+                  "HasBulletInBarrel": false
+                }
+              }
+            }
+          ],
+          "weight": 1333
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tacz:modern_kinetic_gun",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "GunId": "tacz:vector45",
+                  "GunFireMode": "AUTO",
+                  "GunCurrentAmmoCount": 0,
+                  "HasBulletInBarrel": false
+                }
+              }
+            }
+          ],
+          "weight": 1333
         }
       ]
     }

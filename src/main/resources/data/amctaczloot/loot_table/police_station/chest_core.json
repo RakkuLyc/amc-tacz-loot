@@ -12,12 +12,6 @@
         },
         {
           "type": "minecraft:loot_table",
-          "value": "amctaczloot:pick/ammo_police",
-          "weight": 150,
-          "quality": 38
-        },
-        {
-          "type": "minecraft:loot_table",
           "value": "amctaczloot:pick/att",
           "weight": 90,
           "quality": 22
@@ -30,8 +24,25 @@
         },
         {
           "type": "minecraft:empty",
-          "weight": 460,
-          "quality": -134
+          "weight": 610,
+          "quality": -96
+        }
+      ],
+      "bonus_rolls": 0.2
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:loot_table",
+          "value": "amctaczloot:pick/ammo_police",
+          "weight": 400,
+          "quality": 100
+        },
+        {
+          "type": "minecraft:empty",
+          "weight": 600,
+          "quality": -100
         }
       ],
       "bonus_rolls": 0.2

@@ -32,17 +32,17 @@ MOD = "amctaczloot"
 LUCK_QUALITY = 0.25      # cada nível de Sorte multiplica a chance de cada categoria por (1 + 0.25 * Sorte)
 # rolagens por tier: (rolls, bonus_rolls).  floor(bonus*Sorte): 0.34 soma 1 rolagem só na Sorte III; 0.2 só na Sorte V
 ROLLS = {"chest": (1, 0.2), "chest_hard": (1, 0.34), "barrel": (1, 0.0), "barrel_hard": (1, 0.0)}
-# chance (‰) por rolagem de cada categoria, por tema e tier.  gun = arma+munição do calibre, ammo = munição solta,
+# chance (‰) por rolagem de cada categoria, por tema e tier.  gun = arma (sem munição junto), ammo = pilha de munição (pool próprio),
 # att = attachment, lr = cura LesRaisins, fa = cura First Aid (tabela à parte, só se o First Aid estiver instalado)
 RATES = {
-    "building":       {"chest": dict(gun=200, ammo=60, att=40, lr=40, fa=40),          # 1 arma a cada 5 baús
-                       "chest_hard": dict(gun=333, ammo=100, att=70, lr=70, fa=70),     # 1 arma a cada 3 baús difíceis
-                       "barrel": dict(gun=6, ammo=25, att=12, lr=15, fa=15),
-                       "barrel_hard": dict(gun=12, ammo=45, att=24, lr=30, fa=30)},
-    "police_station": {"chest": dict(gun=250, ammo=150, att=90, lr=50, fa=50),          # 1 arma a cada 4 baús
-                       "chest_hard": dict(gun=333, ammo=250, att=160, lr=80, fa=80),    # 1 arma a cada 3 baús difíceis
-                       "barrel": dict(gun=30, ammo=70, att=40, lr=20, fa=20),
-                       "barrel_hard": dict(gun=60, ammo=120, att=70, lr=35, fa=35)},
+    "building":       {"chest": dict(gun=200, ammo=260, att=40, lr=40, fa=40),         # 1 arma a cada 5 baús
+                       "chest_hard": dict(gun=333, ammo=433, att=70, lr=70, fa=70),     # 1 arma a cada 3 baús difíceis
+                       "barrel": dict(gun=6, ammo=31, att=12, lr=15, fa=15),
+                       "barrel_hard": dict(gun=12, ammo=57, att=24, lr=30, fa=30)},
+    "police_station": {"chest": dict(gun=250, ammo=400, att=90, lr=50, fa=50),          # 1 arma a cada 4 baús
+                       "chest_hard": dict(gun=333, ammo=583, att=160, lr=80, fa=80),    # 1 arma a cada 3 baús difíceis
+                       "barrel": dict(gun=30, ammo=100, att=40, lr=20, fa=20),
+                       "barrel_hard": dict(gun=60, ammo=180, att=70, lr=35, fa=35)},
     "pharmacy":       {"chest": dict(lr=300, fa=300), "chest_hard": dict(lr=400, fa=400),
                        "barrel": dict(lr=120, fa=120), "barrel_hard": dict(lr=200, fa=200)},
     "house":          {"chest": dict(lr=30, fa=30), "chest_hard": dict(lr=60, fa=60),
@@ -60,7 +60,7 @@ GUN_TYPE_W = {
 }
 GUN_PROFILE = {"police_station": "police"}          # os demais temas usam "default"
 AMMO_RARE = {"50bmg": 0.4, "40mm": 0.15, "rpg_rocket": 0.15, "338": 0.5, "45_70": 0.5, "500mag": 0.5}  # fator no peso
-GUN_KIT_AMMO = (1, 2)    # munição que vem junto com a arma: de 1 a 2 pentes (limitado ao tamanho da pilha)
+# (a arma NÃO traz munição junto: a munição é um sorteio separado, calibre pela raridade das armas que o usam)
 ATT_TYPE_W = dict(scope=4, muzzle=4, grip=3, stock=3, extended_mag=4, laser=2)   # peso do tipo de attachment
 # itens de cura: (peso, mín, máx)
 LR_W = dict(ibuprofen=(10, 1, 1), blood_pack=(8, 1, 1), vaseline=(8, 1, 1), goldenstar=(6, 1, 1), cms=(5, 1, 1),
@@ -77,6 +77,7 @@ JUNK = dict(stick=(12, 1, 6), wheat_seeds=(10, 1, 4), beetroot_seeds=(8, 1, 4), 
 JUNK_SHAPE = {"chest": (1000, 2, 4), "chest_hard": (1000, 2, 4), "barrel": (300, 1, 2), "barrel_hard": (300, 1, 2),
               "pot": (300, 1, 1), "pot_hard": (300, 1, 1)}
 # categorias da tabela principal (TACZ + LesRaisins, obrigatórios) e da tabela do First Aid (opcional)
+CORE_POOLS = (("gun", "att", "lr"), ("ammo",))      # dois sorteios independentes por rolagem do baú
 CORE_CATS = ("gun", "ammo", "att", "lr")
 LUCKS = (0, 1, 2, 3)
 # =====================================================================================================================
@@ -110,13 +111,6 @@ def ammo_weights(profile):
     for g, gw in gun_weights(profile).items():
         c = TZ["guns"][g]["ammo"].split(":")[1]; w[c] = w.get(c, 0) + gw
     return {c: max(1, round(x * AMMO_RARE.get(c, 1.0))) for c, x in w.items()}
-
-
-def ammo_count(gun):
-    """Munição que acompanha a arma: de 1 a 2 pentes, limitada ao tamanho da pilha."""
-    v = TZ["guns"][gun]; c = v["ammo"].split(":")[1]; stack = TZ["ammo"][c]["stack"] or 30
-    mag = v["mag"] or 100
-    return min(stack, max(1, mag * GUN_KIT_AMMO[0])), min(stack, max(1, mag * GUN_KIT_AMMO[1]))
 
 
 def att_weights():
@@ -180,12 +174,7 @@ def pick_tables():
     out = {}
     for prof in ("default", "police"):
         gw = gun_weights(prof)
-        kits = []
-        for g, w in gw.items():
-            lo, hi = ammo_count(g); c = TZ["guns"][g]["ammo"].split(":")[1]
-            kits.append({"type": "minecraft:loot_table", "weight": w, "value": table(
-                [pool([e_gun(g)]), pool([e_ammo(c, lo, hi)])])})
-        out["pick/gun_" + prof] = (table([pool(kits)]), None)
+        out["pick/gun_" + prof] = (table([pool([with_w(e_gun(g), w) for g, w in gw.items()])]), None)
         out["pick/ammo_" + prof] = (table([pool([with_w(e_ammo(c), w) for c, w in ammo_weights(prof).items()])]), None)
     out["pick/att"] = (table([pool([with_w(e_att(a), w) for a, w in att_weights().items()])]), None)
     out["pick/lr"] = (table([pool([with_w(e_lr(i, lo, hi), w) for i, (w, lo, hi) in LR_W.items()])]), None)
@@ -226,13 +215,17 @@ def main_tables():
         prof = GUN_PROFILE.get(theme, "default")
         for tier, rates in tiers.items():
             rolls, bonus = ROLLS[tier]
-            core = {k: v for k, v in rates.items() if k in CORE_CATS}
-            ent = []
-            for c, (w, q) in weights(core).items():
-                if c == "empty": e = {"type": "minecraft:empty"}
-                else: e = {"type": "minecraft:loot_table", "value": "%s:pick/%s" % (MOD, {"gun": "gun_" + prof, "ammo": "ammo_" + prof, "att": "att", "lr": "lr"}[c])}
-                ent.append({**e, "weight": w, "quality": q})
-            out["%s/%s_core" % (theme, tier)] = table([pool(ent, rolls, bonus)])
+            pools = []
+            for group in CORE_POOLS:
+                part = {k: v for k, v in rates.items() if k in group}
+                if not part: continue
+                ent = []
+                for c, (w, q) in weights(part).items():
+                    if c == "empty": e = {"type": "minecraft:empty"}
+                    else: e = {"type": "minecraft:loot_table", "value": "%s:pick/%s" % (MOD, {"gun": "gun_" + prof, "ammo": "ammo_" + prof, "att": "att", "lr": "lr"}[c])}
+                    ent.append({**e, "weight": w, "quality": q})
+                pools.append(pool(ent, rolls, bonus))
+            out["%s/%s_core" % (theme, tier)] = table(pools)
             if "fa" in rates:
                 ent = []
                 for c, (w, q) in weights({"fa": rates["fa"]}).items():
@@ -248,11 +241,11 @@ def eff(w, q, luck):
 
 
 def expected(theme, tier, luck):
-    """Esperado por container (stacks): guns, ammo (kit + solta), att, lr, fa."""
+    """Esperado por container (stacks): guns, ammo, att, lr, fa."""
     rates = RATES[theme][tier]; rolls, bonus = ROLLS[tier]
     r = rolls + math.floor(bonus * luck)
     res = {k: 0.0 for k in ("gun", "ammo", "att", "lr", "fa")}
-    for cat_set, in ((CORE_CATS,), (("fa",),)):
+    for cat_set in (*CORE_POOLS, ("fa",)):
         part = {k: v for k, v in rates.items() if k in cat_set}
         if not part: continue
         wq = weights(part)
@@ -262,7 +255,6 @@ def expected(theme, tier, luck):
             avg = {"lr": sum(w * (lo + hi) / 2 for w, lo, hi in LR_W.values()) / sum(w for w, _, _ in LR_W.values()),
                    "fa": sum(w * (lo + hi) / 2 for w, lo, hi in FA_W.values()) / sum(w for w, _, _ in FA_W.values())}.get(c, 1)
             res[c] += r * p * avg
-            if c == "gun": res["ammo"] += r * p      # a arma vem com 1 pilha de munição
     return res
 
 
@@ -274,7 +266,7 @@ def preview():
         if th not in RATES: continue
         rows.append((th, name, v))
     rows.sort(key=lambda r: (list(RATES).index(r[0]), -r[2]["total"]))
-    print("Esperado por estrutura (uma instância), em unidades: armas | pilhas de munição | attachments | cura LesRaisins | cura First Aid")
+    print("Esperado por estrutura (uma instância): armas | pilhas de munição | attachments | cura LesRaisins | cura First Aid")
     print("Sorte 0 detalhada; 'armas' também em Sorte 1/2/3. Vasos não recebem nada do mod.\n")
     print("%-14s %-30s %5s | %s | %-23s | %6s %6s" % ("tema", "estrutura", "cont.", "Sorte 0: arm  mun  att   LR   FA", "armas S0 S1 S2 S3", "LR S3", "FA S3"))
     for th, name, v in rows:
@@ -314,9 +306,13 @@ def preview():
             cells = []
             for l in LUCKS:
                 rolls, bonus = ROLLS[tier]; r = rolls + math.floor(bonus * l)
-                core = {k: v for k, v in RATES[th][tier].items() if k in CORE_CATS}
-                wq = weights(core); tot = sum(eff(w, q, l) for w, q in wq.values())
-                p_core = 1 - (eff(*wq["empty"], l) / tot) ** r
+                p_none = 1.0
+                for group in CORE_POOLS:
+                    part = {k: v for k, v in RATES[th][tier].items() if k in group}
+                    if not part: continue
+                    wq = weights(part); tot = sum(eff(w, q, l) for w, q in wq.values())
+                    p_none *= (eff(*wq["empty"], l) / tot) ** r
+                p_core = 1 - p_none
                 fa = weights({"fa": RATES[th][tier]["fa"]}); tf = sum(eff(w, q, l) for w, q in fa.values())
                 p_fa = 1 - (eff(*fa["empty"], l) / tf) ** r
                 cells.append("S%d %4.0f%%|%4.0f%%" % (l, 100 * p_core, 100 * (1 - (1 - p_core) * (1 - p_fa))))
