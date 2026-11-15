@@ -19,8 +19,9 @@ First Aid e da LesRaisins. Mod id `amctaczloot`. Recomeçado do zero em 13 Nov 2
   Arma cai sem munição, descarregada.
 - **Munição** (pool próprio): baú de prédio 52,0%, difícil 86,6%, barris 6,2% / 11,4%; delegacia baú 80,0%, difícil 100,0% (teto), barris 20,0% / 36,0%.
   Calibre: metade igual para os 23 calibres com arma + metade pela popularidade das armas (ex. prédio: 12g 11,9%, 9mm 10,8%, .45 ACP 9,3%; mais raros ~2,4%).
-  **Cada acerto de munição dá 1 a 3 pilhas de calibres sorteados** (o mesmo calibre pode repetir), com balas por pilha proporcionais à pilha máxima e
-  50% do tamanho antigo para o total não mudar (9mm 12–25 com pilha 60; 12g 7–15; .308 10–20; 40mm e foguete 1–3). `AMMO_STACKS`, `AMMO_SIZE`.
+  **Cada acerto de munição dá 1 a 3 pilhas de calibres sorteados** (o mesmo calibre pode repetir), com balas por pilha proporcionais à pilha máxima, **no
+  tamanho original** (9mm 24–50 com pilha 60; 12g 14–30; .308 19–40; 22wmr 26–53; 40mm e foguete 2–5). `AMMO_STACKS = (1, 3)`, `AMMO_SIZE = 1.0`.
+  **Total de balas por baú de prédio ~31 (dobro da versão de 1 pilha); delegacia ~48.**
 - **Cura LesRaisins** (chance de CADA item por container, independente; mesma em todos os temas exceto farmácia): vaseline, ibuprofen,
   amoxicillin e golden star **9,2% cada, mesma chance** (Comuns; 184‰ antes do x0,5 = média dos 4 antigos, total dos Comuns inalterado); blood pack 4,5%, CAR 4,3%, AI-2 4,0%, CMS 3,5% (Incomuns); SURV12 2,0% (Raro) (CAR 4,3% = 4,25% arredondado em ‰).
   **Farmácia**: Incomuns e Raro ×2 sobre esses valores (blood pack 9,0%, CAR 8,5%, AI-2 8,0%, CMS 7,0%, SURV12 4,0%). Fator geral `HEAL_SCALE = 0.5`.
@@ -225,3 +226,11 @@ First Aid e da LesRaisins. Mod id `amctaczloot`. Recomeçado do zero em 13 Nov 2
 - Para testar o preenchimento real: `setblock ... chest{LootTable:"...",LootTableSeed:1L}` + `execute if items block ... container.0 minecraft:stone`
   + `data get block ... Items`. **O Minecraft do Prism Launcher do usuário aparece como `bootstraplauncher` no `pgrep`: nunca matar; para saber se o
   servidor de teste está aberto, use a porta 25575 (`ss -ltn`).**
+
+## Tamanho das pilhas de volta ao original (15 Nov 2026)
+- Pedido: "o tamanho das pilhas deve ser igual ao valor anterior, sem mudar" → `AMMO_SIZE = 1.0` (9mm 24–50 etc.), com 1 a 3 pilhas por acerto.
+- **Consequência (avisada ao usuário):** o total de balas por container dobrou (média 2,0 pilhas x tamanho cheio): baú de prédio 15,6 → ~31, delegacia
+  ~24 → ~48; green tower ~2.800 balas (antes ~1.400). Para voltar ao total antigo bastaria baixar a chance de munição em `RATES` ×0,5 (não aplicado).
+- Validado: tamanhos observados iguais aos esperados (9mm 24–50, 308 19–40, 22wmr 26–53, 338 12–25, 40mm 2–5; o 12g chegou a 36 por fusão de duas
+  pilhas no `/loot insert`, pilha cheia = 36); baú real (800 de prédio): 54% com munição, calibres 1/2/3 = 37/34/29%, 33,0 balas por baú (esperado 31,2);
+  delegacia (500): 80%, 46,4 balas (esperado 47,9).

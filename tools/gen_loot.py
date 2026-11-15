@@ -67,11 +67,12 @@ GUN_PROFILE = {"police_station": "police"}          # os demais temas usam "defa
 AMMO_REF = ("9mm", 24, 50)
 AMMO_MIX_UNIFORM = 0.5
 # Cada vez que um container "ganha munição" (chance por tier em RATES["ammo"]) saem AMMO_STACKS sorteios de calibre (1 a 3 pilhas; o mesmo
-# calibre pode repetir: uma tabela não garante "sem repetir"), cada pilha com AMMO_SIZE do tamanho anterior (9mm 24-50 -> 12-25), para o TOTAL
-# de balas continuar igual (média de pilhas x AMMO_SIZE = 1: 2,0 x 0,5). Pedido do usuário: de 1 a 3 pilhas, não sempre 2 a 3 (antes: 2-3 x 0,4). Escolha do usuário (opção C, 15 Nov 2026). O Minecraft ainda divide as pilhas
+# calibre pode repetir: uma tabela não garante "sem repetir"), cada pilha com AMMO_SIZE do tamanho original (9mm 24-50). Pedido do usuário
+# (15 Nov 2026): de 1 a 3 pilhas (não sempre 2 a 3) e o tamanho das pilhas IGUAL ao original (AMMO_SIZE = 1.0). Consequência: com média de 2,0 pilhas por
+# acerto o TOTAL de balas por container dobra em relação a quando era 1 pilha; para manter o total, baixar a chance de munição em RATES (x0,5). Escolha do usuário (opção C, 15 Nov 2026). O Minecraft ainda divide as pilhas
 # em pedaços espalhados em slots aleatórios ao abrir o container (shuffleAndSplitItems), então as balas já aparecem soltas pelos slots.
 AMMO_STACKS = (1, 3)
-AMMO_SIZE = 0.5
+AMMO_SIZE = 1.0
 # (a arma NÃO traz munição junto: a munição é um sorteio separado, calibre pela raridade das armas que o usam)
 ATT_TYPE_W = dict(scope=4, muzzle=4, grip=3, stock=3, extended_mag=4, laser=2)   # peso do tipo de attachment
 # itens de cura: (peso, mín, máx)
