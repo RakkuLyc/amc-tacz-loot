@@ -66,6 +66,7 @@ def nbt(b, p, t):
 def block_entities(world):
     for f in glob.glob(world + "/region/*.mca"):
         b = open(f, "rb").read()
+        if len(b) < 8192: continue  # região vazia (mundo novo)
         for i in range(1024):
             off = struct.unpack(">I", b"\0" + b[i * 4:i * 4 + 3])[0]
             if not off: continue

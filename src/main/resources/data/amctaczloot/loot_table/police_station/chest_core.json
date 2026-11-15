@@ -7,8 +7,8 @@
         {
           "type": "minecraft:loot_table",
           "value": "amctaczloot:pick/gun_police",
-          "weight": 120,
-          "quality": 30
+          "weight": 250,
+          "quality": 62
         },
         {
           "type": "minecraft:loot_table",
@@ -30,8 +30,8 @@
         },
         {
           "type": "minecraft:empty",
-          "weight": 590,
-          "quality": -102
+          "weight": 460,
+          "quality": -134
         }
       ],
       "bonus_rolls": 0.2

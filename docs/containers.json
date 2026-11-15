@@ -1,50 +1,54 @@
 {
  "abandoned_crash_building": {
-  "theme": "building_large",
+  "theme": "building",
   "tiers": {
-   "barrel": 133,
-   "chest": 68
+   "chest": 94
   },
-  "total": 201
+  "total": 94
  },
  "abandoned_garage_house": {
   "theme": "house",
   "tiers": {
-   "barrel": 10,
-   "chest": 6
+   "barrel": 9,
+   "barrel_hard": 1,
+   "chest": 4,
+   "chest_hard": 2
   },
   "total": 16
  },
  "abandoned_glass_house": {
   "theme": "house",
   "tiers": {
-   "barrel": 13,
-   "chest": 9
+   "barrel": 7,
+   "barrel_hard": 6,
+   "chest": 5,
+   "chest_hard": 4
   },
   "total": 22
  },
  "abandoned_green_tower": {
-  "theme": "building_large",
+  "theme": "building",
   "tiers": {
-   "barrel": 73,
-   "chest": 62
+   "chest": 91
   },
-  "total": 135
+  "total": 91
  },
  "abandoned_house": {
   "theme": "house",
   "tiers": {
    "barrel": 46,
-   "chest": 10,
-   "chest_hard": 1
+   "chest": 9,
+   "chest_hard": 2
   },
   "total": 57
  },
  "abandoned_large_house": {
   "theme": "house",
   "tiers": {
-   "barrel": 20,
-   "chest": 4,
+   "barrel": 17,
+   "barrel_hard": 3,
+   "chest": 3,
+   "chest_hard": 1,
    "pot": 1
   },
   "total": 25
@@ -52,8 +56,8 @@
  "abandoned_mansion": {
   "theme": "house",
   "tiers": {
-   "barrel": 21,
-   "barrel_hard": 2,
+   "barrel": 16,
+   "barrel_hard": 7,
    "chest": 4,
    "chest_hard": 1,
    "pot": 1
@@ -63,41 +67,46 @@
  "abandoned_modern_garage_house": {
   "theme": "house",
   "tiers": {
-   "barrel": 17,
-   "chest": 12
+   "barrel": 9,
+   "barrel_hard": 8,
+   "chest": 6,
+   "chest_hard": 6
   },
   "total": 29
  },
  "abandoned_modern_house": {
   "theme": "house",
   "tiers": {
-   "barrel": 35,
-   "chest": 18,
-   "chest_hard": 1
+   "barrel": 29,
+   "barrel_hard": 6,
+   "chest": 11,
+   "chest_hard": 8
   },
   "total": 54
  },
  "abandoned_police_station": {
   "theme": "police_station",
   "tiers": {
-   "barrel": 29,
-   "barrel_hard": 5,
-   "chest": 21,
-   "chest_hard": 8
+   "barrel": 27,
+   "barrel_hard": 7,
+   "chest": 18,
+   "chest_hard": 11
   },
   "total": 63
  },
  "abandoned_pool_house": {
   "theme": "house",
   "tiers": {
-   "barrel": 20,
-   "chest": 12,
-   "pot": 2
+   "barrel": 18,
+   "barrel_hard": 2,
+   "chest": 10,
+   "chest_hard": 2,
+   "pot_hard": 2
   },
   "total": 34
  },
  "abandoned_ramp_building": {
-  "theme": "building_large",
+  "theme": "building",
   "tiers": {
    "barrel": 242,
    "chest": 157
@@ -107,16 +116,17 @@
  "abandoned_small_building": {
   "theme": "building",
   "tiers": {
-   "barrel": 23,
-   "chest": 19
+   "chest": 24
   },
-  "total": 42
+  "total": 24
  },
  "abandoned_suburban_house": {
   "theme": "house",
   "tiers": {
-   "barrel": 20,
-   "chest": 11
+   "barrel": 18,
+   "barrel_hard": 2,
+   "chest": 8,
+   "chest_hard": 3
   },
   "total": 31
  },
@@ -124,27 +134,31 @@
   "theme": "house",
   "tiers": {
    "barrel": 23,
-   "chest": 17,
-   "pot": 2
+   "chest": 15,
+   "chest_hard": 2,
+   "pot": 1,
+   "pot_hard": 1
   },
   "total": 42
  },
  "abandoned_victorian_house": {
   "theme": "house",
   "tiers": {
-   "barrel": 21,
-   "chest": 15,
-   "pot": 4
+   "barrel": 18,
+   "barrel_hard": 3,
+   "chest": 11,
+   "chest_hard": 4,
+   "pot": 2,
+   "pot_hard": 2
   },
   "total": 40
  },
  "abandoned_wide_building": {
-  "theme": "building_large",
+  "theme": "building",
   "tiers": {
-   "barrel": 116,
-   "chest": 133
+   "chest": 161
   },
-  "total": 249
+  "total": 161
  },
  "apartment_building": {
   "theme": "building",
@@ -156,30 +170,26 @@
  "apocalyptic_building_57x45": {
   "theme": "building",
   "tiers": {
-   "barrel": 30,
-   "barrel_hard": 7,
-   "chest": 33,
-   "chest_hard": 3
+   "chest": 44,
+   "chest_hard": 5
   },
-  "total": 73
+  "total": 49
  },
  "bluish_building": {
   "theme": "building",
   "tiers": {
-   "barrel": 3,
-   "chest": 14,
+   "chest": 15,
    "chest_hard": 1
   },
-  "total": 18
+  "total": 16
  },
  "brutalist_u_building_75x58": {
-  "theme": "building_large",
+  "theme": "building",
   "tiers": {
-   "barrel": 259,
-   "chest": 168,
+   "chest": 229,
    "pot": 9
   },
-  "total": 436
+  "total": 238
  },
  "gas_station_blue": {
   "theme": "gas_station",
@@ -288,7 +298,8 @@
   "theme": "pharmacy",
   "tiers": {
    "barrel": 19,
-   "chest": 4,
+   "chest": 3,
+   "chest_hard": 1,
    "pot": 9
   },
   "total": 32
@@ -297,7 +308,8 @@
   "theme": "pharmacy",
   "tiers": {
    "barrel": 19,
-   "chest": 4,
+   "chest": 3,
+   "chest_hard": 1,
    "pot": 9
   },
   "total": 32
@@ -306,7 +318,8 @@
   "theme": "pharmacy",
   "tiers": {
    "barrel": 19,
-   "chest": 4,
+   "chest": 3,
+   "chest_hard": 1,
    "pot": 9
   },
   "total": 32
@@ -315,7 +328,8 @@
   "theme": "pharmacy",
   "tiers": {
    "barrel": 19,
-   "chest": 4,
+   "chest": 3,
+   "chest_hard": 1,
    "pot": 9
   },
   "total": 32
@@ -324,7 +338,8 @@
   "theme": "pharmacy",
   "tiers": {
    "barrel": 19,
-   "chest": 4,
+   "chest": 3,
+   "chest_hard": 1,
    "pot": 9
   },
   "total": 32
@@ -359,27 +374,27 @@
  "post_apocalyptic_mansion": {
   "theme": "house",
   "tiers": {
-   "barrel": 7,
-   "chest": 21
+   "barrel": 5,
+   "barrel_hard": 2,
+   "chest": 11,
+   "chest_hard": 10
   },
   "total": 28
  },
  "skeleton_building_31x29": {
   "theme": "building",
   "tiers": {
-   "barrel": 1,
-   "chest": 16
+   "chest": 17
   },
   "total": 17
  },
  "tower": {
-  "theme": "building_large",
+  "theme": "building",
   "tiers": {
-   "barrel": 149,
-   "chest": 29,
+   "chest": 71,
    "pot": 37
   },
-  "total": 215
+  "total": 108
  },
  "workshop_medium_blue_black": {
   "theme": "workshop",
@@ -408,7 +423,8 @@
  "workshop_small_blue": {
   "theme": "workshop",
   "tiers": {
-   "barrel": 39,
+   "barrel": 38,
+   "barrel_hard": 1,
    "chest": 2
   },
   "total": 41
@@ -416,7 +432,8 @@
  "workshop_small_green": {
   "theme": "workshop",
   "tiers": {
-   "barrel": 39,
+   "barrel": 38,
+   "barrel_hard": 1,
    "chest": 2
   },
   "total": 41
@@ -424,7 +441,8 @@
  "workshop_small_purple": {
   "theme": "workshop",
   "tiers": {
-   "barrel": 39,
+   "barrel": 38,
+   "barrel_hard": 1,
    "chest": 2
   },
   "total": 41
@@ -432,7 +450,8 @@
  "workshop_small_red": {
   "theme": "workshop",
   "tiers": {
-   "barrel": 39,
+   "barrel": 38,
+   "barrel_hard": 1,
    "chest": 2
   },
   "total": 41
@@ -440,7 +459,8 @@
  "workshop_small_yellow": {
   "theme": "workshop",
   "tiers": {
-   "barrel": 39,
+   "barrel": 38,
+   "barrel_hard": 1,
    "chest": 2
   },
   "total": 41

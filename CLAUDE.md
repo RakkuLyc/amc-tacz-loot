@@ -15,7 +15,7 @@ First Aid e da LesRaisins. Mod id `amctaczloot`. Recomeçado do zero em 13 Nov 2
 
 ## Decisões do usuário (13 Nov 2026)
 - Só o pacote padrão do TACZ (70 armas); o Gunpowder Revolution (`hamster`) fica de fora por ora.
-- Armas/munição/attachments em `building` e `building_large`; **a delegacia recebe mais armas**: o AMC ganhou o tema `police_station` (commit `27ae583` do AMC, 13 Nov 2026).
+- Armas/munição/attachments em `building` (o tema `building_large` foi removido do AMC em 14 Nov 2026, commit `72d07b3`); **a delegacia recebe mais armas**: o AMC ganhou o tema `police_station` (commit `27ae583` do AMC, 13 Nov 2026).
 - Cura: farmácia bastante; casas, oficinas e postos um pouco; oficinas também com pouca munição.
 - **Vasos (`pot`) não recebem nada** (ver fatos).
 - **Sem itens vanilla úteis (14 Nov 2026):** as tabelas do mod nunca tiveram item vanilla; os vanilla dos containers vinham das tabelas
@@ -61,8 +61,7 @@ First Aid e da LesRaisins. Mod id `amctaczloot`. Recomeçado do zero em 13 Nov 2
   estrutura e tipo medidos no jogo: `docs/containers.json` (`tools/measure_containers.py`; confere com o total do AMC).
 
 ## Números aprovados pelo usuário (13 Nov 2026, "Aprovo")
-- Esperado por estrutura (Sorte 0), armas / pilhas de munição: delegacia 5,7 / 13,5; brutalista 4,1 / 15,5; rampa 3,8 / 14,5;
-  larga 2,9 / 10,6; crash 1,8 / 6,8; torre verde 1,4 / 5,3; torre 1,1 / 4,7; apocalíptico 1,4 / 4,8; prédios pequenos 0,3–0,7.
+- (Os totais por estrutura aprovados em 13 Nov foram substituídos pela mudança de 14 Nov, abaixo; as raridades e a Sorte continuam.)
 - Raridade das armas por tipo (peso): padrão pistol 10, smg 6, shotgun 6, rifle 4, dmr 2, sniper 1,5, mg 1, rpg 0,3; delegacia
   pistol 8, smg 8, shotgun 8, rifle 6, dmr 2,5, sniper 1,5, mg 1, rpg 0,3 (rpg7, m320 e minigun entram, bem raros; munição
   .50 BMG, 40mm e foguete ×0,15–0,4). A arma vem **descarregada**, com 1 a 2 pentes do calibre junto.
@@ -91,7 +90,7 @@ First Aid e da LesRaisins. Mod id `amctaczloot`. Recomeçado do zero em 13 Nov 2
   de consistência. **Todos os números ficam no bloco do topo do script** (chances em ‰ por tema/tier, Sorte, raridade das armas).
 - Estrutura gerada: `<tema>/<tier>_core.json` (arma+munição, munição solta, attachment, cura LesRaisins; TACZ+LesRaisins) e
   `<tema>/<tier>_firstaid.json` (cura First Aid, com `neoforge:mod_loaded`); tabelas de escolha em `pick/`; um GLM
-  `neoforge:add_table` por tabela, filtrado por `neoforge:loot_table_id`. Temas: building, building_large, police_station,
+  `neoforge:add_table` por tabela, filtrado por `neoforge:loot_table_id`. Temas: building, police_station,
   pharmacy, house, workshop, gas_station; tiers chest, chest_hard, barrel, barrel_hard (sem pot).
 - Validação (13 Nov 2026): servidor real com AMC+TACZ+LesRaisins+First Aid, `tools/sample_loot.py <tema> <tier> [N]` amostra
   centenas de baús: médias observadas batem com a prévia (Sorte 0). Dados: `tools/tacz_catalog.py`, `tools/lr_catalog.py`.
@@ -100,3 +99,16 @@ First Aid e da LesRaisins. Mod id `amctaczloot`. Recomeçado do zero em 13 Nov 2
   amostras de baús/barris dos 7 temas deram só sucata + itens do mod. **Não testado:** sem o `ordering` (não sei se é necessário) e
   os vasos (arquivos gerados, não amostrados). A ordem entre mods não é uma garantia do Minecraft: se outro mod também sobrescrever
   essas tabelas, o resultado depende da ordem de carga. As verificações do gerador falham se surgir qualquer item vanilla fora da lista de sucata.
+
+## Mudança de 14 Nov 2026 (pedido do usuário): mais armas, e o AMC mudou
+- O AMC removeu `building_large` (72d07b3), tirou 70% dos barris dos prédios e converteu o resto em baús (68e2d7c) e criou
+  containers difíceis em subsolos/terraços/sótãos (a783d70). **`docs/containers.json` foi medido de novo** com o AMC atual
+  (a crash building foi de 201 para 94 containers; prédios são quase só baús; a rampa ainda tem 242 barris).
+- Pedido: prédios **1 arma a cada 3–7 baús**; delegacia **1 arma a cada 3–4 baús "de forma garantida"**.
+  Implementado (Sorte 0, por baú; barris continuam raros): `building` baú 200‰ (1 em 5), baú difícil 333‰ (1 em 3);
+  `police_station` baú 250‰ (1 em 4), baú difícil 333‰ (1 em 3). Resultado: prédios 1 arma a cada **5,0** baús, delegacia a cada **3,6**.
+  Amostragem no servidor: baú de prédio 0,191 (esp. 0,200), difícil 0,332 (0,333); delegacia 0,259 (0,250), difícil 0,323 (0,333).
+- "Garantida": loot table é sorteio independente por container; **não existe garantia exata por estrutura** em mod só de dados.
+  O mais próximo é a probabilidade: na delegacia (Sorte 0) chance de pelo menos 4 armas 99%, 5: 98%, 6: 94%, 8: 76%.
+- Consequência (a vigiar): o total por prédio subiu muito (brutalista ~46 armas, rampa ~33, torre ~14, apartamentos ~2),
+  porque os prédios têm centenas de baús. Se for demais, baixar `gun` em `RATES["building"]` (1 em 7 = 143‰).

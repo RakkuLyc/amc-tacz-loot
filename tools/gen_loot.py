@@ -35,16 +35,12 @@ ROLLS = {"chest": (1, 0.2), "chest_hard": (1, 0.34), "barrel": (1, 0.0), "barrel
 # chance (‰) por rolagem de cada categoria, por tema e tier.  gun = arma+munição do calibre, ammo = munição solta,
 # att = attachment, lr = cura LesRaisins, fa = cura First Aid (tabela à parte, só se o First Aid estiver instalado)
 RATES = {
-    "building":       {"chest": dict(gun=30, ammo=60, att=40, lr=40, fa=40),
-                       "chest_hard": dict(gun=60, ammo=100, att=70, lr=70, fa=70),
+    "building":       {"chest": dict(gun=200, ammo=60, att=40, lr=40, fa=40),          # 1 arma a cada 5 baús
+                       "chest_hard": dict(gun=333, ammo=100, att=70, lr=70, fa=70),     # 1 arma a cada 3 baús difíceis
                        "barrel": dict(gun=6, ammo=25, att=12, lr=15, fa=15),
                        "barrel_hard": dict(gun=12, ammo=45, att=24, lr=30, fa=30)},
-    "building_large": {"chest": dict(gun=18, ammo=45, att=25, lr=25, fa=25),
-                       "chest_hard": dict(gun=36, ammo=80, att=45, lr=45, fa=45),
-                       "barrel": dict(gun=4, ammo=15, att=8, lr=10, fa=10),
-                       "barrel_hard": dict(gun=8, ammo=30, att=16, lr=20, fa=20)},
-    "police_station": {"chest": dict(gun=120, ammo=150, att=90, lr=50, fa=50),
-                       "chest_hard": dict(gun=250, ammo=250, att=160, lr=80, fa=80),
+    "police_station": {"chest": dict(gun=250, ammo=150, att=90, lr=50, fa=50),          # 1 arma a cada 4 baús
+                       "chest_hard": dict(gun=333, ammo=250, att=160, lr=80, fa=80),    # 1 arma a cada 3 baús difíceis
                        "barrel": dict(gun=30, ammo=70, att=40, lr=20, fa=20),
                        "barrel_hard": dict(gun=60, ammo=120, att=70, lr=35, fa=35)},
     "pharmacy":       {"chest": dict(lr=300, fa=300), "chest_hard": dict(lr=400, fa=400),
@@ -56,6 +52,7 @@ RATES = {
     "gas_station":    {"chest": dict(lr=30, fa=30), "chest_hard": dict(lr=60, fa=60),
                        "barrel": dict(lr=10, fa=10), "barrel_hard": dict(lr=20, fa=20)},
 }
+# (o tema building_large foi removido do AMC em 14 Nov 2026, commit 72d07b3: todo prédio usa `building`)
 # raridade das armas por tipo (peso relativo entre tipos) e perfis de tema
 GUN_TYPE_W = {
     "default": dict(pistol=10, smg=6, shotgun=6, rifle=4, dmr=2, sniper=1.5, mg=1, rpg=0.3),
@@ -291,6 +288,26 @@ def preview():
         print("%-14s %-30s %5d | %17.1f %4.1f %4.1f %4.1f %4.1f | %5.1f %4.1f %4.1f %4.1f | %5.1f %5.1f" % (
             th, name, v["total"], e[0]["gun"], e[0]["ammo"], e[0]["att"], e[0]["lr"], e[0]["fa"],
             e[0]["gun"], e[1]["gun"], e[2]["gun"], e[3]["gun"], e[3]["lr"], e[3]["fa"]))
+    print("\nBaús (chest + chest_hard) por arma, Sorte 0 / I / II / III  (1 arma a cada N baús):")
+    for th in ("building", "police_station"):
+        cells = []
+        for l in LUCKS:
+            n = sum(c for _, nm, v in rows if nm == "abandoned_police_station" and th == "police_station" for tr, c in v["tiers"].items() if tr.startswith("chest")) or 1
+            ex = 0.0; ch = 0
+            for _, nm, v in rows:
+                if v["theme"] != th: continue
+                for tr, c in v["tiers"].items():
+                    if tr.startswith("chest"): ex += c * expected(th, tr, l)["gun"]; ch += c
+            cells.append("S%d: 1 a cada %.1f" % (l, ch / ex))
+        print("  %-15s %s" % (th, "   ".join(cells)))
+    gun_p = []
+    for tr, c in CONT["abandoned_police_station"]["tiers"].items():
+        if tr.startswith("pot"): continue
+        r_, b_ = ROLLS[tr]; q = expected("police_station", tr, 0)["gun"]; gun_p += [q] * c
+    dist = [1.0]
+    for q in gun_p:
+        dist = [(dist[k] if k < len(dist) else 0) * (1 - q) + (dist[k - 1] * q if k > 0 else 0) for k in range(len(dist) + 1)]
+    print("Delegacia, Sorte 0: chance de ter pelo menos N armas: " + "  ".join("N=%d: %.0f%%" % (n, 100 * sum(dist[n:])) for n in (3, 4, 5, 6, 7, 8)))
     print("\nChance de UM baú (chest) ter pelo menos 1 item do mod (TACZ+LesRaisins | + First Aid), por tema e Sorte:")
     for th in RATES:
         for tier in ("chest", "chest_hard"):
