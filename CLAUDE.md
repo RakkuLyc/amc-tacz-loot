@@ -20,8 +20,8 @@ First Aid e da LesRaisins. Mod id `amctaczloot`. Recomeçado do zero em 13 Nov 2
 - **Munição** (pool próprio): baú de prédio 52,0%, difícil 86,6%, barris 6,2% / 11,4%; delegacia baú 80,0%, difícil 100,0% (teto), barris 20,0% / 36,0%.
   Calibre: metade igual para os 23 calibres com arma + metade pela popularidade das armas (ex. prédio: 12g 11,9%, 9mm 10,8%, .45 ACP 9,3%; mais raros ~2,4%).
   Balas por pilha proporcionais à pilha máxima (9mm 24–50 com pilha 60; 12g 14–30; .308 19–40; 40mm e foguete 2–5).
-- **Cura LesRaisins** (chance de CADA item por container, independente; mesma em todos os temas exceto farmácia): vaseline 9,8%, ibuprofen 9,5%,
-  amoxicillin 9,0%, golden star 8,5% (Comuns); blood pack 4,5%, CAR 4,3%, AI-2 4,0%, CMS 3,5% (Incomuns); SURV12 2,0% (Raro) (CAR 4,3% = 4,25% arredondado em ‰).
+- **Cura LesRaisins** (chance de CADA item por container, independente; mesma em todos os temas exceto farmácia): vaseline, ibuprofen,
+  amoxicillin e golden star **9,2% cada, mesma chance** (Comuns; 184‰ antes do x0,5 = média dos 4 antigos, total dos Comuns inalterado); blood pack 4,5%, CAR 4,3%, AI-2 4,0%, CMS 3,5% (Incomuns); SURV12 2,0% (Raro) (CAR 4,3% = 4,25% arredondado em ‰).
   **Farmácia**: Incomuns e Raro ×2 sobre esses valores (blood pack 9,0%, CAR 8,5%, AI-2 8,0%, CMS 7,0%, SURV12 4,0%). Fator geral `HEAL_SCALE = 0.5`.
 - **Comida**: leite condensado 8% por container em todos os temas (2–4 unidades); pão 20% só em casas (4–12). Itens de cura First Aid e comida **não** mudaram com o ×0,5.
 - **First Aid** (opcional; chance por container baú / difícil / barril / barril difícil, em %): building 4,0/7,0/1,5/3,0; police_station 5,0/8,0/2,0/3,5; pharmacy 30,0/40,0/12,0/20,0; house 3,0/6,0/1,0/2,0; workshop 2,0/4,0/0,8/1,5; gas_station 3,0/6,0/1,0/2,0. **Ainda varia por tema/tier: pergunta aberta ao usuário
@@ -200,3 +200,11 @@ First Aid e da LesRaisins. Mod id `amctaczloot`. Recomeçado do zero em 13 Nov 2
 - Validado no servidor: prédio (3.000 baús) vaseline 9,7%, SURV12 1,9%; farmácia (2.500) incomuns 6,8–9,1%, SURV12 4,4%; casa pão 20,6%.
 - Monte Carlo (Sorte 0), curas LesRaisins: green tower 50 (39–62); brutalista 126; rampa 220; delegacia 35; casa 31; oficina 34; posto 17;
   farmácia grande 16,9 (11–24); farmácia pequena 12,4 (7–18). Antes da mudança de 15 Nov eram 3,6 na green tower e 3,6 na farmácia grande.
+
+## Comuns da LesRaisins com a mesma chance (15 Nov 2026)
+- Pedido: "todos os itens comuns do LesRaisins com o mesmo peso". Os 4 Comuns (vaseline, ibuprofen, amoxicillin, golden star) agora têm 184‰ (18,4%)
+  antes do x0,5 = **9,2% por container** (média dos antigos 19,5/19/18/17; total dos Comuns inalterado em 36,8%). Incomuns, Raro, farmácia, leite,
+  pão e First Aid inalterados. Valor 18,4% escolhido por mim (o usuário não deu número).
+- Validado no servidor (Sorte 0): prédio (4.000 baús) comuns 8,8–9,9%; farmácia (3.000) 9,2–10,5%. Lição: **sempre mandar `tools/rcon.py stop` ao
+  fim de um teste**; um servidor esquecido faz o próximo falhar com "FAILED TO BIND TO PORT" e o amostrador mede o servidor antigo sem aviso
+  (aconteceu uma vez; o teste foi refeito). Para ver se há servidor aberto use `pgrep -f '[b]ootstraplauncher'` (o `pgrep` simples conta o próprio comando).

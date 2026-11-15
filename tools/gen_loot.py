@@ -73,7 +73,8 @@ ATT_TYPE_W = dict(scope=4, muzzle=4, grip=3, stock=3, extended_mag=4, laser=2)  
 # a mesma em todos os temas e tipos de container, exceto na farmácia (multiplicador só nos incomuns e no raro, PHARMACY_MULT).
 # Classes: Comuns = golden star, amoxicillin, ibuprofen, vaseline; Incomuns = CMS, AI-2, CAR, blood pack; Raro = SURV12.
 # SURV12: 3% pedido pelo usuário, depois "diminuir levemente a raridade" (= um pouco mais comum): 4%.
-HEAL_LR = dict(vaseline=195, ibuprofen=190, amoxycillin=180, goldenstar=170, blood_pack=90, carfak=85, ai2=80, cms=70, surv12=40)
+# Os 4 Comuns têm a MESMA chance (184‰ = média dos antigos 195/190/180/170, mantendo o total dos Comuns; pedido de 15 Nov 2026).
+HEAL_LR = dict(vaseline=184, ibuprofen=184, amoxycillin=184, goldenstar=184, blood_pack=90, carfak=85, ai2=80, cms=70, surv12=40)
 HEAL_CLASS = dict(vaseline="Comum", ibuprofen="Comum", amoxycillin="Comum", goldenstar="Comum",
                   blood_pack="Incomum", carfak="Incomum", ai2="Incomum", cms="Incomum", surv12="Raro")
 PHARMACY_MULT = {"Comum": 1.0, "Incomum": 2.0, "Raro": 2.0}
