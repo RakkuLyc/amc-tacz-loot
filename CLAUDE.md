@@ -13,7 +13,7 @@ Mod **só de dados** (NeoForge 1.21.1, `modLoader="lowcodefml"`, sem Java) que i
 (`abandonedmoderncity:chests/<tema>/<chest|barrel|pot>[_hard]`): armas, munições e attachments do TACZ, itens de cura do
 First Aid e da LesRaisins. Mod id `amctaczloot`. Recomeçado do zero em 13 Nov 2026 (a versão anterior foi apagada).
 
-## ESTADO ATUAL (15 Nov 2026) — o que está valendo; as seções abaixo desta são HISTÓRICO e podem citar números já substituídos
+## ESTADO ATUAL (16 Nov 2026; etapa de balanceamento concluída e aprovada pelo usuário) — o que está valendo; as seções abaixo desta são HISTÓRICO e podem citar números já substituídos
 - **Armas** (chance por baú comum / difícil, Sorte 0): prédio 12,0% / 20,0% (1 a cada 8,3 / 5 baús), barris 0,4% / 0,7%; delegacia 25,0% / 33,3%
   (1 a cada 4 / 3), barris 3,0% / 6,0%. Tipos: pistola 10, smg 6, escopeta 6, fuzil 4, dmr 2, sniper 1,5, mg 1, rpg 0,3 (delegacia: smg/escopeta 8, fuzil 6).
   Arma cai **com 50% do pente cheio** (`GunCurrentAmmoCount` = ammo_amount x 0,5 arredondado para cima: 17 -> 9, pente de 1 -> 1; `HasBulletInBarrel` = false), **exceto a minigun** (sem pente definido, nasce com 0).
@@ -295,5 +295,5 @@ First Aid e da LesRaisins. Mod id `amctaczloot`. Recomeçado do zero em 13 Nov 2
 - Pedido: "todas as armas, com exceção da minigun, passam a já spawnar com 50% do pente cheio". `GUN_SPAWN_AMMO_FRACTION = 0.5`, `GUN_SPAWN_AMMO_EXCLUDED = ("minigun",)`, `gun_spawn_ammo()`.
   Pente = `ammo_amount` do TACZ (`docs/tacz_catalog.json`); só a minigun não tem. Arredondamento para CIMA (escolha minha): 22 armas têm pente ímpar; 4 têm pente de 1
   (lonetrail, m320, rpg7, springfield1873) e nascem carregadas com 1. A bala na câmara (`HasBulletInBarrel`) continua false.
-- Validado no servidor: 1.280 armas amostradas (as 70 apareceram), todas com a contagem esperada; minigun 0; 0 erros de carga. **Não testado no jogo:** se o TACZ aceita atirar com o pente a 50% sem bala na câmara.
+- Validado no servidor: 1.280 armas amostradas (as 70 apareceram), todas com a contagem esperada; minigun 0; 0 erros de carga. **Testado no jogo pelo usuário (16 Nov) e aprovado:** a arma com o pente a 50% e sem bala na câmara funciona.
 - Isso interage com o pool de munição: a arma já traz balas, mas a munição de reserva continua sorteada à parte.
