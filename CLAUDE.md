@@ -21,6 +21,8 @@ First Aid e da LesRaisins. Mod id `amctaczloot`. Recomeçado do zero em 13 Nov 2
   barris 0,3% / 0,6%; delegacia 20% / 26,6% / 2,4% / 4,8%. Qual sai: peso por **classe** (Comum 8, Incomum 4, Raro 2, Épico 1) sobre os 104 attachments fabricáveis, classes em
   `docs/attachments_rarity.json` (gerado por `tools/att_rarity.py <tacz.jar>`: 50% quantas armas aceitam o attachment (peso real do loot) + 50% atributos (zoom, recuo, precisão, nível do pente,
   dano/perfuração, silenciador), comparados dentro de cada tipo; corte 40/30/20/10%). Chance de cada item por baú de prédio: Comum 0,150%, Incomum 0,075%, Raro 0,037%, Épico 0,019%. Miras = 35% dos sorteios.
+- **Barris** (16 Nov): nos tiers `barrel` e `barrel_hard` a chance de **cura LesRaisins, First Aid, comida (leite e pão) e granadas/armas brancas é METADE da do baú**, em todos os temas
+  (inclusive farmácia). Armas, munição e attachments têm redução própria nos barris (RATES: 3% a 25% da do baú). Sucata no barril: 30% com 1–2 pilhas. `BARREL_ITEM_MULT = 0.5`.
 - **Munição** (pool próprio): baú de prédio 52,0%, difícil 86,6%, barris 6,2% / 11,4%; delegacia baú 80,0%, difícil 100,0% (teto), barris 20,0% / 36,0%.
   Calibre: metade igual para os 23 calibres com arma + metade pela popularidade das armas (ex. prédio: 12g 11,9%, 9mm 10,8%, .45 ACP 9,3%; mais raros ~2,4%).
   **Cada acerto de munição dá 1 a 3 pilhas de calibres sorteados** (o mesmo calibre pode repetir), com balas por pilha proporcionais à pilha máxima, **no
@@ -297,3 +299,12 @@ First Aid e da LesRaisins. Mod id `amctaczloot`. Recomeçado do zero em 13 Nov 2
   (lonetrail, m320, rpg7, springfield1873) e nascem carregadas com 1. A bala na câmara (`HasBulletInBarrel`) continua false.
 - Validado no servidor: 1.280 armas amostradas (as 70 apareceram), todas com a contagem esperada; minigun 0; 0 erros de carga. **Testado no jogo pelo usuário (16 Nov) e aprovado:** a arma com o pente a 50% e sem bala na câmara funciona.
 - Isso interage com o pool de munição: a arma já traz balas, mas a munição de reserva continua sorteada à parte.
+
+## Barris com metade da chance (16 Nov 2026)
+- Pergunta do usuário: "a regra dos barris darem 50% a menos de loot ainda está ativa?" **Essa regra não existia neste mod** (pode ter sido do mod antigo, apagado). Existiam: barris com 3% a 25% das
+  armas/munição/attachments do baú, e a regra do AMC de remover 70% dos barris dos prédios (commit `68e2d7c` do AMC; vale só nos prédios). Pedido: "aplique barris com metade da chance nessas categorias".
+- Implementado em `item_chances`/`fa_chances` (parâmetro `tier`). Para a metade ser exata nas chances baixas (SURV12 barril 0,25%) os sorteios por item passaram a ter resolução 10x mais fina
+  (`ITEM_RES = 10`: peso total 10.000; `item_prob()` faz a conta real). A chance de sorteio de TODOS os itens por container não mudou nos baús.
+- Validado no servidor: prédio barril (6.000) M67 4,6%, leite 4,1%, plaster 4,2%, SURV12 0,3%; casa barril pão 9,3%; farmácia barril vaseline 4,4%, SURV12 1,9%; baú de prédio inalterado (M67 9,6%).
+- Efeito por estrutura (antes -> depois, cura LR / First Aid / granadas+brancas): oficina média 15,7->8,0 / 67->34 / 36->18; farmácia grande 16,9->9,9 / 53->31; casa 14,4->8,6 / 62->37; rampa
+  100,9->70,3 / 431->300; green tower (sem barris) inalterada. Risco de estourar dispenser/dropper diminui (menos itens por barril).

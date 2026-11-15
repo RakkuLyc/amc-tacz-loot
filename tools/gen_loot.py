@@ -126,6 +126,9 @@ GEAR = dict(m67=dict(item="throwable", key="ThrowableId", p=92, lo=3, hi=5), rgn
             c4=dict(item="throwable", key="ThrowableId", p=30, lo=1, hi=1), dagger=dict(item="melee", key="MeleeWeaponId", p=20, lo=1, hi=1),
             karambit=dict(item="melee", key="MeleeWeaponId", p=20, lo=1, hi=1), baseball_bat=dict(item="melee", key="MeleeWeaponId", p=20, lo=1, hi=1))
 GEAR_EXCLUDED_THEMES = ("pharmacy",)
+# BARRIS (pedido do usuário, 16 Nov 2026): nos barris (tiers barrel e barrel_hard) a chance de cura LesRaisins, First Aid, comida (leite e pão) e granadas/armas brancas é
+# BARREL_ITEM_MULT da chance do baú, em TODOS os temas (inclusive a farmácia, que é quase só barril). Armas, munição e attachments já têm a sua própria redução nos barris (RATES).
+BARREL_ITEM_MULT = 0.5
 # Multiplicador por tema e tipo de item (pedido do usuário, 16 Nov 2026): na delegacia as chances dos THROWABLE (M67, RGN e C4) dobram. As armas brancas
 # ficam iguais em todos os temas (as casas já as têm, como todos os temas menos a farmácia).
 GEAR_THEME_MULT = {"police_station": {"throwable": 2.0}}
@@ -275,7 +278,7 @@ def junk_tables():
     return out
 
 
-def item_chances(theme):
+def item_chances(theme, tier="chest"):
     """Itens com chance própria neste tema: lista de (tipo, item, p em ‰). Farmácia: multiplicador nos incomuns e no raro."""
     out = []
     for i, p in HEAL_LR.items():
@@ -287,12 +290,15 @@ def item_chances(theme):
         for i, d in GEAR.items():
             m = GEAR_THEME_MULT.get(theme, {}).get(d["item"], 1.0)
             out.append(("gear", i, min(1000, round(d["p"] * m))))
+    if tier.startswith("barrel"): out = [(k, i, p * BARREL_ITEM_MULT) for k, i, p in out]
     return out
 
 
-def fa_chances(theme):
+def fa_chances(theme, tier="chest"):
     """First Aid neste tema: lista de (item, p em ‰). Farmácia: valores congelados (HEAL_PHARMACY_FIXED); fora dela, chance x HEAL_RARITY_SCALE."""
-    return [(i, max(1, min(1000, HEAL_PHARMACY_FIXED["fa"][i] if theme == "pharmacy" else int(p * HEAL_RARITY_SCALE + 0.5)))) for i, p in FA_CHANCE.items()]
+    out = [(i, max(1, min(1000, HEAL_PHARMACY_FIXED["fa"][i] if theme == "pharmacy" else int(p * HEAL_RARITY_SCALE + 0.5)))) for i, p in FA_CHANCE.items()]
+    if tier.startswith("barrel"): out = [(i, p * BARREL_ITEM_MULT) for i, p in out]
+    return out
 
 
 def e_gear(i):
@@ -309,12 +315,21 @@ def e_item(kind, i):
     return e_lr(i, 1, 1)
 
 
+ITEM_RES = 10   # resolução dos sorteios por item: peso total 1000 x 10 (a chance p, em ‰, pode ser fracionária: 2,5‰ = 0,25%)
+
+
 def item_pool(kind, i, p, rolls=1, bonus=0.0):
-    """Um sorteio independente: o item com chance p (‰) ou nada. A Sorte sobe a chance pelo `quality`, como nas outras categorias."""
-    q = max(1, round(p * LUCK_QUALITY))
-    ents = [{**e_item(kind, i), "weight": p, "quality": q}]
-    if p < 1000: ents.append({"type": "minecraft:empty", "weight": 1000 - p, "quality": -q})
+    """Um sorteio independente: o item com chance p (‰, aceita fração) ou nada. A Sorte sobe a chance pelo `quality`, como nas outras categorias."""
+    w = max(1, round(p * ITEM_RES)); q = max(1, round(w * LUCK_QUALITY))
+    ents = [{**e_item(kind, i), "weight": w, "quality": q}]
+    if w < 1000 * ITEM_RES: ents.append({"type": "minecraft:empty", "weight": 1000 * ITEM_RES - w, "quality": -q})
     return pool(ents, rolls, bonus)
+
+
+def item_prob(p, luck):
+    """Chance real de um sorteio por item (a mesma conta do Minecraft, na resolução de item_pool)."""
+    w = max(1, round(p * ITEM_RES)); q = max(1, round(w * LUCK_QUALITY)); a = eff(w, q, luck); e = eff(1000 * ITEM_RES - w, -q, luck)
+    return a / (a + e) if a + e else 0.0
 
 
 def weights(rates):
@@ -344,9 +359,9 @@ def main_tables():
                     else: e = {"type": "minecraft:loot_table", "value": "%s:pick/%s" % (MOD, {"gun": "gun_" + prof, "ammo": "ammo_" + prof, "att": "att", "lr": "lr"}[c])}
                     ent.append({**e, "weight": w, "quality": q})
                 pools.append(pool(ent, rolls, bonus))
-            for kind, i, p in item_chances(theme): pools.append(item_pool(kind, i, p))
+            for kind, i, p in item_chances(theme, tier): pools.append(item_pool(kind, i, p))
             out["%s/%s_core" % (theme, tier)] = table(pools)
-            out["%s/%s_firstaid" % (theme, tier)] = table([item_pool("fa", i, p) for i, p in fa_chances(theme)],
+            out["%s/%s_firstaid" % (theme, tier)] = table([item_pool("fa", i, p) for i, p in fa_chances(theme, tier)],
                                                            [{"type": "neoforge:mod_loaded", "modid": "firstaid"}])
     return out
 
@@ -370,12 +385,10 @@ def expected(theme, tier, luck):
             p = eff(*wq[c], luck) / tot if tot else 0
             avg = {"ammo": sum(AMMO_STACKS) / 2}.get(c, 1)
             res[c] += r * p * avg
-    for i, p0 in fa_chances(theme):                   # First Aid: unidades esperadas (chance x quantidade média)
-        q = max(1, round(p0 * LUCK_QUALITY)); a = eff(p0, q, luck); e0 = eff(1000 - p0, -q, luck)
-        res["fa"] += (a / (a + e0) if a + e0 else 0) * sum(FA_COUNT[i]) / 2
-    for kind, i, p0 in item_chances(theme):           # um sorteio por item (rolagem única, sem bonus)
-        q = max(1, round(p0 * LUCK_QUALITY)); a = eff(p0, q, luck); e0 = eff(1000 - p0, -q, luck)
-        res[kind] += a / (a + e0) if a + e0 else 0
+    for i, p0 in fa_chances(theme, tier):             # First Aid: unidades esperadas (chance x quantidade média)
+        res["fa"] += item_prob(p0, luck) * sum(FA_COUNT[i]) / 2
+    for kind, i, p0 in item_chances(theme, tier):     # um sorteio por item (rolagem única, sem bonus)
+        res[kind] += item_prob(p0, luck)
     return res
 
 
@@ -433,14 +446,12 @@ def preview():
                     if not part: continue
                     wq = weights(part); tot = sum(eff(w, q, l) for w, q in wq.values())
                     p_none *= (eff(*wq["empty"], l) / tot) ** r
-                for kind, i, p0 in item_chances(th):
-                    q0 = max(1, round(p0 * LUCK_QUALITY)); a0 = eff(p0, q0, l); e0 = eff(1000 - p0, -q0, l)
-                    p_none *= (e0 / (a0 + e0)) if a0 + e0 else 1.0
+                for kind, i, p0 in item_chances(th, tier):
+                    p_none *= 1.0 - item_prob(p0, l)
                 p_core = 1 - p_none
                 pn_fa = 1.0
-                for i, p0 in fa_chances(th):
-                    q0 = max(1, round(p0 * LUCK_QUALITY)); a0 = eff(p0, q0, l); e0 = eff(1000 - p0, -q0, l)
-                    pn_fa *= (e0 / (a0 + e0)) if a0 + e0 else 1.0
+                for i, p0 in fa_chances(th, tier):
+                    pn_fa *= 1.0 - item_prob(p0, l)
                 p_fa = 1 - pn_fa
                 cells.append("S%d %4.0f%%|%4.0f%%" % (l, 100 * p_core, 100 * (1 - (1 - p_core) * (1 - p_fa))))
             print("  %-14s %-11s %s" % (th, tier, "   ".join(cells)))

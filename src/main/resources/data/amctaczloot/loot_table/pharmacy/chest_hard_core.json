@@ -17,13 +17,13 @@
               }
             }
           ],
-          "weight": 92,
-          "quality": 23
+          "weight": 920,
+          "quality": 230
         },
         {
           "type": "minecraft:empty",
-          "weight": 908,
-          "quality": -23
+          "weight": 9080,
+          "quality": -230
         }
       ],
       "bonus_rolls": 0.0
@@ -44,13 +44,13 @@
               }
             }
           ],
-          "weight": 92,
-          "quality": 23
+          "weight": 920,
+          "quality": 230
         },
         {
           "type": "minecraft:empty",
-          "weight": 908,
-          "quality": -23
+          "weight": 9080,
+          "quality": -230
         }
       ],
       "bonus_rolls": 0.0
@@ -71,13 +71,13 @@
               }
             }
           ],
-          "weight": 92,
-          "quality": 23
+          "weight": 920,
+          "quality": 230
         },
         {
           "type": "minecraft:empty",
-          "weight": 908,
-          "quality": -23
+          "weight": 9080,
+          "quality": -230
         }
       ],
       "bonus_rolls": 0.0
@@ -98,13 +98,13 @@
               }
             }
           ],
-          "weight": 92,
-          "quality": 23
+          "weight": 920,
+          "quality": 230
         },
         {
           "type": "minecraft:empty",
-          "weight": 908,
-          "quality": -23
+          "weight": 9080,
+          "quality": -230
         }
       ],
       "bonus_rolls": 0.0
@@ -125,13 +125,13 @@
               }
             }
           ],
-          "weight": 90,
-          "quality": 22
+          "weight": 900,
+          "quality": 225
         },
         {
           "type": "minecraft:empty",
-          "weight": 910,
-          "quality": -22
+          "weight": 9100,
+          "quality": -225
         }
       ],
       "bonus_rolls": 0.0
@@ -152,13 +152,13 @@
               }
             }
           ],
-          "weight": 85,
-          "quality": 21
+          "weight": 850,
+          "quality": 212
         },
         {
           "type": "minecraft:empty",
-          "weight": 915,
-          "quality": -21
+          "weight": 9150,
+          "quality": -212
         }
       ],
       "bonus_rolls": 0.0
@@ -179,13 +179,13 @@
               }
             }
           ],
-          "weight": 80,
-          "quality": 20
+          "weight": 800,
+          "quality": 200
         },
         {
           "type": "minecraft:empty",
-          "weight": 920,
-          "quality": -20
+          "weight": 9200,
+          "quality": -200
         }
       ],
       "bonus_rolls": 0.0
@@ -206,13 +206,13 @@
               }
             }
           ],
-          "weight": 70,
-          "quality": 18
+          "weight": 700,
+          "quality": 175
         },
         {
           "type": "minecraft:empty",
-          "weight": 930,
-          "quality": -18
+          "weight": 9300,
+          "quality": -175
         }
       ],
       "bonus_rolls": 0.0
@@ -233,13 +233,13 @@
               }
             }
           ],
-          "weight": 40,
-          "quality": 10
+          "weight": 400,
+          "quality": 100
         },
         {
           "type": "minecraft:empty",
-          "weight": 960,
-          "quality": -10
+          "weight": 9600,
+          "quality": -100
         }
       ],
       "bonus_rolls": 0.0
@@ -268,13 +268,13 @@
               }
             }
           ],
-          "weight": 80,
-          "quality": 20
+          "weight": 800,
+          "quality": 200
         },
         {
           "type": "minecraft:empty",
-          "weight": 920,
-          "quality": -20
+          "weight": 9200,
+          "quality": -200
         }
       ],
       "bonus_rolls": 0.0
