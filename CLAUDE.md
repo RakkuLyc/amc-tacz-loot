@@ -140,3 +140,15 @@ First Aid e da LesRaisins. Mod id `amctaczloot`. Recomeçado do zero em 13 Nov 2
   ~1.350 balas / ~40 úteis por arma; delegacia 9,4 armas, 33,3 pilhas.
 - Validado no servidor (Sorte 0): armas e munição por baú batem (prédio 0,120 e 0,542; delegacia 0,244 e 0,811; difícil 1,000); 23 calibres,
   fatias 3,6–5,0% (esperado 4,35%); balas por pilha dentro dos intervalos acima. A seção "Munição (opção B)" acima ficou superada neste ponto.
+
+## Calibre misto, opção 2 (15 Nov 2026) — substitui "raridade igual" da proposta C
+- Feedback (crash building, ~66 baús, 3 armas, ~33 pilhas): munição como projetado (34,3 esperadas), mas **3 armas** (chance de ≤3: 3,6%) e,
+  com calibres todos iguais, só ~24% da munição serve às armas achadas (poucas armas cobrem poucos dos 23 calibres). Antes eu mostrara só a
+  média de "balas úteis por arma"; **a variação é grande e deve ser mostrada**.
+- Decisão do usuário (opção 2): a chance de cada calibre é **metade igual para todos e metade pela popularidade das armas** que o usam
+  (`AMMO_MIX_UNIFORM = 0.5`; popularidade = soma do peso por tipo das armas do tema). Tabelas `pick/ammo_default` e `pick/ammo_police`
+  (a delegacia usa os pesos de armas dela). Mais comuns (prédio): 12g 11,9%, 9mm 10,8%, .45 ACP 9,3%, 5.56 5,9%; mais raros ~2,4%
+  (40mm, foguete, .45-70, 7.92x57). Taxas de arma/munição e tamanhos de pilha da proposta C **inalterados**.
+- Validado no servidor: 100 rodadas de 66 baús (crash building): 7,5 armas, 34,8 pilhas, ~416 balas úteis, mediana 58 úteis/arma (antes 33),
+  38% da munição serve (antes 24%), 3% das rodadas com <20 úteis/arma (antes 16%). Calibres batem com o esperado (12g em prédio saiu 14,6%
+  contra 11,9% — ~3σ, pesos do arquivo conferidos; na delegacia saiu abaixo; tratado como ruído).

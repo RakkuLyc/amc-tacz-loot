@@ -35,7 +35,7 @@
       "entries": [
         {
           "type": "minecraft:loot_table",
-          "value": "amctaczloot:pick/ammo",
+          "value": "amctaczloot:pick/ammo_default",
           "weight": 62,
           "quality": 16
         },

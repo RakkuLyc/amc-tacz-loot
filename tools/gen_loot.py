@@ -59,9 +59,12 @@ GUN_TYPE_W = {
     "police":  dict(pistol=8, smg=8, shotgun=8, rifle=6, dmr=2.5, sniper=1.5, mg=1, rpg=0.3),
 }
 GUN_PROFILE = {"police_station": "police"}          # os demais temas usam "default"
-# MUNIÇÃO (escolha do usuário, 14 Nov 2026): todos os calibres que têm alguma arma no pacote padrão têm a MESMA raridade
-# (peso 1); a quantidade por pilha é proporcional à pilha máxima do calibre, tomando o 9mm como referência (24 a 50 balas).
+# MUNIÇÃO (escolhas do usuário, 14-15 Nov 2026): a quantidade por pilha é proporcional à pilha máxima do calibre, tomando o
+# 9mm como referência (24 a 50 balas). A chance de cada calibre é MISTA: AMMO_MIX_UNIFORM da chance é igual para todos os
+# calibres que têm alguma arma e o resto acompanha a popularidade das armas que o usam (peso das armas do tema). Com 1.0 seria
+# tudo igual; com 0.0, só pela popularidade. (Com poucas armas achadas, calibres todos iguais deixavam ~24% da munição útil.)
 AMMO_REF = ("9mm", 24, 50)
+AMMO_MIX_UNIFORM = 0.5
 # (a arma NÃO traz munição junto: a munição é um sorteio separado, calibre pela raridade das armas que o usam)
 ATT_TYPE_W = dict(scope=4, muzzle=4, grip=3, stock=3, extended_mag=4, laser=2)   # peso do tipo de attachment
 # itens de cura: (peso, mín, máx)
@@ -108,9 +111,14 @@ def gun_weights(profile):
     return {g: max(1, round(tw[v["type"]] * 1000 / n[v["type"]])) for g, v in guns.items()}
 
 
-def ammo_weights(profile=None):
-    """Calibres que têm ao menos uma arma elegível, todos com o mesmo peso (7.62x25 e 6.8x51 Fury não têm arma: ficam de fora)."""
-    return {c: 1 for c in sorted({v["ammo"].split(":")[1] for v in eligible_guns().values()})}
+def ammo_weights(profile="default"):
+    """Peso de cada calibre (só os que têm arma elegível; 7.62x25 e 6.8x51 Fury não têm): AMMO_MIX_UNIFORM igual para todos +
+    o resto proporcional ao peso das armas do perfil que usam o calibre. Pesos inteiros, somando ~1000."""
+    pop = {}
+    for gun, w in gun_weights(profile).items():
+        c = TZ["guns"][gun]["ammo"].split(":")[1]; pop[c] = pop.get(c, 0) + w
+    tot = sum(pop.values()); n = len(pop)
+    return {c: max(1, round(1000 * (AMMO_MIX_UNIFORM / n + (1 - AMMO_MIX_UNIFORM) * pop[c] / tot))) for c in sorted(pop)}
 
 
 def ammo_range(c):
@@ -180,7 +188,7 @@ def pick_tables():
     for prof in ("default", "police"):
         gw = gun_weights(prof)
         out["pick/gun_" + prof] = (table([pool([with_w(e_gun(g), w) for g, w in gw.items()])]), None)
-        out["pick/ammo"] = (table([pool([with_w(e_ammo(c), w) for c, w in ammo_weights().items()])]), None)
+        out["pick/ammo_" + prof] = (table([pool([with_w(e_ammo(c), w) for c, w in ammo_weights(prof).items()])]), None)
     out["pick/att"] = (table([pool([with_w(e_att(a), w) for a, w in att_weights().items()])]), None)
     out["pick/lr"] = (table([pool([with_w(e_lr(i, lo, hi), w) for i, (w, lo, hi) in LR_W.items()])]), None)
     out["pick/fa"] = (table([pool([with_w(e_fa(i, lo, hi), w) for i, (w, lo, hi) in FA_W.items()])],
@@ -228,7 +236,7 @@ def main_tables():
                 for c, (w, q) in weights(part).items():
                     if c == "empty" and w <= 0: continue          # chance 100%: sem entrada vazia (peso 0 não vale)
                     if c == "empty": e = {"type": "minecraft:empty"}
-                    else: e = {"type": "minecraft:loot_table", "value": "%s:pick/%s" % (MOD, {"gun": "gun_" + prof, "ammo": "ammo", "att": "att", "lr": "lr"}[c])}
+                    else: e = {"type": "minecraft:loot_table", "value": "%s:pick/%s" % (MOD, {"gun": "gun_" + prof, "ammo": "ammo_" + prof, "att": "att", "lr": "lr"}[c])}
                     ent.append({**e, "weight": w, "quality": q})
                 pools.append(pool(ent, rolls, bonus))
             out["%s/%s_core" % (theme, tier)] = table(pools)
