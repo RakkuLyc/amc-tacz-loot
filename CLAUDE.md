@@ -26,8 +26,10 @@ First Aid e da LesRaisins. Mod id `amctaczloot`. Recomeçado do zero em 13 Nov 2
   amoxicillin e golden star **9,2% cada, mesma chance** (Comuns; 184‰ antes do x0,5 = média dos 4 antigos, total dos Comuns inalterado); blood pack 4,5%, CAR 4,3%, AI-2 4,0%, CMS 3,5% (Incomuns); SURV12 2,0% (Raro) (CAR 4,3% = 4,25% arredondado em ‰).
   **Farmácia**: Incomuns e Raro ×2 sobre esses valores (blood pack 9,0%, CAR 8,5%, AI-2 8,0%, CMS 7,0%, SURV12 4,0%). Fator geral `HEAL_SCALE = 0.5`.
 - **Comida**: leite condensado 8% por container em todos os temas (2–4 unidades); pão 20% só em casas (4–12). Itens de cura First Aid e comida **não** mudaram com o ×0,5.
-- **First Aid** (opcional; chance por container baú / difícil / barril / barril difícil, em %): building 4,0/7,0/1,5/3,0; police_station 5,0/8,0/2,0/3,5; pharmacy 30,0/40,0/12,0/20,0; house 3,0/6,0/1,0/2,0; workshop 2,0/4,0/0,8/1,5; gas_station 3,0/6,0/1,0/2,0. **Ainda varia por tema/tier: pergunta aberta ao usuário
-  se a regra "mesma chance em todos os lugares" vale para o First Aid.**
+- **First Aid** (opcional, tabela própria com `neoforge:mod_loaded`; chance de CADA item por container, independente, a mesma em todos os temas exceto farmácia):
+  plaster 15% (4–14 unidades, "Muito comum"); bandage 9,2% (2–10), adrenaline injector 9,2%, painkillers 9,2% (Comuns, mesma chance dos comuns LR);
+  morphine 4,1% e defibrillator 4,1% (Incomuns); morphine injector 2,0% (Raro). **Farmácia**: Incomuns e Raro ×2 (8,2% / 8,2% / 4,0%). Sem o corte ×0,5.
+  Valores de chance escolhidos por mim a partir das classes do usuário (ele ajustou só as quantidades depois); `FA_CHANCE`, `FA_CLASS`, `FA_COUNT`.
 - **Sucata** vanilla (stick, 4 sementes, carne podre, osso, papel, tigela, garrafa, olho de aranha) nas 36 tabelas do AMC sobrescritas; sem itens vanilla úteis (única exceção: pão).
 - **Vasos** não recebem nada do mod. Temas: building, police_station, pharmacy, house, workshop, gas_station (o AMC removeu `building_large`).
 - **Ferramentas**: `gen_loot.py` (prévia / `--write`), `sample_items.py` (chance por item num servidor de teste; use este), `sample_loot.py` (categorias de arma/munição;
@@ -234,3 +236,14 @@ First Aid e da LesRaisins. Mod id `amctaczloot`. Recomeçado do zero em 13 Nov 2
 - Validado: tamanhos observados iguais aos esperados (9mm 24–50, 308 19–40, 22wmr 26–53, 338 12–25, 40mm 2–5; o 12g chegou a 36 por fusão de duas
   pilhas no `/loot insert`, pilha cheia = 36); baú real (800 de prédio): 54% com munição, calibres 1/2/3 = 37/34/29%, 33,0 balas por baú (esperado 31,2);
   delegacia (500): 80%, 46,4 balas (esperado 47,9).
+
+## First Aid por item e quantidades grandes (16 Nov 2026)
+- Classes pedidas pelo usuário: Muito comum = plaster; Comum (mesma categoria LesRaisins) = bandage, adrenaline injector, painkillers; Incomum = morphine,
+  defibrillator; Raro = morphine injector. Depois: "aumente drasticamente a quantidade da pilha": plaster **4–14**, bandage **2–10** (pilha máxima de ambos no
+  First Aid = 16, `stacksTo(16)` no registro; defibrillator tem durabilidade). O usuário não aprovou/ajustou os números de chance que propus; aplicados mesmo assim.
+- O sistema antigo (taxa por categoria `fa` + `pick/fa` com pesos) foi removido: o First Aid agora é um pool por item (como as curas LR). `fa` saiu de `RATES`.
+- Validado (Sorte 0): prédio (3.000 baús) plaster 13,5% (4–14), bandage 8,9% (2–10), comuns ~9%; farmácia incomuns 7,4–9,0%, injector 3,6%; barril de oficina igual
+  ao prédio; **sem o jar do First Aid o servidor sobe sem erros, sem itens `firstaid:` e com o resto do mod normal**.
+- Monte Carlo (unidades de First Aid): green tower ~199 (plaster 123, bandage 50), rampa ~872, casa ~125, delegacia ~138, farmácia grande ~52, pequena ~39.
+  **Escala ~38x a anterior (5 na green tower).** Risco de estourar um dispenser/dropper (9 espaços): ~1 em 5.000 (barril difícil da delegacia), 1 em 12.000
+  (barril da delegacia), 1 em 38.000 (barril de prédio); o container fica vazio se estourar.

@@ -11,15 +11,142 @@
       "rolls": 1,
       "entries": [
         {
-          "type": "minecraft:loot_table",
-          "value": "amctaczloot:pick/fa",
-          "weight": 200,
-          "quality": 50
+          "type": "minecraft:item",
+          "name": "firstaid:plaster",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 4,
+                "max": 14
+              }
+            }
+          ],
+          "weight": 150,
+          "quality": 38
         },
         {
           "type": "minecraft:empty",
-          "weight": 800,
-          "quality": -50
+          "weight": 850,
+          "quality": -38
+        }
+      ],
+      "bonus_rolls": 0.0
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "firstaid:bandage",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 2,
+                "max": 10
+              }
+            }
+          ],
+          "weight": 92,
+          "quality": 23
+        },
+        {
+          "type": "minecraft:empty",
+          "weight": 908,
+          "quality": -23
+        }
+      ],
+      "bonus_rolls": 0.0
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "firstaid:adrenaline_injector",
+          "functions": [],
+          "weight": 92,
+          "quality": 23
+        },
+        {
+          "type": "minecraft:empty",
+          "weight": 908,
+          "quality": -23
+        }
+      ],
+      "bonus_rolls": 0.0
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "firstaid:painkillers",
+          "functions": [],
+          "weight": 92,
+          "quality": 23
+        },
+        {
+          "type": "minecraft:empty",
+          "weight": 908,
+          "quality": -23
+        }
+      ],
+      "bonus_rolls": 0.0
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "firstaid:morphine",
+          "functions": [],
+          "weight": 82,
+          "quality": 20
+        },
+        {
+          "type": "minecraft:empty",
+          "weight": 918,
+          "quality": -20
+        }
+      ],
+      "bonus_rolls": 0.0
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "firstaid:defibrillator",
+          "functions": [],
+          "weight": 82,
+          "quality": 20
+        },
+        {
+          "type": "minecraft:empty",
+          "weight": 918,
+          "quality": -20
+        }
+      ],
+      "bonus_rolls": 0.0
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "firstaid:morphine_injector",
+          "functions": [],
+          "weight": 40,
+          "quality": 10
+        },
+        {
+          "type": "minecraft:empty",
+          "weight": 960,
+          "quality": -10
         }
       ],
       "bonus_rolls": 0.0
