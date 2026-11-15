@@ -22,17 +22,17 @@ First Aid e da LesRaisins. Mod id `amctaczloot`. Recomeçado do zero em 13 Nov 2
   **Cada acerto de munição dá 1 a 3 pilhas de calibres sorteados** (o mesmo calibre pode repetir), com balas por pilha proporcionais à pilha máxima, **no
   tamanho original** (9mm 24–50 com pilha 60; 12g 14–30; .308 19–40; 22wmr 26–53; 40mm e foguete 2–5). `AMMO_STACKS = (1, 3)`, `AMMO_SIZE = 1.0`.
   **Total de balas por baú de prédio ~31 (dobro da versão de 1 pilha); delegacia ~48.**
-- **Cura LesRaisins** (chance de CADA item por container, independente; mesma em todos os temas exceto farmácia): vaseline, ibuprofen,
-  amoxicillin e golden star **9,2% cada, mesma chance** (Comuns; 184‰ antes do x0,5 = média dos 4 antigos, total dos Comuns inalterado); blood pack 4,5%, CAR 4,3%, AI-2 4,0%, CMS 3,5% (Incomuns); SURV12 2,0% (Raro) (CAR 4,3% = 4,25% arredondado em ‰).
-  **Farmácia**: Incomuns e Raro ×2 sobre esses valores (blood pack 9,0%, CAR 8,5%, AI-2 8,0%, CMS 7,0%, SURV12 4,0%). Fator geral `HEAL_SCALE = 0.5`.
+- **Cura LesRaisins** (chance de CADA item por container, independente; mesma em todos os temas exceto farmácia; "raridade dobrada" em 16 Nov = chances x0,5): Comuns vaseline,
+  ibuprofen, amoxicillin, golden star **4,6% cada**; Incomuns blood pack **2,3%**, CAR **2,1%**; **Raros** AI-2 e CMS **1,0%**; **Épico** SURV12 **0,5%**.
+  **Farmácia = valores congelados "como estava"** (`HEAL_PHARMACY_FIXED`): comuns 9,2%, blood pack 9,0%, CAR 8,5%, AI-2 8,0%, CMS 7,0%, SURV12 4,0%.
 - **Comida**: leite condensado 8% por container em todos os temas (2–4 unidades); pão 20% só em casas (4–12). Itens de cura First Aid e comida **não** mudaram com o ×0,5.
 - **Equipamento LesRaisins** (chance de CADA item por container, independente; todos os temas **exceto farmácia**; **na delegacia as chances dos throwable dobram**): M67 Grenade 9,2% (**3 a 5**; delegacia 18,4%),
   RGN Grenade 4,1% (**2 a 4**; delegacia 8,2%), C4 Sticky Bomb 3,0% (1; delegacia 6,0%), Dagger / Karambit / Baseball Bat 2,0% cada (1, durabilidade cheia). Itens: `lrtactical:throwable` (`ThrowableId`) e
   `lrtactical:melee` (`MeleeWeaponId`). O detonator **não** entra no loot (o C4 o entrega ao ser arremessado, confirmado pelo usuário). smoke/flash/molotov/flash shield de fora.
-- **First Aid** (opcional, tabela própria com `neoforge:mod_loaded`; chance de CADA item por container, independente, a mesma em todos os temas exceto farmácia):
-  plaster 15% (4–14 unidades, "Muito comum"); bandage 9,2% (2–10), adrenaline injector 9,2%, painkillers 9,2% (Comuns, mesma chance dos comuns LR);
-  morphine 4,1% e defibrillator 4,1% (Incomuns); morphine injector 2,0% (Raro). **Farmácia**: Incomuns e Raro ×2 (8,2% / 8,2% / 4,0%). Sem o corte ×0,5.
-  Valores de chance escolhidos por mim a partir das classes do usuário (ele ajustou só as quantidades depois); `FA_CHANCE`, `FA_CLASS`, `FA_COUNT`.
+- **First Aid** (opcional, tabela própria com `neoforge:mod_loaded`; chance de CADA item por container, independente, mesma em todos os temas exceto farmácia; x0,5 em 16 Nov):
+  plaster **7,5%** (4–14 un., "Muito comum"); bandage, adrenaline injector, painkillers **4,6%** (Comuns; bandage 2–10); defibrillator **2,1%** (Incomum); **Raro** morphine **1,0%**;
+  **Épico** morphine injector **0,5%**. **Farmácia congelada**: plaster 15%, comuns 9,2%, morphine 8,2%, defibrillator 8,2%, injector 4,0%. `FA_CHANCE`, `FA_CLASS`, `FA_COUNT`.
+  Classes (mais comum -> mais rara): Muito comum, Comum, Incomum, Raro, **Épico** (nova, 16 Nov). Raro = base 4,0% e Épico = 2,0% LR (e 2,0% / 1,0% FA) antes de x0,5: valores meus.
 - **Sucata** vanilla (stick, 4 sementes, carne podre, osso, papel, tigela, garrafa, olho de aranha) nas 36 tabelas do AMC sobrescritas; sem itens vanilla úteis (única exceção: pão).
 - **Vasos** não recebem nada do mod. Temas: building, police_station, pharmacy, house, workshop, gas_station (o AMC removeu `building_large`).
 - **Ferramentas**: `gen_loot.py` (prévia / `--write`), `sample_items.py` (chance por item num servidor de teste; use este), `sample_loot.py` (categorias de arma/munição;
@@ -268,3 +268,11 @@ First Aid e da LesRaisins. Mod id `amctaczloot`. Recomeçado do zero em 13 Nov 2
   **As armas brancas já saíam nas casas** (regra: todos os temas menos a farmácia, 2% cada); nada foi alterado nelas, o usuário foi avisado e recebeu uma tabela de multiplicadores.
 - Validado (3.000 baús): delegacia M67 17,8%, RGN 8,9%, C4 6,1%, armas brancas 1,7–2,1%; casa e prédio inalterados; 0 erros de carga. Delegacia inteira (63 containers): ~46 M67, ~15,5 RGN, ~3,8 C4.
 - Risco de estourar dispenser/dropper (9 espaços) na delegacia: ~1 em 1.200 (barril) e 1 em 610 (barril difícil).
+
+## Raridade dobrada das curas e nova classe Épico (16 Nov 2026)
+- Pedido: "duplique a raridade dos itens de cura, mantenha a farmácia como está" (interpretado: itens 2x mais raros = chances x0,5, LesRaisins e First Aid, farmácia com os mesmos números de antes);
+  CMS, AI-2 e Morphine -> Raro; SURV12 e Morphine Injector -> nova classe **Épico**. Os números de Raro/Épico foram escolhas minhas. Leite, pão, equipamento e munição inalterados.
+- Config: `HEAL_RARITY_SCALE = 0.5`, `HEAL_PHARMACY_FIXED` (a antiga `PHARMACY_MULT` foi removida).
+- Validado (prédio, 8.000 baús): plaster 7,8%, comuns 4,2–5,3%, blood pack 2,2%, CAR 2,1%, AI-2 e CMS 0,9%, SURV12 0,6%, defibrillator 2,3%, morphine 1,1%, injector 0,5%; farmácia (3.000) idêntica
+  à anterior (CMS 6,8%, SURV12 4,0%, plaster 15,1%). 0 erros de carga.
+- Resultado esperado: green tower ~23 curas LesRaisins e ~98 unidades de First Aid (antes 50 e 199); 100 baús ~133 itens de cura no total; chance de 1+ item Épico em 100 baús 39% cada, Raro 63% cada.

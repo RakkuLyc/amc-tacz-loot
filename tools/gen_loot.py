@@ -81,10 +81,16 @@ ATT_TYPE_W = dict(scope=4, muzzle=4, grip=3, stock=3, extended_mag=4, laser=2)  
 # Classes: Comuns = golden star, amoxicillin, ibuprofen, vaseline; Incomuns = CMS, AI-2, CAR, blood pack; Raro = SURV12.
 # SURV12: 3% pedido pelo usuário, depois "diminuir levemente a raridade" (= um pouco mais comum): 4%.
 # Os 4 Comuns têm a MESMA chance (184‰ = média dos antigos 195/190/180/170, mantendo o total dos Comuns; pedido de 15 Nov 2026).
-HEAL_LR = dict(vaseline=184, ibuprofen=184, amoxycillin=184, goldenstar=184, blood_pack=90, carfak=85, ai2=80, cms=70, surv12=40)
+# 16 Nov 2026 (reclassificação pedida pelo usuário): CMS e AI-2 (e Morphine no First Aid) passam a Raro; SURV12 (e Morphine Injector) passam a ÉPICO (a classe mais rara).
+# Valores base (antes dos fatores abaixo): Raro 4,0%, Épico 2,0% (escolha minha; o usuário não deu os números de Raro e Épico).
+HEAL_LR = dict(vaseline=184, ibuprofen=184, amoxycillin=184, goldenstar=184, blood_pack=90, carfak=85, ai2=40, cms=40, surv12=20)
 HEAL_CLASS = dict(vaseline="Comum", ibuprofen="Comum", amoxycillin="Comum", goldenstar="Comum",
-                  blood_pack="Incomum", carfak="Incomum", ai2="Incomum", cms="Incomum", surv12="Raro")
-PHARMACY_MULT = {"Muito comum": 1.0, "Comum": 1.0, "Incomum": 2.0, "Raro": 2.0}
+                  blood_pack="Incomum", carfak="Incomum", ai2="Raro", cms="Raro", surv12="Épico")
+# "Duplique a raridade dos itens de cura" (16 Nov 2026) = chances x0,5 (itens 2x mais raros), em LesRaisins e First Aid, FORA da farmácia.
+HEAL_RARITY_SCALE = 0.5
+# FARMÁCIA "como está" (pedido do usuário): os valores da farmácia ficam CONGELADOS nos números de antes da reclassificação e do fator acima (‰).
+HEAL_PHARMACY_FIXED = dict(lr=dict(vaseline=92, ibuprofen=92, amoxycillin=92, goldenstar=92, blood_pack=90, carfak=85, ai2=80, cms=70, surv12=40),
+                           fa=dict(plaster=150, bandage=92, adrenaline_injector=92, painkillers=92, morphine=82, defibrillator=82, morphine_injector=40))
 # Fator geral sobre as chances de cura LesRaisins acima (15 Nov 2026: "exagerei um pouco" -> opção C, tudo x0,5). Vale por cima do
 # multiplicador da farmácia. Não mexe no leite, no pão nem no First Aid. Valores resultantes arredondados em ‰ (ex.: 19,5% -> 9,8%).
 HEAL_SCALE = 0.5
@@ -94,9 +100,10 @@ FOOD = dict(condensed_milk=dict(p=80, lo=2, hi=4, themes=None), bread=dict(p=200
 # categoria dos Comuns da LesRaisins) = bandage, adrenaline injector, painkillers; Incomum = morphine, defibrillator; Raro = morphine injector.
 # Chance de CADA item por container (‰), independente dos outros, a mesma em todos os temas exceto na farmácia (PHARMACY_MULT nos incomuns e raro):
 # Comum = 9,2% (igual aos comuns LR); Incomum = 4,1% (média dos incomuns LR); Raro = 2,0%; Muito comum = 15% (valor meu). Sem o corte x0,5 das curas LR.
-FA_CHANCE = dict(plaster=150, bandage=92, adrenaline_injector=92, painkillers=92, morphine=41, defibrillator=41, morphine_injector=20)
-FA_CLASS = dict(plaster="Muito comum", bandage="Comum", adrenaline_injector="Comum", painkillers="Comum", morphine="Incomum",
-                defibrillator="Incomum", morphine_injector="Raro")
+# 16 Nov 2026: Morphine passa a Raro (base 2,0%) e Morphine Injector a Épico (base 1,0%); depois HEAL_RARITY_SCALE (x0,5) fora da farmácia.
+FA_CHANCE = dict(plaster=150, bandage=92, adrenaline_injector=92, painkillers=92, morphine=20, defibrillator=41, morphine_injector=10)
+FA_CLASS = dict(plaster="Muito comum", bandage="Comum", adrenaline_injector="Comum", painkillers="Comum", morphine="Raro",
+                defibrillator="Incomum", morphine_injector="Épico")
 # quantidade por pilha (pedido do usuário: plaster 4-14 e bandage 2-10; a pilha máxima desses dois itens no First Aid é 16)
 FA_COUNT = dict(plaster=(4, 14), bandage=(2, 10), painkillers=(1, 1), morphine=(1, 1), morphine_injector=(1, 1),
                 adrenaline_injector=(1, 1), defibrillator=(1, 1))
@@ -254,8 +261,8 @@ def item_chances(theme):
     """Itens com chance própria neste tema: lista de (tipo, item, p em ‰). Farmácia: multiplicador nos incomuns e no raro."""
     out = []
     for i, p in HEAL_LR.items():
-        m = PHARMACY_MULT[HEAL_CLASS[i]] if theme == "pharmacy" else 1.0
-        out.append(("lr", i, max(1, min(1000, int(p * m * HEAL_SCALE + 0.5)))))
+        v = HEAL_PHARMACY_FIXED["lr"][i] if theme == "pharmacy" else int(p * HEAL_SCALE * HEAL_RARITY_SCALE + 0.5)
+        out.append(("lr", i, max(1, min(1000, v))))
     for i, f in FOOD.items():
         if f["themes"] is None or theme in f["themes"]: out.append(("food", i, f["p"]))
     if theme not in GEAR_EXCLUDED_THEMES:
@@ -266,8 +273,8 @@ def item_chances(theme):
 
 
 def fa_chances(theme):
-    """First Aid neste tema: lista de (item, p em ‰). Farmácia: multiplicador nos incomuns e no raro."""
-    return [(i, min(1000, round(p * (PHARMACY_MULT[FA_CLASS[i]] if theme == "pharmacy" else 1.0)))) for i, p in FA_CHANCE.items()]
+    """First Aid neste tema: lista de (item, p em ‰). Farmácia: valores congelados (HEAL_PHARMACY_FIXED); fora dela, chance x HEAL_RARITY_SCALE."""
+    return [(i, max(1, min(1000, HEAL_PHARMACY_FIXED["fa"][i] if theme == "pharmacy" else int(p * HEAL_RARITY_SCALE + 0.5)))) for i, p in FA_CHANCE.items()]
 
 
 def e_gear(i):
