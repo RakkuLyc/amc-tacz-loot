@@ -3,7 +3,7 @@
 Mod só de dados para NeoForge 1.21.1: loot do TACZ (armas, munições, attachments), da LesRaisins Tactical (cura e comida) e
 do First Aid nos containers do Abandoned Modern City (AMC).
 
-**Estado (16 Nov 2026):** etapa de balanceamento concluída e aprovada pelo usuário (armas, munição, curas, equipamento, First Aid, attachments e pente inicial).
+**Versão 1.0.0** (16 Nov 2026). **Estado:** etapa de balanceamento concluída e aprovada pelo usuário (armas, munição, curas, equipamento, First Aid, attachments e pente inicial).
 Os valores em vigor estão no bloco "ESTADO ATUAL" do `CLAUDE.md`.
 
 - As tabelas são geradas por `tools/gen_loot.py` (`python3 -I tools/gen_loot.py` mostra a prévia; `--write` grava os arquivos).

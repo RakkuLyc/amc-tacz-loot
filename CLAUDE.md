@@ -13,7 +13,7 @@ Mod **só de dados** (NeoForge 1.21.1, `modLoader="lowcodefml"`, sem Java) que i
 (`abandonedmoderncity:chests/<tema>/<chest|barrel|pot>[_hard]`): armas, munições e attachments do TACZ, itens de cura do
 First Aid e da LesRaisins. Mod id `amctaczloot`. Recomeçado do zero em 13 Nov 2026 (a versão anterior foi apagada).
 
-## ESTADO ATUAL (16 Nov 2026; etapa de balanceamento concluída e aprovada pelo usuário) — o que está valendo; as seções abaixo desta são HISTÓRICO e podem citar números já substituídos
+## ESTADO ATUAL (versão 1.0.0, 16 Nov 2026; etapa de balanceamento concluída e aprovada pelo usuário) — o que está valendo; as seções abaixo desta são HISTÓRICO e podem citar números já substituídos
 - **Armas** (chance por baú comum / difícil, Sorte 0): prédio 12,0% / 20,0% (1 a cada 8,3 / 5 baús), barris 0,4% / 0,7%; delegacia 25,0% / 33,3%
   (1 a cada 4 / 3), barris 3,0% / 6,0%. Tipos: pistola 10, smg 6, escopeta 6, fuzil 4, dmr 2, sniper 1,5, mg 1, rpg 0,3 (delegacia: smg/escopeta 8, fuzil 6).
   Arma cai **com 50% do pente cheio** (`GunCurrentAmmoCount` = ammo_amount x 0,5 arredondado para cima: 17 -> 9, pente de 1 -> 1; `HasBulletInBarrel` = false), **exceto a minigun** (sem pente definido, nasce com 0).
