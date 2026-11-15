@@ -33,24 +33,25 @@ LUCK_QUALITY = 0.25      # cada nível de Sorte multiplica a chance de cada cate
 # rolagens por tier: (rolls, bonus_rolls).  floor(bonus*Sorte): 0.34 soma 1 rolagem só na Sorte III; 0.2 só na Sorte V
 ROLLS = {"chest": (1, 0.2), "chest_hard": (1, 0.34), "barrel": (1, 0.0), "barrel_hard": (1, 0.0)}
 # chance (‰) por rolagem de cada categoria, por tema e tier.  gun = arma (sem munição junto), ammo = pilha de munição (pool próprio),
-# att = attachment, lr = cura LesRaisins, fa = cura First Aid (tabela à parte, só se o First Aid estiver instalado)
+# att = attachment, fa = cura First Aid (tabela à parte, só se o First Aid estiver instalado).
+# A cura LesRaisins, o leite condensado e o pão NÃO estão aqui: cada item tem a sua chance por container (HEAL_LR / FOOD abaixo).
 RATES = {
-    "building":       {"chest": dict(gun=120, ammo=520, att=40, lr=40, fa=40),         # 1 arma a cada 8,3 baús; munição em 52%
-                       "chest_hard": dict(gun=200, ammo=866, att=70, lr=70, fa=70),     # 1 arma a cada 5 baús difíceis; munição 86,6%
-                       "barrel": dict(gun=4, ammo=62, att=12, lr=15, fa=15),
-                       "barrel_hard": dict(gun=7, ammo=114, att=24, lr=30, fa=30)},
-    "police_station": {"chest": dict(gun=250, ammo=800, att=90, lr=50, fa=50),          # armas inalteradas: 1 a cada 4 baús; munição 80%
-                       "chest_hard": dict(gun=333, ammo=1000, att=160, lr=80, fa=80),   # 1 arma a cada 3 baús difíceis; munição sempre (teto)
-                       "barrel": dict(gun=30, ammo=200, att=40, lr=20, fa=20),
-                       "barrel_hard": dict(gun=60, ammo=360, att=70, lr=35, fa=35)},
-    "pharmacy":       {"chest": dict(lr=300, fa=300), "chest_hard": dict(lr=400, fa=400),
-                       "barrel": dict(lr=120, fa=120), "barrel_hard": dict(lr=200, fa=200)},
-    "house":          {"chest": dict(lr=30, fa=30), "chest_hard": dict(lr=60, fa=60),
-                       "barrel": dict(lr=10, fa=10), "barrel_hard": dict(lr=20, fa=20)},
-    "workshop":       {"chest": dict(ammo=40, lr=20, fa=20), "chest_hard": dict(ammo=70, lr=40, fa=40),
-                       "barrel": dict(ammo=15, lr=8, fa=8), "barrel_hard": dict(ammo=30, lr=15, fa=15)},
-    "gas_station":    {"chest": dict(lr=30, fa=30), "chest_hard": dict(lr=60, fa=60),
-                       "barrel": dict(lr=10, fa=10), "barrel_hard": dict(lr=20, fa=20)},
+    "building":       {"chest": dict(gun=120, ammo=520, att=40, fa=40),         # 1 arma a cada 8,3 baús; munição em 52%
+                       "chest_hard": dict(gun=200, ammo=866, att=70, fa=70),     # 1 arma a cada 5 baús difíceis; munição 86,6%
+                       "barrel": dict(gun=4, ammo=62, att=12, fa=15),
+                       "barrel_hard": dict(gun=7, ammo=114, att=24, fa=30)},
+    "police_station": {"chest": dict(gun=250, ammo=800, att=90, fa=50),          # armas inalteradas: 1 a cada 4 baús; munição 80%
+                       "chest_hard": dict(gun=333, ammo=1000, att=160, fa=80),   # 1 arma a cada 3 baús difíceis; munição sempre (teto)
+                       "barrel": dict(gun=30, ammo=200, att=40, fa=20),
+                       "barrel_hard": dict(gun=60, ammo=360, att=70, fa=35)},
+    "pharmacy":       {"chest": dict(fa=300), "chest_hard": dict(fa=400),
+                       "barrel": dict(fa=120), "barrel_hard": dict(fa=200)},
+    "house":          {"chest": dict(fa=30), "chest_hard": dict(fa=60),
+                       "barrel": dict(fa=10), "barrel_hard": dict(fa=20)},
+    "workshop":       {"chest": dict(ammo=40, fa=20), "chest_hard": dict(ammo=70, fa=40),
+                       "barrel": dict(ammo=15, fa=8), "barrel_hard": dict(ammo=30, fa=15)},
+    "gas_station":    {"chest": dict(fa=30), "chest_hard": dict(fa=60),
+                       "barrel": dict(fa=10), "barrel_hard": dict(fa=20)},
 }
 # (o tema building_large foi removido do AMC em 14 Nov 2026, commit 72d07b3: todo prédio usa `building`)
 # raridade das armas por tipo (peso relativo entre tipos) e perfis de tema
@@ -68,8 +69,16 @@ AMMO_MIX_UNIFORM = 0.5
 # (a arma NÃO traz munição junto: a munição é um sorteio separado, calibre pela raridade das armas que o usam)
 ATT_TYPE_W = dict(scope=4, muzzle=4, grip=3, stock=3, extended_mag=4, laser=2)   # peso do tipo de attachment
 # itens de cura: (peso, mín, máx)
-LR_W = dict(ibuprofen=(10, 1, 1), blood_pack=(8, 1, 1), vaseline=(8, 1, 1), goldenstar=(6, 1, 1), cms=(5, 1, 1),
-            amoxycillin=(5, 1, 1), surv12=(4, 1, 1), ai2=(2, 1, 1), carfak=(2, 1, 1))
+# CURA LESRAISINS (escolha do usuário, 15 Nov 2026): chance de CADA item por container, independente dos outros (‰: 195 = 19,5%),
+# a mesma em todos os temas e tipos de container, exceto na farmácia (multiplicador só nos incomuns e no raro, PHARMACY_MULT).
+# Classes: Comuns = golden star, amoxicillin, ibuprofen, vaseline; Incomuns = CMS, AI-2, CAR, blood pack; Raro = SURV12.
+# SURV12: 3% pedido pelo usuário, depois "diminuir levemente a raridade" (= um pouco mais comum): 4%.
+HEAL_LR = dict(vaseline=195, ibuprofen=190, amoxycillin=180, goldenstar=170, blood_pack=90, carfak=85, ai2=80, cms=70, surv12=40)
+HEAL_CLASS = dict(vaseline="Comum", ibuprofen="Comum", amoxycillin="Comum", goldenstar="Comum",
+                  blood_pack="Incomum", carfak="Incomum", ai2="Incomum", cms="Incomum", surv12="Raro")
+PHARMACY_MULT = {"Comum": 1.0, "Incomum": 2.0, "Raro": 2.0}
+# COMIDA: chance por container (‰) e quantidade; themes=None = todos os temas. O pão é vanilla (exceção explícita do usuário) e só em casas.
+FOOD = dict(condensed_milk=dict(p=80, lo=2, hi=4, themes=None), bread=dict(p=200, lo=4, hi=12, themes=("house",)))
 FA_W = dict(plaster=(12, 1, 3), bandage=(12, 1, 2), painkillers=(8, 1, 1), morphine=(4, 1, 1),
             morphine_injector=(3, 1, 1), adrenaline_injector=(2, 1, 1), defibrillator=(1, 1, 1))
 # SUCATA: o mod sobrescreve as 42 tabelas do AMC (mesmos caminhos) para que NÃO reste nenhum item vanilla útil nos containers.
@@ -82,8 +91,8 @@ JUNK = dict(stick=(12, 1, 6), wheat_seeds=(10, 1, 4), beetroot_seeds=(8, 1, 4), 
 JUNK_SHAPE = {"chest": (1000, 2, 4), "chest_hard": (1000, 2, 4), "barrel": (300, 1, 2), "barrel_hard": (300, 1, 2),
               "pot": (300, 1, 1), "pot_hard": (300, 1, 1)}
 # categorias da tabela principal (TACZ + LesRaisins, obrigatórios) e da tabela do First Aid (opcional)
-CORE_POOLS = (("gun", "att", "lr"), ("ammo",))      # dois sorteios independentes por rolagem do baú
-CORE_CATS = ("gun", "ammo", "att", "lr")
+CORE_POOLS = (("gun", "att"), ("ammo",))      # sorteios independentes por rolagem do baú (a cura e a comida têm um pool por item)
+CORE_CATS = ("gun", "ammo", "att")
 LUCKS = (0, 1, 2, 3)
 # =====================================================================================================================
 
@@ -190,7 +199,6 @@ def pick_tables():
         out["pick/gun_" + prof] = (table([pool([with_w(e_gun(g), w) for g, w in gw.items()])]), None)
         out["pick/ammo_" + prof] = (table([pool([with_w(e_ammo(c), w) for c, w in ammo_weights(prof).items()])]), None)
     out["pick/att"] = (table([pool([with_w(e_att(a), w) for a, w in att_weights().items()])]), None)
-    out["pick/lr"] = (table([pool([with_w(e_lr(i, lo, hi), w) for i, (w, lo, hi) in LR_W.items()])]), None)
     out["pick/fa"] = (table([pool([with_w(e_fa(i, lo, hi), w) for i, (w, lo, hi) in FA_W.items()])],
                             [{"type": "neoforge:mod_loaded", "modid": "firstaid"}]), None)
     return out
@@ -210,6 +218,31 @@ def junk_tables():
             if chance < 1000: p["conditions"] = [{"condition": "minecraft:random_chance", "chance": chance / 1000}]
             out["%s/%s" % (theme, tier)] = table([p])
     return out
+
+
+def item_chances(theme):
+    """Itens com chance própria neste tema: lista de (tipo, item, p em ‰). Farmácia: multiplicador nos incomuns e no raro."""
+    out = []
+    for i, p in HEAL_LR.items():
+        m = PHARMACY_MULT[HEAL_CLASS[i]] if theme == "pharmacy" else 1.0
+        out.append(("lr", i, min(1000, round(p * m))))
+    for i, f in FOOD.items():
+        if f["themes"] is None or theme in f["themes"]: out.append(("food", i, f["p"]))
+    return out
+
+
+def e_item(kind, i):
+    if i == "bread": return {"type": "minecraft:item", "name": "minecraft:bread", "functions": [count(FOOD["bread"]["lo"], FOOD["bread"]["hi"])]}
+    if i == "condensed_milk": return e_lr(i, FOOD[i]["lo"], FOOD[i]["hi"])
+    return e_lr(i, 1, 1)
+
+
+def item_pool(kind, i, p, rolls=1, bonus=0.0):
+    """Um sorteio independente: o item com chance p (‰) ou nada. A Sorte sobe a chance pelo `quality`, como nas outras categorias."""
+    q = max(1, round(p * LUCK_QUALITY))
+    ents = [{**e_item(kind, i), "weight": p, "quality": q}]
+    if p < 1000: ents.append({"type": "minecraft:empty", "weight": 1000 - p, "quality": -q})
+    return pool(ents, rolls, bonus)
 
 
 def weights(rates):
@@ -239,6 +272,7 @@ def main_tables():
                     else: e = {"type": "minecraft:loot_table", "value": "%s:pick/%s" % (MOD, {"gun": "gun_" + prof, "ammo": "ammo_" + prof, "att": "att", "lr": "lr"}[c])}
                     ent.append({**e, "weight": w, "quality": q})
                 pools.append(pool(ent, rolls, bonus))
+            for kind, i, p in item_chances(theme): pools.append(item_pool(kind, i, p))
             out["%s/%s_core" % (theme, tier)] = table(pools)
             if "fa" in rates:
                 ent = []
@@ -258,7 +292,7 @@ def expected(theme, tier, luck):
     """Esperado por container (stacks): guns, ammo, att, lr, fa."""
     rates = RATES[theme][tier]; rolls, bonus = ROLLS[tier]
     r = rolls + math.floor(bonus * luck)
-    res = {k: 0.0 for k in ("gun", "ammo", "att", "lr", "fa")}
+    res = {k: 0.0 for k in ("gun", "ammo", "att", "lr", "fa", "food")}
     for cat_set in (*CORE_POOLS, ("fa",)):
         part = {k: v for k, v in rates.items() if k in cat_set}
         if not part: continue
@@ -266,9 +300,11 @@ def expected(theme, tier, luck):
         tot = sum(eff(w, q, luck) for w, q in wq.values())
         for c in part:
             p = eff(*wq[c], luck) / tot if tot else 0
-            avg = {"lr": sum(w * (lo + hi) / 2 for w, lo, hi in LR_W.values()) / sum(w for w, _, _ in LR_W.values()),
-                   "fa": sum(w * (lo + hi) / 2 for w, lo, hi in FA_W.values()) / sum(w for w, _, _ in FA_W.values())}.get(c, 1)
+            avg = {"fa": sum(w * (lo + hi) / 2 for w, lo, hi in FA_W.values()) / sum(w for w, _, _ in FA_W.values())}.get(c, 1)
             res[c] += r * p * avg
+    for kind, i, p0 in item_chances(theme):           # um sorteio por item (rolagem única, sem bonus)
+        q = max(1, round(p0 * LUCK_QUALITY)); a = eff(p0, q, luck); e0 = eff(1000 - p0, -q, luck)
+        res[kind] += a / (a + e0) if a + e0 else 0
     return res
 
 
@@ -285,7 +321,7 @@ def preview():
     print("%-14s %-30s %5s | %s | %-23s | %6s %6s" % ("tema", "estrutura", "cont.", "Sorte 0: arm  mun  att   LR   FA", "armas S0 S1 S2 S3", "LR S3", "FA S3"))
     for th, name, v in rows:
         def tot(luck):
-            t = {k: 0.0 for k in ("gun", "ammo", "att", "lr", "fa")}
+            t = {k: 0.0 for k in ("gun", "ammo", "att", "lr", "fa", "food")}
             for tier, n in v["tiers"].items():
                 if tier.startswith("pot"): continue
                 for k, x in expected(th, tier, luck).items(): t[k] += n * x
@@ -326,6 +362,9 @@ def preview():
                     if not part: continue
                     wq = weights(part); tot = sum(eff(w, q, l) for w, q in wq.values())
                     p_none *= (eff(*wq["empty"], l) / tot) ** r
+                for kind, i, p0 in item_chances(th):
+                    q0 = max(1, round(p0 * LUCK_QUALITY)); a0 = eff(p0, q0, l); e0 = eff(1000 - p0, -q0, l)
+                    p_none *= (e0 / (a0 + e0)) if a0 + e0 else 1.0
                 p_core = 1 - p_none
                 fa = weights({"fa": RATES[th][tier]["fa"]}); tf = sum(eff(w, q, l) for w, q in fa.values())
                 p_fa = 1 - (eff(*fa["empty"], l) / tf) ** r
@@ -382,7 +421,7 @@ def check(base, gl, tables, glms, junk):
         for ref in [x for x in s.split('"') if x.startswith(MOD + ":pick/")]:
             if ref.split(":")[1] not in tables: errs.append("tabela de escolha inexistente: " + ref)
     # nenhum item vanilla fora da lista de sucata, em NENHUMA tabela gerada (mod + sobrescritas do AMC)
-    allowed = {"minecraft:" + i for i in JUNK}
+    allowed = {"minecraft:" + i for i in JUNK} | {"minecraft:bread"}
     for n, t in list(tables.items()) + [("amc:" + k, v) for k, v in junk.items()]:
         for name in re.findall(r'"name": "(minecraft:[a-z_0-9]+)"', json.dumps(t)):
             if name not in allowed: errs.append("item vanilla fora da sucata em %s: %s" % (n, name))

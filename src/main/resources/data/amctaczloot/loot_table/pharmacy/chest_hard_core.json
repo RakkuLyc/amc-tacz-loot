@@ -5,18 +5,279 @@
       "rolls": 1,
       "entries": [
         {
-          "type": "minecraft:loot_table",
-          "value": "amctaczloot:pick/lr",
-          "weight": 400,
-          "quality": 100
+          "type": "minecraft:item",
+          "name": "lrtactical:consumable",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "ConsumableId": "lrtactical:vaseline"
+                }
+              }
+            }
+          ],
+          "weight": 195,
+          "quality": 49
         },
         {
           "type": "minecraft:empty",
-          "weight": 600,
-          "quality": -100
+          "weight": 805,
+          "quality": -49
         }
       ],
-      "bonus_rolls": 0.34
+      "bonus_rolls": 0.0
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "lrtactical:consumable",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "ConsumableId": "lrtactical:ibuprofen"
+                }
+              }
+            }
+          ],
+          "weight": 190,
+          "quality": 48
+        },
+        {
+          "type": "minecraft:empty",
+          "weight": 810,
+          "quality": -48
+        }
+      ],
+      "bonus_rolls": 0.0
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "lrtactical:consumable",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "ConsumableId": "lrtactical:amoxycillin"
+                }
+              }
+            }
+          ],
+          "weight": 180,
+          "quality": 45
+        },
+        {
+          "type": "minecraft:empty",
+          "weight": 820,
+          "quality": -45
+        }
+      ],
+      "bonus_rolls": 0.0
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "lrtactical:consumable",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "ConsumableId": "lrtactical:goldenstar"
+                }
+              }
+            }
+          ],
+          "weight": 170,
+          "quality": 42
+        },
+        {
+          "type": "minecraft:empty",
+          "weight": 830,
+          "quality": -42
+        }
+      ],
+      "bonus_rolls": 0.0
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "lrtactical:consumable",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "ConsumableId": "lrtactical:blood_pack"
+                }
+              }
+            }
+          ],
+          "weight": 180,
+          "quality": 45
+        },
+        {
+          "type": "minecraft:empty",
+          "weight": 820,
+          "quality": -45
+        }
+      ],
+      "bonus_rolls": 0.0
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "lrtactical:consumable",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "ConsumableId": "lrtactical:carfak"
+                }
+              }
+            }
+          ],
+          "weight": 170,
+          "quality": 42
+        },
+        {
+          "type": "minecraft:empty",
+          "weight": 830,
+          "quality": -42
+        }
+      ],
+      "bonus_rolls": 0.0
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "lrtactical:consumable",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "ConsumableId": "lrtactical:ai2"
+                }
+              }
+            }
+          ],
+          "weight": 160,
+          "quality": 40
+        },
+        {
+          "type": "minecraft:empty",
+          "weight": 840,
+          "quality": -40
+        }
+      ],
+      "bonus_rolls": 0.0
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "lrtactical:consumable",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "ConsumableId": "lrtactical:cms"
+                }
+              }
+            }
+          ],
+          "weight": 140,
+          "quality": 35
+        },
+        {
+          "type": "minecraft:empty",
+          "weight": 860,
+          "quality": -35
+        }
+      ],
+      "bonus_rolls": 0.0
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "lrtactical:consumable",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "ConsumableId": "lrtactical:surv12"
+                }
+              }
+            }
+          ],
+          "weight": 80,
+          "quality": 20
+        },
+        {
+          "type": "minecraft:empty",
+          "weight": 920,
+          "quality": -20
+        }
+      ],
+      "bonus_rolls": 0.0
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "lrtactical:consumable",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "ConsumableId": "lrtactical:condensed_milk"
+                }
+              }
+            },
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 2,
+                "max": 4
+              }
+            }
+          ],
+          "weight": 80,
+          "quality": 20
+        },
+        {
+          "type": "minecraft:empty",
+          "weight": 920,
+          "quality": -20
+        }
+      ],
+      "bonus_rolls": 0.0
     }
   ]
 }

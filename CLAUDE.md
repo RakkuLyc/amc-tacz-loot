@@ -152,3 +152,21 @@ First Aid e da LesRaisins. Mod id `amctaczloot`. Recomeçado do zero em 13 Nov 2
 - Validado no servidor: 100 rodadas de 66 baús (crash building): 7,5 armas, 34,8 pilhas, ~416 balas úteis, mediana 58 úteis/arma (antes 33),
   38% da munição serve (antes 24%), 3% das rodadas com <20 úteis/arma (antes 16%). Calibres batem com o esperado (12g em prédio saiu 14,6%
   contra 11,9% — ~3σ, pesos do arquivo conferidos; na delegacia saiu abaixo; tratado como ruído).
+
+## Cura LesRaisins e comida (15 Nov 2026) — substitui os pesos/fatias de cura anteriores
+- **Chance de cada item POR CONTAINER, independente dos outros** (não é fatia): vaseline 19,5%, ibuprofen 19%, amoxicillin 18%, golden star 17%
+  (Comuns); blood pack 9%, CAR 8,5%, AI-2 8%, CMS 7% (Incomuns); SURV12 **4%** (Raro; o usuário pediu 3% e depois "diminuir levemente a
+  raridade" — interpretado como um pouco mais comum). Soma 110% = ~1 item de cura LesRaisins por container (antes ~4%).
+  A mesma chance em todos os temas e tipos de container; `HEAL_LR`, `HEAL_CLASS`, `PHARMACY_MULT` no bloco do topo de `gen_loot.py`.
+- **Farmácia**: multiplicador **×2 só nos Incomuns e no Raro** (blood pack 18%, CAR 17%, AI-2 16%, CMS 14%, SURV12 8%); Comuns inalterados.
+  O ×2 é escolha minha (o usuário pediu um multiplicador sem valor).
+- **Comida**: leite condensado 8% por container, 2–4 unidades, em todos os temas (incluindo farmácia: suposição minha); **pão (vanilla,
+  exceção explícita do usuário) 20%, 4–12 unidades, só em casas**. O leite já restaura 6 de fome, saturação 1,6 e aplica o efeito Saturação
+  (2 s) no próprio item da LesRaisins (conferido no JSON). First Aid inalterado (continua por categoria, `fa`).
+- Implementação: cada item tem o seu próprio pool (item com `weight` = chance em ‰ e `quality` = 25% por nível de Sorte; entrada `empty` com o
+  resto); a tabela `pick/lr` deixou de existir. A verificação do gerador passou a aceitar `minecraft:bread` além da sucata.
+- Validado no servidor (Sorte 0): prédio (2.500 baús) vaseline 20,2%, SURV12 3,6%, leite 7,0% (2–4); casa (2.000) pão 20,1% (4–12, média 7,9);
+  farmácia (2.000) incomuns 13–18%, SURV12 7,3%; barril de oficina e baú difícil da delegacia com as mesmas chances do prédio; pão ausente em prédio.
+- Monte Carlo (Sorte 0): green tower ~100 curas LR (comuns 67 / incomuns 30 / SURV12 3,6), 7,3 pilhas de leite; rampa 439; casa 63 curas e
+  ~91 unidades de pão; farmácia grande 33,6. **Escala ~27× a anterior (3,6 curas na green tower)**; risco de estouro de container só em
+  dispenser/dropper (9 espaços): ~1 em 125.000–250.000 containers (o container fica vazio se estourar).
