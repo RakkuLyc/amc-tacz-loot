@@ -18,7 +18,7 @@ for _ in range(N):
     it = cmd("data get block 0 100 0 Items"); per = collections.Counter()
     for m in re.finditer(r'\{count: (\d+), Slot: \d+b,(.*?)id: "([a-z_:0-9]+)"\}', it, re.S):
         n, body, iid = int(m.group(1)), m.group(2), m.group(3)
-        k = re.search(r'(?:ConsumableId|AmmoId|GunId|AttachmentId): "([a-z_:0-9]+)"', body)
+        k = re.search(r'(?:ConsumableId|ThrowableId|MeleeWeaponId|AmmoId|GunId|AttachmentId): "([a-z_:0-9]+)"', body)
         per[k.group(1) if k else iid] += n
     for k, v in per.items(): have[k] += 1; units[k].append(v)
 for k in sorted(have, key=lambda k: -have[k]):

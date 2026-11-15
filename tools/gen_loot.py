@@ -100,6 +100,14 @@ FA_CLASS = dict(plaster="Muito comum", bandage="Comum", adrenaline_injector="Com
 # quantidade por pilha (pedido do usuário: plaster 4-14 e bandage 2-10; a pilha máxima desses dois itens no First Aid é 16)
 FA_COUNT = dict(plaster=(4, 14), bandage=(2, 10), painkillers=(1, 1), morphine=(1, 1), morphine_injector=(1, 1),
                 adrenaline_injector=(1, 1), defibrillator=(1, 1))
+# EQUIPAMENTO LESRAISINS (granadas, C4 e armas brancas), pedido do usuário em 16 Nov 2026: chance de CADA item por container, baseada nas curas
+# da LesRaisins (já com o x0,5): Comum = 9,2% (M67), Incomum = 4,1% (RGN, média dos incomuns de cura), Meio-termo = 3,0% (C4, ponto médio entre o
+# incomum e o raro), Raro = 2,0% cada (Dagger, Karambit, Baseball Bat; igual ao SURV12). M67 sempre 3 a 5 e RGN 2 a 4 (pilha máxima das granadas = 3: o Minecraft divide
+# o excedente em outra pilha). O detonator NÃO entra: o C4 o entrega ao ser arremessado (confirmado pelo usuário no jogo). Fora da farmácia; sem smoke/flash/molotov/flash shield.
+GEAR = dict(m67=dict(item="throwable", key="ThrowableId", p=92, lo=3, hi=5), rgn=dict(item="throwable", key="ThrowableId", p=41, lo=2, hi=4),
+            c4=dict(item="throwable", key="ThrowableId", p=30, lo=1, hi=1), dagger=dict(item="melee", key="MeleeWeaponId", p=20, lo=1, hi=1),
+            karambit=dict(item="melee", key="MeleeWeaponId", p=20, lo=1, hi=1), baseball_bat=dict(item="melee", key="MeleeWeaponId", p=20, lo=1, hi=1))
+GEAR_EXCLUDED_THEMES = ("pharmacy",)
 # SUCATA: o mod sobrescreve as 42 tabelas do AMC (mesmos caminhos) para que NÃO reste nenhum item vanilla útil nos containers.
 # Só entra aqui o que tem pouca ou nenhuma utilidade: nome -> (peso, mín, máx). A mesma lista em todos os temas.
 JUNK = dict(stick=(12, 1, 6), wheat_seeds=(10, 1, 4), beetroot_seeds=(8, 1, 4), melon_seeds=(8, 1, 4),
@@ -247,6 +255,8 @@ def item_chances(theme):
         out.append(("lr", i, max(1, min(1000, int(p * m * HEAL_SCALE + 0.5)))))
     for i, f in FOOD.items():
         if f["themes"] is None or theme in f["themes"]: out.append(("food", i, f["p"]))
+    if theme not in GEAR_EXCLUDED_THEMES:
+        for i, d in GEAR.items(): out.append(("gear", i, d["p"]))
     return out
 
 
@@ -255,7 +265,14 @@ def fa_chances(theme):
     return [(i, min(1000, round(p * (PHARMACY_MULT[FA_CLASS[i]] if theme == "pharmacy" else 1.0)))) for i, p in FA_CHANCE.items()]
 
 
+def e_gear(i):
+    d = GEAR[i]
+    return {"type": "minecraft:item", "name": "lrtactical:" + d["item"],
+            "functions": [custom(**{d["key"]: "lrtactical:" + i})] + ([count(d["lo"], d["hi"])] if d["hi"] > 1 else [])}
+
+
 def e_item(kind, i):
+    if kind == "gear": return e_gear(i)
     if kind == "fa": return e_fa(i)
     if i == "bread": return {"type": "minecraft:item", "name": "minecraft:bread", "functions": [count(FOOD["bread"]["lo"], FOOD["bread"]["hi"])]}
     if i == "condensed_milk": return e_lr(i, FOOD[i]["lo"], FOOD[i]["hi"])
@@ -313,7 +330,7 @@ def expected(theme, tier, luck):
     """Esperado por container (stacks): guns, ammo, att, lr, fa."""
     rates = RATES[theme][tier]; rolls, bonus = ROLLS[tier]
     r = rolls + math.floor(bonus * luck)
-    res = {k: 0.0 for k in ("gun", "ammo", "att", "lr", "fa", "food")}
+    res = {k: 0.0 for k in ("gun", "ammo", "att", "lr", "fa", "food", "gear")}
     for cat_set in CORE_POOLS:
         part = {k: v for k, v in rates.items() if k in cat_set}
         if not part: continue
@@ -345,7 +362,7 @@ def preview():
     print("%-14s %-30s %5s | %s | %-23s | %6s %6s" % ("tema", "estrutura", "cont.", "Sorte 0: arm  mun  att   LR   FA", "armas S0 S1 S2 S3", "LR S3", "FA S3"))
     for th, name, v in rows:
         def tot(luck):
-            t = {k: 0.0 for k in ("gun", "ammo", "att", "lr", "fa", "food")}
+            t = {k: 0.0 for k in ("gun", "ammo", "att", "lr", "fa", "food", "gear")}
             for tier, n in v["tiers"].items():
                 if tier.startswith("pot"): continue
                 for k, x in expected(th, tier, luck).items(): t[k] += n * x

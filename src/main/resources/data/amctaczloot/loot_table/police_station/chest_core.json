@@ -318,6 +318,184 @@
         }
       ],
       "bonus_rolls": 0.0
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "lrtactical:throwable",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "ThrowableId": "lrtactical:m67"
+                }
+              }
+            },
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 3,
+                "max": 5
+              }
+            }
+          ],
+          "weight": 92,
+          "quality": 23
+        },
+        {
+          "type": "minecraft:empty",
+          "weight": 908,
+          "quality": -23
+        }
+      ],
+      "bonus_rolls": 0.0
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "lrtactical:throwable",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "ThrowableId": "lrtactical:rgn"
+                }
+              }
+            },
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 2,
+                "max": 4
+              }
+            }
+          ],
+          "weight": 41,
+          "quality": 10
+        },
+        {
+          "type": "minecraft:empty",
+          "weight": 959,
+          "quality": -10
+        }
+      ],
+      "bonus_rolls": 0.0
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "lrtactical:throwable",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "ThrowableId": "lrtactical:c4"
+                }
+              }
+            }
+          ],
+          "weight": 30,
+          "quality": 8
+        },
+        {
+          "type": "minecraft:empty",
+          "weight": 970,
+          "quality": -8
+        }
+      ],
+      "bonus_rolls": 0.0
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "lrtactical:melee",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "MeleeWeaponId": "lrtactical:dagger"
+                }
+              }
+            }
+          ],
+          "weight": 20,
+          "quality": 5
+        },
+        {
+          "type": "minecraft:empty",
+          "weight": 980,
+          "quality": -5
+        }
+      ],
+      "bonus_rolls": 0.0
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "lrtactical:melee",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "MeleeWeaponId": "lrtactical:karambit"
+                }
+              }
+            }
+          ],
+          "weight": 20,
+          "quality": 5
+        },
+        {
+          "type": "minecraft:empty",
+          "weight": 980,
+          "quality": -5
+        }
+      ],
+      "bonus_rolls": 0.0
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "lrtactical:melee",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": {
+                  "MeleeWeaponId": "lrtactical:baseball_bat"
+                }
+              }
+            }
+          ],
+          "weight": 20,
+          "quality": 5
+        },
+        {
+          "type": "minecraft:empty",
+          "weight": 980,
+          "quality": -5
+        }
+      ],
+      "bonus_rolls": 0.0
     }
   ]
 }
