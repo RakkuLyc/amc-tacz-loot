@@ -36,14 +36,14 @@ ROLLS = {"chest": (1, 0.2), "chest_hard": (1, 0.34), "barrel": (1, 0.0), "barrel
 # att = attachment.
 # A cura LesRaisins, o First Aid, o leite condensado e o pão NÃO estão aqui: cada item tem a sua chance por container (HEAL_LR / FA_CHANCE / FOOD abaixo).
 RATES = {
-    "building":       {"chest": dict(gun=120, ammo=520, att=40),         # 1 arma a cada 8,3 baús; munição em 52%
-                       "chest_hard": dict(gun=200, ammo=866, att=70),     # 1 arma a cada 5 baús difíceis; munição 86,6%
-                       "barrel": dict(gun=4, ammo=62, att=12),
-                       "barrel_hard": dict(gun=7, ammo=114, att=24)},
-    "police_station": {"chest": dict(gun=250, ammo=800, att=90),          # armas inalteradas: 1 a cada 4 baús; munição 80%
-                       "chest_hard": dict(gun=333, ammo=1000, att=160),   # 1 arma a cada 3 baús difíceis; munição sempre (teto)
-                       "barrel": dict(gun=30, ammo=200, att=40),
-                       "barrel_hard": dict(gun=60, ammo=360, att=70)},
+    "building":       {"chest": dict(gun=120, ammo=520),         # 1 arma a cada 8,3 baús; munição em 52%
+                       "chest_hard": dict(gun=200, ammo=866),     # 1 arma a cada 5 baús difíceis; munição 86,6%
+                       "barrel": dict(gun=4, ammo=62),
+                       "barrel_hard": dict(gun=7, ammo=114)},
+    "police_station": {"chest": dict(gun=250, ammo=800),          # armas inalteradas: 1 a cada 4 baús; munição 80%
+                       "chest_hard": dict(gun=333, ammo=1000),   # 1 arma a cada 3 baús difíceis; munição sempre (teto)
+                       "barrel": dict(gun=30, ammo=200),
+                       "barrel_hard": dict(gun=60, ammo=360)},
     "pharmacy":       {"chest": dict(), "chest_hard": dict(),
                        "barrel": dict(), "barrel_hard": dict()},
     "house":          {"chest": dict(), "chest_hard": dict(),
@@ -74,7 +74,14 @@ AMMO_MIX_UNIFORM = 0.5
 AMMO_STACKS = (1, 3)
 AMMO_SIZE = 1.0
 # (a arma NÃO traz munição junto: a munição é um sorteio separado, calibre pela raridade das armas que o usam)
-ATT_TYPE_W = dict(scope=4, muzzle=4, grip=3, stock=3, extended_mag=4, laser=2)   # peso do tipo de attachment
+# ATTACHMENTS (aprovado em 16 Nov 2026): "ligeiramente mais raros que as armas" = a chance de QUALQUER attachment num container é ATT_FRACTION_OF_GUN da chance de
+# arma do mesmo tema e tipo de container. Qual attachment sai: peso por CLASSE (Comum/Incomum/Raro/Épico), calculada por tools/att_rarity.py a partir de dois fatores
+# (quantas armas aceitam o attachment e seus atributos) e gravada em docs/attachments_rarity.json.
+ATT_FRACTION_OF_GUN = 0.8
+ATT_CLASS_W = {"Comum": 8, "Incomum": 4, "Raro": 2, "Épico": 1}
+for _th in RATES.values():
+    for _r in _th.values():
+        if "gun" in _r: _r["att"] = round(_r["gun"] * ATT_FRACTION_OF_GUN)
 # itens de cura: (peso, mín, máx)
 # CURA LESRAISINS (escolha do usuário, 15 Nov 2026): chance de CADA item por container, independente dos outros (‰: 195 = 19,5%),
 # a mesma em todos os temas e tipos de container, exceto na farmácia (multiplicador só nos incomuns e no raro, PHARMACY_MULT).
@@ -174,10 +181,10 @@ def ammo_range(c):
 
 
 def att_weights():
-    items = {a: v for a, v in TZ["attachments"].items() if v["craftable"]}
-    n = {}
-    for v in items.values(): n[v["type"]] = n.get(v["type"], 0) + 1
-    return {a: max(1, round(ATT_TYPE_W[v["type"]] * 100 / n[v["type"]])) for a, v in items.items()}
+    """Peso de cada attachment pela sua classe de raridade (docs/attachments_rarity.json, gerado por tools/att_rarity.py)."""
+    rar = load("docs/attachments_rarity.json")
+    assert {r["id"] for r in rar} == {a for a, v in TZ["attachments"].items() if v["craftable"]}, "classes dos attachments desatualizadas: rode tools/att_rarity.py"
+    return {r["id"]: ATT_CLASS_W[r["cls"]] for r in rar}
 
 
 # ---------------------------------------------------------------- JSON dos itens

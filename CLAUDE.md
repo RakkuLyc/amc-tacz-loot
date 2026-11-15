@@ -17,6 +17,10 @@ First Aid e da LesRaisins. Mod id `amctaczloot`. Recomeçado do zero em 13 Nov 2
 - **Armas** (chance por baú comum / difícil, Sorte 0): prédio 12,0% / 20,0% (1 a cada 8,3 / 5 baús), barris 0,4% / 0,7%; delegacia 25,0% / 33,3%
   (1 a cada 4 / 3), barris 3,0% / 6,0%. Tipos: pistola 10, smg 6, escopeta 6, fuzil 4, dmr 2, sniper 1,5, mg 1, rpg 0,3 (delegacia: smg/escopeta 8, fuzil 6).
   Arma cai sem munição, descarregada.
+- **Attachments** (aprovado em 16 Nov 2026): a chance de QUALQUER attachment por container é **0,8 da chance de arma** do mesmo tema/tipo (`ATT_FRACTION_OF_GUN`): prédio baú 9,6%, difícil 16%,
+  barris 0,3% / 0,6%; delegacia 20% / 26,6% / 2,4% / 4,8%. Qual sai: peso por **classe** (Comum 8, Incomum 4, Raro 2, Épico 1) sobre os 104 attachments fabricáveis, classes em
+  `docs/attachments_rarity.json` (gerado por `tools/att_rarity.py <tacz.jar>`: 50% quantas armas aceitam o attachment (peso real do loot) + 50% atributos (zoom, recuo, precisão, nível do pente,
+  dano/perfuração, silenciador), comparados dentro de cada tipo; corte 40/30/20/10%). Chance de cada item por baú de prédio: Comum 0,150%, Incomum 0,075%, Raro 0,037%, Épico 0,019%. Miras = 35% dos sorteios.
 - **Munição** (pool próprio): baú de prédio 52,0%, difícil 86,6%, barris 6,2% / 11,4%; delegacia baú 80,0%, difícil 100,0% (teto), barris 20,0% / 36,0%.
   Calibre: metade igual para os 23 calibres com arma + metade pela popularidade das armas (ex. prédio: 12g 11,9%, 9mm 10,8%, .45 ACP 9,3%; mais raros ~2,4%).
   **Cada acerto de munição dá 1 a 3 pilhas de calibres sorteados** (o mesmo calibre pode repetir), com balas por pilha proporcionais à pilha máxima, **no
@@ -276,3 +280,13 @@ First Aid e da LesRaisins. Mod id `amctaczloot`. Recomeçado do zero em 13 Nov 2
 - Validado (prédio, 8.000 baús): plaster 7,8%, comuns 4,2–5,3%, blood pack 2,2%, CAR 2,1%, AI-2 e CMS 0,9%, SURV12 0,6%, defibrillator 2,3%, morphine 1,1%, injector 0,5%; farmácia (3.000) idêntica
   à anterior (CMS 6,8%, SURV12 4,0%, plaster 15,1%). 0 erros de carga.
 - Resultado esperado: green tower ~23 curas LesRaisins e ~98 unidades de First Aid (antes 50 e 199); 100 baús ~133 itens de cura no total; chance de 1+ item Épico em 100 baús 39% cada, Raro 63% cada.
+
+## Attachments por classe de raridade (16 Nov 2026)
+- Ideia do usuário: "ligeiramente mais raros que as armas", baseada no tipo de arma que o attachment aceita e nos seus atributos. Proposta (tabela) aprovada e aplicada sem mudanças.
+  Antes: att = 4% (baú de prédio, 1/3 da arma) e 1,2% nos barris (3x a arma), tipo com peso fixo e uniforme dentro do tipo. Agora: 9,6% e 0,3%.
+- Fatos: compatibilidade vem de `tacz_tags/attachments/allow_attachments/<arma>.json` (tags `#tacz:...` resolvidas recursivamente); atributos de `data/attachments/<id>_data.json` e zoom de
+  `assets/tacz/display/attachments/<id>_display.json`. 67 das 71 armas têm lista (`m320`, `minigun`, `rpg7`, `taurus943` não aceitam nenhum attachment); `sight_infitac_fmp13` não tem arquivo de dados.
+  As munições especiais (fmj, he, hp, i, slug...) são do tipo `extended_mag` no TACZ. Épicos: scope_mk5hd, scope_xl50, scope_mk4ert, scope_1873_6x, scope_1866_4x, muzzle_silencer_vulture,
+  muzzle_brake_timeless50, laser_peq6, stock_heavy_spas_12, stock_tactical_spas_12. Os pesos dos atributos e os cortes 40/30/20/10 são julgamento meu (aprovados pelo usuário).
+- Validado no servidor: prédio (8.000 baús) 9,6% com attachment, classes 67,8/22,2/8,1/1,9% (esperado 65,6/24,2/8,2/2,0); por item 0,155/0,069/0,037/0,019%; delegacia (3.000) 19,9%
+  (Épicos saíram abaixo do esperado, amostra pequena). Se o catálogo do TACZ mudar, rode `tools/att_rarity.py` (o gerador falha se as classes estiverem desatualizadas).
