@@ -28,7 +28,9 @@ def rcon(cmds):
 
 
 def category(type_):
-    # mesma regra do AMC: Structures.CATEGORIES, por início do tipo ("houses" -> house, "buildings_*" -> building)
+    # mesma regra do AMC: Structures.CATEGORIES, por início do tipo ("houses" -> house). Desde 16 Nov 2026 os prédios têm categoria por altura:
+    # "buildings_small" -> building_small (idem medium, large, immense).
+    if type_.startswith("buildings_"): return "building_" + type_[len("buildings_"):]
     for k in CATS:
         if type_.startswith(k) or type_.startswith(k + "s"):
             return k

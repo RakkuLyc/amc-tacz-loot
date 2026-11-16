@@ -40,6 +40,9 @@ First Aid e da LesRaisins. Mod id `amctaczloot`. Recomeçado do zero em 13 Nov 2
   **Épico** morphine injector **0,5%**. **Farmácia congelada**: plaster 15%, comuns 9,2%, morphine 8,2%, defibrillator 8,2%, injector 4,0%. `FA_CHANCE`, `FA_CLASS`, `FA_COUNT`.
   Classes (mais comum -> mais rara): Muito comum, Comum, Incomum, Raro, **Épico** (nova, 16 Nov). Raro = base 4,0% e Épico = 2,0% LR (e 2,0% / 1,0% FA) antes de x0,5: valores meus.
 - **Sucata** vanilla (stick, 4 sementes, carne podre, osso, papel, tigela, garrafa, olho de aranha) nas 36 tabelas do AMC sobrescritas; sem itens vanilla úteis (única exceção: pão).
+- **AMC com baús sorteados** (16 Nov 2026): os nomes das tabelas não mudaram (6 temas x chest/barrel/pot x _hard), então o mod não precisou de ajuste. Os 10 prédios
+  `building_*` perderam os baús do modelo e ganharam baús sorteados por cópia (pequeno 12–28, grande 38–65, mais 30% dos barris viram baús); rampa e delegacia não mudaram.
+  `docs/containers.json` foi medido de novo (média de 6 cópias). O spawn agora usa categorias por altura (`building_small`, `building_large`...): `measure_containers.py` ajustado.
 - **Vasos** não recebem nada do mod. Temas: building, police_station, pharmacy, house, workshop, gas_station (o AMC removeu `building_large`).
 - **Ferramentas**: `gen_loot.py` (prévia / `--write`), `sample_items.py` (chance por item num servidor de teste; use este), `sample_loot.py` (categorias de arma/munição;
   a coluna `lr` conta o leite como LesRaisins e **não bate** com `expected()["lr"]`: dá falso desvio), `measure_containers.py`, `tacz_catalog.py`, `lr_catalog.py`.
@@ -317,3 +320,11 @@ First Aid e da LesRaisins. Mod id `amctaczloot`. Recomeçado do zero em 13 Nov 2
 - **Meu erro de teste:** as validações liam o valor com a regex `(\d+)` e ignoravam o sufixo de tipo (`b`, `s`, `L`). Agora: conferir também o **tipo** de toda tag numérica que outro mod lê.
   Validado (baú real, 1.200 baús): 405 armas, 66 modelos, todas com o pente inteiro e na quantidade certa.
 - Regra geral: para qualquer número dentro de `custom_data` que outro mod lê, usar SNBT (ou conferir no bytecode o tipo que ele espera).
+
+## AMC: baús sorteados por cópia (verificação de 16 Nov 2026)
+- AMC `26ab892`..`fc3961a`: baús salvos nos modelos dos 10 prédios removidos e sorteados por cópia (`core/ChestDraw`, faixas por classe de altura), "hard" para os sorteados no subsolo
+  ou no terraço, barris que guardam algo continuam barris; categorias de spawn por altura. `Palette.lootTable` continua `chests/<tema>/<tier>[_hard]` e `LOOT_THEMES` igual:
+  **nenhuma mudança necessária no mod**. Jar do AMC usado na medição idêntico (cmp) ao da instância do usuário.
+- Contagem média (sem vasos), antiga -> nova: apartamentos 10->23, esqueleto 17->22, pequeno 24->26, azulado 16->61, apocalíptico 49->66, torre 71->102, torre verde 91->80,
+  crash 94->94, largo 161->93, brutalista 229->133; rampa 399 e delegacia 63 iguais. Como as chances são por baú, a sensação por baú não muda; o total por prédio sim
+  (ex.: armas no brutalista 27,5->16,0; no azulado 2,0->7,3).

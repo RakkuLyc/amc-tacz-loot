@@ -2,9 +2,13 @@
  "abandoned_crash_building": {
   "theme": "building",
   "tiers": {
-   "chest": 94
+   "chest": 91,
+   "chest_hard": 1.6,
+   "barrel": 1
   },
-  "total": 94
+  "total": 93.6,
+  "copies_measured": 5,
+  "note": "média de cópias (baús sorteados por cópia desde 16 Nov 2026)"
  },
  "abandoned_garage_house": {
   "theme": "house",
@@ -29,9 +33,12 @@
  "abandoned_green_tower": {
   "theme": "building",
   "tiers": {
-   "chest": 91
+   "chest": 79.3,
+   "chest_hard": 0.2
   },
-  "total": 91
+  "total": 79.5,
+  "copies_measured": 6,
+  "note": "média de cópias (baús sorteados por cópia desde 16 Nov 2026)"
  },
  "abandoned_house": {
   "theme": "house",
@@ -87,12 +94,14 @@
  "abandoned_police_station": {
   "theme": "police_station",
   "tiers": {
-   "barrel": 27,
-   "barrel_hard": 7,
    "chest": 18,
-   "chest_hard": 11
+   "chest_hard": 11,
+   "barrel": 27,
+   "barrel_hard": 7
   },
-  "total": 63
+  "total": 63,
+  "copies_measured": 6,
+  "note": "média de cópias (baús sorteados por cópia desde 16 Nov 2026)"
  },
  "abandoned_pool_house": {
   "theme": "house",
@@ -108,17 +117,21 @@
  "abandoned_ramp_building": {
   "theme": "building",
   "tiers": {
-   "barrel": 242,
-   "chest": 157
+   "chest": 157,
+   "barrel": 242
   },
-  "total": 399
+  "total": 399,
+  "copies_measured": 6,
+  "note": "média de cópias (baús sorteados por cópia desde 16 Nov 2026)"
  },
  "abandoned_small_building": {
   "theme": "building",
   "tiers": {
-   "chest": 24
+   "chest": 26
   },
-  "total": 24
+  "total": 26,
+  "copies_measured": 6,
+  "note": "média de cópias (baús sorteados por cópia desde 16 Nov 2026)"
  },
  "abandoned_suburban_house": {
   "theme": "house",
@@ -156,40 +169,50 @@
  "abandoned_wide_building": {
   "theme": "building",
   "tiers": {
-   "chest": 161
+   "chest": 87,
+   "chest_hard": 6
   },
-  "total": 161
+  "total": 93,
+  "copies_measured": 6,
+  "note": "média de cópias (baús sorteados por cópia desde 16 Nov 2026)"
  },
  "apartment_building": {
   "theme": "building",
   "tiers": {
-   "chest": 10
+   "chest": 22.7
   },
-  "total": 10
+  "total": 22.7,
+  "copies_measured": 6,
+  "note": "média de cópias (baús sorteados por cópia desde 16 Nov 2026)"
  },
  "apocalyptic_building_57x45": {
   "theme": "building",
   "tiers": {
-   "chest": 44,
-   "chest_hard": 5
+   "chest": 63.8,
+   "chest_hard": 2.2
   },
-  "total": 49
+  "total": 66.0,
+  "copies_measured": 6,
+  "note": "média de cópias (baús sorteados por cópia desde 16 Nov 2026)"
  },
  "bluish_building": {
   "theme": "building",
   "tiers": {
-   "chest": 15,
-   "chest_hard": 1
+   "chest": 60.8
   },
-  "total": 16
+  "total": 60.8,
+  "copies_measured": 6,
+  "note": "média de cópias (baús sorteados por cópia desde 16 Nov 2026)"
  },
  "brutalist_u_building_75x58": {
   "theme": "building",
   "tiers": {
-   "chest": 229,
+   "chest": 133.2,
    "pot": 9
   },
-  "total": 238
+  "total": 142.2,
+  "copies_measured": 4,
+  "note": "média de cópias (baús sorteados por cópia desde 16 Nov 2026)"
  },
  "gas_station_blue": {
   "theme": "gas_station",
@@ -384,17 +407,23 @@
  "skeleton_building_31x29": {
   "theme": "building",
   "tiers": {
-   "chest": 17
+   "chest": 19.8,
+   "chest_hard": 2.3
   },
-  "total": 17
+  "total": 22.1,
+  "copies_measured": 6,
+  "note": "média de cópias (baús sorteados por cópia desde 16 Nov 2026)"
  },
  "tower": {
   "theme": "building",
   "tiers": {
-   "chest": 71,
+   "chest": 77,
+   "barrel": 25,
    "pot": 37
   },
-  "total": 108
+  "total": 139,
+  "copies_measured": 3,
+  "note": "média de cópias (baús sorteados por cópia desde 16 Nov 2026)"
  },
  "workshop_medium_blue_black": {
   "theme": "workshop",
