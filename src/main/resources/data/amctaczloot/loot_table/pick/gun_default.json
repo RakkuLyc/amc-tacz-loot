@@ -11,12 +11,7 @@
             {
               "function": "minecraft:set_components",
               "components": {
-                "minecraft:custom_data": {
-                  "GunId": "tacz:aa12",
-                  "GunFireMode": "SEMI",
-                  "GunCurrentAmmoCount": 4,
-                  "HasBulletInBarrel": false
-                }
+                "minecraft:custom_data": "{GunId:\"tacz:aa12\",GunFireMode:\"SEMI\",GunCurrentAmmoCount:4,HasBulletInBarrel:0b}"
               }
             }
           ],
@@ -29,12 +24,7 @@
             {
               "function": "minecraft:set_components",
               "components": {
-                "minecraft:custom_data": {
-                  "GunId": "tacz:ai_awp",
-                  "GunFireMode": "SEMI",
-                  "GunCurrentAmmoCount": 3,
-                  "HasBulletInBarrel": false
-                }
+                "minecraft:custom_data": "{GunId:\"tacz:ai_awp\",GunFireMode:\"SEMI\",GunCurrentAmmoCount:3,HasBulletInBarrel:0b}"
               }
             }
           ],
@@ -47,12 +37,7 @@
             {
               "function": "minecraft:set_components",
               "components": {
-                "minecraft:custom_data": {
-                  "GunId": "tacz:ak12",
-                  "GunFireMode": "AUTO",
-                  "GunCurrentAmmoCount": 15,
-                  "HasBulletInBarrel": false
-                }
+                "minecraft:custom_data": "{GunId:\"tacz:ak12\",GunFireMode:\"AUTO\",GunCurrentAmmoCount:15,HasBulletInBarrel:0b}"
               }
             }
           ],
@@ -65,12 +50,7 @@
             {
               "function": "minecraft:set_components",
               "components": {
-                "minecraft:custom_data": {
-                  "GunId": "tacz:ak47",
-                  "GunFireMode": "AUTO",
-                  "GunCurrentAmmoCount": 15,
-                  "HasBulletInBarrel": false
-                }
+                "minecraft:custom_data": "{GunId:\"tacz:ak47\",GunFireMode:\"AUTO\",GunCurrentAmmoCount:15,HasBulletInBarrel:0b}"
               }
             }
           ],
@@ -83,12 +63,7 @@
             {
               "function": "minecraft:set_components",
               "components": {
-                "minecraft:custom_data": {
-                  "GunId": "tacz:ak74m",
-                  "GunFireMode": "AUTO",
-                  "GunCurrentAmmoCount": 15,
-                  "HasBulletInBarrel": false
-                }
+                "minecraft:custom_data": "{GunId:\"tacz:ak74m\",GunFireMode:\"AUTO\",GunCurrentAmmoCount:15,HasBulletInBarrel:0b}"
               }
             }
           ],
@@ -101,12 +76,7 @@
             {
               "function": "minecraft:set_components",
               "components": {
-                "minecraft:custom_data": {
-                  "GunId": "tacz:aug",
-                  "GunFireMode": "AUTO",
-                  "GunCurrentAmmoCount": 15,
-                  "HasBulletInBarrel": false
-                }
+                "minecraft:custom_data": "{GunId:\"tacz:aug\",GunFireMode:\"AUTO\",GunCurrentAmmoCount:15,HasBulletInBarrel:0b}"
               }
             }
           ],
@@ -119,12 +89,7 @@
             {
               "function": "minecraft:set_components",
               "components": {
-                "minecraft:custom_data": {
-                  "GunId": "tacz:b93r",
-                  "GunFireMode": "BURST",
-                  "GunCurrentAmmoCount": 10,
-                  "HasBulletInBarrel": false
-                }
+                "minecraft:custom_data": "{GunId:\"tacz:b93r\",GunFireMode:\"BURST\",GunCurrentAmmoCount:10,HasBulletInBarrel:0b}"
               }
             }
           ],
@@ -137,12 +102,7 @@
             {
               "function": "minecraft:set_components",
               "components": {
-                "minecraft:custom_data": {
-                  "GunId": "tacz:cz75",
-                  "GunFireMode": "AUTO",
-                  "GunCurrentAmmoCount": 8,
-                  "HasBulletInBarrel": false
-                }
+                "minecraft:custom_data": "{GunId:\"tacz:cz75\",GunFireMode:\"AUTO\",GunCurrentAmmoCount:8,HasBulletInBarrel:0b}"
               }
             }
           ],
@@ -155,12 +115,7 @@
             {
               "function": "minecraft:set_components",
               "components": {
-                "minecraft:custom_data": {
-                  "GunId": "tacz:db_long",
-                  "GunFireMode": "SEMI",
-                  "GunCurrentAmmoCount": 1,
-                  "HasBulletInBarrel": false
-                }
+                "minecraft:custom_data": "{GunId:\"tacz:db_long\",GunFireMode:\"SEMI\",GunCurrentAmmoCount:1,HasBulletInBarrel:0b}"
               }
             }
           ],
@@ -173,12 +128,7 @@
             {
               "function": "minecraft:set_components",
               "components": {
-                "minecraft:custom_data": {
-                  "GunId": "tacz:db_short",
-                  "GunFireMode": "BURST",
-                  "GunCurrentAmmoCount": 1,
-                  "HasBulletInBarrel": false
-                }
+                "minecraft:custom_data": "{GunId:\"tacz:db_short\",GunFireMode:\"BURST\",GunCurrentAmmoCount:1,HasBulletInBarrel:0b}"
               }
             }
           ],
@@ -191,12 +141,7 @@
             {
               "function": "minecraft:set_components",
               "components": {
-                "minecraft:custom_data": {
-                  "GunId": "tacz:deagle",
-                  "GunFireMode": "SEMI",
-                  "GunCurrentAmmoCount": 4,
-                  "HasBulletInBarrel": false
-                }
+                "minecraft:custom_data": "{GunId:\"tacz:deagle\",GunFireMode:\"SEMI\",GunCurrentAmmoCount:4,HasBulletInBarrel:0b}"
               }
             }
           ],
@@ -209,12 +154,7 @@
             {
               "function": "minecraft:set_components",
               "components": {
-                "minecraft:custom_data": {
-                  "GunId": "tacz:deagle_golden",
-                  "GunFireMode": "SEMI",
-                  "GunCurrentAmmoCount": 5,
-                  "HasBulletInBarrel": false
-                }
+                "minecraft:custom_data": "{GunId:\"tacz:deagle_golden\",GunFireMode:\"SEMI\",GunCurrentAmmoCount:5,HasBulletInBarrel:0b}"
               }
             }
           ],
@@ -227,12 +167,7 @@
             {
               "function": "minecraft:set_components",
               "components": {
-                "minecraft:custom_data": {
-                  "GunId": "tacz:fn_evolys",
-                  "GunFireMode": "AUTO",
-                  "GunCurrentAmmoCount": 38,
-                  "HasBulletInBarrel": false
-                }
+                "minecraft:custom_data": "{GunId:\"tacz:fn_evolys\",GunFireMode:\"AUTO\",GunCurrentAmmoCount:38,HasBulletInBarrel:0b}"
               }
             }
           ],
@@ -245,12 +180,7 @@
             {
               "function": "minecraft:set_components",
               "components": {
-                "minecraft:custom_data": {
-                  "GunId": "tacz:fn_fal",
-                  "GunFireMode": "SEMI",
-                  "GunCurrentAmmoCount": 10,
-                  "HasBulletInBarrel": false
-                }
+                "minecraft:custom_data": "{GunId:\"tacz:fn_fal\",GunFireMode:\"SEMI\",GunCurrentAmmoCount:10,HasBulletInBarrel:0b}"
               }
             }
           ],
@@ -263,12 +193,7 @@
             {
               "function": "minecraft:set_components",
               "components": {
-                "minecraft:custom_data": {
-                  "GunId": "tacz:g36k",
-                  "GunFireMode": "AUTO",
-                  "GunCurrentAmmoCount": 15,
-                  "HasBulletInBarrel": false
-                }
+                "minecraft:custom_data": "{GunId:\"tacz:g36k\",GunFireMode:\"AUTO\",GunCurrentAmmoCount:15,HasBulletInBarrel:0b}"
               }
             }
           ],
@@ -281,12 +206,7 @@
             {
               "function": "minecraft:set_components",
               "components": {
-                "minecraft:custom_data": {
-                  "GunId": "tacz:glock_17",
-                  "GunFireMode": "SEMI",
-                  "GunCurrentAmmoCount": 9,
-                  "HasBulletInBarrel": false
-                }
+                "minecraft:custom_data": "{GunId:\"tacz:glock_17\",GunFireMode:\"SEMI\",GunCurrentAmmoCount:9,HasBulletInBarrel:0b}"
               }
             }
           ],
@@ -299,12 +219,7 @@
             {
               "function": "minecraft:set_components",
               "components": {
-                "minecraft:custom_data": {
-                  "GunId": "tacz:hcar",
-                  "GunFireMode": "AUTO",
-                  "GunCurrentAmmoCount": 10,
-                  "HasBulletInBarrel": false
-                }
+                "minecraft:custom_data": "{GunId:\"tacz:hcar\",GunFireMode:\"AUTO\",GunCurrentAmmoCount:10,HasBulletInBarrel:0b}"
               }
             }
           ],
@@ -317,12 +232,7 @@
             {
               "function": "minecraft:set_components",
               "components": {
-                "minecraft:custom_data": {
-                  "GunId": "tacz:hk416d",
-                  "GunFireMode": "AUTO",
-                  "GunCurrentAmmoCount": 15,
-                  "HasBulletInBarrel": false
-                }
+                "minecraft:custom_data": "{GunId:\"tacz:hk416d\",GunFireMode:\"AUTO\",GunCurrentAmmoCount:15,HasBulletInBarrel:0b}"
               }
             }
           ],
@@ -335,12 +245,7 @@
             {
               "function": "minecraft:set_components",
               "components": {
-                "minecraft:custom_data": {
-                  "GunId": "tacz:hk_g3",
-                  "GunFireMode": "SEMI",
-                  "GunCurrentAmmoCount": 10,
-                  "HasBulletInBarrel": false
-                }
+                "minecraft:custom_data": "{GunId:\"tacz:hk_g3\",GunFireMode:\"SEMI\",GunCurrentAmmoCount:10,HasBulletInBarrel:0b}"
               }
             }
           ],
@@ -353,12 +258,7 @@
             {
               "function": "minecraft:set_components",
               "components": {
-                "minecraft:custom_data": {
-                  "GunId": "tacz:hk_mk23",
-                  "GunFireMode": "SEMI",
-                  "GunCurrentAmmoCount": 6,
-                  "HasBulletInBarrel": false
-                }
+                "minecraft:custom_data": "{GunId:\"tacz:hk_mk23\",GunFireMode:\"SEMI\",GunCurrentAmmoCount:6,HasBulletInBarrel:0b}"
               }
             }
           ],
@@ -371,12 +271,7 @@
             {
               "function": "minecraft:set_components",
               "components": {
-                "minecraft:custom_data": {
-                  "GunId": "tacz:hk_mp5a5",
-                  "GunFireMode": "AUTO",
-                  "GunCurrentAmmoCount": 15,
-                  "HasBulletInBarrel": false
-                }
+                "minecraft:custom_data": "{GunId:\"tacz:hk_mp5a5\",GunFireMode:\"AUTO\",GunCurrentAmmoCount:15,HasBulletInBarrel:0b}"
               }
             }
           ],
@@ -389,12 +284,7 @@
             {
               "function": "minecraft:set_components",
               "components": {
-                "minecraft:custom_data": {
-                  "GunId": "tacz:hk_mp7a1",
-                  "GunFireMode": "AUTO",
-                  "GunCurrentAmmoCount": 10,
-                  "HasBulletInBarrel": false
-                }
+                "minecraft:custom_data": "{GunId:\"tacz:hk_mp7a1\",GunFireMode:\"AUTO\",GunCurrentAmmoCount:10,HasBulletInBarrel:0b}"
               }
             }
           ],
@@ -407,12 +297,7 @@
             {
               "function": "minecraft:set_components",
               "components": {
-                "minecraft:custom_data": {
-                  "GunId": "tacz:hm50b",
-                  "GunFireMode": "SEMI",
-                  "GunCurrentAmmoCount": 5,
-                  "HasBulletInBarrel": false
-                }
+                "minecraft:custom_data": "{GunId:\"tacz:hm50b\",GunFireMode:\"SEMI\",GunCurrentAmmoCount:5,HasBulletInBarrel:0b}"
               }
             }
           ],
@@ -425,12 +310,7 @@
             {
               "function": "minecraft:set_components",
               "components": {
-                "minecraft:custom_data": {
-                  "GunId": "tacz:kar98",
-                  "GunFireMode": "SEMI",
-                  "GunCurrentAmmoCount": 2,
-                  "HasBulletInBarrel": false
-                }
+                "minecraft:custom_data": "{GunId:\"tacz:kar98\",GunFireMode:\"SEMI\",GunCurrentAmmoCount:2,HasBulletInBarrel:0b}"
               }
             }
           ],
@@ -443,12 +323,7 @@
             {
               "function": "minecraft:set_components",
               "components": {
-                "minecraft:custom_data": {
-                  "GunId": "tacz:lonetrail",
-                  "GunFireMode": "SEMI",
-                  "GunCurrentAmmoCount": 1,
-                  "HasBulletInBarrel": false
-                }
+                "minecraft:custom_data": "{GunId:\"tacz:lonetrail\",GunFireMode:\"SEMI\",GunCurrentAmmoCount:1,HasBulletInBarrel:0b}"
               }
             }
           ],
@@ -461,12 +336,7 @@
             {
               "function": "minecraft:set_components",
               "components": {
-                "minecraft:custom_data": {
-                  "GunId": "tacz:m1014",
-                  "GunFireMode": "SEMI",
-                  "GunCurrentAmmoCount": 3,
-                  "HasBulletInBarrel": false
-                }
+                "minecraft:custom_data": "{GunId:\"tacz:m1014\",GunFireMode:\"SEMI\",GunCurrentAmmoCount:3,HasBulletInBarrel:0b}"
               }
             }
           ],
@@ -479,12 +349,7 @@
             {
               "function": "minecraft:set_components",
               "components": {
-                "minecraft:custom_data": {
-                  "GunId": "tacz:m107",
-                  "GunFireMode": "SEMI",
-                  "GunCurrentAmmoCount": 5,
-                  "HasBulletInBarrel": false
-                }
+                "minecraft:custom_data": "{GunId:\"tacz:m107\",GunFireMode:\"SEMI\",GunCurrentAmmoCount:5,HasBulletInBarrel:0b}"
               }
             }
           ],
@@ -497,12 +362,7 @@
             {
               "function": "minecraft:set_components",
               "components": {
-                "minecraft:custom_data": {
-                  "GunId": "tacz:m16a1",
-                  "GunFireMode": "AUTO",
-                  "GunCurrentAmmoCount": 10,
-                  "HasBulletInBarrel": false
-                }
+                "minecraft:custom_data": "{GunId:\"tacz:m16a1\",GunFireMode:\"AUTO\",GunCurrentAmmoCount:10,HasBulletInBarrel:0b}"
               }
             }
           ],
@@ -515,12 +375,7 @@
             {
               "function": "minecraft:set_components",
               "components": {
-                "minecraft:custom_data": {
-                  "GunId": "tacz:m16a4",
-                  "GunFireMode": "BURST",
-                  "GunCurrentAmmoCount": 15,
-                  "HasBulletInBarrel": false
-                }
+                "minecraft:custom_data": "{GunId:\"tacz:m16a4\",GunFireMode:\"BURST\",GunCurrentAmmoCount:15,HasBulletInBarrel:0b}"
               }
             }
           ],
@@ -533,12 +388,7 @@
             {
               "function": "minecraft:set_components",
               "components": {
-                "minecraft:custom_data": {
-                  "GunId": "tacz:m1866",
-                  "GunFireMode": "AUTO",
-                  "GunCurrentAmmoCount": 3,
-                  "HasBulletInBarrel": false
-                }
+                "minecraft:custom_data": "{GunId:\"tacz:m1866\",GunFireMode:\"AUTO\",GunCurrentAmmoCount:3,HasBulletInBarrel:0b}"
               }
             }
           ],
@@ -551,12 +401,7 @@
             {
               "function": "minecraft:set_components",
               "components": {
-                "minecraft:custom_data": {
-                  "GunId": "tacz:m1897",
-                  "GunFireMode": "AUTO",
-                  "GunCurrentAmmoCount": 3,
-                  "HasBulletInBarrel": false
-                }
+                "minecraft:custom_data": "{GunId:\"tacz:m1897\",GunFireMode:\"AUTO\",GunCurrentAmmoCount:3,HasBulletInBarrel:0b}"
               }
             }
           ],
@@ -569,12 +414,7 @@
             {
               "function": "minecraft:set_components",
               "components": {
-                "minecraft:custom_data": {
-                  "GunId": "tacz:m1911",
-                  "GunFireMode": "SEMI",
-                  "GunCurrentAmmoCount": 4,
-                  "HasBulletInBarrel": false
-                }
+                "minecraft:custom_data": "{GunId:\"tacz:m1911\",GunFireMode:\"SEMI\",GunCurrentAmmoCount:4,HasBulletInBarrel:0b}"
               }
             }
           ],
@@ -587,12 +427,7 @@
             {
               "function": "minecraft:set_components",
               "components": {
-                "minecraft:custom_data": {
-                  "GunId": "tacz:m249",
-                  "GunFireMode": "AUTO",
-                  "GunCurrentAmmoCount": 38,
-                  "HasBulletInBarrel": false
-                }
+                "minecraft:custom_data": "{GunId:\"tacz:m249\",GunFireMode:\"AUTO\",GunCurrentAmmoCount:38,HasBulletInBarrel:0b}"
               }
             }
           ],
@@ -605,12 +440,7 @@
             {
               "function": "minecraft:set_components",
               "components": {
-                "minecraft:custom_data": {
-                  "GunId": "tacz:m320",
-                  "GunFireMode": "SEMI",
-                  "GunCurrentAmmoCount": 1,
-                  "HasBulletInBarrel": false
-                }
+                "minecraft:custom_data": "{GunId:\"tacz:m320\",GunFireMode:\"SEMI\",GunCurrentAmmoCount:1,HasBulletInBarrel:0b}"
               }
             }
           ],
@@ -623,12 +453,7 @@
             {
               "function": "minecraft:set_components",
               "components": {
-                "minecraft:custom_data": {
-                  "GunId": "tacz:m4a1",
-                  "GunFireMode": "AUTO",
-                  "GunCurrentAmmoCount": 15,
-                  "HasBulletInBarrel": false
-                }
+                "minecraft:custom_data": "{GunId:\"tacz:m4a1\",GunFireMode:\"AUTO\",GunCurrentAmmoCount:15,HasBulletInBarrel:0b}"
               }
             }
           ],
@@ -641,12 +466,7 @@
             {
               "function": "minecraft:set_components",
               "components": {
-                "minecraft:custom_data": {
-                  "GunId": "tacz:m700",
-                  "GunFireMode": "SEMI",
-                  "GunCurrentAmmoCount": 3,
-                  "HasBulletInBarrel": false
-                }
+                "minecraft:custom_data": "{GunId:\"tacz:m700\",GunFireMode:\"SEMI\",GunCurrentAmmoCount:3,HasBulletInBarrel:0b}"
               }
             }
           ],
@@ -659,12 +479,7 @@
             {
               "function": "minecraft:set_components",
               "components": {
-                "minecraft:custom_data": {
-                  "GunId": "tacz:m870",
-                  "GunFireMode": "SEMI",
-                  "GunCurrentAmmoCount": 3,
-                  "HasBulletInBarrel": false
-                }
+                "minecraft:custom_data": "{GunId:\"tacz:m870\",GunFireMode:\"SEMI\",GunCurrentAmmoCount:3,HasBulletInBarrel:0b}"
               }
             }
           ],
@@ -677,12 +492,7 @@
             {
               "function": "minecraft:set_components",
               "components": {
-                "minecraft:custom_data": {
-                  "GunId": "tacz:m95",
-                  "GunFireMode": "SEMI",
-                  "GunCurrentAmmoCount": 3,
-                  "HasBulletInBarrel": false
-                }
+                "minecraft:custom_data": "{GunId:\"tacz:m95\",GunFireMode:\"SEMI\",GunCurrentAmmoCount:3,HasBulletInBarrel:0b}"
               }
             }
           ],
@@ -695,12 +505,7 @@
             {
               "function": "minecraft:set_components",
               "components": {
-                "minecraft:custom_data": {
-                  "GunId": "tacz:m9a4",
-                  "GunFireMode": "SEMI",
-                  "GunCurrentAmmoCount": 9,
-                  "HasBulletInBarrel": false
-                }
+                "minecraft:custom_data": "{GunId:\"tacz:m9a4\",GunFireMode:\"SEMI\",GunCurrentAmmoCount:9,HasBulletInBarrel:0b}"
               }
             }
           ],
@@ -713,12 +518,7 @@
             {
               "function": "minecraft:set_components",
               "components": {
-                "minecraft:custom_data": {
-                  "GunId": "tacz:mcx_spear_lt",
-                  "GunFireMode": "AUTO",
-                  "GunCurrentAmmoCount": 15,
-                  "HasBulletInBarrel": false
-                }
+                "minecraft:custom_data": "{GunId:\"tacz:mcx_spear_lt\",GunFireMode:\"AUTO\",GunCurrentAmmoCount:15,HasBulletInBarrel:0b}"
               }
             }
           ],
@@ -731,12 +531,7 @@
             {
               "function": "minecraft:set_components",
               "components": {
-                "minecraft:custom_data": {
-                  "GunId": "tacz:minigun",
-                  "GunFireMode": "AUTO",
-                  "GunCurrentAmmoCount": 0,
-                  "HasBulletInBarrel": false
-                }
+                "minecraft:custom_data": "{GunId:\"tacz:minigun\",GunFireMode:\"AUTO\",GunCurrentAmmoCount:0,HasBulletInBarrel:0b}"
               }
             }
           ],
@@ -749,12 +544,7 @@
             {
               "function": "minecraft:set_components",
               "components": {
-                "minecraft:custom_data": {
-                  "GunId": "tacz:mk14",
-                  "GunFireMode": "SEMI",
-                  "GunCurrentAmmoCount": 5,
-                  "HasBulletInBarrel": false
-                }
+                "minecraft:custom_data": "{GunId:\"tacz:mk14\",GunFireMode:\"SEMI\",GunCurrentAmmoCount:5,HasBulletInBarrel:0b}"
               }
             }
           ],
@@ -767,12 +557,7 @@
             {
               "function": "minecraft:set_components",
               "components": {
-                "minecraft:custom_data": {
-                  "GunId": "tacz:mk18",
-                  "GunFireMode": "AUTO",
-                  "GunCurrentAmmoCount": 15,
-                  "HasBulletInBarrel": false
-                }
+                "minecraft:custom_data": "{GunId:\"tacz:mk18\",GunFireMode:\"AUTO\",GunCurrentAmmoCount:15,HasBulletInBarrel:0b}"
               }
             }
           ],
@@ -785,12 +570,7 @@
             {
               "function": "minecraft:set_components",
               "components": {
-                "minecraft:custom_data": {
-                  "GunId": "tacz:mrad",
-                  "GunFireMode": "SEMI",
-                  "GunCurrentAmmoCount": 5,
-                  "HasBulletInBarrel": false
-                }
+                "minecraft:custom_data": "{GunId:\"tacz:mrad\",GunFireMode:\"SEMI\",GunCurrentAmmoCount:5,HasBulletInBarrel:0b}"
               }
             }
           ],
@@ -803,12 +583,7 @@
             {
               "function": "minecraft:set_components",
               "components": {
-                "minecraft:custom_data": {
-                  "GunId": "tacz:p320",
-                  "GunFireMode": "SEMI",
-                  "GunCurrentAmmoCount": 6,
-                  "HasBulletInBarrel": false
-                }
+                "minecraft:custom_data": "{GunId:\"tacz:p320\",GunFireMode:\"SEMI\",GunCurrentAmmoCount:6,HasBulletInBarrel:0b}"
               }
             }
           ],
@@ -821,12 +596,7 @@
             {
               "function": "minecraft:set_components",
               "components": {
-                "minecraft:custom_data": {
-                  "GunId": "tacz:p90",
-                  "GunFireMode": "AUTO",
-                  "GunCurrentAmmoCount": 25,
-                  "HasBulletInBarrel": false
-                }
+                "minecraft:custom_data": "{GunId:\"tacz:p90\",GunFireMode:\"AUTO\",GunCurrentAmmoCount:25,HasBulletInBarrel:0b}"
               }
             }
           ],
@@ -839,12 +609,7 @@
             {
               "function": "minecraft:set_components",
               "components": {
-                "minecraft:custom_data": {
-                  "GunId": "tacz:pkm",
-                  "GunFireMode": "AUTO",
-                  "GunCurrentAmmoCount": 38,
-                  "HasBulletInBarrel": false
-                }
+                "minecraft:custom_data": "{GunId:\"tacz:pkm\",GunFireMode:\"AUTO\",GunCurrentAmmoCount:38,HasBulletInBarrel:0b}"
               }
             }
           ],
@@ -857,12 +622,7 @@
             {
               "function": "minecraft:set_components",
               "components": {
-                "minecraft:custom_data": {
-                  "GunId": "tacz:qbz_191",
-                  "GunFireMode": "AUTO",
-                  "GunCurrentAmmoCount": 15,
-                  "HasBulletInBarrel": false
-                }
+                "minecraft:custom_data": "{GunId:\"tacz:qbz_191\",GunFireMode:\"AUTO\",GunCurrentAmmoCount:15,HasBulletInBarrel:0b}"
               }
             }
           ],
@@ -875,12 +635,7 @@
             {
               "function": "minecraft:set_components",
               "components": {
-                "minecraft:custom_data": {
-                  "GunId": "tacz:qbz_95",
-                  "GunFireMode": "AUTO",
-                  "GunCurrentAmmoCount": 15,
-                  "HasBulletInBarrel": false
-                }
+                "minecraft:custom_data": "{GunId:\"tacz:qbz_95\",GunFireMode:\"AUTO\",GunCurrentAmmoCount:15,HasBulletInBarrel:0b}"
               }
             }
           ],
@@ -893,12 +648,7 @@
             {
               "function": "minecraft:set_components",
               "components": {
-                "minecraft:custom_data": {
-                  "GunId": "tacz:qr_24",
-                  "GunFireMode": "AUTO",
-                  "GunCurrentAmmoCount": 16,
-                  "HasBulletInBarrel": false
-                }
+                "minecraft:custom_data": "{GunId:\"tacz:qr_24\",GunFireMode:\"AUTO\",GunCurrentAmmoCount:16,HasBulletInBarrel:0b}"
               }
             }
           ],
@@ -911,12 +661,7 @@
             {
               "function": "minecraft:set_components",
               "components": {
-                "minecraft:custom_data": {
-                  "GunId": "tacz:rhino357",
-                  "GunFireMode": "SEMI",
-                  "GunCurrentAmmoCount": 3,
-                  "HasBulletInBarrel": false
-                }
+                "minecraft:custom_data": "{GunId:\"tacz:rhino357\",GunFireMode:\"SEMI\",GunCurrentAmmoCount:3,HasBulletInBarrel:0b}"
               }
             }
           ],
@@ -929,12 +674,7 @@
             {
               "function": "minecraft:set_components",
               "components": {
-                "minecraft:custom_data": {
-                  "GunId": "tacz:rpg7",
-                  "GunFireMode": "SEMI",
-                  "GunCurrentAmmoCount": 1,
-                  "HasBulletInBarrel": false
-                }
+                "minecraft:custom_data": "{GunId:\"tacz:rpg7\",GunFireMode:\"SEMI\",GunCurrentAmmoCount:1,HasBulletInBarrel:0b}"
               }
             }
           ],
@@ -947,12 +687,7 @@
             {
               "function": "minecraft:set_components",
               "components": {
-                "minecraft:custom_data": {
-                  "GunId": "tacz:rpk",
-                  "GunFireMode": "AUTO",
-                  "GunCurrentAmmoCount": 20,
-                  "HasBulletInBarrel": false
-                }
+                "minecraft:custom_data": "{GunId:\"tacz:rpk\",GunFireMode:\"AUTO\",GunCurrentAmmoCount:20,HasBulletInBarrel:0b}"
               }
             }
           ],
@@ -965,12 +700,7 @@
             {
               "function": "minecraft:set_components",
               "components": {
-                "minecraft:custom_data": {
-                  "GunId": "tacz:scar_h",
-                  "GunFireMode": "SEMI",
-                  "GunCurrentAmmoCount": 10,
-                  "HasBulletInBarrel": false
-                }
+                "minecraft:custom_data": "{GunId:\"tacz:scar_h\",GunFireMode:\"SEMI\",GunCurrentAmmoCount:10,HasBulletInBarrel:0b}"
               }
             }
           ],
@@ -983,12 +713,7 @@
             {
               "function": "minecraft:set_components",
               "components": {
-                "minecraft:custom_data": {
-                  "GunId": "tacz:scar_l",
-                  "GunFireMode": "AUTO",
-                  "GunCurrentAmmoCount": 15,
-                  "HasBulletInBarrel": false
-                }
+                "minecraft:custom_data": "{GunId:\"tacz:scar_l\",GunFireMode:\"AUTO\",GunCurrentAmmoCount:15,HasBulletInBarrel:0b}"
               }
             }
           ],
@@ -1001,12 +726,7 @@
             {
               "function": "minecraft:set_components",
               "components": {
-                "minecraft:custom_data": {
-                  "GunId": "tacz:scar_mk20",
-                  "GunFireMode": "SEMI",
-                  "GunCurrentAmmoCount": 5,
-                  "HasBulletInBarrel": false
-                }
+                "minecraft:custom_data": "{GunId:\"tacz:scar_mk20\",GunFireMode:\"SEMI\",GunCurrentAmmoCount:5,HasBulletInBarrel:0b}"
               }
             }
           ],
@@ -1019,12 +739,7 @@
             {
               "function": "minecraft:set_components",
               "components": {
-                "minecraft:custom_data": {
-                  "GunId": "tacz:sks_tactical",
-                  "GunFireMode": "SEMI",
-                  "GunCurrentAmmoCount": 5,
-                  "HasBulletInBarrel": false
-                }
+                "minecraft:custom_data": "{GunId:\"tacz:sks_tactical\",GunFireMode:\"SEMI\",GunCurrentAmmoCount:5,HasBulletInBarrel:0b}"
               }
             }
           ],
@@ -1037,12 +752,7 @@
             {
               "function": "minecraft:set_components",
               "components": {
-                "minecraft:custom_data": {
-                  "GunId": "tacz:spas_12",
-                  "GunFireMode": "SEMI",
-                  "GunCurrentAmmoCount": 3,
-                  "HasBulletInBarrel": false
-                }
+                "minecraft:custom_data": "{GunId:\"tacz:spas_12\",GunFireMode:\"SEMI\",GunCurrentAmmoCount:3,HasBulletInBarrel:0b}"
               }
             }
           ],
@@ -1055,12 +765,7 @@
             {
               "function": "minecraft:set_components",
               "components": {
-                "minecraft:custom_data": {
-                  "GunId": "tacz:spr15hb",
-                  "GunFireMode": "SEMI",
-                  "GunCurrentAmmoCount": 8,
-                  "HasBulletInBarrel": false
-                }
+                "minecraft:custom_data": "{GunId:\"tacz:spr15hb\",GunFireMode:\"SEMI\",GunCurrentAmmoCount:8,HasBulletInBarrel:0b}"
               }
             }
           ],
@@ -1073,12 +778,7 @@
             {
               "function": "minecraft:set_components",
               "components": {
-                "minecraft:custom_data": {
-                  "GunId": "tacz:springfield1873",
-                  "GunFireMode": "SEMI",
-                  "GunCurrentAmmoCount": 1,
-                  "HasBulletInBarrel": false
-                }
+                "minecraft:custom_data": "{GunId:\"tacz:springfield1873\",GunFireMode:\"SEMI\",GunCurrentAmmoCount:1,HasBulletInBarrel:0b}"
               }
             }
           ],
@@ -1091,12 +791,7 @@
             {
               "function": "minecraft:set_components",
               "components": {
-                "minecraft:custom_data": {
-                  "GunId": "tacz:svd",
-                  "GunFireMode": "SEMI",
-                  "GunCurrentAmmoCount": 5,
-                  "HasBulletInBarrel": false
-                }
+                "minecraft:custom_data": "{GunId:\"tacz:svd\",GunFireMode:\"SEMI\",GunCurrentAmmoCount:5,HasBulletInBarrel:0b}"
               }
             }
           ],
@@ -1109,12 +804,7 @@
             {
               "function": "minecraft:set_components",
               "components": {
-                "minecraft:custom_data": {
-                  "GunId": "tacz:taurus500",
-                  "GunFireMode": "SEMI",
-                  "GunCurrentAmmoCount": 3,
-                  "HasBulletInBarrel": false
-                }
+                "minecraft:custom_data": "{GunId:\"tacz:taurus500\",GunFireMode:\"SEMI\",GunCurrentAmmoCount:3,HasBulletInBarrel:0b}"
               }
             }
           ],
@@ -1127,12 +817,7 @@
             {
               "function": "minecraft:set_components",
               "components": {
-                "minecraft:custom_data": {
-                  "GunId": "tacz:taurus943",
-                  "GunFireMode": "SEMI",
-                  "GunCurrentAmmoCount": 4,
-                  "HasBulletInBarrel": false
-                }
+                "minecraft:custom_data": "{GunId:\"tacz:taurus943\",GunFireMode:\"SEMI\",GunCurrentAmmoCount:4,HasBulletInBarrel:0b}"
               }
             }
           ],
@@ -1145,12 +830,7 @@
             {
               "function": "minecraft:set_components",
               "components": {
-                "minecraft:custom_data": {
-                  "GunId": "tacz:tec_9",
-                  "GunFireMode": "AUTO",
-                  "GunCurrentAmmoCount": 10,
-                  "HasBulletInBarrel": false
-                }
+                "minecraft:custom_data": "{GunId:\"tacz:tec_9\",GunFireMode:\"AUTO\",GunCurrentAmmoCount:10,HasBulletInBarrel:0b}"
               }
             }
           ],
@@ -1163,12 +843,7 @@
             {
               "function": "minecraft:set_components",
               "components": {
-                "minecraft:custom_data": {
-                  "GunId": "tacz:timeless50",
-                  "GunFireMode": "SEMI",
-                  "GunCurrentAmmoCount": 4,
-                  "HasBulletInBarrel": false
-                }
+                "minecraft:custom_data": "{GunId:\"tacz:timeless50\",GunFireMode:\"SEMI\",GunCurrentAmmoCount:4,HasBulletInBarrel:0b}"
               }
             }
           ],
@@ -1181,12 +856,7 @@
             {
               "function": "minecraft:set_components",
               "components": {
-                "minecraft:custom_data": {
-                  "GunId": "tacz:type_81",
-                  "GunFireMode": "AUTO",
-                  "GunCurrentAmmoCount": 15,
-                  "HasBulletInBarrel": false
-                }
+                "minecraft:custom_data": "{GunId:\"tacz:type_81\",GunFireMode:\"AUTO\",GunCurrentAmmoCount:15,HasBulletInBarrel:0b}"
               }
             }
           ],
@@ -1199,12 +869,7 @@
             {
               "function": "minecraft:set_components",
               "components": {
-                "minecraft:custom_data": {
-                  "GunId": "tacz:ump45",
-                  "GunFireMode": "AUTO",
-                  "GunCurrentAmmoCount": 13,
-                  "HasBulletInBarrel": false
-                }
+                "minecraft:custom_data": "{GunId:\"tacz:ump45\",GunFireMode:\"AUTO\",GunCurrentAmmoCount:13,HasBulletInBarrel:0b}"
               }
             }
           ],
@@ -1217,12 +882,7 @@
             {
               "function": "minecraft:set_components",
               "components": {
-                "minecraft:custom_data": {
-                  "GunId": "tacz:urgi",
-                  "GunFireMode": "AUTO",
-                  "GunCurrentAmmoCount": 15,
-                  "HasBulletInBarrel": false
-                }
+                "minecraft:custom_data": "{GunId:\"tacz:urgi\",GunFireMode:\"AUTO\",GunCurrentAmmoCount:15,HasBulletInBarrel:0b}"
               }
             }
           ],
@@ -1235,12 +895,7 @@
             {
               "function": "minecraft:set_components",
               "components": {
-                "minecraft:custom_data": {
-                  "GunId": "tacz:uzi",
-                  "GunFireMode": "AUTO",
-                  "GunCurrentAmmoCount": 10,
-                  "HasBulletInBarrel": false
-                }
+                "minecraft:custom_data": "{GunId:\"tacz:uzi\",GunFireMode:\"AUTO\",GunCurrentAmmoCount:10,HasBulletInBarrel:0b}"
               }
             }
           ],
@@ -1253,12 +908,7 @@
             {
               "function": "minecraft:set_components",
               "components": {
-                "minecraft:custom_data": {
-                  "GunId": "tacz:vector45",
-                  "GunFireMode": "AUTO",
-                  "GunCurrentAmmoCount": 10,
-                  "HasBulletInBarrel": false
-                }
+                "minecraft:custom_data": "{GunId:\"tacz:vector45\",GunFireMode:\"AUTO\",GunCurrentAmmoCount:10,HasBulletInBarrel:0b}"
               }
             }
           ],

@@ -13,7 +13,7 @@ Mod **só de dados** (NeoForge 1.21.1, `modLoader="lowcodefml"`, sem Java) que i
 (`abandonedmoderncity:chests/<tema>/<chest|barrel|pot>[_hard]`): armas, munições e attachments do TACZ, itens de cura do
 First Aid e da LesRaisins. Mod id `amctaczloot`. Recomeçado do zero em 13 Nov 2026 (a versão anterior foi apagada).
 
-## ESTADO ATUAL (versão 1.0.0, 16 Nov 2026; etapa de balanceamento concluída e aprovada pelo usuário) — o que está valendo; as seções abaixo desta são HISTÓRICO e podem citar números já substituídos
+## ESTADO ATUAL (versão 1.0.1, 16 Nov 2026; etapa de balanceamento concluída e aprovada pelo usuário) — o que está valendo; as seções abaixo desta são HISTÓRICO e podem citar números já substituídos
 - **Armas** (chance por baú comum / difícil, Sorte 0): prédio 12,0% / 20,0% (1 a cada 8,3 / 5 baús), barris 0,4% / 0,7%; delegacia 25,0% / 33,3%
   (1 a cada 4 / 3), barris 3,0% / 6,0%. Tipos: pistola 10, smg 6, escopeta 6, fuzil 4, dmr 2, sniper 1,5, mg 1, rpg 0,3 (delegacia: smg/escopeta 8, fuzil 6).
   Arma cai **com 50% do pente cheio** (`GunCurrentAmmoCount` = ammo_amount x 0,5 arredondado para cima: 17 -> 9, pente de 1 -> 1; `HasBulletInBarrel` = false), **exceto a minigun** (sem pente definido, nasce com 0).
@@ -297,7 +297,7 @@ First Aid e da LesRaisins. Mod id `amctaczloot`. Recomeçado do zero em 13 Nov 2
 - Pedido: "todas as armas, com exceção da minigun, passam a já spawnar com 50% do pente cheio". `GUN_SPAWN_AMMO_FRACTION = 0.5`, `GUN_SPAWN_AMMO_EXCLUDED = ("minigun",)`, `gun_spawn_ammo()`.
   Pente = `ammo_amount` do TACZ (`docs/tacz_catalog.json`); só a minigun não tem. Arredondamento para CIMA (escolha minha): 22 armas têm pente ímpar; 4 têm pente de 1
   (lonetrail, m320, rpg7, springfield1873) e nascem carregadas com 1. A bala na câmara (`HasBulletInBarrel`) continua false.
-- Validado no servidor: 1.280 armas amostradas (as 70 apareceram), todas com a contagem esperada; minigun 0; 0 erros de carga. **Testado no jogo pelo usuário (16 Nov) e aprovado:** a arma com o pente a 50% e sem bala na câmara funciona.
+- Validado no servidor: 1.280 armas amostradas (as 70 apareceram), todas com a contagem esperada; minigun 0; 0 erros de carga. **ERRO corrigido na 1.0.1:** na 1.0.0 o pente saía VAZIO no jogo (ver seção "Pente vazio na 1.0.0"); a aprovação anterior não tinha verificado o pente.
 - Isso interage com o pool de munição: a arma já traz balas, mas a munição de reserva continua sorteada à parte.
 
 ## Barris com metade da chance (16 Nov 2026)
@@ -308,3 +308,12 @@ First Aid e da LesRaisins. Mod id `amctaczloot`. Recomeçado do zero em 13 Nov 2
 - Validado no servidor: prédio barril (6.000) M67 4,6%, leite 4,1%, plaster 4,2%, SURV12 0,3%; casa barril pão 9,3%; farmácia barril vaseline 4,4%, SURV12 1,9%; baú de prédio inalterado (M67 9,6%).
 - Efeito por estrutura (antes -> depois, cura LR / First Aid / granadas+brancas): oficina média 15,7->8,0 / 67->34 / 36->18; farmácia grande 16,9->9,9 / 53->31; casa 14,4->8,6 / 62->37; rampa
   100,9->70,3 / 431->300; green tower (sem barris) inalterada. Risco de estourar dispenser/dropper diminui (menos itens por barril).
+
+## Pente vazio na 1.0.0 — corrigido na 1.0.1 (16 Nov 2026)
+- Sintoma relatado pelo usuário: armas do loot com o pente vazio (HUD `000`), embora `/data get entity @s SelectedItem` mostrasse `GunCurrentAmmoCount: 5b`.
+- **Causa (confirmada no bytecode):** o TACZ só lê o pente se a tag for **inteiro** (`GunItemDataAccessor.getCurrentAmmoCount`: `contains("GunCurrentAmmoCount", 3)`, 3 = TAG_INT). Um número
+  pequeno escrito como objeto JSON em `minecraft:custom_data` vira **byte** (`5b`), então o TACZ via 0.
+- **Correção:** `e_gun` grava o `custom_data` da arma como **texto SNBT** (`{GunId:"tacz:x",GunFireMode:"SEMI",GunCurrentAmmoCount:15,HasBulletInBarrel:0b}`), em que `15` é inteiro.
+- **Meu erro de teste:** as validações liam o valor com a regex `(\d+)` e ignoravam o sufixo de tipo (`b`, `s`, `L`). Agora: conferir também o **tipo** de toda tag numérica que outro mod lê.
+  Validado (baú real, 1.200 baús): 405 armas, 66 modelos, todas com o pente inteiro e na quantidade certa.
+- Regra geral: para qualquer número dentro de `custom_data` que outro mod lê, usar SNBT (ou conferir no bytecode o tipo que ele espera).

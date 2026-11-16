@@ -211,8 +211,11 @@ def gun_spawn_ammo(g):
 
 
 def e_gun(g):
-    return {"type": "minecraft:item", "name": "tacz:modern_kinetic_gun", "functions": [custom(
-        GunId="tacz:" + g, GunFireMode=TZ["guns"][g]["fire_mode"][0], GunCurrentAmmoCount=gun_spawn_ammo(g), HasBulletInBarrel=False)]}
+    # custom_data em TEXTO NBT (SNBT), não em objeto JSON: o Minecraft converte um número JSON pequeno em BYTE ("5b"), e o TACZ só lê o pente se
+    # GunCurrentAmmoCount for INTEIRO (GunItemDataAccessor: contains(key, 3)). Em SNBT "5" é inteiro; "0b" é o booleano da bala na câmara.
+    snbt = '{GunId:"tacz:%s",GunFireMode:"%s",GunCurrentAmmoCount:%d,HasBulletInBarrel:0b}' % (g, TZ["guns"][g]["fire_mode"][0], gun_spawn_ammo(g))
+    return {"type": "minecraft:item", "name": "tacz:modern_kinetic_gun",
+            "functions": [{"function": "minecraft:set_components", "components": {"minecraft:custom_data": snbt}}]}
 
 
 def e_ammo(c):
