@@ -131,6 +131,10 @@ GEAR_EXCLUDED_THEMES = ("pharmacy",)
 # BARRIS (pedido do usuário, 16 Nov 2026): nos barris (tiers barrel e barrel_hard) a chance de cura LesRaisins, First Aid, comida (leite e pão) e granadas/armas brancas é
 # BARREL_ITEM_MULT da chance do baú, em TODOS os temas (inclusive a farmácia, que é quase só barril). Armas, munição e attachments já têm a sua própria redução nos barris (RATES).
 BARREL_ITEM_MULT = 0.5
+# FERRAMENTAS VANILLA na oficina (pedido do usuário, 16 Nov 2026; opção A: também com metade da chance nos barris). Chance por container (‰) no baú:
+# Raro = 1,0% (picareta de ferro e isqueiro, durabilidade restante 40–65%); Lendário = 0,05% (picareta de netherite inteira; classe nova, 10x mais rara que o Épico).
+TOOLS = dict(iron_pickaxe=dict(p=10, dur=(0.40, 0.65), themes=("workshop",)), flint_and_steel=dict(p=10, dur=(0.40, 0.65), themes=("workshop",)),
+             netherite_pickaxe=dict(p=0.5, dur=None, themes=("workshop",)))
 # Multiplicador por tema e tipo de item (pedido do usuário, 16 Nov 2026): na delegacia as chances dos THROWABLE (M67, RGN e C4) dobram. As armas brancas
 # ficam iguais em todos os temas (as casas já as têm, como todos os temas menos a farmácia).
 GEAR_THEME_MULT = {"police_station": {"throwable": 2.0}}
@@ -291,6 +295,8 @@ def item_chances(theme, tier="chest"):
         out.append(("lr", i, max(1, min(1000, v))))
     for i, f in FOOD.items():
         if f["themes"] is None or theme in f["themes"]: out.append(("food", i, f["p"]))
+    for i, d in TOOLS.items():
+        if theme in d["themes"]: out.append(("tool", i, d["p"]))
     if theme not in GEAR_EXCLUDED_THEMES:
         for i, d in GEAR.items():
             m = GEAR_THEME_MULT.get(theme, {}).get(d["item"], 1.0)
@@ -313,7 +319,15 @@ def e_gear(i):
             "functions": [custom(**{d["key"]: "lrtactical:" + i})] + ([count(d["lo"], d["hi"])] if d["hi"] > 1 else [])}
 
 
+def e_tool(i):
+    d = TOOLS[i]; e = {"type": "minecraft:item", "name": "minecraft:" + i}
+    if d["dur"]:   # set_damage: fração de durabilidade RESTANTE (1,0 = inteira)
+        e["functions"] = [{"function": "minecraft:set_damage", "damage": {"type": "minecraft:uniform", "min": d["dur"][0], "max": d["dur"][1]}}]
+    return e
+
+
 def e_item(kind, i):
+    if kind == "tool": return e_tool(i)
     if kind == "gear": return e_gear(i)
     if kind == "fa": return e_fa(i)
     if i == "bread": return {"type": "minecraft:item", "name": "minecraft:bread", "functions": [count(FOOD["bread"]["lo"], FOOD["bread"]["hi"])]}
@@ -321,7 +335,7 @@ def e_item(kind, i):
     return e_lr(i, 1, 1)
 
 
-ITEM_RES = 10   # resolução dos sorteios por item: peso total 1000 x 10 (a chance p, em ‰, pode ser fracionária: 2,5‰ = 0,25%)
+ITEM_RES = 100  # resolução dos sorteios por item: peso total 1000 x 100 (a chance p, em ‰, pode ser fracionária: 0,25‰ = 0,025%)
 
 
 def item_pool(kind, i, p, rolls=1, bonus=0.0):
@@ -382,7 +396,7 @@ def expected(theme, tier, luck):
     """Esperado por container (stacks): guns, ammo, att, lr, fa."""
     rates = RATES[theme][tier]; rolls, bonus = ROLLS[tier]
     r = rolls + math.floor(bonus * luck)
-    res = {k: 0.0 for k in ("gun", "ammo", "att", "lr", "fa", "food", "gear")}
+    res = {k: 0.0 for k in ("gun", "ammo", "att", "lr", "fa", "food", "gear", "tool")}
     for cat_set in CORE_POOLS:
         part = {k: v for k, v in rates.items() if k in cat_set}
         if not part: continue
@@ -412,7 +426,7 @@ def preview():
     print("%-14s %-30s %5s | %s | %-23s | %6s %6s" % ("tema", "estrutura", "cont.", "Sorte 0: arm  mun  att   LR   FA", "armas S0 S1 S2 S3", "LR S3", "FA S3"))
     for th, name, v in rows:
         def tot(luck):
-            t = {k: 0.0 for k in ("gun", "ammo", "att", "lr", "fa", "food", "gear")}
+            t = {k: 0.0 for k in ("gun", "ammo", "att", "lr", "fa", "food", "gear", "tool")}
             for tier, n in v["tiers"].items():
                 if tier.startswith("pot"): continue
                 for k, x in expected(th, tier, luck).items(): t[k] += n * x
@@ -513,7 +527,7 @@ def check(base, gl, tables, glms, junk):
         for ref in [x for x in s.split('"') if x.startswith(MOD + ":pick/")]:
             if ref.split(":")[1] not in tables: errs.append("tabela de escolha inexistente: " + ref)
     # nenhum item vanilla fora da lista de sucata, em NENHUMA tabela gerada (mod + sobrescritas do AMC)
-    allowed = {"minecraft:" + i for i in JUNK} | {"minecraft:bread"}
+    allowed = {"minecraft:" + i for i in JUNK} | {"minecraft:bread"} | {"minecraft:" + i for i in TOOLS}
     for n, t in list(tables.items()) + [("amc:" + k, v) for k, v in junk.items()]:
         for name in re.findall(r'"name": "(minecraft:[a-z_0-9]+)"', json.dumps(t)):
             if name not in allowed: errs.append("item vanilla fora da sucata em %s: %s" % (n, name))

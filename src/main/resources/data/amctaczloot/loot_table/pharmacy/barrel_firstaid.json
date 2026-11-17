@@ -23,13 +23,13 @@
               }
             }
           ],
-          "weight": 750,
-          "quality": 188
+          "weight": 7500,
+          "quality": 1875
         },
         {
           "type": "minecraft:empty",
-          "weight": 9250,
-          "quality": -188
+          "weight": 92500,
+          "quality": -1875
         }
       ],
       "bonus_rolls": 0.0
@@ -50,13 +50,13 @@
               }
             }
           ],
-          "weight": 460,
-          "quality": 115
+          "weight": 4600,
+          "quality": 1150
         },
         {
           "type": "minecraft:empty",
-          "weight": 9540,
-          "quality": -115
+          "weight": 95400,
+          "quality": -1150
         }
       ],
       "bonus_rolls": 0.0
@@ -68,13 +68,13 @@
           "type": "minecraft:item",
           "name": "firstaid:adrenaline_injector",
           "functions": [],
-          "weight": 460,
-          "quality": 115
+          "weight": 4600,
+          "quality": 1150
         },
         {
           "type": "minecraft:empty",
-          "weight": 9540,
-          "quality": -115
+          "weight": 95400,
+          "quality": -1150
         }
       ],
       "bonus_rolls": 0.0
@@ -86,13 +86,13 @@
           "type": "minecraft:item",
           "name": "firstaid:painkillers",
           "functions": [],
-          "weight": 460,
-          "quality": 115
+          "weight": 4600,
+          "quality": 1150
         },
         {
           "type": "minecraft:empty",
-          "weight": 9540,
-          "quality": -115
+          "weight": 95400,
+          "quality": -1150
         }
       ],
       "bonus_rolls": 0.0
@@ -104,13 +104,13 @@
           "type": "minecraft:item",
           "name": "firstaid:morphine",
           "functions": [],
-          "weight": 410,
-          "quality": 102
+          "weight": 4100,
+          "quality": 1025
         },
         {
           "type": "minecraft:empty",
-          "weight": 9590,
-          "quality": -102
+          "weight": 95900,
+          "quality": -1025
         }
       ],
       "bonus_rolls": 0.0
@@ -122,13 +122,13 @@
           "type": "minecraft:item",
           "name": "firstaid:defibrillator",
           "functions": [],
-          "weight": 410,
-          "quality": 102
+          "weight": 4100,
+          "quality": 1025
         },
         {
           "type": "minecraft:empty",
-          "weight": 9590,
-          "quality": -102
+          "weight": 95900,
+          "quality": -1025
         }
       ],
       "bonus_rolls": 0.0
@@ -140,13 +140,13 @@
           "type": "minecraft:item",
           "name": "firstaid:morphine_injector",
           "functions": [],
-          "weight": 200,
-          "quality": 50
+          "weight": 2000,
+          "quality": 500
         },
         {
           "type": "minecraft:empty",
-          "weight": 9800,
-          "quality": -50
+          "weight": 98000,
+          "quality": -500
         }
       ],
       "bonus_rolls": 0.0

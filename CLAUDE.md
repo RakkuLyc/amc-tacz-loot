@@ -45,6 +45,9 @@ First Aid e da LesRaisins. Mod id `amctaczloot`. Recomeçado do zero em 13 Nov 2
   `docs/containers.json` foi medido de novo (média de 6 cópias). O spawn agora usa categorias por altura (`building_small`, `building_large`...): `measure_containers.py` ajustado.
 - **Sem itens de cura** (LesRaisins e First Aid) em **oficina, posto de gasolina e delegacia** (16 Nov, `HEAL_EXCLUDED_THEMES`; esses temas não têm tabela `_firstaid`). O leite continua.
 - **Leite condensado: 1 a 3 unidades** por acerto (antes 2 a 4), **só em prédios (`building`) e casas** (16 Nov; fora de farmácia, delegacia, oficina e posto).
+- **Ferramentas vanilla só na oficina** (16 Nov, `TOOLS`, opção A = metade nos barris): picareta de ferro e isqueiro **Raros** (baú 1,0% / barril 0,5%, durabilidade restante 40–65%);
+  picareta de netherite **Lendária** (classe nova, 10x mais rara que o Épico: baú 0,05% / barril 0,025%, inteira). Exceções vanilla permitidas: pão e essas 3 ferramentas.
+  Resolução dos sorteios por item: `ITEM_RES = 100` (1 em 100.000).
 - **Vasos** não recebem nada do mod. Temas: building, police_station, pharmacy, house, workshop, gas_station (o AMC removeu `building_large`).
 - **Ferramentas**: `gen_loot.py` (prévia / `--write`), `sample_items.py` (chance por item num servidor de teste; use este), `sample_loot.py` (categorias de arma/munição;
   a coluna `lr` conta o leite como LesRaisins e **não bate** com `expected()["lr"]`: dá falso desvio), `measure_containers.py`, `tacz_catalog.py`, `lr_catalog.py`.
@@ -335,3 +338,10 @@ First Aid e da LesRaisins. Mod id `amctaczloot`. Recomeçado do zero em 13 Nov 2
 - Validado no servidor (1.500 containers cada): baú da delegacia, barril de oficina e barril de posto sem nenhuma cura LesRaisins nem First Aid; leite presente com 1–3; baú de prédio
   com as curas normais. 41 tabelas e 36 loot modifiers (sem as 12 tabelas `_firstaid` desses 3 temas). 0 erros de carga.
 - Leite só em prédios e casas (16 Nov): validado (1.200 containers cada): farmácia, delegacia, oficina e posto sem leite; prédio 7,5% e casa 8,1%, com 1–3.
+
+## Ferramentas vanilla na oficina (16 Nov 2026)
+- Pedido: Raros picareta de ferro e isqueiro (40–65% de durabilidade), Lendário picareta de netherite (100%); proposta com opção A (barris com metade, como a regra dos barris) aprovada.
+  `set_damage` usa a fração de durabilidade RESTANTE (1,0 = inteira).
+- Validado (3.000 baús e 3.000 barris de oficina): ferro 1,07% / 0,43%, isqueiro 0,93% / 0,60%, durabilidade observada 41–66% (o isqueiro tem 64 usos: o arredondamento chega a 65,6%).
+  Netherite não saiu em 6.000 amostras (esperado ~2,25; chance de zero ~10%): conferida só pelos pesos da tabela (0,050% / 0,025%). Por oficina: ferro e isqueiro 27% (média) / 19% (pequena);
+  netherite ~1 a cada 64 oficinas médias.

@@ -23,6 +23,77 @@
       "entries": [
         {
           "type": "minecraft:item",
+          "name": "minecraft:iron_pickaxe",
+          "functions": [
+            {
+              "function": "minecraft:set_damage",
+              "damage": {
+                "type": "minecraft:uniform",
+                "min": 0.4,
+                "max": 0.65
+              }
+            }
+          ],
+          "weight": 1000,
+          "quality": 250
+        },
+        {
+          "type": "minecraft:empty",
+          "weight": 99000,
+          "quality": -250
+        }
+      ],
+      "bonus_rolls": 0.0
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:flint_and_steel",
+          "functions": [
+            {
+              "function": "minecraft:set_damage",
+              "damage": {
+                "type": "minecraft:uniform",
+                "min": 0.4,
+                "max": 0.65
+              }
+            }
+          ],
+          "weight": 1000,
+          "quality": 250
+        },
+        {
+          "type": "minecraft:empty",
+          "weight": 99000,
+          "quality": -250
+        }
+      ],
+      "bonus_rolls": 0.0
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:netherite_pickaxe",
+          "weight": 50,
+          "quality": 12
+        },
+        {
+          "type": "minecraft:empty",
+          "weight": 99950,
+          "quality": -12
+        }
+      ],
+      "bonus_rolls": 0.0
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
           "name": "lrtactical:throwable",
           "functions": [
             {
@@ -42,13 +113,13 @@
               }
             }
           ],
-          "weight": 920,
-          "quality": 230
+          "weight": 9200,
+          "quality": 2300
         },
         {
           "type": "minecraft:empty",
-          "weight": 9080,
-          "quality": -230
+          "weight": 90800,
+          "quality": -2300
         }
       ],
       "bonus_rolls": 0.0
@@ -77,13 +148,13 @@
               }
             }
           ],
-          "weight": 410,
-          "quality": 102
+          "weight": 4100,
+          "quality": 1025
         },
         {
           "type": "minecraft:empty",
-          "weight": 9590,
-          "quality": -102
+          "weight": 95900,
+          "quality": -1025
         }
       ],
       "bonus_rolls": 0.0
@@ -104,13 +175,13 @@
               }
             }
           ],
-          "weight": 300,
-          "quality": 75
+          "weight": 3000,
+          "quality": 750
         },
         {
           "type": "minecraft:empty",
-          "weight": 9700,
-          "quality": -75
+          "weight": 97000,
+          "quality": -750
         }
       ],
       "bonus_rolls": 0.0
@@ -131,13 +202,13 @@
               }
             }
           ],
-          "weight": 200,
-          "quality": 50
+          "weight": 2000,
+          "quality": 500
         },
         {
           "type": "minecraft:empty",
-          "weight": 9800,
-          "quality": -50
+          "weight": 98000,
+          "quality": -500
         }
       ],
       "bonus_rolls": 0.0
@@ -158,13 +229,13 @@
               }
             }
           ],
-          "weight": 200,
-          "quality": 50
+          "weight": 2000,
+          "quality": 500
         },
         {
           "type": "minecraft:empty",
-          "weight": 9800,
-          "quality": -50
+          "weight": 98000,
+          "quality": -500
         }
       ],
       "bonus_rolls": 0.0
@@ -185,13 +256,13 @@
               }
             }
           ],
-          "weight": 200,
-          "quality": 50
+          "weight": 2000,
+          "quality": 500
         },
         {
           "type": "minecraft:empty",
-          "weight": 9800,
-          "quality": -50
+          "weight": 98000,
+          "quality": -500
         }
       ],
       "bonus_rolls": 0.0
