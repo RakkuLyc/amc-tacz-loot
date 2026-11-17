@@ -155,13 +155,13 @@ BARREL_ITEM_MULT = 0.5
 BACKPACK_COMPONENTS = {"copper_backpack": (1, 45), "iron_backpack": (2, 54), "gold_backpack": (3, 81), "diamond_backpack": (5, 108), "netherite_backpack": (7, 120)}   # (vagas de upgrade, espaços), como nos baús do usuário
 LEVEL_FAMILIES = {
     "backpacks": dict(mod="sophisticatedbackpacks", themes=("house",),
-                      one_in={"Comum": 15, "Incomum": 30, "Raro": 45, "Épico": 75, "Lendário": 120},
+                      one_in={"Comum": 9, "Incomum": 14, "Raro": 20, "Épico": 30, "Lendário": 54},   # cada ITEM; 17 Nov 2026 (antes 15/30/45/75/120)
                       items={"Comum": ["copper_backpack"], "Incomum": ["iron_backpack", "stack_upgrade_tier_1"],
                              "Raro": ["gold_backpack", "advanced_pickup_upgrade", "stack_upgrade_tier_2"],
                              "Épico": ["diamond_backpack", "stack_upgrade_tier_3"],
                              "Lendário": ["netherite_backpack", "inception_upgrade", "stack_upgrade_tier_4"]}),
     "flashlight": dict(mod="flashlight", themes=("house",),
-                       one_in={"Incomum": 30, "Raro": 45},
+                       one_in={"Incomum": 10, "Raro": 16},   # cada ITEM; 17 Nov 2026 (antes 30/45)
                        items={"Incomum": ["flashlight_off"], "Raro": ["headlamp_helmet", "night_vision_goggles_helmet"]}),
 }
 # FERRAMENTAS VANILLA na oficina (pedido do usuário, 16 Nov 2026; opção A: também com metade da chance nos barris). Chance por container (‰) no baú:

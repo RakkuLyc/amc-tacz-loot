@@ -13,13 +13,13 @@
         {
           "type": "minecraft:item",
           "name": "flashlight:flashlight_off",
-          "weight": 1667,
-          "quality": 417
+          "weight": 5000,
+          "quality": 1250
         },
         {
           "type": "minecraft:empty",
-          "weight": 98333,
-          "quality": -417
+          "weight": 95000,
+          "quality": -1250
         }
       ]
     },
@@ -29,13 +29,13 @@
         {
           "type": "minecraft:item",
           "name": "flashlight:headlamp_helmet",
-          "weight": 1111,
-          "quality": 278
+          "weight": 3125,
+          "quality": 781
         },
         {
           "type": "minecraft:empty",
-          "weight": 98889,
-          "quality": -278
+          "weight": 96875,
+          "quality": -781
         }
       ]
     },
@@ -45,13 +45,13 @@
         {
           "type": "minecraft:item",
           "name": "flashlight:night_vision_goggles_helmet",
-          "weight": 1111,
-          "quality": 278
+          "weight": 3125,
+          "quality": 781
         },
         {
           "type": "minecraft:empty",
-          "weight": 98889,
-          "quality": -278
+          "weight": 96875,
+          "quality": -781
         }
       ]
     }
