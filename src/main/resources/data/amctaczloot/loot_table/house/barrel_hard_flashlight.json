@@ -29,18 +29,28 @@
         {
           "type": "minecraft:item",
           "name": "flashlight:headlamp_helmet",
-          "weight": 556,
-          "quality": 139
-        },
-        {
-          "type": "minecraft:item",
-          "name": "flashlight:night_vision_goggles_helmet",
-          "weight": 556,
-          "quality": 139
+          "weight": 1111,
+          "quality": 278
         },
         {
           "type": "minecraft:empty",
-          "weight": 98888,
+          "weight": 98889,
+          "quality": -278
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "flashlight:night_vision_goggles_helmet",
+          "weight": 1111,
+          "quality": 278
+        },
+        {
+          "type": "minecraft:empty",
+          "weight": 98889,
           "quality": -278
         }
       ]

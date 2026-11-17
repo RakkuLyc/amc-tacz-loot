@@ -149,8 +149,8 @@ GEAR_EXCLUDED_THEMES = ("pharmacy",)
 # BARREL_ITEM_MULT da chance do baú, em TODOS os temas (inclusive a farmácia, que é quase só barril). Armas, munição e attachments já têm a sua própria redução nos barris (RATES).
 BARREL_ITEM_MULT = 0.5
 # ITENS POR NÍVEL DE MODS OPCIONAIS (mochilas do Sophisticated Backpacks e lanternas do TCT Flashlight; pedido do usuário, 17 Nov 2026; níveis das estruturas
-# backpacks.nbt e flashlight.nbt dele). "1 a cada N" é a chance, por baú, de sair QUALQUER item daquele nível (os itens do nível dividem igual: um sorteio por nível,
-# com um item ou nada). Só nas casas ("itens exclusivos das casas"); baú e baú difícil iguais; barris com BARREL_ITEM_MULT. Cada família tem tabelas e loot modifiers
+# backpacks.nbt e flashlight.nbt dele). "1 a cada N" é a chance, por baú, de CADA ITEM daquele nível (correção do usuário, 17 Nov 2026: não é do nível inteiro); cada item
+# é um sorteio independente. Só nas casas ("itens exclusivos das casas"); baú e baú difícil iguais; barris com BARREL_ITEM_MULT. Cada família tem tabelas e loot modifiers
 # próprios com a condição neoforge:mod_loaded (mod ausente = nada acontece).
 BACKPACK_COMPONENTS = {"copper_backpack": (1, 45), "iron_backpack": (2, 54), "gold_backpack": (3, 81), "diamond_backpack": (5, 108), "netherite_backpack": (7, 120)}   # (vagas de upgrade, espaços), como nos baús do usuário
 LEVEL_FAMILIES = {
@@ -377,19 +377,18 @@ def e_family_item(fam, i):
 
 
 def family_chances(fam, theme, tier):
-    """[(nível, [item...], chance do NÍVEL em ‰)] do tema/tier ([] se a família não vale no tema)."""
+    """[(nível, [item...], chance de CADA item em ‰)] do tema/tier ([] se a família não vale no tema)."""
     f = LEVEL_FAMILIES[fam]
     if theme not in f["themes"]: return []
     m = BARREL_ITEM_MULT if tier.startswith("barrel") else 1.0
     return [(lv, f["items"][lv], 1000.0 / n * m) for lv, n in f["one_in"].items()]
 
 
-def family_pool(fam, items, p_level):
-    """Um sorteio por nível: cada item com p_level/n (‰) ou nada; a Sorte sobe pelo quality, como em item_pool."""
-    each = p_level / len(items); w = max(1, round(each * ITEM_RES)); q = max(1, round(w * LUCK_QUALITY))
-    ents = [{**e_family_item(fam, i), "weight": w, "quality": q} for i in items]
-    ents.append({"type": "minecraft:empty", "weight": 1000 * ITEM_RES - w * len(items), "quality": -q * len(items)})
-    return pool(ents)
+def family_pool(fam, i, p):
+    """Sorteio independente de UM item (chance p em ‰) ou nada; a Sorte sobe pelo quality, como em item_pool."""
+    w = max(1, round(p * ITEM_RES)); q = max(1, round(w * LUCK_QUALITY))
+    return pool([{**e_family_item(fam, i), "weight": w, "quality": q},
+                 {"type": "minecraft:empty", "weight": 1000 * ITEM_RES - w, "quality": -q}])
 
 
 def e_item(kind, i):
@@ -453,7 +452,7 @@ def main_tables():
     for fam, f in LEVEL_FAMILIES.items():
         for theme in f["themes"]:
             for tier in TIERS:
-                out["%s/%s_%s" % (theme, tier, fam)] = table([family_pool(fam, items, p) for _, items, p in family_chances(fam, theme, tier)],
+                out["%s/%s_%s" % (theme, tier, fam)] = table([family_pool(fam, i, p) for _, items, p in family_chances(fam, theme, tier) for i in items],
                                                               [{"type": "neoforge:mod_loaded", "modid": f["mod"]}])
     return out
 
