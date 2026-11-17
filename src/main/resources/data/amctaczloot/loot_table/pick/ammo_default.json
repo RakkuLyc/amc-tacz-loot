@@ -323,12 +323,12 @@
               "function": "minecraft:set_count",
               "count": {
                 "type": "minecraft:uniform",
-                "min": 12,
-                "max": 25
+                "min": 21,
+                "max": 30
               }
             }
           ],
-          "weight": 100
+          "weight": 135
         },
         {
           "type": "minecraft:item",

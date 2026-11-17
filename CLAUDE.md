@@ -31,8 +31,8 @@ First Aid e da LesRaisins. Mod id `amctaczloot`. Recomeçado do zero em 13 Nov 2
   (inclusive farmácia). Armas, munição e attachments têm redução própria nos barris (RATES: 3% a 25% da do baú). Sucata no barril: 30% com 1–2 pilhas. `BARREL_ITEM_MULT = 0.5`.
 - **Munição** (pool próprio; 17 Nov 2026): **delegacia = mesmas chances do prédio**: baú 52%, difícil 86,6%, barris 6,2% / 11,4% (antes da delegacia: 80 / 100 / 20 / 36%). Oficina inalterada (4 / 7 / 1,5 / 3%), mas usa a mesma mistura de calibres.
   **Calibre por NÍVEL** (usuário, `tacz_ammo.nbt` -> `docs/ammo_rarity.json`, via `tools/att_from_nbt.py`; `AMMO_LEVEL_W` 16/8/4/2/1 por calibre): Comum 9mm, .45 ACP, .22 WMR, 4.6x30; Incomum 7.62x39, 5.56, 7.92x57, 12g;
-  Raro 5.7x28, 5.8x42, 5.45, 7.62x54, .338, .45-70, .357; Épico .300 BLK, .308, .500, .30-06, .50 AE, 40mm, foguete RPG; Lendário .50 BMG. Fatia das pilhas: Comum 11,5% cada, Incomum 5,8%, Raro 2,9%, Épico 1,4%, Lendário 0,7%.
-  Chance por baú de prédio de >= 1 pilha: Comum 11,1%, Incomum 5,8%, Raro 2,9%, Épico 1,5%, .50 BMG 0,74% (1 a cada 134). 1 a 3 pilhas, tamanho cheio (9mm 24-50). Balas por acerto ~65,6.
+  Raro 5.7x28, 5.8x42, 5.45, 7.62x54, .338, .45-70, .357; Épico .300 BLK, .308, .500, .30-06, .50 AE, 40mm, foguete RPG; Lendário .50 BMG (**peso 1,35, pilha 21-30**, ajuste de 17 Nov). Fatia das pilhas: Comum 11,5% cada, Incomum 5,8%, Raro 2,9%, Épico 1,4%, Lendário 0,97%.
+  Chance por baú de prédio de >= 1 pilha: Comum 11,1%, Incomum 5,8%, Raro 2,9%, Épico 1,5%, .50 BMG 1,0% (1 a cada 100; era 0,74% / 1 a cada 134). 1 a 3 pilhas, tamanho cheio (9mm 24-50). Balas por acerto ~65,6.
   **Cada acerto de munição dá 1 a 3 pilhas de calibres sorteados** (o mesmo calibre pode repetir), com balas por pilha proporcionais à pilha máxima, **no
   tamanho original** (9mm 24–50 com pilha 60; 12g 14–30; .308 19–40; 22wmr 26–53; 40mm e foguete 2–5). `AMMO_STACKS = (1, 3)`, `AMMO_SIZE = 1.0`.
   **Total de balas por baú de prédio ~31 (dobro da versão de 1 pilha); delegacia ~48.**
@@ -389,3 +389,6 @@ First Aid e da LesRaisins. Mod id `amctaczloot`. Recomeçado do zero em 13 Nov 2
 - Validado no servidor (Sorte 0, 0 erros de carga): prédio baú 60.000 -> 51,87% com munição (esperado 52%), 34,06 balas/container (34,1); delegacia baú 60.000 -> 52,06% / 34,03; difícil 30.000 -> 86,3% (86,6%) em prédio e delegacia; delegacia barril 60.000 -> 6,16%
   (6,2%), barril difícil 40.000 -> 11,26% (11,4%). Por calibre (prédio baú, medido/esperado): 9mm 11,2/11,1, 12g 5,71/5,76, .308 1,47/1,48, 40mm 1,39/1,48, foguete 1,52/1,48, .50 BMG 442 vezes em 60.000 (447 esperado).
 - Consequência (comunicada): barris da delegacia perdem munição (barril 11,8 -> 4,1 balas, difícil 21,2 -> 7,5); baú 47,1 -> 34,1. Prédio sobe ~11% em balas por container (calibres de pilha grande ficaram mais comuns).
+- Ajuste no mesmo dia (usuário: ".50 BMG 21-30; diminuir um pouco a raridade do Lendário: 1/100 em vez de 1/134"): `AMMO_LEVEL_W["Lendário"]` 1 -> 1,35 (único Lendário é o .50 BMG; os outros 22 calibres perdem ~0,2% de fatia) e `AMMO_RANGE_OVERRIDE = {"50bmg": (21, 30)}`
+  (antes 12-25; pilha máxima 30). Validado (80.000 baús cada, Sorte 0): prédio 1,03% (824 baús, pilhas 21-30, média 25,5), delegacia 1,00% (803; esperado 1,00%). Uma pilha de 16 apareceu na delegacia: dois sorteios do mesmo calibre no mesmo baú se
+  somam no `/loot insert` (limite 30), artefato do teste, não da tabela.

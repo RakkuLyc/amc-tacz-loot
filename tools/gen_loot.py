@@ -82,7 +82,7 @@ GUN_PROFILE = {}          # todos os temas usam o perfil "default" (delegacia in
 # MUNIÇÃO (escolhas do usuário, 14-17 Nov 2026): a quantidade por pilha é proporcional à pilha máxima do calibre, tomando o 9mm como referência (24 a 50 balas).
 # Qual calibre sai: peso por NÍVEL dado pelo usuário (tacz_ammo.nbt -> docs/ammo_rarity.json; antes era 50% igual + 50% pela popularidade das armas).
 AMMO_REF = ("9mm", 24, 50)
-AMMO_LEVEL_W = {"Comum": 16, "Incomum": 8, "Raro": 4, "Épico": 2, "Lendário": 1}   # peso por calibre (17 Nov 2026, "pesos 16/8/4/2/1"), nível em docs/ammo_rarity.json
+AMMO_LEVEL_W = {"Comum": 16, "Incomum": 8, "Raro": 4, "Épico": 2, "Lendário": 1.35}   # peso por calibre (17 Nov 2026, "pesos 16/8/4/2/1"; Lendário 1 -> 1,35 no mesmo dia: .50 BMG de 1/134 para 1/100 baús de prédio), nível em docs/ammo_rarity.json
 # Cada vez que um container "ganha munição" (chance por tier em RATES["ammo"]) saem AMMO_STACKS sorteios de calibre (1 a 3 pilhas; o mesmo
 # calibre pode repetir: uma tabela não garante "sem repetir"), cada pilha com AMMO_SIZE do tamanho original (9mm 24-50). Pedido do usuário
 # (15 Nov 2026): de 1 a 3 pilhas (não sempre 2 a 3) e o tamanho das pilhas IGUAL ao original (AMMO_SIZE = 1.0). Consequência: com média de 2,0 pilhas por
@@ -208,8 +208,12 @@ def ammo_weights(profile="default"):
     return {r["id"]: round(AMMO_LEVEL_W[r["level"]] * 100) for r in sorted(rar, key=lambda r: r["id"])}
 
 
+AMMO_RANGE_OVERRIDE = {"50bmg": (21, 30)}      # pedido do usuário, 17 Nov 2026 (antes 12-25, proporcional à pilha de 30)
+
+
 def ammo_range(c):
     """Mín e máx de balas por pilha: proporcional à pilha máxima, com o 9mm de referência (AMMO_REF)."""
+    if c in AMMO_RANGE_OVERRIDE: return AMMO_RANGE_OVERRIDE[c]
     ref, lo9, hi9 = AMMO_REF; base = TZ["ammo"][ref]["stack"]; st = TZ["ammo"][c]["stack"] or 30
     lo = max(1, int(lo9 * st / base * AMMO_SIZE + 0.5)); return lo, max(lo, int(hi9 * st / base * AMMO_SIZE + 0.5))
 
