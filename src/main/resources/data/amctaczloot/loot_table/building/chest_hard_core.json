@@ -308,13 +308,13 @@
               }
             }
           ],
-          "weight": 8000,
-          "quality": 2000
+          "weight": 4000,
+          "quality": 1000
         },
         {
           "type": "minecraft:empty",
-          "weight": 92000,
-          "quality": -2000
+          "weight": 96000,
+          "quality": -1000
         }
       ],
       "bonus_rolls": 0.0

@@ -31,7 +31,7 @@ First Aid e da LesRaisins. Mod id `amctaczloot`. Recomeçado do zero em 13 Nov 2
 - **Cura LesRaisins** (chance de CADA item por container, independente; mesma em todos os temas exceto farmácia; "raridade dobrada" em 16 Nov = chances x0,5): Comuns vaseline,
   ibuprofen, amoxicillin, golden star **4,6% cada**; Incomuns blood pack **2,3%**, CAR **2,1%**; **Raros** AI-2 e CMS **1,0%**; **Épico** SURV12 **0,5%**.
   **Farmácia = valores congelados "como estava"** (`HEAL_PHARMACY_FIXED`): comuns 9,2%, blood pack 9,0%, CAR 8,5%, AI-2 8,0%, CMS 7,0%, SURV12 4,0%.
-- **Comida**: leite condensado 8% por container em todos os temas (2–4 unidades); pão 20% só em casas (4–12). Itens de cura First Aid e comida **não** mudaram com o ×0,5.
+- **Comida** (17 Nov 2026): leite condensado **4%** por baú (1–3 unidades), só em prédios e casas; pão **16%** por baú (**1–5**), só em casas. Nos barris metade (leite 2%, pão 8%). Antes: leite 8%, pão 20% com 4–12.
 - **Equipamento LesRaisins** (chance de CADA item por container, independente; todos os temas **exceto farmácia**; **na delegacia as chances dos throwable dobram**): M67 Grenade 9,2% (**3 a 5**; delegacia 18,4%),
   RGN Grenade 4,1% (**2 a 4**; delegacia 8,2%), C4 Sticky Bomb 3,0% (1; delegacia 6,0%), Dagger / Karambit / Baseball Bat 2,0% cada (1, durabilidade cheia). Itens: `lrtactical:throwable` (`ThrowableId`) e
   `lrtactical:melee` (`MeleeWeaponId`). O detonator **não** entra no loot (o C4 o entrega ao ser arremessado, confirmado pelo usuário). smoke/flash/molotov/flash shield de fora.
@@ -345,3 +345,7 @@ First Aid e da LesRaisins. Mod id `amctaczloot`. Recomeçado do zero em 13 Nov 2
 - Validado (3.000 baús e 3.000 barris de oficina): ferro 1,07% / 0,43%, isqueiro 0,93% / 0,60%, durabilidade observada 41–66% (o isqueiro tem 64 usos: o arredondamento chega a 65,6%).
   Netherite não saiu em 6.000 amostras (esperado ~2,25; chance de zero ~10%): conferida só pelos pesos da tabela (0,050% / 0,025%). Por oficina: ferro e isqueiro 27% (média) / 19% (pequena);
   netherite ~1 a cada 64 oficinas médias.
+
+## Leite 4% e pão 16% com 1–5 (17 Nov 2026)
+- Pedido do usuário (números dele): leite condensado 8% -> 4% e pão 20% -> 16%, quantidade do pão 4–12 -> 1–5; barris proporcionais (metade: leite 2%, pão 8%). Só `FOOD` em `tools/gen_loot.py`; mudaram 8 tabelas (`building` e `house`, `chest`/`chest_hard`/`barrel`/`barrel_hard` `_core`).
+- Validado no servidor (3.000 containers cada, Sorte 0): baú de prédio leite 3,6%; baú de casa leite 3,7% e pão 16,0% (1–5, média 3,0); barril de prédio leite 1,9%; barril de casa leite 1,6% e pão 7,8%. Sem erros de carga.

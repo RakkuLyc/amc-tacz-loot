@@ -268,13 +268,13 @@
               }
             }
           ],
-          "weight": 8000,
-          "quality": 2000
+          "weight": 4000,
+          "quality": 1000
         },
         {
           "type": "minecraft:empty",
-          "weight": 92000,
-          "quality": -2000
+          "weight": 96000,
+          "quality": -1000
         }
       ],
       "bonus_rolls": 0.0
@@ -290,18 +290,18 @@
               "function": "minecraft:set_count",
               "count": {
                 "type": "minecraft:uniform",
-                "min": 4,
-                "max": 12
+                "min": 1,
+                "max": 5
               }
             }
           ],
-          "weight": 20000,
-          "quality": 5000
+          "weight": 16000,
+          "quality": 4000
         },
         {
           "type": "minecraft:empty",
-          "weight": 80000,
-          "quality": -5000
+          "weight": 84000,
+          "quality": -4000
         }
       ],
       "bonus_rolls": 0.0
