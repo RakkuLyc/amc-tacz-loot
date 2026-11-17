@@ -148,6 +148,22 @@ GEAR_EXCLUDED_THEMES = ("pharmacy",)
 # BARRIS (pedido do usuário, 16 Nov 2026): nos barris (tiers barrel e barrel_hard) a chance de cura LesRaisins, First Aid, comida (leite e pão) e granadas/armas brancas é
 # BARREL_ITEM_MULT da chance do baú, em TODOS os temas (inclusive a farmácia, que é quase só barril). Armas, munição e attachments já têm a sua própria redução nos barris (RATES).
 BARREL_ITEM_MULT = 0.5
+# ITENS POR NÍVEL DE MODS OPCIONAIS (mochilas do Sophisticated Backpacks e lanternas do TCT Flashlight; pedido do usuário, 17 Nov 2026; níveis das estruturas
+# backpacks.nbt e flashlight.nbt dele). "1 a cada N" é a chance, por baú, de sair QUALQUER item daquele nível (os itens do nível dividem igual: um sorteio por nível,
+# com um item ou nada). Só nas casas ("itens exclusivos das casas"); baú e baú difícil iguais; barris com BARREL_ITEM_MULT. Cada família tem tabelas e loot modifiers
+# próprios com a condição neoforge:mod_loaded (mod ausente = nada acontece).
+BACKPACK_COMPONENTS = {"copper_backpack": (1, 45), "iron_backpack": (2, 54), "gold_backpack": (3, 81), "diamond_backpack": (5, 108), "netherite_backpack": (7, 120)}   # (vagas de upgrade, espaços), como nos baús do usuário
+LEVEL_FAMILIES = {
+    "backpacks": dict(mod="sophisticatedbackpacks", themes=("house",),
+                      one_in={"Comum": 15, "Incomum": 30, "Raro": 45, "Épico": 75, "Lendário": 120},
+                      items={"Comum": ["copper_backpack"], "Incomum": ["iron_backpack", "stack_upgrade_tier_1"],
+                             "Raro": ["gold_backpack", "advanced_pickup_upgrade", "stack_upgrade_tier_2"],
+                             "Épico": ["diamond_backpack", "stack_upgrade_tier_3"],
+                             "Lendário": ["netherite_backpack", "inception_upgrade", "stack_upgrade_tier_4"]}),
+    "flashlight": dict(mod="flashlight", themes=("house",),
+                       one_in={"Incomum": 30, "Raro": 45},
+                       items={"Incomum": ["flashlight_off"], "Raro": ["headlamp_helmet", "night_vision_goggles_helmet"]}),
+}
 # FERRAMENTAS VANILLA na oficina (pedido do usuário, 16 Nov 2026; opção A: também com metade da chance nos barris). Chance por container (‰) no baú:
 # Raro = 1,0% (picareta de ferro e isqueiro, durabilidade restante 40–65%); Lendário = 0,05% (picareta de netherite inteira; classe nova, 10x mais rara que o Épico).
 TOOLS = dict(iron_pickaxe=dict(p=10, dur=(0.40, 0.65), themes=("workshop",)), flint_and_steel=dict(p=10, dur=(0.40, 0.65), themes=("workshop",)),
@@ -352,6 +368,30 @@ def e_tool(i):
     return e
 
 
+def e_family_item(fam, i):
+    e = {"type": "minecraft:item", "name": "%s:%s" % (LEVEL_FAMILIES[fam]["mod"], i)}
+    if i in BACKPACK_COMPONENTS:
+        up, inv = BACKPACK_COMPONENTS[i]
+        e["functions"] = [{"function": "minecraft:set_components", "components": {"sophisticatedcore:number_of_upgrade_slots": up, "sophisticatedcore:number_of_inventory_slots": inv}}]
+    return e
+
+
+def family_chances(fam, theme, tier):
+    """[(nível, [item...], chance do NÍVEL em ‰)] do tema/tier ([] se a família não vale no tema)."""
+    f = LEVEL_FAMILIES[fam]
+    if theme not in f["themes"]: return []
+    m = BARREL_ITEM_MULT if tier.startswith("barrel") else 1.0
+    return [(lv, f["items"][lv], 1000.0 / n * m) for lv, n in f["one_in"].items()]
+
+
+def family_pool(fam, items, p_level):
+    """Um sorteio por nível: cada item com p_level/n (‰) ou nada; a Sorte sobe pelo quality, como em item_pool."""
+    each = p_level / len(items); w = max(1, round(each * ITEM_RES)); q = max(1, round(w * LUCK_QUALITY))
+    ents = [{**e_family_item(fam, i), "weight": w, "quality": q} for i in items]
+    ents.append({"type": "minecraft:empty", "weight": 1000 * ITEM_RES - w * len(items), "quality": -q * len(items)})
+    return pool(ents)
+
+
 def e_item(kind, i):
     if kind == "tool": return e_tool(i)
     if kind == "gear": return e_gear(i)
@@ -410,6 +450,11 @@ def main_tables():
             if not fa_chances(theme, tier): continue          # tema sem First Aid: sem tabela nem loot modifier
             out["%s/%s_firstaid" % (theme, tier)] = table([item_pool("fa", i, p) for i, p in fa_chances(theme, tier)],
                                                            [{"type": "neoforge:mod_loaded", "modid": "firstaid"}])
+    for fam, f in LEVEL_FAMILIES.items():
+        for theme in f["themes"]:
+            for tier in TIERS:
+                out["%s/%s_%s" % (theme, tier, fam)] = table([family_pool(fam, items, p) for _, items, p in family_chances(fam, theme, tier)],
+                                                              [{"type": "neoforge:mod_loaded", "modid": f["mod"]}])
     return out
 
 
@@ -525,7 +570,8 @@ def write():
         g = {"type": "neoforge:add_table",
              "conditions": [{"condition": "neoforge:loot_table_id", "loot_table_id": "%s:chests/%s/%s" % (AMC, theme, tier)}],
              "table": "%s:%s" % (MOD, n)}
-        if kind == "firstaid": g["neoforge:conditions"] = [{"type": "neoforge:mod_loaded", "modid": "firstaid"}]
+        modid = "firstaid" if kind == "firstaid" else LEVEL_FAMILIES[kind]["mod"] if kind in LEVEL_FAMILIES else None
+        if modid: g["neoforge:conditions"] = [{"type": "neoforge:mod_loaded", "modid": modid}]
         glms["%s_%s_%s" % (kind, theme, tier)] = g
     for n, g in glms.items(): w("%s/loot_modifiers/%s.json" % (base, n), g)
     w(gl, {"replace": False, "entries": ["%s:%s" % (MOD, n) for n in glms]})
@@ -547,8 +593,9 @@ def check(base, gl, tables, glms, junk):
         if g["conditions"][0]["loot_table_id"] not in amc_ids: errs.append("alvo não é tabela do AMC: " + n)
     for n, t in tables.items():
         s = json.dumps(t)
-        if "firstaid:" in s and t.get("neoforge:conditions") != [{"type": "neoforge:mod_loaded", "modid": "firstaid"}]:
-            errs.append("item do First Aid em tabela sem condição mod_loaded: " + n)
+        for mid in ["firstaid"] + [f["mod"] for f in LEVEL_FAMILIES.values()]:
+            if '"%s:' % mid in s and t.get("neoforge:conditions") != [{"type": "neoforge:mod_loaded", "modid": mid}]:
+                errs.append("item do mod %s em tabela sem condição mod_loaded: %s" % (mid, n))
         if "pot" in n: errs.append("tabela de vaso gerada: " + n)
         for ref in [x for x in s.split('"') if x.startswith(MOD + ":pick/")]:
             if ref.split(":")[1] not in tables: errs.append("tabela de escolha inexistente: " + ref)

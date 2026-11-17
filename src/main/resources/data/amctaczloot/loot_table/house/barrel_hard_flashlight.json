@@ -1,0 +1,49 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "flashlight"
+    }
+  ],
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "flashlight:flashlight_off",
+          "weight": 1667,
+          "quality": 417
+        },
+        {
+          "type": "minecraft:empty",
+          "weight": 98333,
+          "quality": -417
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "flashlight:headlamp_helmet",
+          "weight": 556,
+          "quality": 139
+        },
+        {
+          "type": "minecraft:item",
+          "name": "flashlight:night_vision_goggles_helmet",
+          "weight": 556,
+          "quality": 139
+        },
+        {
+          "type": "minecraft:empty",
+          "weight": 98888,
+          "quality": -278
+        }
+      ]
+    }
+  ]
+}

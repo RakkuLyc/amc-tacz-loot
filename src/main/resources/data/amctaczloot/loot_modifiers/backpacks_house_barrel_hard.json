@@ -1,0 +1,16 @@
+{
+  "type": "neoforge:add_table",
+  "conditions": [
+    {
+      "condition": "neoforge:loot_table_id",
+      "loot_table_id": "abandonedmoderncity:chests/house/barrel_hard"
+    }
+  ],
+  "table": "amctaczloot:house/barrel_hard_backpacks",
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "sophisticatedbackpacks"
+    }
+  ]
+}

@@ -36,6 +36,14 @@
     "amctaczloot:core_gas_station_chest",
     "amctaczloot:core_gas_station_chest_hard",
     "amctaczloot:core_gas_station_barrel",
-    "amctaczloot:core_gas_station_barrel_hard"
+    "amctaczloot:core_gas_station_barrel_hard",
+    "amctaczloot:backpacks_house_chest",
+    "amctaczloot:backpacks_house_chest_hard",
+    "amctaczloot:backpacks_house_barrel",
+    "amctaczloot:backpacks_house_barrel_hard",
+    "amctaczloot:flashlight_house_chest",
+    "amctaczloot:flashlight_house_chest_hard",
+    "amctaczloot:flashlight_house_barrel",
+    "amctaczloot:flashlight_house_barrel_hard"
   ]
 }

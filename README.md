@@ -1,9 +1,9 @@
 # AMC TACZ Loot
 
 Mod só de dados para NeoForge 1.21.1: loot do TACZ (armas, munições, attachments), da LesRaisins Tactical (cura e comida) e
-do First Aid nos containers do Abandoned Modern City (AMC).
+do First Aid nos containers do Abandoned Modern City (AMC). Opcionais: mochilas do Sophisticated Backpacks e lanternas do TCT Flashlight (só nas casas).
 
-**Versão 1.0.1** (16 Nov 2026; corrige o pente das armas da 1.0.0). **Estado:** etapa de balanceamento concluída e aprovada pelo usuário (armas, munição, curas, equipamento, First Aid, attachments e pente inicial).
+**Versão 1.1.0** (17 Nov 2026; mochilas e lanternas opcionais, raridade por nível de armas, attachments e munição). **Estado:** armas, munição, curas, equipamento, First Aid, attachments e pente inicial aprovados pelo usuário; mochilas e lanternas aguardam o teste no jogo.
 Os valores em vigor estão no bloco "ESTADO ATUAL" do `CLAUDE.md`.
 
 - As tabelas são geradas por `tools/gen_loot.py` (`python3 -I tools/gen_loot.py` mostra a prévia; `--write` grava os arquivos).

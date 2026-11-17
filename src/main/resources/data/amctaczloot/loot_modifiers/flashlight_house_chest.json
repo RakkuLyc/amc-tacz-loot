@@ -1,0 +1,16 @@
+{
+  "type": "neoforge:add_table",
+  "conditions": [
+    {
+      "condition": "neoforge:loot_table_id",
+      "loot_table_id": "abandonedmoderncity:chests/house/chest"
+    }
+  ],
+  "table": "amctaczloot:house/chest_flashlight",
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "flashlight"
+    }
+  ]
+}

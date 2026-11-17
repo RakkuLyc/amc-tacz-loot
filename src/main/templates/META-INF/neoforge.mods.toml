@@ -52,3 +52,18 @@ description='''${mod_description}'''
     versionRange="[1.3.5,)"
     ordering="NONE"
     side="BOTH"
+
+# Sophisticated Backpacks e TCT Flashlight (mochilas e lanternas nas casas) também são opcionais: tabelas e loot modifiers com a condição neoforge:mod_loaded.
+[[dependencies.${mod_id}]]
+    modId="sophisticatedbackpacks"
+    type="optional"
+    versionRange="[3.26.21,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.${mod_id}]]
+    modId="flashlight"
+    type="optional"
+    versionRange="[5.0,)"
+    ordering="NONE"
+    side="BOTH"

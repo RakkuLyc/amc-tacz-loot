@@ -1,0 +1,172 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "sophisticatedbackpacks"
+    }
+  ],
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "sophisticatedbackpacks:copper_backpack",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "sophisticatedcore:number_of_upgrade_slots": 1,
+                "sophisticatedcore:number_of_inventory_slots": 45
+              }
+            }
+          ],
+          "weight": 6667,
+          "quality": 1667
+        },
+        {
+          "type": "minecraft:empty",
+          "weight": 93333,
+          "quality": -1667
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "sophisticatedbackpacks:iron_backpack",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "sophisticatedcore:number_of_upgrade_slots": 2,
+                "sophisticatedcore:number_of_inventory_slots": 54
+              }
+            }
+          ],
+          "weight": 1667,
+          "quality": 417
+        },
+        {
+          "type": "minecraft:item",
+          "name": "sophisticatedbackpacks:stack_upgrade_tier_1",
+          "weight": 1667,
+          "quality": 417
+        },
+        {
+          "type": "minecraft:empty",
+          "weight": 96666,
+          "quality": -834
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "sophisticatedbackpacks:gold_backpack",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "sophisticatedcore:number_of_upgrade_slots": 3,
+                "sophisticatedcore:number_of_inventory_slots": 81
+              }
+            }
+          ],
+          "weight": 741,
+          "quality": 185
+        },
+        {
+          "type": "minecraft:item",
+          "name": "sophisticatedbackpacks:advanced_pickup_upgrade",
+          "weight": 741,
+          "quality": 185
+        },
+        {
+          "type": "minecraft:item",
+          "name": "sophisticatedbackpacks:stack_upgrade_tier_2",
+          "weight": 741,
+          "quality": 185
+        },
+        {
+          "type": "minecraft:empty",
+          "weight": 97777,
+          "quality": -555
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "sophisticatedbackpacks:diamond_backpack",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "sophisticatedcore:number_of_upgrade_slots": 5,
+                "sophisticatedcore:number_of_inventory_slots": 108
+              }
+            }
+          ],
+          "weight": 667,
+          "quality": 167
+        },
+        {
+          "type": "minecraft:item",
+          "name": "sophisticatedbackpacks:stack_upgrade_tier_3",
+          "weight": 667,
+          "quality": 167
+        },
+        {
+          "type": "minecraft:empty",
+          "weight": 98666,
+          "quality": -334
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "sophisticatedbackpacks:netherite_backpack",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "sophisticatedcore:number_of_upgrade_slots": 7,
+                "sophisticatedcore:number_of_inventory_slots": 120
+              }
+            }
+          ],
+          "weight": 278,
+          "quality": 70
+        },
+        {
+          "type": "minecraft:item",
+          "name": "sophisticatedbackpacks:inception_upgrade",
+          "weight": 278,
+          "quality": 70
+        },
+        {
+          "type": "minecraft:item",
+          "name": "sophisticatedbackpacks:stack_upgrade_tier_4",
+          "weight": 278,
+          "quality": 70
+        },
+        {
+          "type": "minecraft:empty",
+          "weight": 99166,
+          "quality": -210
+        }
+      ]
+    }
+  ]
+}
