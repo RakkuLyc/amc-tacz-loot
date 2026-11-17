@@ -13,7 +13,7 @@ Mod **só de dados** (NeoForge 1.21.1, `modLoader="lowcodefml"`, sem Java) que i
 (`abandonedmoderncity:chests/<tema>/<chest|barrel|pot>[_hard]`): armas, munições e attachments do TACZ, itens de cura do
 First Aid e da LesRaisins. Mod id `amctaczloot`. Recomeçado do zero em 13 Nov 2026 (a versão anterior foi apagada).
 
-## ESTADO ATUAL (versão 1.0.1, 16 Nov 2026; etapa de balanceamento concluída e aprovada pelo usuário) — o que está valendo; as seções abaixo desta são HISTÓRICO e podem citar números já substituídos
+## ESTADO ATUAL (versão 1.0.1; **17 Nov 2026: etapa de armas por nível, delegacia 2x, attachments e munição por nível testada e aprovada pelo usuário** — "Testado e aprovado, pode fechar essa etapa"; push em `d5b5945`) — o que está valendo; as seções abaixo desta são HISTÓRICO e podem citar números já substituídos
 - **Armas** (17 Nov 2026, reformulado; chance por baú comum / difícil, Sorte 0): **prédio 16,8% / 28,1% (1 a cada 5,95 / 3,6 baús), barris 0,6% / 1,0%** (antes 12% / 20% / 0,4% / 0,7%);
   **delegacia: 2x o prédio (17 Nov 2026) = 33,6% / 56,2% (1 a cada 3 / 1,8), barris 1,2% / 2,0%**, com a mesma divisão por categoria e nível do prédio (perfil "police" removido). **7 categorias** (o DMR do TACZ conta como **fuzil**, 26 armas) e **5 níveis fixos** (Comum, Incomum, Raro, Épico, Lendário):
   `GUN_CAT_ONE_IN` (prédio, "1 a cada N baús": pistola 25, smg 29, fuzil 42, escopeta 42, metralhadora 65, sniper 60, explosiva 70; a soma é 16,84%), `GUN_LEVELS` (arma -> nível, do arquivo
