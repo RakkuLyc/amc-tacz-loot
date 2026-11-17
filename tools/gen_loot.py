@@ -148,6 +148,14 @@ GEAR_EXCLUDED_THEMES = ("pharmacy",)
 # BARRIS (pedido do usuário, 16 Nov 2026): nos barris (tiers barrel e barrel_hard) a chance de cura LesRaisins, First Aid, comida (leite e pão) e granadas/armas brancas é
 # BARREL_ITEM_MULT da chance do baú, em TODOS os temas (inclusive a farmácia, que é quase só barril). Armas, munição e attachments já têm a sua própria redução nos barris (RATES).
 BARREL_ITEM_MULT = 0.5
+# CAIXAS DE MUNIÇÃO do TACZ (pedido do usuário, 17 Nov 2026, "Opção B, apenas prédios e delegacia, delegacia com as mesmas chances"): tacz:ammo_box vazia, o nível é o
+# custom_data Level (0 ferro, 1 ouro, 2 diamante, como nas receitas do TACZ; SNBT em texto para o Level ser INTEIRO). Chance de CADA caixa por baú ("1 a cada N", os mesmos
+# números das mochilas: Incomum 14, Raro 20, Épico 30); baú difícil = baú; barris com BARREL_ITEM_MULT. O TACZ é dependência obrigatória: sem condição de mod.
+AMMO_BOX = dict(iron_ammo_box=dict(level=0, one_in=14, themes=("building", "police_station")),       # Incomum
+                gold_ammo_box=dict(level=1, one_in=20, themes=("building", "police_station")),       # Raro
+                diamond_ammo_box=dict(level=2, one_in=30, themes=("building", "police_station")))    # Épico
+
+
 # ITENS POR NÍVEL DE MODS OPCIONAIS (mochilas do Sophisticated Backpacks e lanternas do TCT Flashlight; pedido do usuário, 17 Nov 2026; níveis das estruturas
 # backpacks.nbt e flashlight.nbt dele). "1 a cada N" é a chance, por baú, de CADA ITEM daquele nível (correção do usuário, 17 Nov 2026: não é do nível inteiro); cada item
 # é um sorteio independente. Só nas casas ("itens exclusivos das casas"); baú e baú difícil iguais; barris com BARREL_ITEM_MULT. Cada família tem tabelas e loot modifiers
@@ -339,6 +347,8 @@ def item_chances(theme, tier="chest"):
         if f["themes"] is None or theme in f["themes"]: out.append(("food", i, f["p"]))
     for i, d in TOOLS.items():
         if theme in d["themes"]: out.append(("tool", i, d["p"]))
+    for i, d in AMMO_BOX.items():
+        if theme in d["themes"]: out.append(("box", i, 1000.0 / d["one_in"]))
     if theme not in GEAR_EXCLUDED_THEMES:
         for i, d in GEAR.items():
             m = GEAR_THEME_MULT.get(theme, {}).get(d["item"], 1.0)
@@ -393,6 +403,7 @@ def family_pool(fam, i, p):
 
 def e_item(kind, i):
     if kind == "tool": return e_tool(i)
+    if kind == "box": return {"type": "minecraft:item", "name": "tacz:ammo_box", "functions": [{"function": "minecraft:set_components", "components": {"minecraft:custom_data": "{Level:%d}" % AMMO_BOX[i]["level"]}}]}
     if kind == "gear": return e_gear(i)
     if kind == "fa": return e_fa(i)
     if i == "bread": return {"type": "minecraft:item", "name": "minecraft:bread", "functions": [count(FOOD["bread"]["lo"], FOOD["bread"]["hi"])]}
@@ -466,7 +477,7 @@ def expected(theme, tier, luck):
     """Esperado por container (stacks): guns, ammo, att, lr, fa."""
     rates = RATES[theme][tier]; rolls, bonus = ROLLS[tier]
     r = rolls + math.floor(bonus * luck)
-    res = {k: 0.0 for k in ("gun", "ammo", "att", "lr", "fa", "food", "gear", "tool")}
+    res = {k: 0.0 for k in ("gun", "ammo", "att", "lr", "fa", "food", "gear", "tool", "box")}
     for cat_set in CORE_POOLS:
         part = {k: v for k, v in rates.items() if k in cat_set}
         if not part: continue
@@ -496,7 +507,7 @@ def preview():
     print("%-14s %-30s %5s | %s | %-23s | %6s %6s" % ("tema", "estrutura", "cont.", "Sorte 0: arm  mun  att   LR   FA", "armas S0 S1 S2 S3", "LR S3", "FA S3"))
     for th, name, v in rows:
         def tot(luck):
-            t = {k: 0.0 for k in ("gun", "ammo", "att", "lr", "fa", "food", "gear", "tool")}
+            t = {k: 0.0 for k in ("gun", "ammo", "att", "lr", "fa", "food", "gear", "tool", "box")}
             for tier, n in v["tiers"].items():
                 if tier.startswith("pot"): continue
                 for k, x in expected(th, tier, luck).items(): t[k] += n * x

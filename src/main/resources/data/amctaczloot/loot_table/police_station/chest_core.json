@@ -57,6 +57,81 @@
       "entries": [
         {
           "type": "minecraft:item",
+          "name": "tacz:ammo_box",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": "{Level:0}"
+              }
+            }
+          ],
+          "weight": 7143,
+          "quality": 1786
+        },
+        {
+          "type": "minecraft:empty",
+          "weight": 92857,
+          "quality": -1786
+        }
+      ],
+      "bonus_rolls": 0.0
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "tacz:ammo_box",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": "{Level:1}"
+              }
+            }
+          ],
+          "weight": 5000,
+          "quality": 1250
+        },
+        {
+          "type": "minecraft:empty",
+          "weight": 95000,
+          "quality": -1250
+        }
+      ],
+      "bonus_rolls": 0.0
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "tacz:ammo_box",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_data": "{Level:2}"
+              }
+            }
+          ],
+          "weight": 3333,
+          "quality": 833
+        },
+        {
+          "type": "minecraft:empty",
+          "weight": 96667,
+          "quality": -833
+        }
+      ],
+      "bonus_rolls": 0.0
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
           "name": "lrtactical:throwable",
           "functions": [
             {
