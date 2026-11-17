@@ -36,10 +36,12 @@ ROLLS = {"chest": (1, 0.2), "chest_hard": (1, 0.34), "barrel": (1, 0.0), "barrel
 # att = attachment.
 # A cura LesRaisins, o First Aid, o leite condensado e o pão NÃO estão aqui: cada item tem a sua chance por container (HEAL_LR / FA_CHANCE / FOOD abaixo).
 RATES = {
-    "building":       {"chest": dict(gun=120, ammo=520),         # 1 arma a cada 8,3 baús; munição em 52%
-                       "chest_hard": dict(gun=200, ammo=866),     # 1 arma a cada 5 baús difíceis; munição 86,6%
-                       "barrel": dict(gun=4, ammo=62),
-                       "barrel_hard": dict(gun=7, ammo=114)},
+    # PRÉDIO (17 Nov 2026, "Opção A, manter 16,8%"): a soma das categorias do usuário (GUN_CAT_ONE_IN) dá 16,84% de arma por baú (antes 12%); os demais tiers
+    # sobem pelo mesmo fator (16,84/12 = 1,404). Os attachments ficam com os valores ANTIGOS (att explícito): a regra "att = 0,8 x arma" não foi reaplicada.
+    "building":       {"chest": dict(gun=168, att=96, ammo=520),          # 1 arma a cada 5,95 baús; munição em 52%
+                       "chest_hard": dict(gun=281, att=160, ammo=866),    # 1 arma a cada 3,6 baús difíceis; munição 86,6%
+                       "barrel": dict(gun=6, att=3, ammo=62),
+                       "barrel_hard": dict(gun=10, att=6, ammo=114)},
     "police_station": {"chest": dict(gun=250, ammo=800),          # armas inalteradas: 1 a cada 4 baús; munição 80%
                        "chest_hard": dict(gun=333, ammo=1000),   # 1 arma a cada 3 baús difíceis; munição sempre (teto)
                        "barrel": dict(gun=30, ammo=200),
@@ -54,11 +56,27 @@ RATES = {
                        "barrel": dict(), "barrel_hard": dict()},
 }
 # (o tema building_large foi removido do AMC em 14 Nov 2026, commit 72d07b3: todo prédio usa `building`)
-# raridade das armas por tipo (peso relativo entre tipos) e perfis de tema
-GUN_TYPE_W = {
-    "default": dict(pistol=10, smg=6, shotgun=6, rifle=4, dmr=2, sniper=1.5, mg=1, rpg=0.3),
-    "police":  dict(pistol=8, smg=8, shotgun=8, rifle=6, dmr=2.5, sniper=1.5, mg=1, rpg=0.3),
+# RARIDADE DAS ARMAS (reformulada em 17 Nov 2026, pedido do usuário, "Opção A"): 7 categorias (o DMR do TACZ conta como fuzil) e 5 níveis fixos.
+# - A chance TOTAL de cada categoria vem do usuário (perfil default = prédio): "1 a cada N baús" em GUN_CAT_ONE_IN; a divisão entre as categorias é proporcional a 1/N.
+#   Perfil police: as proporções que já existiam (pesos antigos, DMR somado ao fuzil), só mudam os níveis dentro de cada categoria.
+# - Dentro da categoria, o peso de CADA arma depende só do nível (LEVEL_W, mesmo em todas as categorias: cada nível vale metade do anterior).
+GUN_CAT_ONE_IN = dict(pistol=25, smg=29, rifle=42, shotgun=42, mg=65, sniper=60, rpg=70)       # perfil default (prédio)
+GUN_CAT_POLICE_W = dict(pistol=8, smg=8, shotgun=8, rifle=8.5, sniper=1.5, mg=1, rpg=0.3)    # perfil police (rifle = 6 + dmr 2,5)
+GUN_TYPE_MERGE = {"dmr": "rifle"}
+LEVEL_W = dict(Comum=16, Incomum=8, Raro=4, Épico=2, Lendário=1)
+GUN_LEVELS = {   # nível -> armas (nomes do arquivo do usuário; deagle_golden e springfield1873 não estavam nele: escolha minha, aprovada)
+    "pistol":  dict(Comum="glock_17 cz75 taurus943 m9a4", Incomum="m1911 b93r hk_mk23 tec_9", Raro="p320 lonetrail rhino357",
+                    Épico="taurus500 deagle timeless50 deagle_golden"),
+    "smg":     dict(Comum="hk_mp7a1", Incomum="uzi hk_mp5a5", Raro="ump45 p90", Épico="vector45"),
+    "rifle":   dict(Comum="m1866 g36k", Incomum="ak47 type_81 m16a1 m16a4 scar_l",
+                    Raro="m4a1 hk_g3 qr_24 ak12 qbz_191 urgi hk416d aug mk18 qbz_95",
+                    Épico="sks_tactical mk14 scar_h fn_fal mcx_spear_lt spr15hb", Lendário="hcar scar_mk20 ak74m"),
+    "shotgun": dict(Comum="db_short", Incomum="db_long", Raro="m1897 m870", Épico="spas_12 aa12", Lendário="m1014"),
+    "mg":      dict(Incomum="m249", Raro="rpk", Épico="fn_evolys pkm", Lendário="minigun"),
+    "sniper":  dict(Comum="m700", Incomum="svd kar98 springfield1873", Raro="mrad", Épico="ai_awp", Lendário="m95 m107 hm50b"),
+    "rpg":     dict(Épico="rpg7 m320"),
 }
+GUN_LEVEL = {g: (cat, lv) for cat, d in GUN_LEVELS.items() for lv, gs in d.items() for g in gs.split()}
 GUN_PROFILE = {"police_station": "police"}          # os demais temas usam "default"
 # MUNIÇÃO (escolhas do usuário, 14-15 Nov 2026): a quantidade por pilha é proporcional à pilha máxima do calibre, tomando o
 # 9mm como referência (24 a 50 balas). A chance de cada calibre é MISTA: AMMO_MIX_UNIFORM da chance é igual para todos os
@@ -85,7 +103,7 @@ GUN_SPAWN_AMMO_EXCLUDED = ("minigun",)
 ATT_CLASS_W = {"Comum": 8, "Incomum": 4, "Raro": 2, "Épico": 1}
 for _th in RATES.values():
     for _r in _th.values():
-        if "gun" in _r: _r["att"] = round(_r["gun"] * ATT_FRACTION_OF_GUN)
+        if "gun" in _r and "att" not in _r: _r["att"] = round(_r["gun"] * ATT_FRACTION_OF_GUN)
 # itens de cura: (peso, mín, máx)
 # CURA LESRAISINS (escolha do usuário, 15 Nov 2026): chance de CADA item por container, independente dos outros (‰: 195 = 19,5%),
 # a mesma em todos os temas e tipos de container, exceto na farmácia (multiplicador só nos incomuns e no raro, PHARMACY_MULT).
@@ -171,10 +189,14 @@ def eligible_guns():
 
 
 def gun_weights(profile):
-    guns = eligible_guns(); tw = GUN_TYPE_W[profile]
-    n = {}
-    for v in guns.values(): n[v["type"]] = n.get(v["type"], 0) + 1
-    return {g: max(1, round(tw[v["type"]] * 1000 / n[v["type"]])) for g, v in guns.items()}
+    """Peso de cada arma (soma ~100.000): fatia da categoria (perfil) x LEVEL_W do nível / soma dos níveis da categoria."""
+    guns = eligible_guns()
+    cat_share = ({c: 1.0 / n for c, n in GUN_CAT_ONE_IN.items()} if profile == "default" else dict(GUN_CAT_POLICE_W))
+    tot = sum(cat_share.values()); cat_share = {c: v / tot for c, v in cat_share.items()}
+    for g, v in guns.items():
+        assert GUN_LEVEL[g][0] == GUN_TYPE_MERGE.get(v["type"], v["type"]), "categoria do nível != categoria do TACZ: " + g
+    sums = {c: sum(LEVEL_W[GUN_LEVEL[g][1]] for g in guns if GUN_LEVEL[g][0] == c) for c in cat_share}
+    return {g: max(1, round(100000 * cat_share[GUN_LEVEL[g][0]] * LEVEL_W[GUN_LEVEL[g][1]] / sums[GUN_LEVEL[g][0]])) for g in guns}
 
 
 def ammo_weights(profile="default"):

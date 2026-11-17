@@ -14,10 +14,13 @@ Mod **só de dados** (NeoForge 1.21.1, `modLoader="lowcodefml"`, sem Java) que i
 First Aid e da LesRaisins. Mod id `amctaczloot`. Recomeçado do zero em 13 Nov 2026 (a versão anterior foi apagada).
 
 ## ESTADO ATUAL (versão 1.0.1, 16 Nov 2026; etapa de balanceamento concluída e aprovada pelo usuário) — o que está valendo; as seções abaixo desta são HISTÓRICO e podem citar números já substituídos
-- **Armas** (chance por baú comum / difícil, Sorte 0): prédio 12,0% / 20,0% (1 a cada 8,3 / 5 baús), barris 0,4% / 0,7%; delegacia 25,0% / 33,3%
-  (1 a cada 4 / 3), barris 3,0% / 6,0%. Tipos: pistola 10, smg 6, escopeta 6, fuzil 4, dmr 2, sniper 1,5, mg 1, rpg 0,3 (delegacia: smg/escopeta 8, fuzil 6).
+- **Armas** (17 Nov 2026, reformulado; chance por baú comum / difícil, Sorte 0): **prédio 16,8% / 28,1% (1 a cada 5,95 / 3,6 baús), barris 0,6% / 1,0%** (antes 12% / 20% / 0,4% / 0,7%);
+  delegacia inalterada: 25,0% / 33,3% (1 a cada 4 / 3), barris 3,0% / 6,0%. **7 categorias** (o DMR do TACZ conta como **fuzil**, 26 armas) e **5 níveis fixos** (Comum, Incomum, Raro, Épico, Lendário):
+  `GUN_CAT_ONE_IN` (prédio, "1 a cada N baús": pistola 25, smg 29, fuzil 42, escopeta 42, metralhadora 65, sniper 60, explosiva 70; a soma é 16,84%), `GUN_LEVELS` (arma -> nível, do arquivo
+  do usuário "Reformular o sistema de classificação de raridade de armas"; **escolhas minhas aprovadas**: golden deagle = Épico, springfield1873 = Incomum), `LEVEL_W` por ARMA (16/8/4/2/1: cada nível metade do anterior;
+  "Opção A"). Delegacia (`GUN_CAT_POLICE_W`): mesma divisão entre categorias de antes (DMR somado ao fuzil), só os níveis dentro da categoria mudam. Armas sem nível quebram `gun_weights` (assert).
   Arma cai **com 50% do pente cheio** (`GunCurrentAmmoCount` = ammo_amount x 0,5 arredondado para cima: 17 -> 9, pente de 1 -> 1; `HasBulletInBarrel` = false), **exceto a minigun** (sem pente definido, nasce com 0).
-- **Attachments** (aprovado em 16 Nov 2026): a chance de QUALQUER attachment por container é **0,8 da chance de arma** do mesmo tema/tipo (`ATT_FRACTION_OF_GUN`): prédio baú 9,6%, difícil 16%,
+- **Attachments** (aprovado em 16 Nov 2026; **em 17 Nov os do prédio ficaram CONGELADOS** nos valores antigos, `att` explícito em `RATES["building"]`, apesar da arma ter subido: a regra "0,8 x arma" só vale para os outros temas): a chance de QUALQUER attachment por container era **0,8 da chance de arma** do mesmo tema/tipo (`ATT_FRACTION_OF_GUN`): prédio baú 9,6%, difícil 16%,
   barris 0,3% / 0,6%; delegacia 20% / 26,6% / 2,4% / 4,8%. Qual sai: peso por **classe** (Comum 8, Incomum 4, Raro 2, Épico 1) sobre os 104 attachments fabricáveis, classes em
   `docs/attachments_rarity.json` (gerado por `tools/att_rarity.py <tacz.jar>`: 50% quantas armas aceitam o attachment (peso real do loot) + 50% atributos (zoom, recuo, precisão, nível do pente,
   dano/perfuração, silenciador), comparados dentro de cada tipo; corte 40/30/20/10%). Chance de cada item por baú de prédio: Comum 0,150%, Incomum 0,075%, Raro 0,037%, Épico 0,019%. Miras = 35% dos sorteios.
@@ -349,3 +352,14 @@ First Aid e da LesRaisins. Mod id `amctaczloot`. Recomeçado do zero em 13 Nov 2
 ## Leite 4% e pão 16% com 1–5 (17 Nov 2026)
 - Pedido do usuário (números dele): leite condensado 8% -> 4% e pão 20% -> 16%, quantidade do pão 4–12 -> 1–5; barris proporcionais (metade: leite 2%, pão 8%). Só `FOOD` em `tools/gen_loot.py`; mudaram 8 tabelas (`building` e `house`, `chest`/`chest_hard`/`barrel`/`barrel_hard` `_core`).
 - Validado no servidor (3.000 containers cada, Sorte 0): baú de prédio leite 3,6%; baú de casa leite 3,7% e pão 16,0% (1–5, média 3,0); barril de prédio leite 1,9%; barril de casa leite 1,6% e pão 7,8%. Sem erros de carga.
+
+## Reformulação da raridade das armas: categorias + 5 níveis (17 Nov 2026, v1.0.1)
+- Pedido do usuário (arquivo na [user's desktop] + "Categorize essas dmr como rifle mesmo" + "Opção A, manter 16,8%, pode aplicar"): DMR vira fuzil; 5 níveis por categoria; chance total por categoria no prédio = os "1 a cada N" dele.
+- Peso por arma = fatia da categoria x LEVEL_W[nível] / soma dos pesos da categoria (soma total 100.000). Nível por arma em `GUN_LEVELS` (todas as 70 armas; golden deagle Épico e springfield1873 Incomum foram escolha minha).
+- Efeitos colaterais (comunicados): (1) total de armas do prédio 12% -> 16,8%; (2) attachments do prédio congelados (não sobem); (3) a munição segue a popularidade das armas (`ammo_weights` usa `gun_weights`): fatias de calibre
+  mudaram (prédio: 12g 11,9->9,2%, .45 ACP 9,3->6,6%, .50 AE 4,3->2,6%, 40mm e foguete 2,4->4,3%, 4.6x30 3,8->6,1%); a chance total de munição por container NÃO mudou; (4) `docs/attachments_rarity.json`
+  (que usou os pesos antigos de arma como "popularidade") NÃO foi regenerado.
+- Chances resultantes (prédio, baú): Comum 5,68%, Incomum 5,21%, Raro 2,83%, Épico 2,77%, Lendário 0,31% (1 a cada 319); 100 baús: 27% de ter >= 1 Lendário. Por arma (Opção A): fuzil Comum 0,30% (1/333) ... fuzil Lendário 0,019% (1/5.334);
+  explosivas (só Épico) 0,714% cada (1/140).
+- Validado no servidor (Sorte 0, 0 erros de carga): 40.000 baús de prédio -> 6.716 armas (esperado 6.736), níveis 5,70/5,27/2,62/2,89/0,31%; 80.000 baús -> por categoria dentro de 2 desvios; delegacia 20.000 baús -> 5.035 armas
+  (esperado 5.000), níveis Comum 10,0 / Incomum 7,7 / Raro 5,0 / Épico 2,1 / Lendário 0,34%. Um desvio de -2,5 desvios nos fuzis na 1a amostra sumiu na 2a (ruído).

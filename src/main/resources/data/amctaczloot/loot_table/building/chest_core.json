@@ -7,8 +7,8 @@
         {
           "type": "minecraft:loot_table",
           "value": "amctaczloot:pick/gun_default",
-          "weight": 120,
-          "quality": 30
+          "weight": 168,
+          "quality": 42
         },
         {
           "type": "minecraft:loot_table",
@@ -18,8 +18,8 @@
         },
         {
           "type": "minecraft:empty",
-          "weight": 784,
-          "quality": -54
+          "weight": 736,
+          "quality": -66
         }
       ],
       "bonus_rolls": 0.2
