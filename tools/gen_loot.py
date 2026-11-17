@@ -37,17 +37,17 @@ ROLLS = {"chest": (1, 0.2), "chest_hard": (1, 0.34), "barrel": (1, 0.0), "barrel
 # A cura LesRaisins, o First Aid, o leite condensado e o pão NÃO estão aqui: cada item tem a sua chance por container (HEAL_LR / FA_CHANCE / FOOD abaixo).
 RATES = {
     # PRÉDIO (17 Nov 2026, "Opção A, manter 16,8%"): a soma das categorias do usuário (GUN_CAT_ONE_IN) dá 16,84% de arma por baú (antes 12%); os demais tiers
-    # sobem pelo mesmo fator (16,84/12 = 1,404). Os attachments ficam com os valores ANTIGOS (att explícito): a regra "att = 0,8 x arma" não foi reaplicada.
-    "building":       {"chest": dict(gun=168, att=96, ammo=520),          # 1 arma a cada 5,95 baús; munição em 52%
-                       "chest_hard": dict(gun=281, att=160, ammo=866),    # 1 arma a cada 3,6 baús difíceis; munição 86,6%
-                       "barrel": dict(gun=6, att=3, ammo=62),
-                       "barrel_hard": dict(gun=10, att=6, ammo=114)},
+    # sobem pelo mesmo fator (16,84/12 = 1,404). Attachments = ATT_FRACTION_OF_GUN (1,2) x arma: 202 / 337 / 7 / 12 ‰.
+    "building":       {"chest": dict(gun=168, ammo=520),          # 1 arma a cada 5,95 baús; munição em 52%
+                       "chest_hard": dict(gun=281, ammo=866),    # 1 arma a cada 3,6 baús difíceis; munição 86,6%
+                       "barrel": dict(gun=6, ammo=62),
+                       "barrel_hard": dict(gun=10, ammo=114)},
     # DELEGACIA (17 Nov 2026): a chance de TODAS as armas é 2x a do prédio (mesma divisão por categoria e nível; baú 33,6%, difícil 56,2%, barris 1,2% / 2,0%).
-    # Attachments e munição (chance por container) ficam como estavam (att explícito: a regra "0,8 x arma" não vale aqui); o usuário vai rever os dois depois.
-    "police_station": {"chest": dict(gun=336, att=200, ammo=800),          # 1 arma a cada 3 baús; munição 80%
-                       "chest_hard": dict(gun=562, att=266, ammo=1000),    # 56,2%; munição sempre (teto)
-                       "barrel": dict(gun=12, att=24, ammo=200),
-                       "barrel_hard": dict(gun=20, att=48, ammo=360)},
+    # Attachments = 1,2 x arma (= 2x os do prédio: 403 / 674 / 14 / 24 ‰). Munição (chance por container) como estava; o usuário vai rever a munição depois.
+    "police_station": {"chest": dict(gun=336, ammo=800),          # 1 arma a cada 3 baús; munição 80%
+                       "chest_hard": dict(gun=562, ammo=1000),    # 56,2%; munição sempre (teto)
+                       "barrel": dict(gun=12, ammo=200),
+                       "barrel_hard": dict(gun=20, ammo=360)},
     "pharmacy":       {"chest": dict(), "chest_hard": dict(),
                        "barrel": dict(), "barrel_hard": dict()},
     "house":          {"chest": dict(), "chest_hard": dict(),
@@ -93,15 +93,15 @@ AMMO_MIX_UNIFORM = 0.5
 AMMO_STACKS = (1, 3)
 AMMO_SIZE = 1.0
 # (a arma NÃO traz munição junto: a munição é um sorteio separado, calibre pela raridade das armas que o usam)
-# ATTACHMENTS (aprovado em 16 Nov 2026): "ligeiramente mais raros que as armas" = a chance de QUALQUER attachment num container é ATT_FRACTION_OF_GUN da chance de
-# arma do mesmo tema e tipo de container. Qual attachment sai: peso por CLASSE (Comum/Incomum/Raro/Épico), calculada por tools/att_rarity.py a partir de dois fatores
-# (quantas armas aceitam o attachment e seus atributos) e gravada em docs/attachments_rarity.json.
-ATT_FRACTION_OF_GUN = 0.8
+# ATTACHMENTS (redefinidos em 17 Nov 2026, arquivo do usuário "TACZ_attachments.txt" + estruturas .nbt dele): a chance de QUALQUER attachment num container é
+# ATT_FRACTION_OF_GUN (1,2: "em torno de 20% mais comuns que armas") da chance de arma do mesmo tema e tipo de container. Qual sai: peso por NÍVEL de cada attachment
+# (docs/attachments_rarity.json, gerado por tools/att_from_nbt.py a partir da cor do concreto sobre os baús do usuário). "Sem raridade" = baú sem concreto = peso do Incomum (opção B).
+ATT_FRACTION_OF_GUN = 1.2
+ATT_LEVEL_W = {"Comum": 16, "Incomum": 8, "Raro": 4, "Épico": 2, "Lendário": 1, "Mítico": 0.5, "Sem raridade": 8}
 # MUNIÇÃO JÁ NA ARMA (pedido do usuário, 16 Nov 2026): toda arma nasce com GUN_SPAWN_AMMO_FRACTION do pente cheio (ammo_amount do TACZ), arredondado para CIMA
 # (pente de 1 -> 1; 17 -> 9), exceto as de GUN_SPAWN_AMMO_EXCLUDED (minigun: sem tamanho de pente definido; nasce como antes, com 0).
 GUN_SPAWN_AMMO_FRACTION = 0.5
 GUN_SPAWN_AMMO_EXCLUDED = ("minigun",)
-ATT_CLASS_W = {"Comum": 8, "Incomum": 4, "Raro": 2, "Épico": 1}
 for _th in RATES.values():
     for _r in _th.values():
         if "gun" in _r and "att" not in _r: _r["att"] = round(_r["gun"] * ATT_FRACTION_OF_GUN)
@@ -167,7 +167,7 @@ JUNK = dict(stick=(12, 1, 6), wheat_seeds=(10, 1, 4), beetroot_seeds=(8, 1, 4), 
 JUNK_SHAPE = {"chest": (1000, 2, 4), "chest_hard": (1000, 2, 4), "barrel": (300, 1, 2), "barrel_hard": (300, 1, 2),
               "pot": (300, 1, 1), "pot_hard": (300, 1, 1)}
 # categorias da tabela principal (TACZ + LesRaisins, obrigatórios) e da tabela do First Aid (opcional)
-CORE_POOLS = (("gun", "att"), ("ammo",))      # sorteios independentes por rolagem do baú (a cura e a comida têm um pool por item)
+CORE_POOLS = (("gun",), ("att",), ("ammo",))      # sorteios independentes por rolagem do baú (a cura e a comida têm um pool por item)
 CORE_CATS = ("gun", "ammo", "att")
 LUCKS = (0, 1, 2, 3)
 # =====================================================================================================================
@@ -218,10 +218,11 @@ def ammo_range(c):
 
 
 def att_weights():
-    """Peso de cada attachment pela sua classe de raridade (docs/attachments_rarity.json, gerado por tools/att_rarity.py)."""
+    """Peso de cada attachment pelo seu nível (docs/attachments_rarity.json, gerado por tools/att_from_nbt.py), x100 para caber em inteiros (Mítico 0,5)."""
     rar = load("docs/attachments_rarity.json")
-    assert {r["id"] for r in rar} == {a for a, v in TZ["attachments"].items() if v["craftable"]}, "classes dos attachments desatualizadas: rode tools/att_rarity.py"
-    return {r["id"]: ATT_CLASS_W[r["cls"]] for r in rar}
+    ids = [r["id"] for r in rar]
+    assert len(ids) == len(set(ids)) and set(ids) <= set(TZ["attachments"]), "attachments do arquivo repetidos ou fora do catálogo do TACZ"
+    return {r["id"]: round(ATT_LEVEL_W[r["level"]] * 100) for r in rar}
 
 
 # ---------------------------------------------------------------- JSON dos itens

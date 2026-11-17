@@ -11,15 +11,26 @@
           "quality": 84
         },
         {
+          "type": "minecraft:empty",
+          "weight": 664,
+          "quality": -84
+        }
+      ],
+      "bonus_rolls": 0.2
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
           "type": "minecraft:loot_table",
           "value": "amctaczloot:pick/att",
-          "weight": 200,
-          "quality": 50
+          "weight": 403,
+          "quality": 101
         },
         {
           "type": "minecraft:empty",
-          "weight": 464,
-          "quality": -134
+          "weight": 597,
+          "quality": -101
         }
       ],
       "bonus_rolls": 0.2

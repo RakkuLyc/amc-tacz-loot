@@ -20,10 +20,13 @@ First Aid e da LesRaisins. Mod id `amctaczloot`. Recomeçado do zero em 13 Nov 2
   do usuário "Reformular o sistema de classificação de raridade de armas"; **escolhas minhas aprovadas**: golden deagle = Épico, springfield1873 = Incomum), `LEVEL_W` por ARMA (16/8/4/2/1: cada nível metade do anterior;
   "Opção A"). Armas sem nível quebram `gun_weights` (assert). Delegacia: ver a seção "Delegacia 2x" no fim (a primeira versão, que mantinha a divisão antiga da delegacia, foi substituída no mesmo dia).
   Arma cai **com 50% do pente cheio** (`GunCurrentAmmoCount` = ammo_amount x 0,5 arredondado para cima: 17 -> 9, pente de 1 -> 1; `HasBulletInBarrel` = false), **exceto a minigun** (sem pente definido, nasce com 0).
-- **Attachments** (aprovado em 16 Nov 2026; **em 17 Nov os do prédio ficaram CONGELADOS** nos valores antigos, `att` explícito em `RATES["building"]`, apesar da arma ter subido: a regra "0,8 x arma" só vale para os outros temas): a chance de QUALQUER attachment por container era **0,8 da chance de arma** do mesmo tema/tipo (`ATT_FRACTION_OF_GUN`): prédio baú 9,6%, difícil 16%,
-  barris 0,3% / 0,6%; delegacia 20% / 26,6% / 2,4% / 4,8%. Qual sai: peso por **classe** (Comum 8, Incomum 4, Raro 2, Épico 1) sobre os 104 attachments fabricáveis, classes em
-  `docs/attachments_rarity.json` (gerado por `tools/att_rarity.py <tacz.jar>`: 50% quantas armas aceitam o attachment (peso real do loot) + 50% atributos (zoom, recuo, precisão, nível do pente,
-  dano/perfuração, silenciador), comparados dentro de cada tipo; corte 40/30/20/10%). Chance de cada item por baú de prédio: Comum 0,150%, Incomum 0,075%, Raro 0,037%, Épico 0,019%. Miras = 35% dos sorteios.
+- **Attachments** (REDEFINIDOS em 17 Nov 2026, "Opção B, 16/8/4/2/1, incluir todos, os 4 que não estão nos meus arquivos de fora"): chance de QUALQUER attachment por container = **1,2 x a chance de arma** (`ATT_FRACTION_OF_GUN`;
+  "em torno de 20% mais comuns que armas"): prédio baú 20,2%, difícil 33,7%, barris 0,7% / 1,2%; delegacia (= 2x o prédio) 40,3% / 67,4% / 1,4% / 2,4%. Arma e attachment são **pools independentes** (`CORE_POOLS`): no baú difícil da
+  delegacia a soma passa de 100%. Qual sai: peso por NÍVEL de cada um dos **109 attachments** da classificação do usuário (cor do concreto SOBRE o baú nas estruturas `.nbt` dele; `docs/attachments_rarity.json`, gerado por
+  `tools/att_from_nbt.py <pasta structures>`): Comum 22 itens (cinza-claro, peso 16), Incomum 3 (lima, 8), Raro 14 (azul-claro, 4), Épico 12 (magenta, 2), Lendário 5 (amarelo, 1), **Mítico** 1 (laranja, 0,5: só `ammo_mod_he`),
+  **Sem raridade** 52 (baú sem concreto: empunhaduras, lasers, bocas de cano, coronhas; peso do Incomum, 8). Itens por família: miras 40 (com nível), pente estendido 17 (sem Incomum; Lendários = ammo_mod_i/hp/slug/fmj), e as 4 famílias sem nível.
+  Incluídos os 9 listados que o TACZ não deixa fabricar (4 `oem_stock_*`, `stock_psg`, 4 miras `sight_*_rifle`). **De fora** (fabricáveis, não estão nos arquivos dele): `ammo_mod_overpressure_recoil`, `stock_heavy_spas_12`, `stock_moe`,
+  `stock_tactical_spas_12`. Chance de cada item por baú de prédio: Comum 0,368%, Incomum/sem raridade 0,184%, Raro 0,092%, Épico 0,046%, Lendário 0,023%, Mítico 0,012% (delegacia: o dobro).
 - **Barris** (16 Nov): nos tiers `barrel` e `barrel_hard` a chance de **cura LesRaisins, First Aid, comida (leite e pão) e granadas/armas brancas é METADE da do baú**, em todos os temas
   (inclusive farmácia). Armas, munição e attachments têm redução própria nos barris (RATES: 3% a 25% da do baú). Sucata no barril: 30% com 1–2 pilhas. `BARREL_ITEM_MULT = 0.5`.
 - **Munição** (pool próprio): baú de prédio 52,0%, difícil 86,6%, barris 6,2% / 11,4%; delegacia baú 80,0%, difícil 100,0% (teto), barris 20,0% / 36,0%.
@@ -370,3 +373,10 @@ First Aid e da LesRaisins. Mod id `amctaczloot`. Recomeçado do zero em 13 Nov 2
   A mistura de calibres da delegacia agora é a MESMA do prédio (`pick/ammo_default`; `ammo_police` e `gun_police` deixaram de existir). Usuário: "munições e attachments, veremos com mais calma depois".
 - Validado no servidor (Sorte 0, 0 erros de carga): baú 40.000 -> 33,38% de arma (esperado 33,6%); baú difícil 20.000 -> 55,98% (56,2%); barril 60.000 -> 1,21% (1,2%); barril difícil 40.000 -> 1,93% (2,0%).
   Anexos medidos 20,1 / 26,3 / 2,4 / 5,0%. Níveis no baú: Comum 11,5%, Incomum 10,3%, Raro 5,5%, Épico 5,5%, Lendário 0,57% (esperado 0,62%, 1 a cada 160 baús).
+
+## Attachments redefinidos pelas estruturas do usuário (17 Nov 2026, v1.0.1)
+- Arquivo `[user's desktop]/TACZ_attachments.txt` + 7 `.nbt` (`.../[user's test instance]/.../generated/minecraft/structures/`: base = legenda de cores; tacz_scopes, tacz_extended_mag com nível; grip, laser, muzzle, stock sem).
+  Escolhas do usuário: sem raridade = peso do Incomum (opção B), níveis 16/8/4/2/1 (Mítico 0,5 foi proposta minha, aceita), incluir os 9 não fabricáveis, deixar de fora os 4 fabricáveis não listados. `stock_m4ss` estava duplicado (conta 1).
+- Removidos `tools/att_rarity.py` e `docs/attachments_proposta.csv` (classificação antiga por 2 fatores, substituída). A regra antiga "0,8 x arma" e o congelamento dos anexos do prédio acabaram.
+- Validado no servidor (Sorte 0, 0 erros de carga): prédio baú 80.000 -> anexos 20,25% (esperado 20,2%), armas 16,83%; difícil 30.000 -> 33,78% / 28,40%; barril 60.000 -> 0,69% / 0,61%; delegacia baú 40.000 -> 40,33% / 33,45%, difícil
+  30.000 -> 66,85% / 56,07%, barril 60.000 -> 1,44% / 1,15%. Níveis (prédio baú, medido/esperado): Comum 8,01/8,10, sem raridade 9,63/9,58, Raro 1,30/1,29, Épico 0,55/0,55, Lendário 0,131/0,115, Mítico 0,018/0,012 (14 `ammo_mod_he` em 80.000 baús).

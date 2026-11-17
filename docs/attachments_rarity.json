@@ -1,1042 +1,547 @@
 [
  {
   "id": "ammo_mod_fmj",
-  "type": "extended_mag",
-  "cls": "Incomum",
-  "guns_accept": 66,
-  "pop": 0.9621,
-  "power": 7.6,
-  "score": 0.486,
-  "why": "pente nív.3, damage, armor_ignore, pierce, ammo_speed"
+  "family": "extended_mag",
+  "level": "Lendário"
  },
  {
   "id": "ammo_mod_he",
-  "type": "extended_mag",
-  "cls": "Incomum",
-  "guns_accept": 18,
-  "pop": 0.2475,
-  "power": 7.33,
-  "score": 0.556,
-  "why": "precisão -38%, pente nív.1, armor_ignore, pierce, head_shot, explosion, rpm"
+  "family": "extended_mag",
+  "level": "Mítico"
  },
  {
   "id": "ammo_mod_hp",
-  "type": "extended_mag",
-  "cls": "Incomum",
-  "guns_accept": 66,
-  "pop": 0.9621,
-  "power": 7.6,
-  "score": 0.486,
-  "why": "pente nív.3, damage, armor_ignore, pierce, ammo_speed"
+  "family": "extended_mag",
+  "level": "Lendário"
  },
  {
   "id": "ammo_mod_i",
-  "type": "extended_mag",
-  "cls": "Incomum",
-  "guns_accept": 66,
-  "pop": 0.9621,
-  "power": 7.8,
-  "score": 0.528,
-  "why": "pente nív.3, damage, armor_ignore, ammo_speed, ignite"
- },
- {
-  "id": "ammo_mod_overpressure_recoil",
-  "type": "extended_mag",
-  "cls": "Comum",
-  "guns_accept": 1,
-  "pop": 0.0278,
-  "power": -0.2,
-  "score": 0.417,
-  "why": "recuo +12%, precisão +50%, damage, knockback"
+  "family": "extended_mag",
+  "level": "Lendário"
  },
  {
   "id": "ammo_mod_slug",
-  "type": "extended_mag",
-  "cls": "Raro",
-  "guns_accept": 7,
-  "pop": 0.1948,
-  "power": 7.55,
-  "score": 0.694,
-  "why": "precisão -65%, pente nív.3, damage, ammo_speed"
- },
- {
-  "id": "bayonet_6h3",
-  "type": "muzzle",
-  "cls": "Incomum",
-  "guns_accept": 1,
-  "pop": 0.0062,
-  "power": 0.5,
-  "score": 0.537,
-  "why": "corpo a corpo"
- },
- {
-  "id": "bayonet_m9",
-  "type": "muzzle",
-  "cls": "Comum",
-  "guns_accept": 6,
-  "pop": 0.037,
-  "power": 0.5,
-  "score": 0.438,
-  "why": "corpo a corpo"
- },
- {
-  "id": "deagle_golden_long_barrel",
-  "type": "muzzle",
-  "cls": "Raro",
-  "guns_accept": 1,
-  "pop": 0.0217,
-  "power": 1.97,
-  "score": 0.662,
-  "why": "recuo -20%, precisão -12%, effective_range"
+  "family": "extended_mag",
+  "level": "Lendário"
  },
  {
   "id": "extended_mag_1",
-  "type": "extended_mag",
-  "cls": "Comum",
-  "guns_accept": 29,
-  "pop": 0.2075,
-  "power": 1.2,
-  "score": 0.319,
-  "why": "pente nív.1"
+  "family": "extended_mag",
+  "level": "Comum"
  },
  {
   "id": "extended_mag_2",
-  "type": "extended_mag",
-  "cls": "Comum",
-  "guns_accept": 29,
-  "pop": 0.2075,
-  "power": 2.4,
-  "score": 0.431,
-  "why": "pente nív.2"
+  "family": "extended_mag",
+  "level": "Raro"
  },
  {
   "id": "extended_mag_3",
-  "type": "extended_mag",
-  "cls": "Incomum",
-  "guns_accept": 29,
-  "pop": 0.2075,
-  "power": 3.6,
-  "score": 0.542,
-  "why": "pente nív.3"
- },
- {
-  "id": "grip_cobra",
-  "type": "grip",
-  "cls": "Incomum",
-  "guns_accept": 25,
-  "pop": 0.2564,
-  "power": 0.0,
-  "score": 0.462,
-  "why": ""
- },
- {
-  "id": "grip_magpul_afg",
-  "type": "grip",
-  "cls": "Raro",
-  "guns_accept": 25,
-  "pop": 0.2564,
-  "power": 0.5,
-  "score": 0.635,
-  "why": "recuo -12%"
- },
- {
-  "id": "grip_magpul_afg_2",
-  "type": "grip",
-  "cls": "Raro",
-  "guns_accept": 25,
-  "pop": 0.2564,
-  "power": 0.5,
-  "score": 0.635,
-  "why": "recuo -12%"
- },
- {
-  "id": "grip_osovets_black",
-  "type": "grip",
-  "cls": "Incomum",
-  "guns_accept": 26,
-  "pop": 0.2889,
-  "power": 0.8,
-  "score": 0.442,
-  "why": "recuo -20%"
- },
- {
-  "id": "grip_rk0",
-  "type": "grip",
-  "cls": "Comum",
-  "guns_accept": 26,
-  "pop": 0.2889,
-  "power": 0.4,
-  "score": 0.327,
-  "why": "recuo -10%"
- },
- {
-  "id": "grip_rk1_b25u",
-  "type": "grip",
-  "cls": "Incomum",
-  "guns_accept": 26,
-  "pop": 0.2889,
-  "power": 1.08,
-  "score": 0.519,
-  "why": "recuo -17%, precisão -14%"
- },
- {
-  "id": "grip_rk6",
-  "type": "grip",
-  "cls": "Comum",
-  "guns_accept": 26,
-  "pop": 0.2889,
-  "power": -1.0,
-  "score": 0.173,
-  "why": "recuo +10%, precisão +20%"
- },
- {
-  "id": "grip_se_5",
-  "type": "grip",
-  "cls": "Incomum",
-  "guns_accept": 25,
-  "pop": 0.2564,
-  "power": 0.3,
-  "score": 0.5,
-  "why": "recuo -7%"
- },
- {
-  "id": "grip_td",
-  "type": "grip",
-  "cls": "Comum",
-  "guns_accept": 26,
-  "pop": 0.2889,
-  "power": 0.36,
-  "score": 0.288,
-  "why": "precisão -12%"
- },
- {
-  "id": "grip_troy",
-  "type": "grip",
-  "cls": "Raro",
-  "guns_accept": 25,
-  "pop": 0.2564,
-  "power": 1.2,
-  "score": 0.808,
-  "why": "recuo +7%, precisão -50%"
- },
- {
-  "id": "grip_vertical_military",
-  "type": "grip",
-  "cls": "Incomum",
-  "guns_accept": 26,
-  "pop": 0.2889,
-  "power": 1.25,
-  "score": 0.596,
-  "why": "recuo -20%, precisão -15%"
- },
- {
-  "id": "grip_vertical_ranger",
-  "type": "grip",
-  "cls": "Raro",
-  "guns_accept": 26,
-  "pop": 0.2889,
-  "power": 1.83,
-  "score": 0.635,
-  "why": "recuo -25%, precisão -28%"
- },
- {
-  "id": "grip_vertical_talon",
-  "type": "grip",
-  "cls": "Incomum",
-  "guns_accept": 26,
-  "pop": 0.2889,
-  "power": 0.9,
-  "score": 0.481,
-  "why": "recuo -8%, precisão -20%"
- },
- {
-  "id": "laser_compact",
-  "type": "laser",
-  "cls": "Comum",
-  "guns_accept": 32,
-  "pop": 0.5129,
-  "power": 1.0,
-  "score": 0.25,
-  "why": "precisão -33%"
- },
- {
-  "id": "laser_lopro",
-  "type": "laser",
-  "cls": "Raro",
-  "guns_accept": 25,
-  "pop": 0.2009,
-  "power": 1.8,
-  "score": 0.65,
-  "why": "precisão -60%"
- },
- {
-  "id": "laser_ngal",
-  "type": "laser",
-  "cls": "Incomum",
-  "guns_accept": 25,
-  "pop": 0.2009,
-  "power": 1.35,
-  "score": 0.55,
-  "why": "precisão -45%"
- },
- {
-  "id": "laser_nightstick",
-  "type": "laser",
-  "cls": "Comum",
-  "guns_accept": 32,
-  "pop": 0.5129,
-  "power": 0.98,
-  "score": 0.15,
-  "why": "precisão -32%"
- },
- {
-  "id": "laser_peq6",
-  "type": "laser",
-  "cls": "Épico",
-  "guns_accept": 1,
-  "pop": 0.0217,
-  "power": 2.02,
-  "score": 0.9,
-  "why": "precisão -48%, head_shot"
+  "family": "extended_mag",
+  "level": "Épico"
  },
  {
   "id": "light_extended_mag_1",
-  "type": "extended_mag",
-  "cls": "Comum",
-  "guns_accept": 17,
-  "pop": 0.4136,
-  "power": 1.2,
-  "score": 0.208,
-  "why": "pente nív.1"
+  "family": "extended_mag",
+  "level": "Comum"
  },
  {
   "id": "light_extended_mag_2",
-  "type": "extended_mag",
-  "cls": "Comum",
-  "guns_accept": 17,
-  "pop": 0.4136,
-  "power": 2.4,
-  "score": 0.319,
-  "why": "pente nív.2"
+  "family": "extended_mag",
+  "level": "Raro"
  },
  {
   "id": "light_extended_mag_3",
-  "type": "extended_mag",
-  "cls": "Comum",
-  "guns_accept": 17,
-  "pop": 0.4136,
-  "power": 3.6,
-  "score": 0.431,
-  "why": "pente nív.3"
- },
- {
-  "id": "muzzle_brake_cthulhu",
-  "type": "muzzle",
-  "cls": "Comum",
-  "guns_accept": 38,
-  "pop": 0.4348,
-  "power": 1.2,
-  "score": 0.3,
-  "why": "recuo -18%, precisão +0%"
- },
- {
-  "id": "muzzle_brake_cyclone_d2",
-  "type": "muzzle",
-  "cls": "Comum",
-  "guns_accept": 38,
-  "pop": 0.4348,
-  "power": 0.7,
-  "score": 0.25,
-  "why": "recuo -25%, precisão +10%"
- },
- {
-  "id": "muzzle_brake_mastiff_sg",
-  "type": "muzzle",
-  "cls": "Incomum",
-  "guns_accept": 5,
-  "pop": 0.1391,
-  "power": 1.4,
-  "score": 0.55,
-  "why": "recuo -35%"
- },
- {
-  "id": "muzzle_brake_pioneer",
-  "type": "muzzle",
-  "cls": "Comum",
-  "guns_accept": 38,
-  "pop": 0.4348,
-  "power": 0.21,
-  "score": 0.175,
-  "why": "recuo -30%, precisão +33%"
- },
- {
-  "id": "muzzle_brake_timeless50",
-  "type": "muzzle",
-  "cls": "Épico",
-  "guns_accept": 1,
-  "pop": 0.0217,
-  "power": 3.15,
-  "score": 0.812,
-  "why": "recuo -45%, precisão -45%"
- },
- {
-  "id": "muzzle_brake_trex",
-  "type": "muzzle",
-  "cls": "Comum",
-  "guns_accept": 38,
-  "pop": 0.4348,
-  "power": 1.36,
-  "score": 0.35,
-  "why": "recuo -34%"
- },
- {
-  "id": "muzzle_choke_sg",
-  "type": "muzzle",
-  "cls": "Incomum",
-  "guns_accept": 5,
-  "pop": 0.1391,
-  "power": 0.8,
-  "score": 0.45,
-  "why": "recuo +10%, precisão -40%"
- },
- {
-  "id": "muzzle_compensator_trident",
-  "type": "muzzle",
-  "cls": "Comum",
-  "guns_accept": 38,
-  "pop": 0.4348,
-  "power": 1.25,
-  "score": 0.325,
-  "why": "recuo -20%, precisão -15%"
- },
- {
-  "id": "muzzle_silencer_knight_qd",
-  "type": "muzzle",
-  "cls": "Comum",
-  "guns_accept": 40,
-  "pop": 0.4457,
-  "power": 2.85,
-  "score": 0.375,
-  "why": "recuo -10%, precisão -25%, silencioso"
- },
- {
-  "id": "muzzle_silencer_mirage",
-  "type": "muzzle",
-  "cls": "Incomum",
-  "guns_accept": 15,
-  "pop": 0.3897,
-  "power": 2.8,
-  "score": 0.55,
-  "why": "precisão +10%, head_shot, effective_range, silencioso"
- },
- {
-  "id": "muzzle_silencer_phantom_s1",
-  "type": "muzzle",
-  "cls": "Comum",
-  "guns_accept": 41,
-  "pop": 0.4673,
-  "power": 2.6,
-  "score": 0.275,
-  "why": "precisão +10%, effective_range, rpm, silencioso"
- },
- {
-  "id": "muzzle_silencer_ptilopsis",
-  "type": "muzzle",
-  "cls": "Raro",
-  "guns_accept": 15,
-  "pop": 0.3897,
-  "power": 3.1,
-  "score": 0.625,
-  "why": "precisão -20%, effective_range, silencioso"
- },
- {
-  "id": "muzzle_silencer_sg",
-  "type": "muzzle",
-  "cls": "Raro",
-  "guns_accept": 5,
-  "pop": 0.1391,
-  "power": 3.33,
-  "score": 0.775,
-  "why": "recuo -5%, precisão -8%, effective_range, rpm, silencioso"
- },
- {
-  "id": "muzzle_silencer_socom_rc1",
-  "type": "muzzle",
-  "cls": "Incomum",
-  "guns_accept": 40,
-  "pop": 0.4457,
-  "power": 3.3,
-  "score": 0.475,
-  "why": "recuo -20%, effective_range, silencioso"
- },
- {
-  "id": "muzzle_silencer_ursus",
-  "type": "muzzle",
-  "cls": "Comum",
-  "guns_accept": 40,
-  "pop": 0.4457,
-  "power": 2.95,
-  "score": 0.4,
-  "why": "recuo -22%, precisão +15%, effective_range, silencioso"
- },
- {
-  "id": "muzzle_silencer_vulture",
-  "type": "muzzle",
-  "cls": "Épico",
-  "guns_accept": 3,
-  "pop": 0.0163,
-  "power": 3.98,
-  "score": 0.925,
-  "why": "recuo -30%, precisão +10%, head_shot, effective_range, silencioso"
- },
- {
-  "id": "muzzle_silencer_wraith",
-  "type": "muzzle",
-  "cls": "Raro",
-  "guns_accept": 15,
-  "pop": 0.3897,
-  "power": 4.35,
-  "score": 0.75,
-  "why": "precisão -25%, head_shot, ammo_speed, effective_range, silencioso"
- },
- {
-  "id": "scope_1866_4x",
-  "type": "scope",
-  "cls": "Épico",
-  "guns_accept": 1,
-  "pop": 0.013,
-  "power": 3.02,
-  "score": 0.819,
-  "why": "zoom 3.2, precisão -34%"
- },
- {
-  "id": "scope_1873_6x",
-  "type": "scope",
-  "cls": "Épico",
-  "guns_accept": 1,
-  "pop": 0.0054,
-  "power": 3.9,
-  "score": 0.951,
-  "why": "zoom 6.0, precisão -34%"
- },
- {
-  "id": "scope_98k",
-  "type": "scope",
-  "cls": "Raro",
-  "guns_accept": 1,
-  "pop": 0.0054,
-  "power": 2.39,
-  "score": 0.792,
-  "why": "zoom 4.2"
- },
- {
-  "id": "scope_acog_ta31",
-  "type": "scope",
-  "cls": "Comum",
-  "guns_accept": 44,
-  "pop": 0.5052,
-  "power": 1.62,
-  "score": 0.438,
-  "why": "zoom 2.5"
- },
- {
-  "id": "scope_amg_10",
-  "type": "scope",
-  "cls": "Incomum",
-  "guns_accept": 44,
-  "pop": 0.5052,
-  "power": 3.16,
-  "score": 0.576,
-  "why": "zoom 7.2"
- },
- {
-  "id": "scope_c79",
-  "type": "scope",
-  "cls": "Incomum",
-  "guns_accept": 44,
-  "pop": 0.5052,
-  "power": 3.23,
-  "score": 0.59,
-  "why": "zoom 3.8, precisão -34%"
- },
- {
-  "id": "scope_contender",
-  "type": "scope",
-  "cls": "Raro",
-  "guns_accept": 24,
-  "pop": 0.3568,
-  "power": 2.84,
-  "score": 0.611,
-  "why": "zoom 4.2, precisão -15%"
- },
- {
-  "id": "scope_elcan_4x",
-  "type": "scope",
-  "cls": "Incomum",
-  "guns_accept": 44,
-  "pop": 0.5052,
-  "power": 2.39,
-  "score": 0.5,
-  "why": "zoom 4.2"
- },
- {
-  "id": "scope_hamr",
-  "type": "scope",
-  "cls": "Incomum",
-  "guns_accept": 44,
-  "pop": 0.5052,
-  "power": 2.45,
-  "score": 0.521,
-  "why": "zoom 3.2, precisão -15%"
- },
- {
-  "id": "scope_lpvo_1_6",
-  "type": "scope",
-  "cls": "Incomum",
-  "guns_accept": 44,
-  "pop": 0.5052,
-  "power": 2.94,
-  "score": 0.549,
-  "why": "zoom 6.2"
- },
- {
-  "id": "scope_mk4ert",
-  "type": "scope",
-  "cls": "Épico",
-  "guns_accept": 19,
-  "pop": 0.1554,
-  "power": 3.9,
-  "score": 0.861,
-  "why": "zoom 8.0, precisão -20%"
- },
- {
-  "id": "scope_mk5hd",
-  "type": "scope",
-  "cls": "Épico",
-  "guns_accept": 19,
-  "pop": 0.1554,
-  "power": 5.96,
-  "score": 0.903,
-  "why": "zoom 25.0, precisão -34%"
- },
- {
-  "id": "scope_qmk152",
-  "type": "scope",
-  "cls": "Incomum",
-  "guns_accept": 44,
-  "pop": 0.5052,
-  "power": 2.0,
-  "score": 0.458,
-  "why": "zoom 3.2"
- },
- {
-  "id": "scope_reap_ir",
-  "type": "scope",
-  "cls": "Incomum",
-  "guns_accept": 44,
-  "pop": 0.5052,
-  "power": 2.3,
-  "score": 0.479,
-  "why": "zoom 4.0"
- },
- {
-  "id": "scope_retro_2x",
-  "type": "scope",
-  "cls": "Raro",
-  "guns_accept": 1,
-  "pop": 0.0062,
-  "power": 2.0,
-  "score": 0.729,
-  "why": "zoom 3.2"
- },
- {
-  "id": "scope_standard_8x",
-  "type": "scope",
-  "cls": "Raro",
-  "guns_accept": 20,
-  "pop": 0.1879,
-  "power": 3.62,
-  "score": 0.715,
-  "why": "zoom 10.0"
- },
- {
-  "id": "scope_vudu",
-  "type": "scope",
-  "cls": "Raro",
-  "guns_accept": 44,
-  "pop": 0.5052,
-  "power": 3.3,
-  "score": 0.604,
-  "why": "zoom 6.5, precisão -10%"
- },
- {
-  "id": "scope_xl50",
-  "type": "scope",
-  "cls": "Épico",
-  "guns_accept": 19,
-  "pop": 0.1554,
-  "power": 3.62,
-  "score": 0.84,
-  "why": "zoom 10.0"
- },
- {
-  "id": "scope_xm157",
-  "type": "scope",
-  "cls": "Raro",
-  "guns_accept": 44,
-  "pop": 0.5052,
-  "power": 4.36,
-  "score": 0.674,
-  "why": "zoom 8.2, precisão -34%"
+  "family": "extended_mag",
+  "level": "Épico"
  },
  {
   "id": "shotgun_extended_mag_1",
-  "type": "extended_mag",
-  "cls": "Comum",
-  "guns_accept": 4,
-  "pop": 0.1113,
-  "power": 1.2,
-  "score": 0.431,
-  "why": "pente nív.1"
+  "family": "extended_mag",
+  "level": "Comum"
  },
  {
   "id": "shotgun_extended_mag_2",
-  "type": "extended_mag",
-  "cls": "Incomum",
-  "guns_accept": 4,
-  "pop": 0.1113,
-  "power": 2.4,
-  "score": 0.542,
-  "why": "pente nív.2"
+  "family": "extended_mag",
+  "level": "Raro"
  },
  {
   "id": "shotgun_extended_mag_3",
-  "type": "extended_mag",
-  "cls": "Raro",
-  "guns_accept": 4,
-  "pop": 0.1113,
-  "power": 3.6,
-  "score": 0.653,
-  "why": "pente nív.3"
- },
- {
-  "id": "sight_1p87",
-  "type": "scope",
-  "cls": "Comum",
-  "guns_accept": 49,
-  "pop": 0.6259,
-  "power": 0.88,
-  "score": 0.167,
-  "why": "zoom 1.5"
- },
- {
-  "id": "sight_552",
-  "type": "scope",
-  "cls": "Comum",
-  "guns_accept": 49,
-  "pop": 0.6259,
-  "power": 1.48,
-  "score": 0.278,
-  "why": "zoom 1.5, precisão -20%"
- },
- {
-  "id": "sight_acro_pistol",
-  "type": "scope",
-  "cls": "Comum",
-  "guns_accept": 8,
-  "pop": 0.1733,
-  "power": 0.77,
-  "score": 0.403,
-  "why": "zoom 1.2, precisão -5%"
- },
- {
-  "id": "sight_apm4s",
-  "type": "scope",
-  "cls": "Comum",
-  "guns_accept": 49,
-  "pop": 0.6259,
-  "power": 1.3,
-  "score": 0.25,
-  "why": "zoom 2.0"
- },
- {
-  "id": "sight_coyote",
-  "type": "scope",
-  "cls": "Comum",
-  "guns_accept": 49,
-  "pop": 0.6259,
-  "power": 1.18,
-  "score": 0.229,
-  "why": "zoom 1.5, precisão -10%"
- },
- {
-  "id": "sight_deltapoint_pistol",
-  "type": "scope",
-  "cls": "Comum",
-  "guns_accept": 8,
-  "pop": 0.1733,
-  "power": 0.77,
-  "score": 0.403,
-  "why": "zoom 1.2, precisão -5%"
- },
- {
-  "id": "sight_exp3",
-  "type": "scope",
-  "cls": "Comum",
-  "guns_accept": 49,
-  "pop": 0.6259,
-  "power": 1.18,
-  "score": 0.229,
-  "why": "zoom 1.5, precisão -10%"
- },
- {
-  "id": "sight_fastfire_pistol",
-  "type": "scope",
-  "cls": "Comum",
-  "guns_accept": 8,
-  "pop": 0.1733,
-  "power": 0.77,
-  "score": 0.403,
-  "why": "zoom 1.2, precisão -5%"
- },
- {
-  "id": "sight_infitac_fmp13",
-  "type": "scope",
-  "cls": "Comum",
-  "guns_accept": 8,
-  "pop": 0.1733,
-  "power": 0.62,
-  "score": 0.361,
-  "why": "zoom 1.2"
- },
- {
-  "id": "sight_okp7",
-  "type": "scope",
-  "cls": "Comum",
-  "guns_accept": 49,
-  "pop": 0.6259,
-  "power": 0.88,
-  "score": 0.167,
-  "why": "zoom 1.5"
- },
- {
-  "id": "sight_pk06_pistol",
-  "type": "scope",
-  "cls": "Incomum",
-  "guns_accept": 8,
-  "pop": 0.1733,
-  "power": 1.03,
-  "score": 0.472,
-  "why": "zoom 1.5, precisão -5%"
- },
- {
-  "id": "sight_rmr_dot",
-  "type": "scope",
-  "cls": "Comum",
-  "guns_accept": 8,
-  "pop": 0.1733,
-  "power": 0.62,
-  "score": 0.361,
-  "why": "zoom 1.2"
- },
- {
-  "id": "sight_sro_dot",
-  "type": "scope",
-  "cls": "Comum",
-  "guns_accept": 8,
-  "pop": 0.1733,
-  "power": 0.62,
-  "score": 0.361,
-  "why": "zoom 1.2"
- },
- {
-  "id": "sight_srs_02",
-  "type": "scope",
-  "cls": "Comum",
-  "guns_accept": 49,
-  "pop": 0.6259,
-  "power": 0.88,
-  "score": 0.167,
-  "why": "zoom 1.5"
- },
- {
-  "id": "sight_t1",
-  "type": "scope",
-  "cls": "Raro",
-  "guns_accept": 3,
-  "pop": 0.065,
-  "power": 1.48,
-  "score": 0.653,
-  "why": "zoom 1.5, precisão -20%"
- },
- {
-  "id": "sight_t2",
-  "type": "scope",
-  "cls": "Comum",
-  "guns_accept": 49,
-  "pop": 0.6259,
-  "power": 1.48,
-  "score": 0.278,
-  "why": "zoom 1.5, precisão -20%"
- },
- {
-  "id": "sight_uh1",
-  "type": "scope",
-  "cls": "Comum",
-  "guns_accept": 49,
-  "pop": 0.6259,
-  "power": 1.11,
-  "score": 0.208,
-  "why": "zoom 1.8"
+  "family": "extended_mag",
+  "level": "Épico"
  },
  {
   "id": "sniper_extended_mag_1",
-  "type": "extended_mag",
-  "cls": "Incomum",
-  "guns_accept": 5,
-  "pop": 0.0271,
-  "power": 1.2,
-  "score": 0.542,
-  "why": "pente nív.1"
+  "family": "extended_mag",
+  "level": "Comum"
  },
  {
   "id": "sniper_extended_mag_2",
-  "type": "extended_mag",
-  "cls": "Raro",
-  "guns_accept": 5,
-  "pop": 0.0271,
-  "power": 2.4,
-  "score": 0.653,
-  "why": "pente nív.2"
+  "family": "extended_mag",
+  "level": "Raro"
  },
  {
   "id": "sniper_extended_mag_3",
-  "type": "extended_mag",
-  "cls": "Raro",
-  "guns_accept": 5,
-  "pop": 0.0271,
-  "power": 3.6,
-  "score": 0.764,
-  "why": "pente nív.3"
+  "family": "extended_mag",
+  "level": "Épico"
+ },
+ {
+  "id": "grip_cobra",
+  "family": "grip",
+  "level": "Sem raridade"
+ },
+ {
+  "id": "grip_magpul_afg",
+  "family": "grip",
+  "level": "Sem raridade"
+ },
+ {
+  "id": "grip_magpul_afg_2",
+  "family": "grip",
+  "level": "Sem raridade"
+ },
+ {
+  "id": "grip_osovets_black",
+  "family": "grip",
+  "level": "Sem raridade"
+ },
+ {
+  "id": "grip_rk0",
+  "family": "grip",
+  "level": "Sem raridade"
+ },
+ {
+  "id": "grip_rk1_b25u",
+  "family": "grip",
+  "level": "Sem raridade"
+ },
+ {
+  "id": "grip_rk6",
+  "family": "grip",
+  "level": "Sem raridade"
+ },
+ {
+  "id": "grip_se_5",
+  "family": "grip",
+  "level": "Sem raridade"
+ },
+ {
+  "id": "grip_td",
+  "family": "grip",
+  "level": "Sem raridade"
+ },
+ {
+  "id": "grip_troy",
+  "family": "grip",
+  "level": "Sem raridade"
+ },
+ {
+  "id": "grip_vertical_military",
+  "family": "grip",
+  "level": "Sem raridade"
+ },
+ {
+  "id": "grip_vertical_ranger",
+  "family": "grip",
+  "level": "Sem raridade"
+ },
+ {
+  "id": "grip_vertical_talon",
+  "family": "grip",
+  "level": "Sem raridade"
+ },
+ {
+  "id": "laser_compact",
+  "family": "laser",
+  "level": "Sem raridade"
+ },
+ {
+  "id": "laser_lopro",
+  "family": "laser",
+  "level": "Sem raridade"
+ },
+ {
+  "id": "laser_ngal",
+  "family": "laser",
+  "level": "Sem raridade"
+ },
+ {
+  "id": "laser_nightstick",
+  "family": "laser",
+  "level": "Sem raridade"
+ },
+ {
+  "id": "laser_peq6",
+  "family": "laser",
+  "level": "Sem raridade"
+ },
+ {
+  "id": "bayonet_6h3",
+  "family": "muzzle",
+  "level": "Sem raridade"
+ },
+ {
+  "id": "bayonet_m9",
+  "family": "muzzle",
+  "level": "Sem raridade"
+ },
+ {
+  "id": "deagle_golden_long_barrel",
+  "family": "muzzle",
+  "level": "Sem raridade"
+ },
+ {
+  "id": "muzzle_brake_cthulhu",
+  "family": "muzzle",
+  "level": "Sem raridade"
+ },
+ {
+  "id": "muzzle_brake_cyclone_d2",
+  "family": "muzzle",
+  "level": "Sem raridade"
+ },
+ {
+  "id": "muzzle_brake_mastiff_sg",
+  "family": "muzzle",
+  "level": "Sem raridade"
+ },
+ {
+  "id": "muzzle_brake_pioneer",
+  "family": "muzzle",
+  "level": "Sem raridade"
+ },
+ {
+  "id": "muzzle_brake_timeless50",
+  "family": "muzzle",
+  "level": "Sem raridade"
+ },
+ {
+  "id": "muzzle_brake_trex",
+  "family": "muzzle",
+  "level": "Sem raridade"
+ },
+ {
+  "id": "muzzle_choke_sg",
+  "family": "muzzle",
+  "level": "Sem raridade"
+ },
+ {
+  "id": "muzzle_compensator_trident",
+  "family": "muzzle",
+  "level": "Sem raridade"
+ },
+ {
+  "id": "muzzle_silencer_knight_qd",
+  "family": "muzzle",
+  "level": "Sem raridade"
+ },
+ {
+  "id": "muzzle_silencer_mirage",
+  "family": "muzzle",
+  "level": "Sem raridade"
+ },
+ {
+  "id": "muzzle_silencer_phantom_s1",
+  "family": "muzzle",
+  "level": "Sem raridade"
+ },
+ {
+  "id": "muzzle_silencer_ptilopsis",
+  "family": "muzzle",
+  "level": "Sem raridade"
+ },
+ {
+  "id": "muzzle_silencer_sg",
+  "family": "muzzle",
+  "level": "Sem raridade"
+ },
+ {
+  "id": "muzzle_silencer_socom_rc1",
+  "family": "muzzle",
+  "level": "Sem raridade"
+ },
+ {
+  "id": "muzzle_silencer_ursus",
+  "family": "muzzle",
+  "level": "Sem raridade"
+ },
+ {
+  "id": "muzzle_silencer_vulture",
+  "family": "muzzle",
+  "level": "Sem raridade"
+ },
+ {
+  "id": "muzzle_silencer_wraith",
+  "family": "muzzle",
+  "level": "Sem raridade"
+ },
+ {
+  "id": "scope_1866_4x",
+  "family": "scopes",
+  "level": "Raro"
+ },
+ {
+  "id": "scope_1873_6x",
+  "family": "scopes",
+  "level": "Épico"
+ },
+ {
+  "id": "scope_98k",
+  "family": "scopes",
+  "level": "Raro"
+ },
+ {
+  "id": "scope_acog_ta31",
+  "family": "scopes",
+  "level": "Raro"
+ },
+ {
+  "id": "scope_amg_10",
+  "family": "scopes",
+  "level": "Épico"
+ },
+ {
+  "id": "scope_c79",
+  "family": "scopes",
+  "level": "Raro"
+ },
+ {
+  "id": "scope_contender",
+  "family": "scopes",
+  "level": "Raro"
+ },
+ {
+  "id": "scope_elcan_4x",
+  "family": "scopes",
+  "level": "Raro"
+ },
+ {
+  "id": "scope_hamr",
+  "family": "scopes",
+  "level": "Raro"
+ },
+ {
+  "id": "scope_lpvo_1_6",
+  "family": "scopes",
+  "level": "Épico"
+ },
+ {
+  "id": "scope_mk4ert",
+  "family": "scopes",
+  "level": "Épico"
+ },
+ {
+  "id": "scope_mk5hd",
+  "family": "scopes",
+  "level": "Lendário"
+ },
+ {
+  "id": "scope_qmk152",
+  "family": "scopes",
+  "level": "Raro"
+ },
+ {
+  "id": "scope_reap_ir",
+  "family": "scopes",
+  "level": "Raro"
+ },
+ {
+  "id": "scope_retro_2x",
+  "family": "scopes",
+  "level": "Raro"
+ },
+ {
+  "id": "scope_standard_8x",
+  "family": "scopes",
+  "level": "Épico"
+ },
+ {
+  "id": "scope_vudu",
+  "family": "scopes",
+  "level": "Épico"
+ },
+ {
+  "id": "scope_xl50",
+  "family": "scopes",
+  "level": "Épico"
+ },
+ {
+  "id": "scope_xm157",
+  "family": "scopes",
+  "level": "Épico"
+ },
+ {
+  "id": "sight_1p87",
+  "family": "scopes",
+  "level": "Comum"
+ },
+ {
+  "id": "sight_552",
+  "family": "scopes",
+  "level": "Comum"
+ },
+ {
+  "id": "sight_acro_pistol",
+  "family": "scopes",
+  "level": "Comum"
+ },
+ {
+  "id": "sight_acro_rifle",
+  "family": "scopes",
+  "level": "Incomum"
+ },
+ {
+  "id": "sight_apm4s",
+  "family": "scopes",
+  "level": "Incomum"
+ },
+ {
+  "id": "sight_coyote",
+  "family": "scopes",
+  "level": "Comum"
+ },
+ {
+  "id": "sight_deltapoint_pistol",
+  "family": "scopes",
+  "level": "Comum"
+ },
+ {
+  "id": "sight_deltapoint_rifle",
+  "family": "scopes",
+  "level": "Comum"
+ },
+ {
+  "id": "sight_exp3",
+  "family": "scopes",
+  "level": "Comum"
+ },
+ {
+  "id": "sight_fastfire_pistol",
+  "family": "scopes",
+  "level": "Comum"
+ },
+ {
+  "id": "sight_fastfire_rifle",
+  "family": "scopes",
+  "level": "Comum"
+ },
+ {
+  "id": "sight_infitac_fmp13",
+  "family": "scopes",
+  "level": "Comum"
+ },
+ {
+  "id": "sight_okp7",
+  "family": "scopes",
+  "level": "Comum"
+ },
+ {
+  "id": "sight_pk06_pistol",
+  "family": "scopes",
+  "level": "Comum"
+ },
+ {
+  "id": "sight_pk06_rifle",
+  "family": "scopes",
+  "level": "Comum"
+ },
+ {
+  "id": "sight_rmr_dot",
+  "family": "scopes",
+  "level": "Comum"
+ },
+ {
+  "id": "sight_sro_dot",
+  "family": "scopes",
+  "level": "Comum"
+ },
+ {
+  "id": "sight_srs_02",
+  "family": "scopes",
+  "level": "Comum"
+ },
+ {
+  "id": "sight_t1",
+  "family": "scopes",
+  "level": "Comum"
+ },
+ {
+  "id": "sight_t2",
+  "family": "scopes",
+  "level": "Comum"
+ },
+ {
+  "id": "sight_uh1",
+  "family": "scopes",
+  "level": "Incomum"
+ },
+ {
+  "id": "oem_stock_light",
+  "family": "stock",
+  "level": "Sem raridade"
+ },
+ {
+  "id": "oem_stock_removed",
+  "family": "stock",
+  "level": "Sem raridade"
+ },
+ {
+  "id": "oem_stock_tactical",
+  "family": "stock",
+  "level": "Sem raridade"
+ },
+ {
+  "id": "oem_stock_unfolded",
+  "family": "stock",
+  "level": "Sem raridade"
  },
  {
   "id": "stock_ak12",
-  "type": "stock",
-  "cls": "Incomum",
-  "guns_accept": 27,
-  "pop": 0.2835,
-  "power": 1.1,
-  "score": 0.479,
-  "why": "recuo -20%, precisão -10%"
+  "family": "stock",
+  "level": "Sem raridade"
  },
  {
   "id": "stock_carbon_bone_c5",
-  "type": "stock",
-  "cls": "Comum",
-  "guns_accept": 27,
-  "pop": 0.2835,
-  "power": 0.2,
-  "score": 0.271,
-  "why": "precisão +10%, corpo a corpo"
+  "family": "stock",
+  "level": "Sem raridade"
  },
  {
   "id": "stock_heavy_ctr",
-  "type": "stock",
-  "cls": "Incomum",
-  "guns_accept": 27,
-  "pop": 0.2835,
-  "power": 1.5,
-  "score": 0.542,
-  "why": "recuo -38%"
- },
- {
-  "id": "stock_heavy_spas_12",
-  "type": "stock",
-  "cls": "Épico",
-  "guns_accept": 1,
-  "pop": 0.0278,
-  "power": 1.72,
-  "score": 0.896,
-  "why": "recuo -28%, precisão -20%"
+  "family": "stock",
+  "level": "Sem raridade"
  },
  {
   "id": "stock_hk_slim_line",
-  "type": "stock",
-  "cls": "Incomum",
-  "guns_accept": 27,
-  "pop": 0.2835,
-  "power": 1.06,
-  "score": 0.438,
-  "why": "recuo -26%"
+  "family": "stock",
+  "level": "Sem raridade"
  },
  {
   "id": "stock_m4ss",
-  "type": "stock",
-  "cls": "Comum",
-  "guns_accept": 27,
-  "pop": 0.2835,
-  "power": 0.5,
-  "score": 0.354,
-  "why": "recuo -12%"
+  "family": "stock",
+  "level": "Sem raridade"
  },
  {
   "id": "stock_militech_b5",
-  "type": "stock",
-  "cls": "Raro",
-  "guns_accept": 27,
-  "pop": 0.2835,
-  "power": 2.33,
-  "score": 0.688,
-  "why": "recuo -36%, precisão -13%, corpo a corpo"
+  "family": "stock",
+  "level": "Sem raridade"
  },
  {
-  "id": "stock_moe",
-  "type": "stock",
-  "cls": "Comum",
-  "guns_accept": 27,
-  "pop": 0.2835,
-  "power": 0.3,
-  "score": 0.312,
-  "why": "recuo -8%"
+  "id": "stock_psg",
+  "family": "stock",
+  "level": "Sem raridade"
  },
  {
   "id": "stock_ripstock",
-  "type": "stock",
-  "cls": "Comum",
-  "guns_accept": 27,
-  "pop": 0.2835,
-  "power": -0.15,
-  "score": 0.229,
-  "why": "precisão +5%"
+  "family": "stock",
+  "level": "Sem raridade"
  },
  {
   "id": "stock_sba3",
-  "type": "stock",
-  "cls": "Comum",
-  "guns_accept": 27,
-  "pop": 0.2835,
-  "power": 0.75,
-  "score": 0.396,
-  "why": "precisão -25%"
+  "family": "stock",
+  "level": "Sem raridade"
  },
  {
   "id": "stock_tactical_ar",
-  "type": "stock",
-  "cls": "Incomum",
-  "guns_accept": 27,
-  "pop": 0.2835,
-  "power": 1.5,
-  "score": 0.542,
-  "why": "recuo -25%, corpo a corpo"
- },
- {
-  "id": "stock_tactical_spas_12",
-  "type": "stock",
-  "cls": "Épico",
-  "guns_accept": 1,
-  "pop": 0.0278,
-  "power": 1.7,
-  "score": 0.854,
-  "why": "recuo -20%, precisão -30%"
+  "family": "stock",
+  "level": "Sem raridade"
  }
 ]
