@@ -43,6 +43,8 @@ First Aid e da LesRaisins. Mod id `amctaczloot`. Recomeçado do zero em 13 Nov 2
 - **AMC com baús sorteados** (16 Nov 2026): os nomes das tabelas não mudaram (6 temas x chest/barrel/pot x _hard), então o mod não precisou de ajuste. Os 10 prédios
   `building_*` perderam os baús do modelo e ganharam baús sorteados por cópia (pequeno 12–28, grande 38–65, mais 30% dos barris viram baús); rampa e delegacia não mudaram.
   `docs/containers.json` foi medido de novo (média de 6 cópias). O spawn agora usa categorias por altura (`building_small`, `building_large`...): `measure_containers.py` ajustado.
+- **Sem itens de cura** (LesRaisins e First Aid) em **oficina, posto de gasolina e delegacia** (16 Nov, `HEAL_EXCLUDED_THEMES`; esses temas não têm tabela `_firstaid`). O leite continua.
+- **Leite condensado: 1 a 3 unidades** por acerto (antes 2 a 4), 16 Nov.
 - **Vasos** não recebem nada do mod. Temas: building, police_station, pharmacy, house, workshop, gas_station (o AMC removeu `building_large`).
 - **Ferramentas**: `gen_loot.py` (prévia / `--write`), `sample_items.py` (chance por item num servidor de teste; use este), `sample_loot.py` (categorias de arma/munição;
   a coluna `lr` conta o leite como LesRaisins e **não bate** com `expected()["lr"]`: dá falso desvio), `measure_containers.py`, `tacz_catalog.py`, `lr_catalog.py`.
@@ -328,3 +330,7 @@ First Aid e da LesRaisins. Mod id `amctaczloot`. Recomeçado do zero em 13 Nov 2
 - Contagem média (sem vasos), antiga -> nova: apartamentos 10->23, esqueleto 17->22, pequeno 24->26, azulado 16->61, apocalíptico 49->66, torre 71->102, torre verde 91->80,
   crash 94->94, largo 161->93, brutalista 229->133; rampa 399 e delegacia 63 iguais. Como as chances são por baú, a sensação por baú não muda; o total por prédio sim
   (ex.: armas no brutalista 27,5->16,0; no azulado 2,0->7,3).
+
+## Curas fora de oficina/posto/delegacia e leite 1–3 (16 Nov 2026)
+- Validado no servidor (1.500 containers cada): baú da delegacia, barril de oficina e barril de posto sem nenhuma cura LesRaisins nem First Aid; leite presente com 1–3; baú de prédio
+  com as curas normais. 41 tabelas e 36 loot modifiers (sem as 12 tabelas `_firstaid` desses 3 temas). 0 erros de carga.

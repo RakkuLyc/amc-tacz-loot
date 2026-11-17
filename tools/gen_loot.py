@@ -99,6 +99,8 @@ HEAL_CLASS = dict(vaseline="Comum", ibuprofen="Comum", amoxycillin="Comum", gold
                   blood_pack="Incomum", carfak="Incomum", ai2="Raro", cms="Raro", surv12="Épico")
 # "Duplique a raridade dos itens de cura" (16 Nov 2026) = chances x0,5 (itens 2x mais raros), em LesRaisins e First Aid, FORA da farmácia.
 HEAL_RARITY_SCALE = 0.5
+# Temas SEM itens de cura (LesRaisins e First Aid), pedido do usuário em 16 Nov 2026. O leite condensado (comida) continua.
+HEAL_EXCLUDED_THEMES = ("workshop", "gas_station", "police_station")
 # FARMÁCIA "como está" (pedido do usuário): os valores da farmácia ficam CONGELADOS nos números de antes da reclassificação e do fator acima (‰).
 HEAL_PHARMACY_FIXED = dict(lr=dict(vaseline=92, ibuprofen=92, amoxycillin=92, goldenstar=92, blood_pack=90, carfak=85, ai2=80, cms=70, surv12=40),
                            fa=dict(plaster=150, bandage=92, adrenaline_injector=92, painkillers=92, morphine=82, defibrillator=82, morphine_injector=40))
@@ -106,7 +108,7 @@ HEAL_PHARMACY_FIXED = dict(lr=dict(vaseline=92, ibuprofen=92, amoxycillin=92, go
 # multiplicador da farmácia. Não mexe no leite, no pão nem no First Aid. Valores resultantes arredondados em ‰ (ex.: 19,5% -> 9,8%).
 HEAL_SCALE = 0.5
 # COMIDA: chance por container (‰) e quantidade; themes=None = todos os temas. O pão é vanilla (exceção explícita do usuário) e só em casas.
-FOOD = dict(condensed_milk=dict(p=80, lo=2, hi=4, themes=None), bread=dict(p=200, lo=4, hi=12, themes=("house",)))
+FOOD = dict(condensed_milk=dict(p=80, lo=1, hi=3, themes=None), bread=dict(p=200, lo=4, hi=12, themes=("house",)))
 # FIRST AID (opcional; tabela à parte com neoforge:mod_loaded). Escolha do usuário, 15-16 Nov 2026: classes Muito comum = plaster; Comum (mesma
 # categoria dos Comuns da LesRaisins) = bandage, adrenaline injector, painkillers; Incomum = morphine, defibrillator; Raro = morphine injector.
 # Chance de CADA item por container (‰), independente dos outros, a mesma em todos os temas exceto na farmácia (PHARMACY_MULT nos incomuns e raro):
@@ -284,7 +286,7 @@ def junk_tables():
 def item_chances(theme, tier="chest"):
     """Itens com chance própria neste tema: lista de (tipo, item, p em ‰). Farmácia: multiplicador nos incomuns e no raro."""
     out = []
-    for i, p in HEAL_LR.items():
+    for i, p in ({} if theme in HEAL_EXCLUDED_THEMES else HEAL_LR).items():
         v = HEAL_PHARMACY_FIXED["lr"][i] if theme == "pharmacy" else int(p * HEAL_SCALE * HEAL_RARITY_SCALE + 0.5)
         out.append(("lr", i, max(1, min(1000, v))))
     for i, f in FOOD.items():
@@ -299,6 +301,7 @@ def item_chances(theme, tier="chest"):
 
 def fa_chances(theme, tier="chest"):
     """First Aid neste tema: lista de (item, p em ‰). Farmácia: valores congelados (HEAL_PHARMACY_FIXED); fora dela, chance x HEAL_RARITY_SCALE."""
+    if theme in HEAL_EXCLUDED_THEMES: return []
     out = [(i, max(1, min(1000, HEAL_PHARMACY_FIXED["fa"][i] if theme == "pharmacy" else int(p * HEAL_RARITY_SCALE + 0.5)))) for i, p in FA_CHANCE.items()]
     if tier.startswith("barrel"): out = [(i, p * BARREL_ITEM_MULT) for i, p in out]
     return out
@@ -364,6 +367,7 @@ def main_tables():
                 pools.append(pool(ent, rolls, bonus))
             for kind, i, p in item_chances(theme, tier): pools.append(item_pool(kind, i, p))
             out["%s/%s_core" % (theme, tier)] = table(pools)
+            if not fa_chances(theme, tier): continue          # tema sem First Aid: sem tabela nem loot modifier
             out["%s/%s_firstaid" % (theme, tier)] = table([item_pool("fa", i, p) for i, p in fa_chances(theme, tier)],
                                                            [{"type": "neoforge:mod_loaded", "modid": "firstaid"}])
     return out
