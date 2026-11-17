@@ -6,9 +6,9 @@
       "entries": [
         {
           "type": "minecraft:loot_table",
-          "value": "amctaczloot:pick/gun_police",
-          "weight": 60,
-          "quality": 15
+          "value": "amctaczloot:pick/gun_default",
+          "weight": 20,
+          "quality": 5
         },
         {
           "type": "minecraft:loot_table",
@@ -18,8 +18,8 @@
         },
         {
           "type": "minecraft:empty",
-          "weight": 892,
-          "quality": -27
+          "weight": 932,
+          "quality": -17
         }
       ],
       "bonus_rolls": 0.0
@@ -29,7 +29,7 @@
       "entries": [
         {
           "type": "minecraft:loot_table",
-          "value": "amctaczloot:pick/ammo_police",
+          "value": "amctaczloot:pick/ammo_default",
           "weight": 360,
           "quality": 90
         },

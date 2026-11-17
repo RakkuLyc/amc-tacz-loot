@@ -15,10 +15,10 @@ First Aid e da LesRaisins. Mod id `amctaczloot`. Recomeçado do zero em 13 Nov 2
 
 ## ESTADO ATUAL (versão 1.0.1, 16 Nov 2026; etapa de balanceamento concluída e aprovada pelo usuário) — o que está valendo; as seções abaixo desta são HISTÓRICO e podem citar números já substituídos
 - **Armas** (17 Nov 2026, reformulado; chance por baú comum / difícil, Sorte 0): **prédio 16,8% / 28,1% (1 a cada 5,95 / 3,6 baús), barris 0,6% / 1,0%** (antes 12% / 20% / 0,4% / 0,7%);
-  delegacia inalterada: 25,0% / 33,3% (1 a cada 4 / 3), barris 3,0% / 6,0%. **7 categorias** (o DMR do TACZ conta como **fuzil**, 26 armas) e **5 níveis fixos** (Comum, Incomum, Raro, Épico, Lendário):
+  **delegacia: 2x o prédio (17 Nov 2026) = 33,6% / 56,2% (1 a cada 3 / 1,8), barris 1,2% / 2,0%**, com a mesma divisão por categoria e nível do prédio (perfil "police" removido). **7 categorias** (o DMR do TACZ conta como **fuzil**, 26 armas) e **5 níveis fixos** (Comum, Incomum, Raro, Épico, Lendário):
   `GUN_CAT_ONE_IN` (prédio, "1 a cada N baús": pistola 25, smg 29, fuzil 42, escopeta 42, metralhadora 65, sniper 60, explosiva 70; a soma é 16,84%), `GUN_LEVELS` (arma -> nível, do arquivo
   do usuário "Reformular o sistema de classificação de raridade de armas"; **escolhas minhas aprovadas**: golden deagle = Épico, springfield1873 = Incomum), `LEVEL_W` por ARMA (16/8/4/2/1: cada nível metade do anterior;
-  "Opção A"). Delegacia (`GUN_CAT_POLICE_W`): mesma divisão entre categorias de antes (DMR somado ao fuzil), só os níveis dentro da categoria mudam. Armas sem nível quebram `gun_weights` (assert).
+  "Opção A"). Armas sem nível quebram `gun_weights` (assert). Delegacia: ver a seção "Delegacia 2x" no fim (a primeira versão, que mantinha a divisão antiga da delegacia, foi substituída no mesmo dia).
   Arma cai **com 50% do pente cheio** (`GunCurrentAmmoCount` = ammo_amount x 0,5 arredondado para cima: 17 -> 9, pente de 1 -> 1; `HasBulletInBarrel` = false), **exceto a minigun** (sem pente definido, nasce com 0).
 - **Attachments** (aprovado em 16 Nov 2026; **em 17 Nov os do prédio ficaram CONGELADOS** nos valores antigos, `att` explícito em `RATES["building"]`, apesar da arma ter subido: a regra "0,8 x arma" só vale para os outros temas): a chance de QUALQUER attachment por container era **0,8 da chance de arma** do mesmo tema/tipo (`ATT_FRACTION_OF_GUN`): prédio baú 9,6%, difícil 16%,
   barris 0,3% / 0,6%; delegacia 20% / 26,6% / 2,4% / 4,8%. Qual sai: peso por **classe** (Comum 8, Incomum 4, Raro 2, Épico 1) sobre os 104 attachments fabricáveis, classes em
@@ -363,3 +363,10 @@ First Aid e da LesRaisins. Mod id `amctaczloot`. Recomeçado do zero em 13 Nov 2
   explosivas (só Épico) 0,714% cada (1/140).
 - Validado no servidor (Sorte 0, 0 erros de carga): 40.000 baús de prédio -> 6.716 armas (esperado 6.736), níveis 5,70/5,27/2,62/2,89/0,31%; 80.000 baús -> por categoria dentro de 2 desvios; delegacia 20.000 baús -> 5.035 armas
   (esperado 5.000), níveis Comum 10,0 / Incomum 7,7 / Raro 5,0 / Épico 2,1 / Lendário 0,34%. Um desvio de -2,5 desvios nos fuzis na 1a amostra sumiu na 2a (ruído).
+
+## Delegacia: armas 2x o prédio (17 Nov 2026, v1.0.1)
+- Pedido do usuário: "na delegacia, as chances de todas as armas, independentemente de categoria e nível de raridade, serão multiplicadas por 2". Delegacia usa o mesmo perfil do prédio: baú 336‰, difícil 562‰, barril 12‰, barril difícil 20‰ (`RATES["police_station"]`).
+- **Attachments da delegacia: continuam como estavam** (200/266/24/48‰ explícitos em `att`; "continuará 2x", mas na verdade são 2,08x / 1,66x / 8x / 8x os do prédio) e **a chance de munição por container também** (80 / 100 / 20 / 36%).
+  A mistura de calibres da delegacia agora é a MESMA do prédio (`pick/ammo_default`; `ammo_police` e `gun_police` deixaram de existir). Usuário: "munições e attachments, veremos com mais calma depois".
+- Validado no servidor (Sorte 0, 0 erros de carga): baú 40.000 -> 33,38% de arma (esperado 33,6%); baú difícil 20.000 -> 55,98% (56,2%); barril 60.000 -> 1,21% (1,2%); barril difícil 40.000 -> 1,93% (2,0%).
+  Anexos medidos 20,1 / 26,3 / 2,4 / 5,0%. Níveis no baú: Comum 11,5%, Incomum 10,3%, Raro 5,5%, Épico 5,5%, Lendário 0,57% (esperado 0,62%, 1 a cada 160 baús).

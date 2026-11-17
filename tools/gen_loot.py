@@ -42,10 +42,12 @@ RATES = {
                        "chest_hard": dict(gun=281, att=160, ammo=866),    # 1 arma a cada 3,6 baús difíceis; munição 86,6%
                        "barrel": dict(gun=6, att=3, ammo=62),
                        "barrel_hard": dict(gun=10, att=6, ammo=114)},
-    "police_station": {"chest": dict(gun=250, ammo=800),          # armas inalteradas: 1 a cada 4 baús; munição 80%
-                       "chest_hard": dict(gun=333, ammo=1000),   # 1 arma a cada 3 baús difíceis; munição sempre (teto)
-                       "barrel": dict(gun=30, ammo=200),
-                       "barrel_hard": dict(gun=60, ammo=360)},
+    # DELEGACIA (17 Nov 2026): a chance de TODAS as armas é 2x a do prédio (mesma divisão por categoria e nível; baú 33,6%, difícil 56,2%, barris 1,2% / 2,0%).
+    # Attachments e munição (chance por container) ficam como estavam (att explícito: a regra "0,8 x arma" não vale aqui); o usuário vai rever os dois depois.
+    "police_station": {"chest": dict(gun=336, att=200, ammo=800),          # 1 arma a cada 3 baús; munição 80%
+                       "chest_hard": dict(gun=562, att=266, ammo=1000),    # 56,2%; munição sempre (teto)
+                       "barrel": dict(gun=12, att=24, ammo=200),
+                       "barrel_hard": dict(gun=20, att=48, ammo=360)},
     "pharmacy":       {"chest": dict(), "chest_hard": dict(),
                        "barrel": dict(), "barrel_hard": dict()},
     "house":          {"chest": dict(), "chest_hard": dict(),
@@ -58,10 +60,9 @@ RATES = {
 # (o tema building_large foi removido do AMC em 14 Nov 2026, commit 72d07b3: todo prédio usa `building`)
 # RARIDADE DAS ARMAS (reformulada em 17 Nov 2026, pedido do usuário, "Opção A"): 7 categorias (o DMR do TACZ conta como fuzil) e 5 níveis fixos.
 # - A chance TOTAL de cada categoria vem do usuário (perfil default = prédio): "1 a cada N baús" em GUN_CAT_ONE_IN; a divisão entre as categorias é proporcional a 1/N.
-#   Perfil police: as proporções que já existiam (pesos antigos, DMR somado ao fuzil), só mudam os níveis dentro de cada categoria.
+#   A delegacia usa o MESMO perfil do prédio (a chance de arma dela é 2x a do prédio, ver RATES); o perfil "police" antigo foi removido.
 # - Dentro da categoria, o peso de CADA arma depende só do nível (LEVEL_W, mesmo em todas as categorias: cada nível vale metade do anterior).
 GUN_CAT_ONE_IN = dict(pistol=25, smg=29, rifle=42, shotgun=42, mg=65, sniper=60, rpg=70)       # perfil default (prédio)
-GUN_CAT_POLICE_W = dict(pistol=8, smg=8, shotgun=8, rifle=8.5, sniper=1.5, mg=1, rpg=0.3)    # perfil police (rifle = 6 + dmr 2,5)
 GUN_TYPE_MERGE = {"dmr": "rifle"}
 LEVEL_W = dict(Comum=16, Incomum=8, Raro=4, Épico=2, Lendário=1)
 GUN_LEVELS = {   # nível -> armas (nomes do arquivo do usuário; deagle_golden e springfield1873 não estavam nele: escolha minha, aprovada)
@@ -77,7 +78,7 @@ GUN_LEVELS = {   # nível -> armas (nomes do arquivo do usuário; deagle_golden 
     "rpg":     dict(Épico="rpg7 m320"),
 }
 GUN_LEVEL = {g: (cat, lv) for cat, d in GUN_LEVELS.items() for lv, gs in d.items() for g in gs.split()}
-GUN_PROFILE = {"police_station": "police"}          # os demais temas usam "default"
+GUN_PROFILE = {}          # todos os temas usam o perfil "default" (delegacia incluída desde 17 Nov 2026)
 # MUNIÇÃO (escolhas do usuário, 14-15 Nov 2026): a quantidade por pilha é proporcional à pilha máxima do calibre, tomando o
 # 9mm como referência (24 a 50 balas). A chance de cada calibre é MISTA: AMMO_MIX_UNIFORM da chance é igual para todos os
 # calibres que têm alguma arma e o resto acompanha a popularidade das armas que o usam (peso das armas do tema). Com 1.0 seria
@@ -191,7 +192,8 @@ def eligible_guns():
 def gun_weights(profile):
     """Peso de cada arma (soma ~100.000): fatia da categoria (perfil) x LEVEL_W do nível / soma dos níveis da categoria."""
     guns = eligible_guns()
-    cat_share = ({c: 1.0 / n for c, n in GUN_CAT_ONE_IN.items()} if profile == "default" else dict(GUN_CAT_POLICE_W))
+    assert profile == "default", "só existe o perfil default"
+    cat_share = {c: 1.0 / n for c, n in GUN_CAT_ONE_IN.items()}
     tot = sum(cat_share.values()); cat_share = {c: v / tot for c, v in cat_share.items()}
     for g, v in guns.items():
         assert GUN_LEVEL[g][0] == GUN_TYPE_MERGE.get(v["type"], v["type"]), "categoria do nível != categoria do TACZ: " + g
@@ -284,7 +286,7 @@ def with_w(e, w):
 def pick_tables():
     """Tabelas de escolha (o que sai quando a categoria é sorteada). Nome -> (JSON, condição ou None)."""
     out = {}
-    for prof in ("default", "police"):
+    for prof in ("default",):
         gw = gun_weights(prof)
         out["pick/gun_" + prof] = (table([pool([with_w(e_gun(g), w) for g, w in gw.items()])]), None)
         out["pick/ammo_" + prof] = (table([pool([with_w(e_ammo(c), w) for c, w in ammo_weights(prof).items()],
