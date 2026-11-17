@@ -43,11 +43,11 @@ RATES = {
                        "barrel": dict(gun=6, ammo=62),
                        "barrel_hard": dict(gun=10, ammo=114)},
     # DELEGACIA (17 Nov 2026): a chance de TODAS as armas é 2x a do prédio (mesma divisão por categoria e nível; baú 33,6%, difícil 56,2%, barris 1,2% / 2,0%).
-    # Attachments = 1,2 x arma (= 2x os do prédio: 403 / 674 / 14 / 24 ‰). Munição (chance por container) como estava; o usuário vai rever a munição depois.
-    "police_station": {"chest": dict(gun=336, ammo=800),          # 1 arma a cada 3 baús; munição 80%
-                       "chest_hard": dict(gun=562, ammo=1000),    # 56,2%; munição sempre (teto)
-                       "barrel": dict(gun=12, ammo=200),
-                       "barrel_hard": dict(gun=20, ammo=360)},
+    # Attachments = 1,2 x arma (= 2x os do prédio: 403 / 674 / 14 / 24 ‰). Munição = a MESMA chance do prédio (17 Nov 2026: 52 / 86,6 / 6,2 / 11,4%).
+    "police_station": {"chest": dict(gun=336, ammo=520),          # 1 arma a cada 3 baús; munição como no prédio (52%)
+                       "chest_hard": dict(gun=562, ammo=866),    # 56,2%; munição como no prédio (86,6%)
+                       "barrel": dict(gun=12, ammo=62),
+                       "barrel_hard": dict(gun=20, ammo=114)},
     "pharmacy":       {"chest": dict(), "chest_hard": dict(),
                        "barrel": dict(), "barrel_hard": dict()},
     "house":          {"chest": dict(), "chest_hard": dict(),
@@ -79,12 +79,10 @@ GUN_LEVELS = {   # nível -> armas (nomes do arquivo do usuário; deagle_golden 
 }
 GUN_LEVEL = {g: (cat, lv) for cat, d in GUN_LEVELS.items() for lv, gs in d.items() for g in gs.split()}
 GUN_PROFILE = {}          # todos os temas usam o perfil "default" (delegacia incluída desde 17 Nov 2026)
-# MUNIÇÃO (escolhas do usuário, 14-15 Nov 2026): a quantidade por pilha é proporcional à pilha máxima do calibre, tomando o
-# 9mm como referência (24 a 50 balas). A chance de cada calibre é MISTA: AMMO_MIX_UNIFORM da chance é igual para todos os
-# calibres que têm alguma arma e o resto acompanha a popularidade das armas que o usam (peso das armas do tema). Com 1.0 seria
-# tudo igual; com 0.0, só pela popularidade. (Com poucas armas achadas, calibres todos iguais deixavam ~24% da munição útil.)
+# MUNIÇÃO (escolhas do usuário, 14-17 Nov 2026): a quantidade por pilha é proporcional à pilha máxima do calibre, tomando o 9mm como referência (24 a 50 balas).
+# Qual calibre sai: peso por NÍVEL dado pelo usuário (tacz_ammo.nbt -> docs/ammo_rarity.json; antes era 50% igual + 50% pela popularidade das armas).
 AMMO_REF = ("9mm", 24, 50)
-AMMO_MIX_UNIFORM = 0.5
+AMMO_LEVEL_W = {"Comum": 16, "Incomum": 8, "Raro": 4, "Épico": 2, "Lendário": 1}   # peso por calibre (17 Nov 2026, "pesos 16/8/4/2/1"), nível em docs/ammo_rarity.json
 # Cada vez que um container "ganha munição" (chance por tier em RATES["ammo"]) saem AMMO_STACKS sorteios de calibre (1 a 3 pilhas; o mesmo
 # calibre pode repetir: uma tabela não garante "sem repetir"), cada pilha com AMMO_SIZE do tamanho original (9mm 24-50). Pedido do usuário
 # (15 Nov 2026): de 1 a 3 pilhas (não sempre 2 a 3) e o tamanho das pilhas IGUAL ao original (AMMO_SIZE = 1.0). Consequência: com média de 2,0 pilhas por
@@ -202,13 +200,12 @@ def gun_weights(profile):
 
 
 def ammo_weights(profile="default"):
-    """Peso de cada calibre (só os que têm arma elegível; 7.62x25 e 6.8x51 Fury não têm): AMMO_MIX_UNIFORM igual para todos +
-    o resto proporcional ao peso das armas do perfil que usam o calibre. Pesos inteiros, somando ~1000."""
-    pop = {}
-    for gun, w in gun_weights(profile).items():
-        c = TZ["guns"][gun]["ammo"].split(":")[1]; pop[c] = pop.get(c, 0) + w
-    tot = sum(pop.values()); n = len(pop)
-    return {c: max(1, round(1000 * (AMMO_MIX_UNIFORM / n + (1 - AMMO_MIX_UNIFORM) * pop[c] / tot))) for c in sorted(pop)}
+    """Peso de cada calibre pelo NÍVEL que o usuário deu (docs/ammo_rarity.json, de tacz_ammo.nbt; 17 Nov 2026), AMMO_LEVEL_W x100. Só calibres com arma elegível
+    (7.62x25 e 6.8x51 Fury não têm arma no loot e o usuário não os classificou). Não depende mais das armas."""
+    assert profile == "default"
+    rar = load("docs/ammo_rarity.json"); ids = [r["id"] for r in rar]
+    assert len(ids) == len(set(ids)) and set(ids) == {v["ammo"].split(":")[1] for v in eligible_guns().values()}, "calibres do arquivo != calibres das armas: rode tools/att_from_nbt.py"
+    return {r["id"]: round(AMMO_LEVEL_W[r["level"]] * 100) for r in sorted(rar, key=lambda r: r["id"])}
 
 
 def ammo_range(c):

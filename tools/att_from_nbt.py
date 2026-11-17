@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Gera docs/attachments_rarity.json a partir das estruturas .nbt que o usuário montou (baús com os attachments).
+"""Gera docs/attachments_rarity.json (e docs/ammo_rarity.json, de tacz_ammo.nbt) a partir das estruturas .nbt que o usuário montou (baús com os attachments).
 Regra do usuário (17 Nov 2026): o nível é a cor do concreto no mesmo x/z, ACIMA do baú (cinza-claro Comum, lima Incomum, azul-claro Raro, magenta Épico,
 amarelo Lendário, laranja Mítico); baú sem bloco em cima = sem raridade definida. Uso: python3 -I tools/att_from_nbt.py <pasta das structures>"""
 import glob, gzip, json, os, struct, sys
@@ -34,6 +34,7 @@ def parse(path):
 def main(folder):
     res = {}
     for f in sorted(glob.glob(os.path.join(folder, "tacz_*.nbt"))):
+        if f.endswith("tacz_ammo.nbt"): continue          # munição: ammo_levels()
         d = parse(f); pal = [p["Name"].replace("minecraft:", "") for p in d["palette"]]
         grid = {tuple(b["pos"]): pal[b["state"]] for b in d["blocks"]}; fam = os.path.basename(f)[5:-4]
         for b in d["blocks"]:
@@ -51,5 +52,20 @@ def main(folder):
     print(len(out), "attachments:", cnt)
 
 
+def ammo_levels(folder):
+    """Munição (tacz_ammo.nbt, 17 Nov 2026): mesma regra da cor do concreto; a quantidade dentro do baú é só o tamanho cheio da pilha (não é regra)."""
+    d = parse(os.path.join(folder, "tacz_ammo.nbt")); pal = [p["Name"].replace("minecraft:", "") for p in d["palette"]]
+    grid = {tuple(b["pos"]): pal[b["state"]] for b in d["blocks"]}; res = []
+    for b in d["blocks"]:
+        if "nbt" not in b: continue
+        x, y, z = b["pos"]; lv = None
+        for yy in range(y + 1, d["size"][1]):
+            if grid.get((x, yy, z)) in COL: lv = COL[grid[(x, yy, z)]]
+        for it in b["nbt"].get("Items", []):
+            res.append(dict(id=it["components"]["minecraft:custom_data"]["AmmoId"].split(":")[1], level=lv or "Sem raridade"))
+    res.sort(key=lambda r: r["id"]); json.dump(res, open("docs/ammo_rarity.json", "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+    print(len(res), "calibres")
+
+
 if __name__ == "__main__":
-    main(sys.argv[1])
+    main(sys.argv[1]); ammo_levels(sys.argv[1])

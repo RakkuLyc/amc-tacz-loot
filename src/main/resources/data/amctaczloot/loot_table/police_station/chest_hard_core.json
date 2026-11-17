@@ -41,8 +41,13 @@
         {
           "type": "minecraft:loot_table",
           "value": "amctaczloot:pick/ammo_default",
-          "weight": 1000,
-          "quality": 250
+          "weight": 866,
+          "quality": 216
+        },
+        {
+          "type": "minecraft:empty",
+          "weight": 134,
+          "quality": -216
         }
       ],
       "bonus_rolls": 0.34

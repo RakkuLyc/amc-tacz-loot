@@ -29,8 +29,10 @@ First Aid e da LesRaisins. Mod id `amctaczloot`. Recomeçado do zero em 13 Nov 2
   `stock_tactical_spas_12`. Chance de cada item por baú de prédio: Comum 0,368%, Incomum/sem raridade 0,184%, Raro 0,092%, Épico 0,046%, Lendário 0,023%, Mítico 0,012% (delegacia: o dobro).
 - **Barris** (16 Nov): nos tiers `barrel` e `barrel_hard` a chance de **cura LesRaisins, First Aid, comida (leite e pão) e granadas/armas brancas é METADE da do baú**, em todos os temas
   (inclusive farmácia). Armas, munição e attachments têm redução própria nos barris (RATES: 3% a 25% da do baú). Sucata no barril: 30% com 1–2 pilhas. `BARREL_ITEM_MULT = 0.5`.
-- **Munição** (pool próprio): baú de prédio 52,0%, difícil 86,6%, barris 6,2% / 11,4%; delegacia baú 80,0%, difícil 100,0% (teto), barris 20,0% / 36,0%.
-  Calibre: metade igual para os 23 calibres com arma + metade pela popularidade das armas (ex. prédio: 12g 11,9%, 9mm 10,8%, .45 ACP 9,3%; mais raros ~2,4%).
+- **Munição** (pool próprio; 17 Nov 2026): **delegacia = mesmas chances do prédio**: baú 52%, difícil 86,6%, barris 6,2% / 11,4% (antes da delegacia: 80 / 100 / 20 / 36%). Oficina inalterada (4 / 7 / 1,5 / 3%), mas usa a mesma mistura de calibres.
+  **Calibre por NÍVEL** (usuário, `tacz_ammo.nbt` -> `docs/ammo_rarity.json`, via `tools/att_from_nbt.py`; `AMMO_LEVEL_W` 16/8/4/2/1 por calibre): Comum 9mm, .45 ACP, .22 WMR, 4.6x30; Incomum 7.62x39, 5.56, 7.92x57, 12g;
+  Raro 5.7x28, 5.8x42, 5.45, 7.62x54, .338, .45-70, .357; Épico .300 BLK, .308, .500, .30-06, .50 AE, 40mm, foguete RPG; Lendário .50 BMG. Fatia das pilhas: Comum 11,5% cada, Incomum 5,8%, Raro 2,9%, Épico 1,4%, Lendário 0,7%.
+  Chance por baú de prédio de >= 1 pilha: Comum 11,1%, Incomum 5,8%, Raro 2,9%, Épico 1,5%, .50 BMG 0,74% (1 a cada 134). 1 a 3 pilhas, tamanho cheio (9mm 24-50). Balas por acerto ~65,6.
   **Cada acerto de munição dá 1 a 3 pilhas de calibres sorteados** (o mesmo calibre pode repetir), com balas por pilha proporcionais à pilha máxima, **no
   tamanho original** (9mm 24–50 com pilha 60; 12g 14–30; .308 19–40; 22wmr 26–53; 40mm e foguete 2–5). `AMMO_STACKS = (1, 3)`, `AMMO_SIZE = 1.0`.
   **Total de balas por baú de prédio ~31 (dobro da versão de 1 pilha); delegacia ~48.**
@@ -380,3 +382,10 @@ First Aid e da LesRaisins. Mod id `amctaczloot`. Recomeçado do zero em 13 Nov 2
 - Removidos `tools/att_rarity.py` e `docs/attachments_proposta.csv` (classificação antiga por 2 fatores, substituída). A regra antiga "0,8 x arma" e o congelamento dos anexos do prédio acabaram.
 - Validado no servidor (Sorte 0, 0 erros de carga): prédio baú 80.000 -> anexos 20,25% (esperado 20,2%), armas 16,83%; difícil 30.000 -> 33,78% / 28,40%; barril 60.000 -> 0,69% / 0,61%; delegacia baú 40.000 -> 40,33% / 33,45%, difícil
   30.000 -> 66,85% / 56,07%, barril 60.000 -> 1,44% / 1,15%. Níveis (prédio baú, medido/esperado): Comum 8,01/8,10, sem raridade 9,63/9,58, Raro 1,30/1,29, Épico 0,55/0,55, Lendário 0,131/0,115, Mítico 0,018/0,012 (14 `ammo_mod_he` em 80.000 baús).
+
+## Munição por nível + delegacia com a chance de munição do prédio (17 Nov 2026, v1.0.1)
+- Pedido do usuário: classificou os 23 calibres por cor de concreto em `tacz_ammo.nbt` (mesma regra dos anexos), "pesos 16/8/4/2/1" e "pode aplicar a delegacia junto" (munição da delegacia = chances do prédio). As quantidades dentro dos baús dele são só o tamanho cheio da pilha
+  (7.92x57 estava 34 em vez de 36: digitação, ignorado). Calibres 7.62x25 e 6.8x51 Fury (sem arma no loot) continuam fora. A mistura antiga (50% igual + 50% popularidade das armas) e `AMMO_MIX_UNIFORM` foram removidas; `ammo_police` não existe mais.
+- Validado no servidor (Sorte 0, 0 erros de carga): prédio baú 60.000 -> 51,87% com munição (esperado 52%), 34,06 balas/container (34,1); delegacia baú 60.000 -> 52,06% / 34,03; difícil 30.000 -> 86,3% (86,6%) em prédio e delegacia; delegacia barril 60.000 -> 6,16%
+  (6,2%), barril difícil 40.000 -> 11,26% (11,4%). Por calibre (prédio baú, medido/esperado): 9mm 11,2/11,1, 12g 5,71/5,76, .308 1,47/1,48, 40mm 1,39/1,48, foguete 1,52/1,48, .50 BMG 442 vezes em 60.000 (447 esperado).
+- Consequência (comunicada): barris da delegacia perdem munição (barril 11,8 -> 4,1 balas, difícil 21,2 -> 7,5); baú 47,1 -> 34,1. Prédio sobe ~11% em balas por container (calibres de pilha grande ficaram mais comuns).
