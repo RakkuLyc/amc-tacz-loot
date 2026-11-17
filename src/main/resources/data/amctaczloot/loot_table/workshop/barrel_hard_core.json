@@ -23,41 +23,6 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "lrtactical:consumable",
-          "functions": [
-            {
-              "function": "minecraft:set_components",
-              "components": {
-                "minecraft:custom_data": {
-                  "ConsumableId": "lrtactical:condensed_milk"
-                }
-              }
-            },
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 1,
-                "max": 3
-              }
-            }
-          ],
-          "weight": 400,
-          "quality": 100
-        },
-        {
-          "type": "minecraft:empty",
-          "weight": 9600,
-          "quality": -100
-        }
-      ],
-      "bonus_rolls": 0.0
-    },
-    {
-      "rolls": 1,
-      "entries": [
-        {
-          "type": "minecraft:item",
           "name": "lrtactical:throwable",
           "functions": [
             {

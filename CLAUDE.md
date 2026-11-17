@@ -44,7 +44,7 @@ First Aid e da LesRaisins. Mod id `amctaczloot`. Recomeçado do zero em 13 Nov 2
   `building_*` perderam os baús do modelo e ganharam baús sorteados por cópia (pequeno 12–28, grande 38–65, mais 30% dos barris viram baús); rampa e delegacia não mudaram.
   `docs/containers.json` foi medido de novo (média de 6 cópias). O spawn agora usa categorias por altura (`building_small`, `building_large`...): `measure_containers.py` ajustado.
 - **Sem itens de cura** (LesRaisins e First Aid) em **oficina, posto de gasolina e delegacia** (16 Nov, `HEAL_EXCLUDED_THEMES`; esses temas não têm tabela `_firstaid`). O leite continua.
-- **Leite condensado: 1 a 3 unidades** por acerto (antes 2 a 4), 16 Nov.
+- **Leite condensado: 1 a 3 unidades** por acerto (antes 2 a 4), **só em prédios (`building`) e casas** (16 Nov; fora de farmácia, delegacia, oficina e posto).
 - **Vasos** não recebem nada do mod. Temas: building, police_station, pharmacy, house, workshop, gas_station (o AMC removeu `building_large`).
 - **Ferramentas**: `gen_loot.py` (prévia / `--write`), `sample_items.py` (chance por item num servidor de teste; use este), `sample_loot.py` (categorias de arma/munição;
   a coluna `lr` conta o leite como LesRaisins e **não bate** com `expected()["lr"]`: dá falso desvio), `measure_containers.py`, `tacz_catalog.py`, `lr_catalog.py`.
@@ -334,3 +334,4 @@ First Aid e da LesRaisins. Mod id `amctaczloot`. Recomeçado do zero em 13 Nov 2
 ## Curas fora de oficina/posto/delegacia e leite 1–3 (16 Nov 2026)
 - Validado no servidor (1.500 containers cada): baú da delegacia, barril de oficina e barril de posto sem nenhuma cura LesRaisins nem First Aid; leite presente com 1–3; baú de prédio
   com as curas normais. 41 tabelas e 36 loot modifiers (sem as 12 tabelas `_firstaid` desses 3 temas). 0 erros de carga.
+- Leite só em prédios e casas (16 Nov): validado (1.200 containers cada): farmácia, delegacia, oficina e posto sem leite; prédio 7,5% e casa 8,1%, com 1–3.

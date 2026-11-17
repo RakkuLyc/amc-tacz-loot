@@ -108,7 +108,7 @@ HEAL_PHARMACY_FIXED = dict(lr=dict(vaseline=92, ibuprofen=92, amoxycillin=92, go
 # multiplicador da farmácia. Não mexe no leite, no pão nem no First Aid. Valores resultantes arredondados em ‰ (ex.: 19,5% -> 9,8%).
 HEAL_SCALE = 0.5
 # COMIDA: chance por container (‰) e quantidade; themes=None = todos os temas. O pão é vanilla (exceção explícita do usuário) e só em casas.
-FOOD = dict(condensed_milk=dict(p=80, lo=1, hi=3, themes=None), bread=dict(p=200, lo=4, hi=12, themes=("house",)))
+FOOD = dict(condensed_milk=dict(p=80, lo=1, hi=3, themes=("building", "house")), bread=dict(p=200, lo=4, hi=12, themes=("house",)))
 # FIRST AID (opcional; tabela à parte com neoforge:mod_loaded). Escolha do usuário, 15-16 Nov 2026: classes Muito comum = plaster; Comum (mesma
 # categoria dos Comuns da LesRaisins) = bandage, adrenaline injector, painkillers; Incomum = morphine, defibrillator; Raro = morphine injector.
 # Chance de CADA item por container (‰), independente dos outros, a mesma em todos os temas exceto na farmácia (PHARMACY_MULT nos incomuns e raro):
