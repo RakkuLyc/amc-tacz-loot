@@ -442,3 +442,4 @@ First Aid e da LesRaisins. Mod id `amctaczloot`. Recomeçado do zero em 13 Nov 2
 ## Versão 1.1.2 (18 Nov 2026)
 - `mod_version` 1.1.1 -> 1.1.2 para publicar: throwables só em prédio e delegacia, mochilas e upgrades com raridade por item e sem Inception, mochilas/upgrades com a mesma chance do baú nos barris. Jar `amctaczloot-1.1.2.jar` (carrega sem erros; Inception ausente; mochilas e armas brancas saem; throwables fora das casas).
   Push e release v1.1.2 feitos a pedido do usuário; o release v1.1.1 (e o v1.1.0) continuam publicados com o conteúdo antigo.
+- **18 Nov 2026: etapa das mochilas, throwables e v1.1.2 testada e aprovada pelo usuário** ("Testado e aprovado, pode fechar essa etapa"). Próxima etapa (pré-lançamento): revisão de código, segurança, otimização, bugs e tradução dos documentos para inglês.
