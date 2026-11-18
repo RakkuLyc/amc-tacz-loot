@@ -3,7 +3,7 @@
 Mod só de dados para NeoForge 1.21.1: loot do TACZ (armas, munições, attachments), da LesRaisins Tactical (cura e comida) e
 do First Aid nos containers do Abandoned Modern City (AMC). Opcionais: mochilas do Sophisticated Backpacks e lanternas do TCT Flashlight (só nas casas).
 
-**Versão 1.1.1** (18 Nov 2026; taco de baseball levemente mais raro; a 1.1.0 trouxe mochilas e lanternas opcionais, caixas de munição e raridade por nível de armas, attachments e munição). **Estado:** tudo aprovado pelo usuário em testes no jogo (armas, munição, curas, equipamento, First Aid, attachments, mochilas, lanternas e caixas de munição).
+**Versão 1.1.2** (18 Nov 2026; throwables só em prédio e delegacia, novas raridades das mochilas e upgrades (sem Inception), taco de baseball mais raro; a 1.1.0 trouxe mochilas e lanternas opcionais, caixas de munição e raridade por nível de armas, attachments e munição). **Estado:** tudo aprovado pelo usuário em testes no jogo (armas, munição, curas, equipamento, First Aid, attachments, mochilas, lanternas e caixas de munição).
 Os valores em vigor estão no bloco "ESTADO ATUAL" do `CLAUDE.md`.
 
 - As tabelas são geradas por `tools/gen_loot.py` (`python3 -I tools/gen_loot.py` mostra a prévia; `--write` grava os arquivos).

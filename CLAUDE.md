@@ -438,3 +438,7 @@ First Aid e da LesRaisins. Mod id `amctaczloot`. Recomeçado do zero em 13 Nov 2
 - **Barris das mochilas (18 Nov 2026):** pedido do usuário "raridade das mochilas permanece a mesma dos baús nos barris" e, em seguida, "e dos upgrades também": a família `backpacks` (5 mochilas + 4 upgrades) tem nos barris a MESMA chance do baú (`barrel_mult=1.0` em `LEVEL_FAMILIES`). As lanternas seguem com metade nos barris.
   Validado (casa barril 60.000 / barril difícil 30.000, Sorte 0): copper 7,89 / 7,71%, iron 5,07 / 4,79, gold 3,01 / 3,19, diamond 2,21 / 2,19, netherite 1,76 / 1,82, stack1 3,86 / 3,79, stack2 1,97 / 1,99, stack3 1,60 / 1,67, stack4 1,17 / 1,30, pickup 3,48 / 3,27 (esperado igual ao baú);
   Flashlight no barril 4,89 / 4,80% (metade de 10%). Risco de estourar barril de 9 espaços na casa: 1 em 8,8 milhões (enumeração exata), média 1,26 pilhas.
+
+## Versão 1.1.2 (18 Nov 2026)
+- `mod_version` 1.1.1 -> 1.1.2 para publicar: throwables só em prédio e delegacia, mochilas e upgrades com raridade por item e sem Inception, mochilas/upgrades com a mesma chance do baú nos barris. Jar `amctaczloot-1.1.2.jar` (carrega sem erros; Inception ausente; mochilas e armas brancas saem; throwables fora das casas).
+  Push e release v1.1.2 feitos a pedido do usuário; o release v1.1.1 (e o v1.1.0) continuam publicados com o conteúdo antigo.
