@@ -145,6 +145,8 @@ GEAR = dict(m67=dict(item="throwable", key="ThrowableId", p=92, lo=3, hi=5), rgn
             c4=dict(item="throwable", key="ThrowableId", p=30, lo=1, hi=1), dagger=dict(item="melee", key="MeleeWeaponId", p=20, lo=1, hi=1),
             karambit=dict(item="melee", key="MeleeWeaponId", p=20, lo=1, hi=1), baseball_bat=dict(item="melee", key="MeleeWeaponId", p=15, lo=1, hi=1))   # taco: 20 -> 15 (18 Nov 2026, "levemente mais raro que a dagger")
 GEAR_EXCLUDED_THEMES = ("pharmacy",)
+# THROWABLES (M67, RGN, C4) só no prédio e na delegacia (pedido do usuário, 18 Nov 2026); as armas brancas continuam em todos os temas menos a farmácia.
+THROWABLE_THEMES = ("building", "police_station")
 # BARRIS (pedido do usuário, 16 Nov 2026): nos barris (tiers barrel e barrel_hard) a chance de cura LesRaisins, First Aid, comida (leite e pão) e granadas/armas brancas é
 # BARREL_ITEM_MULT da chance do baú, em TODOS os temas (inclusive a farmácia, que é quase só barril). Armas, munição e attachments já têm a sua própria redução nos barris (RATES).
 BARREL_ITEM_MULT = 0.5
@@ -351,6 +353,7 @@ def item_chances(theme, tier="chest"):
         if theme in d["themes"]: out.append(("box", i, 1000.0 / d["one_in"]))
     if theme not in GEAR_EXCLUDED_THEMES:
         for i, d in GEAR.items():
+            if d["item"] == "throwable" and theme not in THROWABLE_THEMES: continue
             m = GEAR_THEME_MULT.get(theme, {}).get(d["item"], 1.0)
             out.append(("gear", i, min(1000, round(d["p"] * m))))
     if tier.startswith("barrel"): out = [(k, i, p * BARREL_ITEM_MULT) for k, i, p in out]

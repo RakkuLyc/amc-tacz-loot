@@ -423,3 +423,9 @@ First Aid e da LesRaisins. Mod id `amctaczloot`. Recomeçado do zero em 13 Nov 2
 - Validado no servidor (Sorte 0, 0 erros de carga): prédio baú 60.000 -> taco 1,55%, dagger 1,9%, karambit 2,0%; casa barril 60.000 -> 0,76% / 1,0% / 0,9%; delegacia baú difícil 30.000 -> 1,55% / 2,1% / 2,0%.
 - O jar `amctaczloot-1.1.0.jar` reconstruído difere do anexado ao release v1.1.0 (que ainda tem o taco a 2,0%): o release NÃO foi atualizado.
 - **Versão 1.1.1 (18 Nov 2026):** `mod_version` 1.1.0 -> 1.1.1 só para publicar o taco a 1,5% (o jar anexado ao release v1.1.0 ainda tinha 2,0%); jar `amctaczloot-1.1.1.jar` (carrega sem erros; mochilas continuam saindo). Push e release v1.1.1 feitos a pedido do usuário.
+
+## Throwables só no prédio e na delegacia (18 Nov 2026)
+- Pedido do usuário: "manter os throwable apenas no prédio e na delegacia". `THROWABLE_THEMES = ("building", "police_station")` em `tools/gen_loot.py`: M67 (3-5), RGN (2-4) e C4 saem SÓ nesses dois temas, com as mesmas chances de antes (prédio baú 9,2 / 4,1 / 3,0%, barril metade; delegacia o dobro);
+  casa, oficina, posto e farmácia ficam sem throwables. As armas brancas (dagger, karambit, taco) continuam em todos os temas menos a farmácia. Mudaram 12 tabelas (casa, oficina e posto).
+- Validado no servidor (Sorte 0, 0 erros de carga, 20.000 baús cada): prédio M67 8,8% / RGN 4,1% / C4 3,1%; delegacia 18,6% / 8,2% / 5,8%; casa, oficina (barril) e posto: nenhum throwable, armas brancas presentes (dagger ~2%, taco ~1,5%); farmácia (5.000): nada.
+- O jar `amctaczloot-1.1.1.jar` reconstruído difere do anexado ao release v1.1.1 (que ainda tem throwables nos outros temas); release NÃO atualizado.
