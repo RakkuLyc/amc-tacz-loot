@@ -164,7 +164,7 @@ AMMO_BOX = dict(iron_ammo_box=dict(level=0, one_in=14, themes=("building", "poli
 # próprios com a condição neoforge:mod_loaded (mod ausente = nada acontece).
 BACKPACK_COMPONENTS = {"copper_backpack": (1, 45), "iron_backpack": (2, 54), "gold_backpack": (3, 81), "diamond_backpack": (5, 108), "netherite_backpack": (7, 120)}   # (vagas de upgrade, espaços), como nos baús do usuário
 LEVEL_FAMILIES = {   # item -> (nível, "1 a cada N" de CADA item por baú). Mochilas: valores POR ITEM de 18 Nov 2026 (antes por nível 9/14/20/30/54); Inception Upgrade REMOVIDO.
-    "backpacks": dict(mod="sophisticatedbackpacks", themes=("house",),
+    "backpacks": dict(mod="sophisticatedbackpacks", themes=("house",), barrel_mult=1.0,   # 18 Nov 2026: nos barris a MESMA chance do baú (sem a metade); as lanternas seguem com BARREL_ITEM_MULT
                       items={"copper_backpack": ("Comum", 13), "iron_backpack": ("Incomum", 20), "gold_backpack": ("Raro", 32),
                              "diamond_backpack": ("Épico", 45), "netherite_backpack": ("Lendário", 57),
                              "stack_upgrade_tier_1": ("Incomum", 26), "stack_upgrade_tier_2": ("Raro", 52), "stack_upgrade_tier_3": ("Épico", 63),
@@ -391,7 +391,7 @@ def family_chances(fam, theme, tier):
     """[(item, nível, chance do item em ‰)] do tema/tier ([] se a família não vale no tema)."""
     f = LEVEL_FAMILIES[fam]
     if theme not in f["themes"]: return []
-    m = BARREL_ITEM_MULT if tier.startswith("barrel") else 1.0
+    m = f.get("barrel_mult", BARREL_ITEM_MULT) if tier.startswith("barrel") else 1.0
     return [(i, lv, 1000.0 / n * m) for i, (lv, n) in f["items"].items()]
 
 
