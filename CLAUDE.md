@@ -429,3 +429,9 @@ First Aid e da LesRaisins. Mod id `amctaczloot`. Recomeçado do zero em 13 Nov 2
   casa, oficina, posto e farmácia ficam sem throwables. As armas brancas (dagger, karambit, taco) continuam em todos os temas menos a farmácia. Mudaram 12 tabelas (casa, oficina e posto).
 - Validado no servidor (Sorte 0, 0 erros de carga, 20.000 baús cada): prédio M67 8,8% / RGN 4,1% / C4 3,1%; delegacia 18,6% / 8,2% / 5,8%; casa, oficina (barril) e posto: nenhum throwable, armas brancas presentes (dagger ~2%, taco ~1,5%); farmácia (5.000): nada.
 - O jar `amctaczloot-1.1.1.jar` reconstruído difere do anexado ao release v1.1.1 (que ainda tem throwables nos outros temas); release NÃO atualizado.
+
+## Mochilas: raridade POR ITEM e sem Inception (18 Nov 2026)
+- Pedido do usuário ("Nova atualização das raridades das mochilas e upgrades"): "1 a cada N" de CADA item, por baú de casa (baú difícil = baú; barril metade): Copper Backpack 13, Iron 20, Gold 32, Diamond 45, Netherite 57; Stack Upgrade tier 1 26, tier 2 52, tier 3 63, tier 4 79; Advanced Pickup 29.
+  **Inception Upgrade removido** (era Lendário 1/54). Os níveis Comum a Lendário deixaram de ditar a chance (cada item tem a sua). `LEVEL_FAMILIES` em `tools/gen_loot.py` virou `item -> (nível, N)`; lanternas inalteradas (Flashlight 10, Headlamp 16, NVG 16).
+- Validado no servidor (Sorte 0, 0 erros de carga, casa baú 60.000, medido/esperado): copper 7,58/7,69%, iron 4,97/5,00, gold 2,98/3,12, diamond 2,27/2,22, netherite 1,77/1,75, stack1 3,77/3,85, stack2 1,94/1,92, stack3 1,57/1,59, stack4 1,25/1,27, pickup 3,43/3,45; baú difícil 30.000 e barril 60.000 batem; Inception 0.
+- O jar `amctaczloot-1.1.1.jar` reconstruído difere do anexado ao release v1.1.1; release NÃO atualizado.

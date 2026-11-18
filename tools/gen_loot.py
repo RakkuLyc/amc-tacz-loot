@@ -163,16 +163,14 @@ AMMO_BOX = dict(iron_ammo_box=dict(level=0, one_in=14, themes=("building", "poli
 # é um sorteio independente. Só nas casas ("itens exclusivos das casas"); baú e baú difícil iguais; barris com BARREL_ITEM_MULT. Cada família tem tabelas e loot modifiers
 # próprios com a condição neoforge:mod_loaded (mod ausente = nada acontece).
 BACKPACK_COMPONENTS = {"copper_backpack": (1, 45), "iron_backpack": (2, 54), "gold_backpack": (3, 81), "diamond_backpack": (5, 108), "netherite_backpack": (7, 120)}   # (vagas de upgrade, espaços), como nos baús do usuário
-LEVEL_FAMILIES = {
+LEVEL_FAMILIES = {   # item -> (nível, "1 a cada N" de CADA item por baú). Mochilas: valores POR ITEM de 18 Nov 2026 (antes por nível 9/14/20/30/54); Inception Upgrade REMOVIDO.
     "backpacks": dict(mod="sophisticatedbackpacks", themes=("house",),
-                      one_in={"Comum": 9, "Incomum": 14, "Raro": 20, "Épico": 30, "Lendário": 54},   # cada ITEM; 17 Nov 2026 (antes 15/30/45/75/120)
-                      items={"Comum": ["copper_backpack"], "Incomum": ["iron_backpack", "stack_upgrade_tier_1"],
-                             "Raro": ["gold_backpack", "advanced_pickup_upgrade", "stack_upgrade_tier_2"],
-                             "Épico": ["diamond_backpack", "stack_upgrade_tier_3"],
-                             "Lendário": ["netherite_backpack", "inception_upgrade", "stack_upgrade_tier_4"]}),
-    "flashlight": dict(mod="flashlight", themes=("house",),
-                       one_in={"Incomum": 10, "Raro": 16},   # cada ITEM; 17 Nov 2026 (antes 30/45)
-                       items={"Incomum": ["flashlight_off"], "Raro": ["headlamp_helmet", "night_vision_goggles_helmet"]}),
+                      items={"copper_backpack": ("Comum", 13), "iron_backpack": ("Incomum", 20), "gold_backpack": ("Raro", 32),
+                             "diamond_backpack": ("Épico", 45), "netherite_backpack": ("Lendário", 57),
+                             "stack_upgrade_tier_1": ("Incomum", 26), "stack_upgrade_tier_2": ("Raro", 52), "stack_upgrade_tier_3": ("Épico", 63),
+                             "stack_upgrade_tier_4": ("Lendário", 79), "advanced_pickup_upgrade": ("Raro", 29)}),
+    "flashlight": dict(mod="flashlight", themes=("house",),   # 17 Nov 2026 (antes 30/45)
+                       items={"flashlight_off": ("Incomum", 10), "headlamp_helmet": ("Raro", 16), "night_vision_goggles_helmet": ("Raro", 16)}),
 }
 # FERRAMENTAS VANILLA na oficina (pedido do usuário, 16 Nov 2026; opção A: também com metade da chance nos barris). Chance por container (‰) no baú:
 # Raro = 1,0% (picareta de ferro e isqueiro, durabilidade restante 40–65%); Lendário = 0,05% (picareta de netherite inteira; classe nova, 10x mais rara que o Épico).
@@ -390,11 +388,11 @@ def e_family_item(fam, i):
 
 
 def family_chances(fam, theme, tier):
-    """[(nível, [item...], chance de CADA item em ‰)] do tema/tier ([] se a família não vale no tema)."""
+    """[(item, nível, chance do item em ‰)] do tema/tier ([] se a família não vale no tema)."""
     f = LEVEL_FAMILIES[fam]
     if theme not in f["themes"]: return []
     m = BARREL_ITEM_MULT if tier.startswith("barrel") else 1.0
-    return [(lv, f["items"][lv], 1000.0 / n * m) for lv, n in f["one_in"].items()]
+    return [(i, lv, 1000.0 / n * m) for i, (lv, n) in f["items"].items()]
 
 
 def family_pool(fam, i, p):
@@ -466,7 +464,7 @@ def main_tables():
     for fam, f in LEVEL_FAMILIES.items():
         for theme in f["themes"]:
             for tier in TIERS:
-                out["%s/%s_%s" % (theme, tier, fam)] = table([family_pool(fam, i, p) for _, items, p in family_chances(fam, theme, tier) for i in items],
+                out["%s/%s_%s" % (theme, tier, fam)] = table([family_pool(fam, i, p) for i, _, p in family_chances(fam, theme, tier)],
                                                               [{"type": "neoforge:mod_loaded", "modid": f["mod"]}])
     return out
 

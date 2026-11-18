@@ -22,13 +22,13 @@
               }
             }
           ],
-          "weight": 11111,
-          "quality": 2778
+          "weight": 7692,
+          "quality": 1923
         },
         {
           "type": "minecraft:empty",
-          "weight": 88889,
-          "quality": -2778
+          "weight": 92308,
+          "quality": -1923
         }
       ]
     },
@@ -47,29 +47,13 @@
               }
             }
           ],
-          "weight": 7143,
-          "quality": 1786
+          "weight": 5000,
+          "quality": 1250
         },
         {
           "type": "minecraft:empty",
-          "weight": 92857,
-          "quality": -1786
-        }
-      ]
-    },
-    {
-      "rolls": 1,
-      "entries": [
-        {
-          "type": "minecraft:item",
-          "name": "sophisticatedbackpacks:stack_upgrade_tier_1",
-          "weight": 7143,
-          "quality": 1786
-        },
-        {
-          "type": "minecraft:empty",
-          "weight": 92857,
-          "quality": -1786
+          "weight": 95000,
+          "quality": -1250
         }
       ]
     },
@@ -88,45 +72,13 @@
               }
             }
           ],
-          "weight": 5000,
-          "quality": 1250
+          "weight": 3125,
+          "quality": 781
         },
         {
           "type": "minecraft:empty",
-          "weight": 95000,
-          "quality": -1250
-        }
-      ]
-    },
-    {
-      "rolls": 1,
-      "entries": [
-        {
-          "type": "minecraft:item",
-          "name": "sophisticatedbackpacks:advanced_pickup_upgrade",
-          "weight": 5000,
-          "quality": 1250
-        },
-        {
-          "type": "minecraft:empty",
-          "weight": 95000,
-          "quality": -1250
-        }
-      ]
-    },
-    {
-      "rolls": 1,
-      "entries": [
-        {
-          "type": "minecraft:item",
-          "name": "sophisticatedbackpacks:stack_upgrade_tier_2",
-          "weight": 5000,
-          "quality": 1250
-        },
-        {
-          "type": "minecraft:empty",
-          "weight": 95000,
-          "quality": -1250
+          "weight": 96875,
+          "quality": -781
         }
       ]
     },
@@ -145,29 +97,13 @@
               }
             }
           ],
-          "weight": 3333,
-          "quality": 833
+          "weight": 2222,
+          "quality": 556
         },
         {
           "type": "minecraft:empty",
-          "weight": 96667,
-          "quality": -833
-        }
-      ]
-    },
-    {
-      "rolls": 1,
-      "entries": [
-        {
-          "type": "minecraft:item",
-          "name": "sophisticatedbackpacks:stack_upgrade_tier_3",
-          "weight": 3333,
-          "quality": 833
-        },
-        {
-          "type": "minecraft:empty",
-          "weight": 96667,
-          "quality": -833
+          "weight": 97778,
+          "quality": -556
         }
       ]
     },
@@ -186,13 +122,13 @@
               }
             }
           ],
-          "weight": 1852,
-          "quality": 463
+          "weight": 1754,
+          "quality": 438
         },
         {
           "type": "minecraft:empty",
-          "weight": 98148,
-          "quality": -463
+          "weight": 98246,
+          "quality": -438
         }
       ]
     },
@@ -201,14 +137,46 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "sophisticatedbackpacks:inception_upgrade",
-          "weight": 1852,
-          "quality": 463
+          "name": "sophisticatedbackpacks:stack_upgrade_tier_1",
+          "weight": 3846,
+          "quality": 962
         },
         {
           "type": "minecraft:empty",
-          "weight": 98148,
-          "quality": -463
+          "weight": 96154,
+          "quality": -962
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "sophisticatedbackpacks:stack_upgrade_tier_2",
+          "weight": 1923,
+          "quality": 481
+        },
+        {
+          "type": "minecraft:empty",
+          "weight": 98077,
+          "quality": -481
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "sophisticatedbackpacks:stack_upgrade_tier_3",
+          "weight": 1587,
+          "quality": 397
+        },
+        {
+          "type": "minecraft:empty",
+          "weight": 98413,
+          "quality": -397
         }
       ]
     },
@@ -218,13 +186,29 @@
         {
           "type": "minecraft:item",
           "name": "sophisticatedbackpacks:stack_upgrade_tier_4",
-          "weight": 1852,
-          "quality": 463
+          "weight": 1266,
+          "quality": 316
         },
         {
           "type": "minecraft:empty",
-          "weight": 98148,
-          "quality": -463
+          "weight": 98734,
+          "quality": -316
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "sophisticatedbackpacks:advanced_pickup_upgrade",
+          "weight": 3448,
+          "quality": 862
+        },
+        {
+          "type": "minecraft:empty",
+          "weight": 96552,
+          "quality": -862
         }
       ]
     }
