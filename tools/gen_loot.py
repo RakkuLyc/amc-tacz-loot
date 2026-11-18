@@ -143,7 +143,7 @@ FA_COUNT = dict(plaster=(4, 14), bandage=(2, 10), painkillers=(1, 1), morphine=(
 # o excedente em outra pilha). O detonator NÃO entra: o C4 o entrega ao ser arremessado (confirmado pelo usuário no jogo). Fora da farmácia; sem smoke/flash/molotov/flash shield.
 GEAR = dict(m67=dict(item="throwable", key="ThrowableId", p=92, lo=3, hi=5), rgn=dict(item="throwable", key="ThrowableId", p=41, lo=2, hi=4),
             c4=dict(item="throwable", key="ThrowableId", p=30, lo=1, hi=1), dagger=dict(item="melee", key="MeleeWeaponId", p=20, lo=1, hi=1),
-            karambit=dict(item="melee", key="MeleeWeaponId", p=20, lo=1, hi=1), baseball_bat=dict(item="melee", key="MeleeWeaponId", p=20, lo=1, hi=1))
+            karambit=dict(item="melee", key="MeleeWeaponId", p=20, lo=1, hi=1), baseball_bat=dict(item="melee", key="MeleeWeaponId", p=15, lo=1, hi=1))   # taco: 20 -> 15 (18 Nov 2026, "levemente mais raro que a dagger")
 GEAR_EXCLUDED_THEMES = ("pharmacy",)
 # BARRIS (pedido do usuário, 16 Nov 2026): nos barris (tiers barrel e barrel_hard) a chance de cura LesRaisins, First Aid, comida (leite e pão) e granadas/armas brancas é
 # BARREL_ITEM_MULT da chance do baú, em TODOS os temas (inclusive a farmácia, que é quase só barril). Armas, munição e attachments já têm a sua própria redução nos barris (RATES).

@@ -417,3 +417,8 @@ First Aid e da LesRaisins. Mod id `amctaczloot`. Recomeçado do zero em 13 Nov 2
 - Validado no servidor (Sorte 0, 0 erros de carga): prédio baú 60.000 -> ferro 7,10 / ouro 5,07 / diamante 3,33%; baú difícil 30.000 -> 7,11 / 4,98 / 3,29; barril 60.000 -> 3,62 / 2,64 / 1,70 (esperado 3,57 / 2,5 / 1,67); delegacia baú 60.000 -> 7,09 / 4,98 / 3,34 e barril 3,57 / 2,65 / 1,62;
   casa e oficina: nenhuma. `Level` sai inteiro (`{Level: 1}`, sem sufixo de byte). Capacidade das caixas NÃO verificada (config do TACZ). Risco de estourar barril de 9 espaços (enumeração exata, sem e com as caixas): prédio barril difícil 1 em 534 mil -> 1 em 302 mil; delegacia barril difícil 1 em 1,6 milhão -> 1 em 724 mil.
 - **17 Nov 2026: etapa das caixas de munição (v1.1.0) testada e aprovada pelo usuário** ("Testado e aprovado, pode fechar essa etapa"). Estado: v1.1.0 completa e aprovada; ainda sem push (commits `7c88fc0` a `743107a`) e sem release no GitHub.
+
+## Taco de baseball levemente mais raro que a dagger (18 Nov 2026)
+- Pedido do usuário ("levemente mais raro que a dagger") e escolha "Opção B": taco de baseball 2,0% -> **1,5%** por baú (1 a cada 67; barril 1,0% -> 0,75%, 1 a cada 133); dagger e karambit ficam em 2,0% / 1,0%. `GEAR["baseball_bat"]["p"]` 20 -> 15; vale em todos os temas com armas brancas (todos menos a farmácia); baú difícil = baú.
+- Validado no servidor (Sorte 0, 0 erros de carga): prédio baú 60.000 -> taco 1,55%, dagger 1,9%, karambit 2,0%; casa barril 60.000 -> 0,76% / 1,0% / 0,9%; delegacia baú difícil 30.000 -> 1,55% / 2,1% / 2,0%.
+- O jar `amctaczloot-1.1.0.jar` reconstruído difere do anexado ao release v1.1.0 (que ainda tem o taco a 2,0%): o release NÃO foi atualizado.
