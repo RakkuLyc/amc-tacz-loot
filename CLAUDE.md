@@ -132,7 +132,7 @@ First Aid e da LesRaisins. Mod id `amctaczloot`. Recomeçado do zero em 13 Nov 2
   munição por nível `#L0/#L1/#L2`; o `sample_loot.py` só serve para arma/munição). O RCON de todos os scripts fica em `tools/rconlib.py` (junta respostas
   longas, que o Minecraft divide em pedaços de 4.096 bytes).
 - Servidor de teste: copiar para `run/mods/` os jars de `../AbandonedModernCity/libs` (TACZ, First Aid, LesRaisins) e o
-  jar do AMC; `run/server.properties` com RCON (porta 25575, senha `teste`); `./gradlew runServer` (mesmas opções);
+  jar do AMC; `run/server.properties` com RCON (porta 25575, senha `teste`; outra senha: variável de ambiente `AMC_RCON_PASSWORD`); `./gradlew runServer` (mesmas opções);
   `python3 -I tools/rcon.py "setblock 0 100 0 minecraft:chest" "loot insert 0 100 0 loot <tabela>" "data get block 0 100 0 Items"`;
   `... tools/rcon.py stop`. (`run/` não é versionado.)
 

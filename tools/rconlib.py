@@ -8,16 +8,19 @@ Detalhes do RCON do Minecraft 1.21.1 (conferidos em net.minecraft.server.rcon.th
   este cliente envia um pacote de tipo desconhecido (sentinela): o servidor só o lê depois de mandar todos os pedaços
   da resposta e responde "Unknown request", o que marca o fim da resposta.
 """
+import os
 import socket
 import struct
 
 HOST, PORT = "127.0.0.1", 25575
+# senha do RCON do servidor de teste (rcon.password em run/server.properties); troque pela variável de ambiente AMC_RCON_PASSWORD
+PASSWORD = os.environ.get("AMC_RCON_PASSWORD", "teste")
 AUTH, COMMAND, SENTINEL = 3, 2, 0       # tipos de pacote; o 0 não é tratado pelo servidor (vira "Unknown request")
 CHUNK = 4096                            # tamanho máximo de um pedaço de resposta (RconClient.sendCmdResponse)
 
 
 class Rcon:
-    def __init__(self, password="teste", host=HOST, port=PORT, timeout=600):
+    def __init__(self, password=PASSWORD, host=HOST, port=PORT, timeout=600):
         self.sock = socket.create_connection((host, port), timeout=timeout)
         self._send(1, AUTH, password)
         if self._read()[0] == -1:

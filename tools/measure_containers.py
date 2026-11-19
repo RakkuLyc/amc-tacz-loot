@@ -11,6 +11,7 @@ from rconlib import Rcon
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CONTAINERS = os.path.join(ROOT, "docs/containers.json")
+MAX_CHUNK = 64 << 20    # limite da descompressão de um chunk (64 MB; um chunk normal tem poucos MB)
 CATS = ["house", "pharmacy", "workshop", "gas_station", "building", "police_station", "special"]
 
 
@@ -67,7 +68,8 @@ def block_entities(world):
             off = struct.unpack(">I", b"\0" + b[i * 4:i * 4 + 3])[0]
             if not off: continue
             pos = off * 4096; ln = struct.unpack(">I", b[pos:pos + 4])[0]
-            data = zlib.decompress(b[pos + 5:pos + 4 + ln])
+            z = zlib.decompressobj(); data = z.decompress(b[pos + 5:pos + 4 + ln], MAX_CHUNK)
+            if z.unconsumed_tail: sys.exit("%s: chunk maior que %d MB descompactado (arquivo suspeito)" % (f, MAX_CHUNK >> 20))
             n = struct.unpack(">H", data[1:3])[0]
             root, _ = nbt(data, 3 + n, 10)
             yield from root.get("block_entities", [])

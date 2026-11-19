@@ -6,12 +6,15 @@ import glob, gzip, json, os, struct, sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))   # raiz do projeto: grava em docs/ de qualquer pasta
 
+MAX_NBT = 256 << 20     # limite da descompressão (256 MB): uma estrutura normal tem poucos KB
 COL = {"light_gray_concrete": "Comum", "lime_concrete": "Incomum", "light_blue_concrete": "Raro", "magenta_concrete": "Épico",
        "yellow_concrete": "Lendário", "orange_concrete": "Mítico"}
 
 
 def parse(path):
-    b = gzip.open(path).read(); pos = [0]
+    with gzip.open(path) as f: b = f.read(MAX_NBT + 1)
+    if len(b) > MAX_NBT: sys.exit("%s: maior que %d MB descompactado (arquivo suspeito)" % (path, MAX_NBT >> 20))
+    pos = [0]
     def r(fmt):
         n = struct.calcsize(fmt); v = struct.unpack_from(fmt, b, pos[0]); pos[0] += n; return v[0]
     def s():
