@@ -51,6 +51,8 @@ First Aid e da LesRaisins. Mod id `amctaczloot`. Recomeçado do zero em 13 Nov 2
 - **AMC com baús sorteados** (16 Nov 2026): os nomes das tabelas não mudaram (6 temas x chest/barrel/pot x _hard), então o mod não precisou de ajuste. Os 10 prédios
   `building_*` perderam os baús do modelo e ganharam baús sorteados por cópia (pequeno 12–28, grande 38–65, mais 30% dos barris viram baús); rampa e delegacia não mudaram.
   `docs/containers.json` foi medido de novo (média de 6 cópias). O spawn agora usa categorias por altura (`building_small`, `building_large`...): `measure_containers.py` ajustado.
+  **18 Nov 2026: medido de novo com o AMC 1.0.0** (cópia única para as 40 estruturas sem baús sorteados; média de 5-6 cópias para as 12 com baús sorteados):
+  as 3 `workshop_medium_*` passaram de 1 para 4 baús (commit c03dd5c do AMC); nos prédios as médias variaram dentro do ruído de 6 cópias. Só a prévia muda.
 - **Sem itens de cura** (LesRaisins e First Aid) em **oficina, posto de gasolina e delegacia** (16 Nov, `HEAL_EXCLUDED_THEMES`; esses temas não têm tabela `_firstaid`). O leite continua.
 - **Leite condensado: 1 a 3 unidades** por acerto (antes 2 a 4), **só em prédios (`building`) e casas** (16 Nov; fora de farmácia, delegacia, oficina e posto).
 - **Ferramentas vanilla só na oficina** (16 Nov, `TOOLS`, opção A = metade nos barris): picareta de ferro e isqueiro **Raros** (baú 1,0% / barril 0,5%, durabilidade restante 40–65%);

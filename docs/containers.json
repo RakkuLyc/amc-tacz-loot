@@ -2,13 +2,13 @@
  "abandoned_crash_building": {
   "theme": "building",
   "tiers": {
-   "chest": 91,
-   "chest_hard": 1.6,
-   "barrel": 1
+   "barrel": 1,
+   "chest": 91.7,
+   "chest_hard": 2.7
   },
-  "total": 93.6,
-  "copies_measured": 5,
-  "note": "média de cópias (baús sorteados por cópia desde 16 Nov 2026)"
+  "total": 95.4,
+  "copies_measured": 6,
+  "note": "m\u00e9dia de c\u00f3pias (ba\u00fas sorteados por c\u00f3pia desde 16 Nov 2026; medido com o AMC 1.0.0 em 18 Nov 2026)"
  },
  "abandoned_garage_house": {
   "theme": "house",
@@ -33,12 +33,12 @@
  "abandoned_green_tower": {
   "theme": "building",
   "tiers": {
-   "chest": 79.3,
-   "chest_hard": 0.2
+   "chest": 74.2,
+   "chest_hard": 0.3
   },
-  "total": 79.5,
+  "total": 74.5,
   "copies_measured": 6,
-  "note": "média de cópias (baús sorteados por cópia desde 16 Nov 2026)"
+  "note": "m\u00e9dia de c\u00f3pias (ba\u00fas sorteados por c\u00f3pia desde 16 Nov 2026; medido com o AMC 1.0.0 em 18 Nov 2026)"
  },
  "abandoned_house": {
   "theme": "house",
@@ -94,14 +94,14 @@
  "abandoned_police_station": {
   "theme": "police_station",
   "tiers": {
-   "chest": 18,
-   "chest_hard": 11,
    "barrel": 27,
-   "barrel_hard": 7
+   "barrel_hard": 7,
+   "chest": 18,
+   "chest_hard": 11
   },
   "total": 63,
-  "copies_measured": 6,
-  "note": "média de cópias (baús sorteados por cópia desde 16 Nov 2026)"
+  "copies_measured": 5,
+  "note": "m\u00e9dia de c\u00f3pias (ba\u00fas sorteados por c\u00f3pia desde 16 Nov 2026; medido com o AMC 1.0.0 em 18 Nov 2026)"
  },
  "abandoned_pool_house": {
   "theme": "house",
@@ -117,21 +117,21 @@
  "abandoned_ramp_building": {
   "theme": "building",
   "tiers": {
-   "chest": 157,
-   "barrel": 242
+   "barrel": 242,
+   "chest": 157
   },
   "total": 399,
-  "copies_measured": 6,
-  "note": "média de cópias (baús sorteados por cópia desde 16 Nov 2026)"
+  "copies_measured": 5,
+  "note": "m\u00e9dia de c\u00f3pias (ba\u00fas sorteados por c\u00f3pia desde 16 Nov 2026; medido com o AMC 1.0.0 em 18 Nov 2026)"
  },
  "abandoned_small_building": {
   "theme": "building",
   "tiers": {
-   "chest": 26
+   "chest": 27.4
   },
-  "total": 26,
-  "copies_measured": 6,
-  "note": "média de cópias (baús sorteados por cópia desde 16 Nov 2026)"
+  "total": 27.4,
+  "copies_measured": 5,
+  "note": "m\u00e9dia de c\u00f3pias (ba\u00fas sorteados por c\u00f3pia desde 16 Nov 2026; medido com o AMC 1.0.0 em 18 Nov 2026)"
  },
  "abandoned_suburban_house": {
   "theme": "house",
@@ -169,50 +169,50 @@
  "abandoned_wide_building": {
   "theme": "building",
   "tiers": {
-   "chest": 87,
-   "chest_hard": 6
+   "chest": 87.2,
+   "chest_hard": 5.7
   },
-  "total": 93,
+  "total": 92.9,
   "copies_measured": 6,
-  "note": "média de cópias (baús sorteados por cópia desde 16 Nov 2026)"
+  "note": "m\u00e9dia de c\u00f3pias (ba\u00fas sorteados por c\u00f3pia desde 16 Nov 2026; medido com o AMC 1.0.0 em 18 Nov 2026)"
  },
  "apartment_building": {
   "theme": "building",
   "tiers": {
-   "chest": 22.7
+   "chest": 20.2
   },
-  "total": 22.7,
+  "total": 20.2,
   "copies_measured": 6,
-  "note": "média de cópias (baús sorteados por cópia desde 16 Nov 2026)"
+  "note": "m\u00e9dia de c\u00f3pias (ba\u00fas sorteados por c\u00f3pia desde 16 Nov 2026; medido com o AMC 1.0.0 em 18 Nov 2026)"
  },
  "apocalyptic_building_57x45": {
   "theme": "building",
   "tiers": {
-   "chest": 63.8,
+   "chest": 64.7,
    "chest_hard": 2.2
   },
-  "total": 66.0,
+  "total": 66.9,
   "copies_measured": 6,
-  "note": "média de cópias (baús sorteados por cópia desde 16 Nov 2026)"
+  "note": "m\u00e9dia de c\u00f3pias (ba\u00fas sorteados por c\u00f3pia desde 16 Nov 2026; medido com o AMC 1.0.0 em 18 Nov 2026)"
  },
  "bluish_building": {
   "theme": "building",
   "tiers": {
-   "chest": 60.8
+   "chest": 52.6
   },
-  "total": 60.8,
-  "copies_measured": 6,
-  "note": "média de cópias (baús sorteados por cópia desde 16 Nov 2026)"
+  "total": 52.6,
+  "copies_measured": 5,
+  "note": "m\u00e9dia de c\u00f3pias (ba\u00fas sorteados por c\u00f3pia desde 16 Nov 2026; medido com o AMC 1.0.0 em 18 Nov 2026)"
  },
  "brutalist_u_building_75x58": {
   "theme": "building",
   "tiers": {
-   "chest": 133.2,
+   "chest": 127.2,
    "pot": 9
   },
-  "total": 142.2,
-  "copies_measured": 4,
-  "note": "média de cópias (baús sorteados por cópia desde 16 Nov 2026)"
+  "total": 136.2,
+  "copies_measured": 5,
+  "note": "m\u00e9dia de c\u00f3pias (ba\u00fas sorteados por c\u00f3pia desde 16 Nov 2026; medido com o AMC 1.0.0 em 18 Nov 2026)"
  },
  "gas_station_blue": {
   "theme": "gas_station",
@@ -407,47 +407,47 @@
  "skeleton_building_31x29": {
   "theme": "building",
   "tiers": {
-   "chest": 19.8,
-   "chest_hard": 2.3
+   "chest": 16.8,
+   "chest_hard": 1.8
   },
-  "total": 22.1,
+  "total": 18.6,
   "copies_measured": 6,
-  "note": "média de cópias (baús sorteados por cópia desde 16 Nov 2026)"
+  "note": "m\u00e9dia de c\u00f3pias (ba\u00fas sorteados por c\u00f3pia desde 16 Nov 2026; medido com o AMC 1.0.0 em 18 Nov 2026)"
  },
  "tower": {
   "theme": "building",
   "tiers": {
-   "chest": 77,
    "barrel": 25,
+   "chest": 70.7,
    "pot": 37
   },
-  "total": 139,
-  "copies_measured": 3,
-  "note": "média de cópias (baús sorteados por cópia desde 16 Nov 2026)"
+  "total": 132.7,
+  "copies_measured": 6,
+  "note": "m\u00e9dia de c\u00f3pias (ba\u00fas sorteados por c\u00f3pia desde 16 Nov 2026; medido com o AMC 1.0.0 em 18 Nov 2026)"
  },
  "workshop_medium_blue_black": {
   "theme": "workshop",
   "tiers": {
    "barrel": 61,
-   "chest": 1
+   "chest": 4
   },
-  "total": 62
+  "total": 65
  },
  "workshop_medium_yellow_blue": {
   "theme": "workshop",
   "tiers": {
    "barrel": 61,
-   "chest": 1
+   "chest": 4
   },
-  "total": 62
+  "total": 65
  },
  "workshop_medium_yellow_red": {
   "theme": "workshop",
   "tiers": {
    "barrel": 61,
-   "chest": 1
+   "chest": 4
   },
-  "total": 62
+  "total": 65
  },
  "workshop_small_blue": {
   "theme": "workshop",
