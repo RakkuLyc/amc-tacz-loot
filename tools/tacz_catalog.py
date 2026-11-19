@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Extrai do jar do TACZ o catálogo de armas, munições e attachments -> docs/tacz_catalog.json.
 Uso: python3 -I tools/tacz_catalog.py <tacz.jar>"""
-import json, re, sys, zipfile, collections
+import json, sys, zipfile, collections
 import os
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from jsonc import jsonc

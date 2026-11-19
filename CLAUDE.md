@@ -57,8 +57,8 @@ First Aid e da LesRaisins. Mod id `amctaczloot`. Recomeçado do zero em 13 Nov 2
   picareta de netherite **Lendária** (classe nova, 10x mais rara que o Épico: baú 0,05% / barril 0,025%, inteira). Exceções vanilla permitidas: pão e essas 3 ferramentas.
   Resolução dos sorteios por item: `ITEM_RES = 100` (1 em 100.000).
 - **Vasos** não recebem nada do mod. Temas: building, police_station, pharmacy, house, workshop, gas_station (o AMC removeu `building_large`).
-- **Ferramentas**: `gen_loot.py` (prévia / `--write`), `sample_items.py` (chance por item num servidor de teste; use este), `sample_loot.py` (categorias de arma/munição;
-  a coluna `lr` conta o leite como LesRaisins e **não bate** com `expected()["lr"]`: dá falso desvio), `measure_containers.py`, `tacz_catalog.py`, `lr_catalog.py`.
+- **Ferramentas**: `gen_loot.py` (prévia / `--write`), `sample_items.py` (chance por item num servidor de teste), `rcon.py` e `rconlib.py`
+  (RCON), `measure_containers.py`, `tacz_catalog.py`, `lr_catalog.py`, `att_from_nbt.py`; testes em `tests/` (`python3 -m unittest -v`). O `sample_loot.py` foi removido (18 Nov 2026).
 
 ## HISTÓRICO — Decisões do usuário (13 Nov 2026)
 - Só o pacote padrão do TACZ (70 armas); o Gunpowder Revolution (`hamster`) fica de fora por ora.
@@ -129,7 +129,7 @@ First Aid e da LesRaisins. Mod id `amctaczloot`. Recomeçado do zero em 13 Nov 2
 - **Testes automáticos (sem servidor):** `python3 -m unittest -v` na raiz (`tests/test_loot.py`: arquivos = gerador, determinismo, estrutura das tabelas,
   condições dos mods opcionais, loot modifiers, IDs nos catálogos, chance de cada item = configuração, estouro de container de 9 espaços < 1 em 100.000).
 - Para medir chance por item, use `python3 -I tools/sample_items.py <tema/tier> [N] [filtro] [--json saida.json]` (contagem exata por item; caixas de
-  munição por nível `#L0/#L1/#L2`; o `sample_loot.py` só serve para arma/munição). O RCON de todos os scripts fica em `tools/rconlib.py` (junta respostas
+  munição por nível `#L0/#L1/#L2`). O RCON de todos os scripts fica em `tools/rconlib.py` (junta respostas
   longas, que o Minecraft divide em pedaços de 4.096 bytes).
 - Servidor de teste: copiar para `run/mods/` os jars de `../AbandonedModernCity/libs` (TACZ, First Aid, LesRaisins) e o
   jar do AMC; `run/server.properties` com RCON (porta 25575, senha `teste`; outra senha: variável de ambiente `AMC_RCON_PASSWORD`); `./gradlew runServer` (mesmas opções);

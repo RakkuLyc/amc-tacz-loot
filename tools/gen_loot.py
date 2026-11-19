@@ -6,8 +6,12 @@
                                              src/main/resources/data/abandonedmoderncity e o global_loot_modifiers.json
                                              (o gerador é dono desses arquivos)
 
-Dados de entrada (gerados por tools/tacz_catalog.py, tools/lr_catalog.py, tools/measure_containers.py):
-  docs/tacz_catalog.json  docs/lr_catalog.json  docs/containers.json
+Dados de entrada (em docs/):
+  tacz_catalog.json        armas, munições e attachments do TACZ (tools/tacz_catalog.py)
+  ammo_rarity.json         nível de cada calibre (tools/att_from_nbt.py, estruturas .nbt do usuário)
+  attachments_rarity.json  nível de cada attachment (tools/att_from_nbt.py)
+  containers.json          containers por estrutura do AMC, só para a PRÉVIA (tools/measure_containers.py)
+  (docs/lr_catalog.json, de tools/lr_catalog.py, é só referência: o gerador não o lê)
 
 Como a Sorte entra (confirmado no bytecode do Minecraft 1.21.1):
   peso efetivo de uma entrada = floor(weight + quality * Sorte)   (nunca menos que 0)
@@ -62,9 +66,9 @@ RATES = {
 # (o tema building_large foi removido do AMC em 14 Nov 2026, commit 72d07b3: todo prédio usa `building`)
 # RARIDADE DAS ARMAS (reformulada em 17 Nov 2026, pedido do usuário, "Opção A"): 7 categorias (o DMR do TACZ conta como fuzil) e 5 níveis fixos.
 # - A chance TOTAL de cada categoria vem do usuário (perfil default = prédio): "1 a cada N baús" em GUN_CAT_ONE_IN; a divisão entre as categorias é proporcional a 1/N.
-#   A delegacia usa o MESMO perfil do prédio (a chance de arma dela é 2x a do prédio, ver RATES); o perfil "police" antigo foi removido.
+#   A delegacia usa a MESMA divisão do prédio (a chance de arma dela é 2x a do prédio, ver RATES).
 # - Dentro da categoria, o peso de CADA arma depende só do nível (LEVEL_W, mesmo em todas as categorias: cada nível vale metade do anterior).
-GUN_CAT_ONE_IN = dict(pistol=25, smg=29, rifle=42, shotgun=42, mg=65, sniper=60, rpg=70)       # perfil default (prédio)
+GUN_CAT_ONE_IN = dict(pistol=25, smg=29, rifle=42, shotgun=42, mg=65, sniper=60, rpg=70)       # prédio (a delegacia usa a mesma divisão)
 GUN_TYPE_MERGE = {"dmr": "rifle"}
 LEVEL_W = dict(Comum=16, Incomum=8, Raro=4, Épico=2, Lendário=1)
 GUN_LEVELS = {   # nível -> armas (nomes do arquivo do usuário; deagle_golden e springfield1873 não estavam nele: escolha minha, aprovada)
@@ -80,7 +84,6 @@ GUN_LEVELS = {   # nível -> armas (nomes do arquivo do usuário; deagle_golden 
     "rpg":     dict(Épico="rpg7 m320"),
 }
 GUN_LEVEL = {g: (cat, lv) for cat, d in GUN_LEVELS.items() for lv, gs in d.items() for g in gs.split()}
-GUN_PROFILE = {}          # todos os temas usam o perfil "default" (delegacia incluída desde 17 Nov 2026)
 # MUNIÇÃO (escolhas do usuário, 14-17 Nov 2026): a quantidade por pilha é proporcional à pilha máxima do calibre, tomando o 9mm como referência (24 a 50 balas).
 # Qual calibre sai: peso por NÍVEL dado pelo usuário (tacz_ammo.nbt -> docs/ammo_rarity.json; antes era 50% igual + 50% pela popularidade das armas).
 AMMO_REF = ("9mm", 24, 50)
@@ -92,7 +95,7 @@ AMMO_LEVEL_W = {"Comum": 16, "Incomum": 8, "Raro": 4, "Épico": 2, "Lendário": 
 # em pedaços espalhados em slots aleatórios ao abrir o container (shuffleAndSplitItems), então as balas já aparecem soltas pelos slots.
 AMMO_STACKS = (1, 3)
 AMMO_SIZE = 1.0
-# (a arma NÃO traz munição junto: a munição é um sorteio separado, calibre pela raridade das armas que o usam)
+# (a arma NÃO traz munição junto: a munição é um sorteio separado, calibre pelo nível em AMMO_LEVEL_W)
 # ATTACHMENTS (redefinidos em 17 Nov 2026, arquivo do usuário "TACZ_attachments.txt" + estruturas .nbt dele): a chance de QUALQUER attachment num container é
 # ATT_FRACTION_OF_GUN (1,2: "em torno de 20% mais comuns que armas") da chance de arma do mesmo tema e tipo de container. Qual sai: peso por NÍVEL de cada attachment
 # (docs/attachments_rarity.json, gerado por tools/att_from_nbt.py a partir da cor do concreto sobre os baús do usuário). "Sem raridade" = baú sem concreto = peso do Incomum (opção B).
@@ -105,17 +108,14 @@ GUN_SPAWN_AMMO_EXCLUDED = ("minigun",)
 for _th in RATES.values():
     for _r in _th.values():
         if "gun" in _r and "att" not in _r: _r["att"] = round(_r["gun"] * ATT_FRACTION_OF_GUN)
-# itens de cura: (peso, mín, máx)
 # CURA LESRAISINS (escolha do usuário, 15 Nov 2026): chance de CADA item por container, independente dos outros (‰: 195 = 19,5%),
-# a mesma em todos os temas e tipos de container, exceto na farmácia (multiplicador só nos incomuns e no raro, PHARMACY_MULT).
-# Classes: Comuns = golden star, amoxicillin, ibuprofen, vaseline; Incomuns = CMS, AI-2, CAR, blood pack; Raro = SURV12.
+# a mesma em todos os temas e tipos de container, exceto na farmácia (valores fixos em HEAL_PHARMACY_FIXED).
+# Classes atuais (16 Nov 2026): Comuns = vaseline, ibuprofen, amoxicillin, golden star; Incomuns = blood pack, CAR; Raros = AI-2, CMS; Épico = SURV12.
 # SURV12: 3% pedido pelo usuário, depois "diminuir levemente a raridade" (= um pouco mais comum): 4%.
 # Os 4 Comuns têm a MESMA chance (184‰ = média dos antigos 195/190/180/170, mantendo o total dos Comuns; pedido de 15 Nov 2026).
 # 16 Nov 2026 (reclassificação pedida pelo usuário): CMS e AI-2 (e Morphine no First Aid) passam a Raro; SURV12 (e Morphine Injector) passam a ÉPICO (a classe mais rara).
 # Valores base (antes dos fatores abaixo): Raro 4,0%, Épico 2,0% (escolha minha; o usuário não deu os números de Raro e Épico).
 HEAL_LR = dict(vaseline=184, ibuprofen=184, amoxycillin=184, goldenstar=184, blood_pack=90, carfak=85, ai2=40, cms=40, surv12=20)
-HEAL_CLASS = dict(vaseline="Comum", ibuprofen="Comum", amoxycillin="Comum", goldenstar="Comum",
-                  blood_pack="Incomum", carfak="Incomum", ai2="Raro", cms="Raro", surv12="Épico")
 # "Duplique a raridade dos itens de cura" (16 Nov 2026) = chances x0,5 (itens 2x mais raros), em LesRaisins e First Aid, FORA da farmácia.
 HEAL_RARITY_SCALE = 0.5
 # Temas SEM itens de cura (LesRaisins e First Aid), pedido do usuário em 16 Nov 2026. O leite condensado (comida) continua.
@@ -123,19 +123,18 @@ HEAL_EXCLUDED_THEMES = ("workshop", "gas_station", "police_station")
 # FARMÁCIA "como está" (pedido do usuário): os valores da farmácia ficam CONGELADOS nos números de antes da reclassificação e do fator acima (‰).
 HEAL_PHARMACY_FIXED = dict(lr=dict(vaseline=92, ibuprofen=92, amoxycillin=92, goldenstar=92, blood_pack=90, carfak=85, ai2=80, cms=70, surv12=40),
                            fa=dict(plaster=150, bandage=92, adrenaline_injector=92, painkillers=92, morphine=82, defibrillator=82, morphine_injector=40))
-# Fator geral sobre as chances de cura LesRaisins acima (15 Nov 2026: "exagerei um pouco" -> opção C, tudo x0,5). Vale por cima do
-# multiplicador da farmácia. Não mexe no leite, no pão nem no First Aid. Valores resultantes arredondados em ‰ (ex.: 19,5% -> 9,8%).
+# Fator geral sobre as chances de cura LesRaisins acima (15 Nov 2026: "exagerei um pouco" -> opção C, tudo x0,5). Não vale na farmácia
+# (HEAL_PHARMACY_FIXED). Não mexe no leite, no pão nem no First Aid. Valores resultantes arredondados em ‰ (ex.: 19,5% -> 9,8%).
 HEAL_SCALE = 0.5
 # COMIDA: chance por container (‰) e quantidade; themes=None = todos os temas. O pão é vanilla (exceção explícita do usuário) e só em casas.
 FOOD = dict(condensed_milk=dict(p=40, lo=1, hi=3, themes=("building", "house")), bread=dict(p=160, lo=1, hi=5, themes=("house",)))  # 17 Nov 2026: leite 8%->4%, pão 20%->16% e 4-12 -> 1-5 (baú; barril = metade)
 # FIRST AID (opcional; tabela à parte com neoforge:mod_loaded). Escolha do usuário, 15-16 Nov 2026: classes Muito comum = plaster; Comum (mesma
 # categoria dos Comuns da LesRaisins) = bandage, adrenaline injector, painkillers; Incomum = morphine, defibrillator; Raro = morphine injector.
-# Chance de CADA item por container (‰), independente dos outros, a mesma em todos os temas exceto na farmácia (PHARMACY_MULT nos incomuns e raro):
+# Chance de CADA item por container (‰), independente dos outros, a mesma em todos os temas exceto na farmácia (valores fixos em HEAL_PHARMACY_FIXED):
 # Comum = 9,2% (igual aos comuns LR); Incomum = 4,1% (média dos incomuns LR); Raro = 2,0%; Muito comum = 15% (valor meu). Sem o corte x0,5 das curas LR.
 # 16 Nov 2026: Morphine passa a Raro (base 2,0%) e Morphine Injector a Épico (base 1,0%); depois HEAL_RARITY_SCALE (x0,5) fora da farmácia.
 FA_CHANCE = dict(plaster=150, bandage=92, adrenaline_injector=92, painkillers=92, morphine=20, defibrillator=41, morphine_injector=10)
-FA_CLASS = dict(plaster="Muito comum", bandage="Comum", adrenaline_injector="Comum", painkillers="Comum", morphine="Raro",
-                defibrillator="Incomum", morphine_injector="Épico")
+# Classes atuais: Muito comum = plaster; Comum = bandage, adrenaline injector, painkillers; Incomum = defibrillator; Raro = morphine; Épico = morphine injector.
 # quantidade por pilha (pedido do usuário: plaster 4-14 e bandage 2-10; a pilha máxima desses dois itens no First Aid é 16)
 FA_COUNT = dict(plaster=(4, 14), bandage=(2, 10), painkillers=(1, 1), morphine=(1, 1), morphine_injector=(1, 1),
                 adrenaline_injector=(1, 1), defibrillator=(1, 1))
@@ -192,7 +191,6 @@ JUNK_SHAPE = {"chest": (1000, 2, 4), "chest_hard": (1000, 2, 4), "barrel": (300,
               "pot": (300, 1, 1), "pot_hard": (300, 1, 1)}
 # categorias da tabela principal (TACZ + LesRaisins, obrigatórios) e da tabela do First Aid (opcional)
 CORE_POOLS = (("gun",), ("att",), ("ammo",))      # sorteios independentes por rolagem do baú (a cura e a comida têm um pool por item)
-CORE_CATS = ("gun", "ammo", "att")
 LUCKS = (0, 1, 2, 3)
 # =====================================================================================================================
 
@@ -204,7 +202,6 @@ def load(p):
 
 
 TZ = load("docs/tacz_catalog.json")
-LR = load("docs/lr_catalog.json")
 CONT = load("docs/containers.json")
 
 
@@ -213,10 +210,9 @@ def eligible_guns():
     return {g: v for g, v in TZ["guns"].items() if v["craftable"]}
 
 
-def gun_weights(profile):
-    """Peso de cada arma (soma ~100.000): fatia da categoria (perfil) x LEVEL_W do nível / soma dos níveis da categoria."""
+def gun_weights():
+    """Peso de cada arma (soma ~100.000): fatia da categoria x LEVEL_W do nível / soma dos níveis da categoria."""
     guns = eligible_guns()
-    assert profile == "default", "só existe o perfil default"
     cat_share = {c: 1.0 / n for c, n in GUN_CAT_ONE_IN.items()}
     tot = sum(cat_share.values()); cat_share = {c: v / tot for c, v in cat_share.items()}
     for g, v in guns.items():
@@ -225,10 +221,9 @@ def gun_weights(profile):
     return {g: max(1, round(100000 * cat_share[GUN_LEVEL[g][0]] * LEVEL_W[GUN_LEVEL[g][1]] / sums[GUN_LEVEL[g][0]])) for g in guns}
 
 
-def ammo_weights(profile="default"):
+def ammo_weights():
     """Peso de cada calibre pelo NÍVEL que o usuário deu (docs/ammo_rarity.json, de tacz_ammo.nbt; 17 Nov 2026), AMMO_LEVEL_W x100. Só calibres com arma elegível
     (7.62x25 e 6.8x51 Fury não têm arma no loot e o usuário não os classificou). Não depende mais das armas."""
-    assert profile == "default"
     rar = load("docs/ammo_rarity.json"); ids = [r["id"] for r in rar]
     assert len(ids) == len(set(ids)) and set(ids) == {v["ammo"].split(":")[1] for v in eligible_guns().values()}, "calibres do arquivo != calibres das armas: rode tools/att_from_nbt.py"
     return {r["id"]: round(AMMO_LEVEL_W[r["level"]] * 100) for r in sorted(rar, key=lambda r: r["id"])}
@@ -314,11 +309,10 @@ def with_w(e, w):
 def pick_tables():
     """Tabelas de escolha (o que sai quando a categoria é sorteada). Nome -> (JSON, condição ou None)."""
     out = {}
-    for prof in ("default",):
-        gw = gun_weights(prof)
-        out["pick/gun_" + prof] = (table([pool([with_w(e_gun(g), w) for g, w in gw.items()])]), None)
-        out["pick/ammo_" + prof] = (table([pool([with_w(e_ammo(c), w) for c, w in ammo_weights(prof).items()],
-                                                {"type": "minecraft:uniform", "min": AMMO_STACKS[0], "max": AMMO_STACKS[1]})]), None)
+    # os nomes "_default" ficam por compatibilidade (eram de quando a delegacia tinha um perfil próprio)
+    out["pick/gun_default"] = (table([pool([with_w(e_gun(g), w) for g, w in gun_weights().items()])]), None)
+    out["pick/ammo_default"] = (table([pool([with_w(e_ammo(c), w) for c, w in ammo_weights().items()],
+                                            {"type": "minecraft:uniform", "min": AMMO_STACKS[0], "max": AMMO_STACKS[1]})]), None)
     out["pick/att"] = (table([pool([with_w(e_att(a), w) for a, w in att_weights().items()])]), None)
     return out
 
@@ -340,7 +334,7 @@ def junk_tables():
 
 
 def item_chances(theme, tier="chest"):
-    """Itens com chance própria neste tema: lista de (tipo, item, p em ‰). Farmácia: multiplicador nos incomuns e no raro."""
+    """Itens com chance própria neste tema/tier: lista de (tipo, item, p em ‰). Farmácia: cura com valores fixos; barris: x BARREL_ITEM_MULT."""
     out = []
     for i, p in ({} if theme in HEAL_EXCLUDED_THEMES else HEAL_LR).items():
         v = HEAL_PHARMACY_FIXED["lr"][i] if theme == "pharmacy" else int(p * HEAL_SCALE * HEAL_RARITY_SCALE + 0.5)
@@ -441,11 +435,13 @@ def weights(rates):
     return res
 
 
+PICK = {"gun": "gun_default", "ammo": "ammo_default", "att": "att"}   # categoria -> tabela de escolha (pick/...)
+
+
 def main_tables():
     """Para cada tema/tier: tabela principal (core) e tabela do First Aid. Nome -> JSON."""
     out = {}
     for theme, tiers in RATES.items():
-        prof = GUN_PROFILE.get(theme, "default")
         for tier, rates in tiers.items():
             rolls, bonus = ROLLS[tier]
             pools = []
@@ -456,7 +452,7 @@ def main_tables():
                 for c, (w, q) in weights(part).items():
                     if c == "empty" and w <= 0: continue          # chance 100%: sem entrada vazia (peso 0 não vale)
                     if c == "empty": e = {"type": "minecraft:empty"}
-                    else: e = {"type": "minecraft:loot_table", "value": "%s:pick/%s" % (MOD, {"gun": "gun_" + prof, "ammo": "ammo_" + prof, "att": "att", "lr": "lr"}[c])}
+                    else: e = {"type": "minecraft:loot_table", "value": "%s:pick/%s" % (MOD, PICK[c])}
                     ent.append({**e, "weight": w, "quality": q})
                 pools.append(pool(ent, rolls, bonus))
             for kind, i, p in item_chances(theme, tier): pools.append(item_pool(kind, i, p))
@@ -478,7 +474,7 @@ def eff(w, q, luck):
 
 
 def expected(theme, tier, luck):
-    """Esperado por container (stacks): guns, ammo, att, lr, fa."""
+    """Esperado por container (Sorte `luck`): gun, ammo e att em pilhas; lr, food, gear, tool, box em sorteios; fa em unidades."""
     rates = RATES[theme][tier]; rolls, bonus = ROLLS[tier]
     r = rolls + math.floor(bonus * luck)
     res = {k: 0.0 for k in ("gun", "ammo", "att", "lr", "fa", "food", "gear", "tool", "box")}
@@ -524,9 +520,8 @@ def preview():
     for th in ("building", "police_station"):
         cells = []
         for l in LUCKS:
-            n = sum(c for _, nm, v in rows if nm == "abandoned_police_station" and th == "police_station" for tr, c in v["tiers"].items() if tr.startswith("chest")) or 1
             ex = 0.0; ch = 0
-            for _, nm, v in rows:
+            for _, _, v in rows:
                 if v["theme"] != th: continue
                 for tr, c in v["tiers"].items():
                     if tr.startswith("chest"): ex += c * expected(th, tr, l)["gun"]; ch += c
@@ -535,7 +530,7 @@ def preview():
     gun_p = []
     for tr, c in CONT["abandoned_police_station"]["tiers"].items():
         if tr.startswith("pot"): continue
-        r_, b_ = ROLLS[tr]; q = expected("police_station", tr, 0)["gun"]; gun_p += [q] * c
+        q = expected("police_station", tr, 0)["gun"]; gun_p += [q] * c
     dist = [1.0]
     for q in gun_p:
         dist = [(dist[k] if k < len(dist) else 0) * (1 - q) + (dist[k - 1] * q if k > 0 else 0) for k in range(len(dist) + 1)]
