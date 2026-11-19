@@ -5,6 +5,8 @@ history: the last version of `CLAUDE.md` before the 18 Nov 2026 translation). Nu
 replaced by later ones; the current values are in `CLAUDE.md` and in `tools/gen_loot.py`.
 Commit hashes were replaced by the commit date and title, because the history of this repository and of the AMC
 repository was (or will be) rewritten. "AMC commit" = a commit in the Abandoned Modern City repository.
+Versions 1.0.0 to 1.1.2 below are **internal test versions** (private releases); the first public release, made after the
+18 Nov 2026 review, is also called 1.0.0 and has the same loot as internal 1.1.2.
 Glossary: building = prédio, police station = delegacia, house = casa, workshop = oficina, gas station = posto,
 pharmacy = farmácia, hard chest = baú difícil, Luck = Sorte, "1 in N" = "1 a cada N".
 

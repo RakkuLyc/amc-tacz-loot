@@ -5,7 +5,7 @@ Abandoned Modern City (AMC) with loot from **TACZ** (guns, ammo, attachments, am
 boxes) and **LesRaisins Tactical Equipments** (healing, grenades, C4, melee weapons), plus optional items from
 **First Aid**, **Sophisticated Backpacks** and **TCT Flashlight**.
 
-**Version 2.0.0** (requires AMC 1.0.0). License: MIT (see `LICENSE`).
+**Version 1.0.0**, the first public release (requires AMC 1.0.0). License: MIT (see `LICENSE`).
 
 ## Requirements
 
@@ -23,7 +23,7 @@ Only the TACZ default gun pack is used (70 guns). The game refuses to load this 
 
 ## Installation
 
-1. Install the required mods above, then put `amctaczloot-2.0.0.jar` in the `mods` folder (client and server).
+1. Install the required mods above, then put `amctaczloot-1.0.0.jar` in the `mods` folder (client and server).
 2. Optional mods can be added or removed at any time: their loot is behind a `neoforge:mod_loaded` condition, so
    without them nothing from them appears and nothing breaks.
 3. Use a **new world**, or newly generated areas. Containers keep the loot table id they got when they were placed,

@@ -19,7 +19,9 @@ Aid, Sophisticated Backpacks and TCT Flashlight. It also **overrides the 36 AMC 
 vanilla item is left. Themes: building, police_station, pharmacy, house, workshop, gas_station. Decorated pots get
 nothing from the mod. The history of every decision (13 to 18 Nov 2026) is in `docs/HISTORY.md`.
 
-## Current state (version 2.0.0, 18 Nov 2026)
+## Current state (version 1.0.0, the first public release; 18 Nov 2026)
+- Versions 1.0.0 to 1.1.2 mentioned in `docs/HISTORY.md` were **internal test versions** (private releases, never downloaded by
+  anyone else); their releases and tags are to be deleted before the public 1.0.0 is published (user's decision, 18 Nov 2026).
 - **Requires** AMC 1.0.0+ (`[1.0.0,)`; the game refuses to load the mod with AMC 0.1.0, tested), TACZ 1.2.0+,
   LesRaisins 0.4.3+. **Optional**: First Aid 1.3.5+, Sophisticated Backpacks 3.26.21+ (needs NeoForge 21.1.229+), TCT
   Flashlight 5.0+. Author `RakkuLyc`, license MIT (`LICENSE`).
@@ -42,7 +44,7 @@ nothing from the mod. The history of every decision (13 to 18 Nov 2026) is in `d
   of long replies, sampler with exact counts, tools writing `docs/` from any folder), automated tests, Gradle
   distribution checksum, dead code removed, `gen_loot.py` reorganized and translated, containers re-measured with AMC
   1.0.0, English documentation. The loot did not change (the 128 generated files are identical; only `mods.toml` changed:
-  author, AMC range, version). Pending for the user: merge, push, release 2.0.0, repository visibility, and the final
+  author, AMC range, version). Pending for the user: merge, push, deleting the old internal releases/tags, release 1.0.0, repository visibility, and the final
   rewrite of the commit email (needs a force push and moving the release tags).
 
 ## Verified facts (checked in the jars, the Minecraft source or in game; details in `docs/HISTORY.md`)
