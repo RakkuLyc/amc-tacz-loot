@@ -128,6 +128,14 @@ class Structure(unittest.TestCase):
             for kind, iid in re.findall(r'(GunId|AmmoId|AttachmentId|ConsumableId|ThrowableId|MeleeWeaponId)\\?"?\s*:\s*\\?"[a-z]+:([a-z_0-9]+)', json.dumps(t)):
                 self.assertIn(iid, known[kind], "%s: %s=%s fora do catálogo" % (name, kind, iid))
 
+    def test_all_36_amc_tables_overridden(self):
+        """As 36 tabelas do AMC (6 temas x 6 tiers, lista fixa aqui) existem como sucata; sem uma delas o loot vanilla volta."""
+        themes = ("building", "police_station", "pharmacy", "house", "workshop", "gas_station")
+        tiers = ("chest", "chest_hard", "barrel", "barrel_hard", "pot", "pot_hard")
+        want = {os.path.join(G.AMC, "loot_table/chests", th, ti + ".json") for th in themes for ti in tiers}
+        got = {n for n in TABLES if n.startswith(os.path.join(G.AMC, "loot_table/chests") + os.sep)}
+        self.assertEqual(got, want)
+
     def test_no_pot_tables_and_vanilla_only_junk(self):
         allowed = {"minecraft:" + i for i in list(G.JUNK) + list(G.TOOLS)} | {"minecraft:bread"}
         for name, t in TABLES.items():
