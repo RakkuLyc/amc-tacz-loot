@@ -27,7 +27,7 @@ description='''${mod_description}'''
 [[dependencies.${mod_id}]]
     modId="abandonedmoderncity"
     type="required"
-    versionRange="[0.1.0,)"
+    versionRange="[1.0.0,)"  # o AMC 1.0.0 tem o tema police_station; builds antigas do 0.1.0 podiam não ter
     ordering="AFTER"  # carrega depois do AMC: as tabelas deste mod (mesmos caminhos) prevalecem
     side="BOTH"
 

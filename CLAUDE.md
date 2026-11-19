@@ -123,7 +123,8 @@ First Aid e da LesRaisins. Mod id `amctaczloot`. Recomeçado do zero em 13 Nov 2
   `/effect give @s minecraft:luck infinite 2`; comparar com a prévia (ruído grande numa só estrutura: procura-se diferença clara).
 - Chunks gerados antes de uma mudança no AMC guardam os ids antigos das tabelas (o id é gravado ao colocar o container);
   containers já abertos não têm mais tabela. Testar em mundo novo ou com `/amcs spawn`.
-- O jar do AMC precisa ser o reconstruído com o tema `police_station` (mesmo número de versão 0.1.0 do antigo: substituir).
+- O mod exige o AMC 1.0.0 ou mais novo (18 Nov 2026; antes `[0.1.0,)`, que aceitava builds antigas sem o tema `police_station`). O servidor de teste usa
+  o jar de `../AbandonedModernCity/build/libs/abandonedmoderncity-1.0.0.jar`.
 - Build: `JAVA_HOME=/usr/lib/jvm/java-21-openjdk ./gradlew build -Dorg.gradle.java.installations.paths=$JAVA_HOME`
   (o Java padrão do sistema é o 27, novo demais para o Gradle).
 - **Testes automáticos (sem servidor):** `python3 -m unittest -v` na raiz (`tests/test_loot.py`: arquivos = gerador, determinismo, estrutura das tabelas,
