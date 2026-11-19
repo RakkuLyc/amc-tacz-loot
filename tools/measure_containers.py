@@ -4,26 +4,20 @@
 Com o servidor de teste rodando (RCON 25575): gera cada estrutura do AMC numa célula de 400x400 blocos com
 `/amcs spawn`, salva o mundo e lê os arquivos de região contando os block entities com LootTable, por tema e tipo.
 Uso: python3 -I tools/measure_containers.py <index.txt do AMC> <pasta do mundo (run/world)> [nomes,separados,por,vírgula [deslocamento]]"""
-import collections, glob, json, socket, struct, sys, zlib
+import collections, glob, json, os, struct, sys, zlib
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))   # com -I a pasta do script não entra no sys.path sozinha
+from rconlib import Rcon
+
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+CONTAINERS = os.path.join(ROOT, "docs/containers.json")
 CATS = ["house", "pharmacy", "workshop", "gas_station", "building", "police_station", "special"]
 
 
 def rcon(cmds):
-    s = socket.create_connection(("127.0.0.1", 25575), timeout=120)
-
-    def send(kind, body, rid):
-        d = struct.pack("<ii", rid, kind) + body.encode() + b"\0\0"
-        s.sendall(struct.pack("<i", len(d)) + d)
-
-    def recv():
-        n = struct.unpack("<i", s.recv(4))[0]; b = b""
-        while len(b) < n: b += s.recv(n - len(b))
-        return b[8:-2].decode(errors="replace")
-    send(3, "teste", 1); recv()
-    out = []
-    for c in cmds:
-        send(2, c, 2); out.append(recv())
+    r = Rcon(timeout=120)
+    out = [r.cmd(c) for c in cmds]
+    r.close()
     return out
 
 
@@ -109,8 +103,8 @@ def main(index, world, only=None, offset=0):
         out[n] = {"theme": theme.get(n), "tiers": dict(sorted(c.items())), "total": total}
         print("%-34s %-14s %4d %s  %s" % (n, theme.get(n), total, dict(sorted(c.items())), ok))
     if only is not None:  # repetição de algumas estruturas: junta ao resultado anterior
-        old = json.load(open("docs/containers.json")); old.update(out); out = dict(sorted(old.items()))
-    json.dump(out, open("docs/containers.json", "w"), indent=1)
+        old = json.load(open(CONTAINERS)); old.update(out); out = dict(sorted(old.items()))
+    json.dump(out, open(CONTAINERS, "w"), indent=1)
 
 
 main(sys.argv[1], sys.argv[2], set(sys.argv[3].split(",")) if len(sys.argv) > 3 else None,

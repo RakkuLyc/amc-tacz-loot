@@ -6,6 +6,8 @@ import os
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from jsonc import jsonc
 
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))   # raiz do projeto: grava em docs/ de qualquer pasta
+
 def main(jar):
     z = zipfile.ZipFile(jar); names = set(z.namelist())
     base = "assets/tacz/custom/tacz_default_gun/data/tacz/"
@@ -31,7 +33,7 @@ def main(jar):
             if res.get("id"): made.add((res.get("type"), res["id"]))
     for k, kind in (("guns", "gun"), ("ammo", "ammo"), ("attachments", "attachment")):
         for i, v in cat[k].items(): v["craftable"] = (kind, "tacz:" + i) in made
-    json.dump(cat, open("docs/tacz_catalog.json", "w"), indent=1)
+    json.dump(cat, open(os.path.join(ROOT, "docs/tacz_catalog.json"), "w"), indent=1)
     g = cat["guns"]
     for k in cat: print(k, "fabricáveis:", sum(v["craftable"] for v in cat[k].values()), "de", len(cat[k]))
     print("armas", len(g), "| sem munição:", [k for k, v in g.items() if not v["ammo"]])

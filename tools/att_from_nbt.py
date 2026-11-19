@@ -4,6 +4,8 @@ Regra do usuário (17 Nov 2026): o nível é a cor do concreto no mesmo x/z, ACI
 amarelo Lendário, laranja Mítico); baú sem bloco em cima = sem raridade definida. Uso: python3 -I tools/att_from_nbt.py <pasta das structures>"""
 import glob, gzip, json, os, struct, sys
 
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))   # raiz do projeto: grava em docs/ de qualquer pasta
+
 COL = {"light_gray_concrete": "Comum", "lime_concrete": "Incomum", "light_blue_concrete": "Raro", "magenta_concrete": "Épico",
        "yellow_concrete": "Lendário", "orange_concrete": "Mítico"}
 
@@ -46,7 +48,7 @@ def main(folder):
                 a = it["components"]["minecraft:custom_data"]["AttachmentId"].split(":")[1]
                 res[a] = dict(id=a, family=fam, level=lv or "Sem raridade")      # duplicata (ex.: stock_m4ss) conta uma vez
     out = sorted(res.values(), key=lambda r: (r["family"], r["id"]))
-    json.dump(out, open("docs/attachments_rarity.json", "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+    json.dump(out, open(os.path.join(ROOT, "docs/attachments_rarity.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     cnt = {}
     for r in out: cnt[r["level"]] = cnt.get(r["level"], 0) + 1
     print(len(out), "attachments:", cnt)
@@ -63,9 +65,13 @@ def ammo_levels(folder):
             if grid.get((x, yy, z)) in COL: lv = COL[grid[(x, yy, z)]]
         for it in b["nbt"].get("Items", []):
             res.append(dict(id=it["components"]["minecraft:custom_data"]["AmmoId"].split(":")[1], level=lv or "Sem raridade"))
-    res.sort(key=lambda r: r["id"]); json.dump(res, open("docs/ammo_rarity.json", "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+    res.sort(key=lambda r: r["id"]); json.dump(res, open(os.path.join(ROOT, "docs/ammo_rarity.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     print(len(res), "calibres")
 
 
 if __name__ == "__main__":
+    # confere a pasta ANTES de gravar: com a pasta errada o script gravaria listas vazias por cima dos docs/ (aconteceu na revisão de 18 Nov 2026)
+    att_files = [f for f in glob.glob(os.path.join(sys.argv[1], "tacz_*.nbt")) if not f.endswith("tacz_ammo.nbt")]
+    if not att_files or not os.path.isfile(os.path.join(sys.argv[1], "tacz_ammo.nbt")):
+        sys.exit("pasta sem tacz_ammo.nbt ou sem as estruturas tacz_<família>.nbt: %s (nada foi gravado)" % sys.argv[1])
     main(sys.argv[1]); ammo_levels(sys.argv[1])

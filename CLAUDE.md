@@ -126,7 +126,11 @@ First Aid e da LesRaisins. Mod id `amctaczloot`. Recomeçado do zero em 13 Nov 2
 - O jar do AMC precisa ser o reconstruído com o tema `police_station` (mesmo número de versão 0.1.0 do antigo: substituir).
 - Build: `JAVA_HOME=/usr/lib/jvm/java-21-openjdk ./gradlew build -Dorg.gradle.java.installations.paths=$JAVA_HOME`
   (o Java padrão do sistema é o 27, novo demais para o Gradle).
-- Para medir chance por item, use `python3 -I tools/sample_items.py <tema/tier> [N] [filtro]` (o `sample_loot.py` só serve para arma/munição).
+- **Testes automáticos (sem servidor):** `python3 -m unittest -v` na raiz (`tests/test_loot.py`: arquivos = gerador, determinismo, estrutura das tabelas,
+  condições dos mods opcionais, loot modifiers, IDs nos catálogos, chance de cada item = configuração, estouro de container de 9 espaços < 1 em 100.000).
+- Para medir chance por item, use `python3 -I tools/sample_items.py <tema/tier> [N] [filtro] [--json saida.json]` (contagem exata por item; caixas de
+  munição por nível `#L0/#L1/#L2`; o `sample_loot.py` só serve para arma/munição). O RCON de todos os scripts fica em `tools/rconlib.py` (junta respostas
+  longas, que o Minecraft divide em pedaços de 4.096 bytes).
 - Servidor de teste: copiar para `run/mods/` os jars de `../AbandonedModernCity/libs` (TACZ, First Aid, LesRaisins) e o
   jar do AMC; `run/server.properties` com RCON (porta 25575, senha `teste`); `./gradlew runServer` (mesmas opções);
   `python3 -I tools/rcon.py "setblock 0 100 0 minecraft:chest" "loot insert 0 100 0 loot <tabela>" "data get block 0 100 0 Items"`;

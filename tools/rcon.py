@@ -1,28 +1,19 @@
 #!/usr/bin/env python3
-"""Cliente RCON mínimo para testar o servidor de desenvolvimento.
-Uso: python3 -I tools/rcon.py "comando 1" "comando 2" ...   (imprime a resposta de cada um)"""
-import socket, struct, sys
+"""Envia comandos ao servidor de teste por RCON e imprime a resposta de cada um.
+Uso: python3 -I tools/rcon.py "comando 1" "comando 2" ..."""
+import os
+import sys
 
-def pkt(sock, kind, body, rid=1):
-    data = struct.pack("<ii", rid, kind) + body.encode() + b"\x00\x00"
-    sock.sendall(struct.pack("<i", len(data)) + data)
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))   # com -I a pasta do script não entra no sys.path sozinha
+from rconlib import Rcon
 
-def read(sock):
-    n = struct.unpack("<i", sock.recv(4))[0]
-    buf = b""
-    while len(buf) < n:
-        buf += sock.recv(n - len(buf))
-    rid, kind = struct.unpack("<ii", buf[:8])
-    return rid, buf[8:-2].decode(errors="replace")
 
 def main():
-    s = socket.create_connection(("127.0.0.1", 25575), timeout=60)
-    pkt(s, 3, "teste")
-    if read(s)[0] == -1:
-        sys.exit("RCON: senha recusada")
+    r = Rcon(timeout=60)
     for cmd in sys.argv[1:]:
-        pkt(s, 2, cmd, 2)
         print(">", cmd)
-        print(read(s)[1])
+        print(r.cmd(cmd))
+    r.close()
+
 
 main()

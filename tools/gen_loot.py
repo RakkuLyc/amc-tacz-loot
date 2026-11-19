@@ -2,8 +2,9 @@
 """Gerador das loot tables do AMC TACZ Loot.
 
   python3 -I tools/gen_loot.py            -> só imprime a PRÉVIA (esperados por estrutura, Sorte 0 a 3); não escreve nada
-  python3 -I tools/gen_loot.py --write    -> apaga e reescreve src/main/resources/data/amctaczloot e o
-                                             global_loot_modifiers.json (o gerador é dono desses arquivos)
+  python3 -I tools/gen_loot.py --write    -> apaga e reescreve src/main/resources/data/amctaczloot,
+                                             src/main/resources/data/abandonedmoderncity e o global_loot_modifiers.json
+                                             (o gerador é dono desses arquivos)
 
 Dados de entrada (gerados por tools/tacz_catalog.py, tools/lr_catalog.py, tools/measure_containers.py):
   docs/tacz_catalog.json  docs/lr_catalog.json  docs/containers.json
@@ -12,10 +13,11 @@ Como a Sorte entra (confirmado no bytecode do Minecraft 1.21.1):
   peso efetivo de uma entrada = floor(weight + quality * Sorte)   (nunca menos que 0)
   rolagens de um pool         = rolls + floor(bonus_rolls * Sorte)
 Por isso: `quality` é a alavanca que responde já na Sorte I; `bonus_rolls` abaixo de 1 só age de Sorte II/III em diante.
-Sucata: o mod também SOBRESCREVE as 42 tabelas do AMC (data/abandonedmoderncity/loot_table/chests/...) só com sucata,
+Sucata: o mod também SOBRESCREVE as 36 tabelas do AMC (6 temas x chest/barrel/pot x normal/_hard) (data/abandonedmoderncity/loot_table/chests/...) só com sucata,
 para não restar item vanilla útil; o mod carrega DEPOIS do AMC (mods.toml, ordering AFTER).
 Vasos (pot) ficam de fora dos prêmios: o Minecraft chama unpackLootTable(null) neles (sem Sorte) e, se a tabela gera mais itens
-que espaços, o container fica VAZIO ("Tried to over-fill a container"); um vaso tem 1 espaço.
+que espaços, preenche até acabar o espaço e PERDE o resto, escolhido ao acaso (LootTable.fill: "Tried to over-fill a container");
+um vaso tem 1 espaço, então o item do mod competiria com o do AMC.
 """
 import json, math, os, re, shutil, sys
 
@@ -179,7 +181,7 @@ TOOLS = dict(iron_pickaxe=dict(p=10, dur=(0.40, 0.65), themes=("workshop",)), fl
 # Multiplicador por tema e tipo de item (pedido do usuário, 16 Nov 2026): na delegacia as chances dos THROWABLE (M67, RGN e C4) dobram. As armas brancas
 # ficam iguais em todos os temas (as casas já as têm, como todos os temas menos a farmácia).
 GEAR_THEME_MULT = {"police_station": {"throwable": 2.0}}
-# SUCATA: o mod sobrescreve as 42 tabelas do AMC (mesmos caminhos) para que NÃO reste nenhum item vanilla útil nos containers.
+# SUCATA: o mod sobrescreve as 36 tabelas do AMC (mesmos caminhos) para que NÃO reste nenhum item vanilla útil nos containers.
 # Só entra aqui o que tem pouca ou nenhuma utilidade: nome -> (peso, mín, máx). A mesma lista em todos os temas.
 JUNK = dict(stick=(12, 1, 6), wheat_seeds=(10, 1, 4), beetroot_seeds=(8, 1, 4), melon_seeds=(8, 1, 4),
             pumpkin_seeds=(8, 1, 4), rotten_flesh=(10, 1, 3), bone=(8, 1, 3), paper=(8, 1, 4), bowl=(6, 1, 2),
@@ -398,8 +400,9 @@ def family_chances(fam, theme, tier):
 def family_pool(fam, i, p):
     """Sorteio independente de UM item (chance p em ‰) ou nada; a Sorte sobe pelo quality, como em item_pool."""
     w = max(1, round(p * ITEM_RES)); q = max(1, round(w * LUCK_QUALITY))
-    return pool([{**e_family_item(fam, i), "weight": w, "quality": q},
-                 {"type": "minecraft:empty", "weight": 1000 * ITEM_RES - w, "quality": -q}])
+    ents = [{**e_family_item(fam, i), "weight": w, "quality": q}]
+    if w < 1000 * ITEM_RES: ents.append({"type": "minecraft:empty", "weight": 1000 * ITEM_RES - w, "quality": -q})   # chance 100%: sem empty
+    return pool(ents)
 
 
 def e_item(kind, i):
@@ -561,12 +564,13 @@ def preview():
 
 
 # ---------------------------------------------------------------- escrita + verificações
-def write():
-    base = os.path.join(OUT, MOD)
-    amc_dir = os.path.join(OUT, AMC)
+def write(out=OUT):
+    """Grava todas as tabelas e loot modifiers em `out` (padrão: src/main/resources/data) e roda check()."""
+    base = os.path.join(out, MOD)
+    amc_dir = os.path.join(out, AMC)
     for d in (base, amc_dir):
         if os.path.isdir(d): shutil.rmtree(d)
-    gl = os.path.join(OUT, "neoforge/loot_modifiers/global_loot_modifiers.json")
+    gl = os.path.join(out, "neoforge/loot_modifiers/global_loot_modifiers.json")
     def w(path, obj):
         os.makedirs(os.path.dirname(path), exist_ok=True)
         open(path, "w", encoding="utf-8").write(json.dumps(obj, indent=2, ensure_ascii=False) + "\n")
@@ -616,7 +620,7 @@ def check(base, gl, tables, glms, junk):
         for name in re.findall(r'"name": "(minecraft:[a-z_0-9]+)"', json.dumps(t)):
             if name not in allowed: errs.append("item vanilla fora da sucata em %s: %s" % (n, name))
     expect = {"%s/%s" % (th, ti) for th in RATES for ti in ("chest", "chest_hard", "barrel", "barrel_hard", "pot", "pot_hard")}
-    if set(junk) != expect: errs.append("tabelas do AMC sobrescritas != as 42 do AMC")
+    if set(junk) != expect: errs.append("tabelas do AMC sobrescritas != as 36 do AMC")
     for g, v in TZ["guns"].items():
         if v["ammo"].split(":")[1] not in TZ["ammo"]: errs.append("munição da arma %s fora do catálogo" % g)
     if errs:
