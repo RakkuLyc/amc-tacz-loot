@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Leitor de JSON tolerante (comentários // e /* */, vírgula sobrando), como o dos mods."""
+"""Lenient JSON reader (// and /* */ comments, trailing commas), like the one the mods use."""
 import json, re
 
 
 def jsonc(text):
-    """JSON tolerante, como o do TACZ: comentários // e /* */ e vírgula sobrando (respeita strings)."""
+    """Lenient JSON, like TACZ's: // and /* */ comments and trailing commas (strings are respected)."""
     out, i, n, instr = [], 0, len(text), False
     while i < n:
         c = text[i]

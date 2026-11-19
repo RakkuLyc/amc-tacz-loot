@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
-"""Amostra uma tabela do AMC no servidor de teste (RCON, Sorte 0: o /loot do console não aplica Sorte) e mostra, por item,
-em quantos containers ele apareceu (contagem exata e %) e as unidades por container.
+"""Samples an AMC table on the test server (RCON, Luck 0: the console /loot does not apply Luck) and shows, per item,
+in how many containers it appeared (exact count and %) and the units per container.
 
-Uso: python3 -I tools/sample_items.py <tabela, ex.: building/chest> [N] [filtro] [--json saida.json] [--x X]
-  filtro      mostra só as chaves que contêm este texto
-  --json      grava as contagens brutas (para comparar amostras depois)
-  --x X       coordenada X do baú de teste (padrão 0)
+Usage: python3 -I tools/sample_items.py <table, e.g. building/chest> [N] [filter] [--json out.json] [--x X]
+  filter      only show the keys that contain this text
+  --json      write the raw counts (to compare samples later)
+  --x X       X coordinate of the test chest (default 0)
 
-Chave de cada item: o ID interno do TACZ/LesRaisins quando existe (GunId, AmmoId, ...), senão o id do item; a caixa de
-munição do TACZ ganha o nível (tacz:ammo_box#L0 ferro, #L1 ouro, #L2 diamante). Para armas, conta também o texto cru de
-GunCurrentAmmoCount: o TACZ só lê o pente se o número for INTEIRO ("9"); "9b" seria byte (o bug da versão 1.0.0).
+Key of each item: the TACZ/LesRaisins internal ID when there is one (GunId, AmmoId, ...), otherwise the item id; the
+TACZ ammo box gets its level (tacz:ammo_box#L0 iron, #L1 gold, #L2 diamond). For guns it also counts the raw text of
+GunCurrentAmmoCount: TACZ only reads the magazine if the number is an INTEGER ("9"); "9b" would be a byte (the 1.0.0 bug).
 """
 import argparse
 import collections
@@ -19,14 +19,14 @@ import re
 import sys
 import time
 
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))   # com -I a pasta do script não entra no sys.path sozinha
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))   # with -I the script folder is not on sys.path by itself
 from rconlib import Rcon
 
 CUSTOM_ID = re.compile(r'(?:ConsumableId|ThrowableId|MeleeWeaponId|AmmoId|GunId|AttachmentId): "([a-z_:0-9]+)"')
 
 
 def split_items(txt):
-    """Divide a resposta `... [{...}, {...}]` nos itens do nível de topo (conta chaves, respeita textos entre aspas)."""
+    """Splits the reply `... [{...}, {...}]` into the top-level items (counts braces, respects quoted text)."""
     start_list = txt.find("[")
     if start_list < 0:
         return []
@@ -54,7 +54,7 @@ def split_items(txt):
 
 
 def item_key(item):
-    """(chave, unidades) de um item da resposta do `data get`."""
+    """(key, units, item id) of one item from the `data get` reply."""
     count = int(re.match(r"\{count: (\d+)", item).group(1))
     iid = re.search(r'id: "([a-z_:0-9]+)"\}$', item).group(1)
     m = CUSTOM_ID.search(item)
@@ -82,7 +82,7 @@ def main():
         resp = r.cmd("loot insert %s loot abandonedmoderncity:chests/%s" % (pos, a.table))
         if "dropped" not in resp.lower():
             errors += 1
-            if errors <= 3: print("resposta inesperada:", resp)
+            if errors <= 3: print("unexpected reply:", resp)
         per = collections.Counter()
         for item in split_items(r.cmd("data get block %s Items" % pos)):
             key, n, iid = item_key(item)
@@ -95,10 +95,10 @@ def main():
             umin[key] = min(umin.get(key, n), n); umax[key] = max(umax.get(key, n), n)
     r.close()
     dt = time.time() - t0
-    print("%s  N=%d  %.0f s  erros %d" % (a.table, a.n, dt, errors))
+    print("%s  N=%d  %.0f s  errors %d" % (a.table, a.n, dt, errors))
     for k in sorted(have, key=lambda k: -have[k]):
         if a.filter in k:
-            print("%-34s em %6d containers (%7.3f%%) | unidades por container %.1f (mín %d, máx %d)"
+            print("%-34s in %6d containers (%7.3f%%) | units per container %.1f (min %d, max %d)"
                   % (k, have[k], 100 * have[k] / a.n, units[k] / have[k], umin[k], umax[k]))
     if a.json:
         out = dict(table=a.table, N=a.n, seconds=round(dt, 1), errors=errors,

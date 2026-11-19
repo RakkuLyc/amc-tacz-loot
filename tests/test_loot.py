@@ -1,22 +1,21 @@
 #!/usr/bin/env python3
-"""Testes automáticos das tabelas de loot (sem servidor e sem dependências: só a biblioteca padrão do Python).
+"""Automated tests of the loot tables (no server and no dependencies: only the Python standard library).
 
-Rodar na raiz do projeto:  python3 -m unittest -v
+Run from the project root:  python3 -m unittest -v
 
-O que é conferido:
-- os arquivos em src/main/resources/data são exatamente o que o gerador produz agora (nada editado à mão, nada
-  esquecido)
-  e duas gerações seguidas são idênticas (determinismo);
-- estrutura de toda tabela: pesos inteiros > 0, sinais do `quality` (Sorte) e soma zero nos pools com `empty`;
-- condição `neoforge:mod_loaded` em toda tabela e loot modifier com item de mod opcional;
-- loot modifiers listados, existentes e apontando só para as 36 tabelas do AMC;
-- IDs internos (GunId, AmmoId, ...) existem nos catálogos; nenhum item vanilla fora da sucata e das exceções;
-  nenhum vaso; as 36 tabelas do AMC sobrescritas;
-- a chance de cada item no disco é a da configuração do gerador;
-- risco de estourar um container de 9 espaços (dispenser/dropper recebem a tabela `barrel`) abaixo de 1 em 100.000.
+What is checked:
+- the files in src/main/resources/data are exactly what the generator produces now (nothing edited by hand, nothing
+  forgotten) and two generations in a row are identical (determinism);
+- structure of every table: integer weights > 0, signs of `quality` (Luck) and zero sum in the pools with `empty`;
+- the `neoforge:mod_loaded` condition on every table and loot modifier with an item from an optional mod;
+- loot modifiers listed, present and pointing only at the 36 AMC tables;
+- internal IDs (GunId, AmmoId, ...) exist in the catalogs; no vanilla item outside the junk and the exceptions;
+  no decorated pot tables; all 36 AMC tables overridden;
+- the chance of each item on disk is the one in the generator's configuration;
+- the risk of overflowing a 9-slot container (dispensers/droppers get the `barrel` table) is below 1 in 100,000.
 
-Limite: os testes que comparam com a configuração importam o próprio gen_loot; numa refatoração do gerador a prova de
-"nada mudou" é o hash dos arquivos gerados contra um baseline, não estes testes.
+Limit: the tests that compare with the configuration import gen_loot itself; when refactoring the generator, the proof
+that "nothing changed" is the hash of the generated files against a baseline, not these tests.
 """
 import contextlib
 import filecmp
@@ -35,8 +34,8 @@ import gen_loot as G  # noqa: E402
 
 DATA = os.path.join(ROOT, "src/main/resources/data")
 OPTIONAL_MODS = ("firstaid", "sophisticatedbackpacks", "flashlight")
-# Pilha máxima dos itens que podem passar dela num sorteio (conferido nos jars: index/throwable/*.json da LesRaisins;
-# First Aid stacksTo(16)). Usado só na conta de estouro de container.
+# Max stack of the items whose drawn amount can exceed it (checked in the jars: LesRaisins index/throwable/*.json;
+# First Aid stacksTo(16)). Only used by the container overflow math.
 THROWABLE_STACK = {"m67": 3, "rgn": 3, "c4": 1}
 FIRSTAID_STACK = 16
 
@@ -63,14 +62,14 @@ AMC_IDS = {"%s:chests/%s/%s" % (G.AMC, th, ti) for th in G.RATES
 
 class Generated(unittest.TestCase):
     def test_disk_equals_generator_and_deterministic(self):
-        """O que está no repositório = o que o gerador produz; duas gerações seguidas são iguais."""
+        """What is in the repository = what the generator produces; two generations in a row are equal."""
         with tempfile.TemporaryDirectory() as a, tempfile.TemporaryDirectory() as b:
             for d in (a, b):
                 with contextlib.redirect_stdout(io.StringIO()):
-                    G.write(d)                      # write() roda check() e encerra com erro se algo estiver errado
+                    G.write(d)                      # write() runs check() and exits with an error if anything is wrong
             for d in (a, b):
                 cmp = filecmp.dircmp(d, DATA)
-                self.assertEqual(self._diff(cmp), [], "arquivos diferentes do repositório (rode gen_loot.py --write)")
+                self.assertEqual(self._diff(cmp), [], "files differ from the repository (run gen_loot.py --write)")
 
     def _diff(self, cmp):
         out = cmp.left_only + cmp.right_only + cmp.diff_files + cmp.funny_files
@@ -93,12 +92,12 @@ class Structure(unittest.TestCase):
                     self.assertTrue(isinstance(w, int) and w > 0, "%s: peso inválido %r" % (where, w))
                     q = e.get("quality", 0)
                     if e["type"] == "minecraft:empty":
-                        self.assertLessEqual(q, 0, where + ": empty com quality positivo")
+                        self.assertLessEqual(q, 0, where + ": empty with a positive quality")
                     else:
-                        self.assertGreaterEqual(q, 0, where + ": item com quality negativo")
+                        self.assertGreaterEqual(q, 0, where + ": item with a negative quality")
                 if any(e["type"] == "minecraft:empty" for e in p["entries"]):
                     self.assertEqual(sum(e.get("quality", 0) for e in p["entries"]), 0,
-                                     where + ": soma dos quality != 0")
+                                     where + ": sum of the qualities != 0")
 
     def test_optional_mods_have_condition(self):
         for name, t in TABLES.items():
@@ -106,22 +105,22 @@ class Structure(unittest.TestCase):
             mods = {c.get("modid") for c in t.get("neoforge:conditions", [])}
             for m in OPTIONAL_MODS:
                 if '"%s:' % m in s:
-                    self.assertIn(m, mods, "%s: item de %s sem condição mod_loaded" % (name, m))
+                    self.assertIn(m, mods, "%s: item from %s without the mod_loaded condition" % (name, m))
 
     def test_loot_modifiers(self):
         gl = load(os.path.join(DATA, "neoforge/loot_modifiers/global_loot_modifiers.json"))
         self.assertIs(gl["replace"], False)
         folder = os.path.join(DATA, G.MOD, "loot_modifiers")
         files = {f[:-5] for f in os.listdir(folder)}
-        self.assertEqual(set(e.split(":")[1] for e in gl["entries"]), files, "lista != arquivos de loot modifier")
+        self.assertEqual(set(e.split(":")[1] for e in gl["entries"]), files, "list != loot modifier files")
         for f in files:
             g = load(os.path.join(folder, f + ".json"))
-            self.assertIn(g["conditions"][0]["loot_table_id"], AMC_IDS, f + ": alvo fora das tabelas do AMC")
+            self.assertIn(g["conditions"][0]["loot_table_id"], AMC_IDS, f + ": target outside the AMC tables")
             ns, path = g["table"].split(":")
             t = TABLES.get(os.path.join(ns, "loot_table", path + ".json"))
-            self.assertIsNotNone(t, f + ": tabela inexistente")
+            self.assertIsNotNone(t, f + ": missing table")
             self.assertEqual({c["modid"] for c in g.get("neoforge:conditions", [])},
-                             {c["modid"] for c in t.get("neoforge:conditions", [])}, f + ": condição != da tabela")
+                             {c["modid"] for c in t.get("neoforge:conditions", [])}, f + ": condition != the table's")
 
     def test_ids_exist_in_catalogs(self):
         lr = load(os.path.join(ROOT, "docs/lr_catalog.json"))
@@ -134,13 +133,13 @@ class Structure(unittest.TestCase):
         for name, t in TABLES.items():
             for kind, iid in re.findall(pattern, json.dumps(t)):
                 found += 1
-                self.assertIn(iid, known[kind], "%s: %s=%s fora do catálogo" % (name, kind, iid))
-        self.assertGreater(found, 400, "a busca de IDs internos não encontrou quase nada: expressão quebrada?")
+                self.assertIn(iid, known[kind], "%s: %s=%s missing from the catalog" % (name, kind, iid))
+        self.assertGreater(found, 400, "the internal ID search found almost nothing: broken pattern?")
 
     def test_all_36_amc_tables_overridden(self):
-        """As 36 tabelas do AMC (6 temas x 6 tiers, lista fixa aqui) existem como sucata.
+        """The 36 AMC tables (6 themes x 6 tiers, fixed list here) exist as junk.
 
-        Sem uma delas o loot vanilla do AMC voltaria."""
+        Without one of them the AMC's vanilla loot would come back."""
         themes = ("building", "police_station", "pharmacy", "house", "workshop", "gas_station")
         tiers = ("chest", "chest_hard", "barrel", "barrel_hard", "pot", "pot_hard")
         want = {os.path.join(G.AMC, "loot_table/chests", th, ti + ".json") for th in themes for ti in tiers}
@@ -151,14 +150,14 @@ class Structure(unittest.TestCase):
         allowed = {"minecraft:" + i for i in list(G.JUNK) + list(G.TOOLS)} | {"minecraft:bread"}
         for name, t in TABLES.items():
             if name.startswith(G.MOD + "/"):
-                self.assertNotRegex(name, r"/pot(_hard)?_", "tabela de vaso no namespace do mod")
+                self.assertNotRegex(name, r"/pot(_hard)?_", "decorated pot table in the mod namespace")
             for item in re.findall(r'"name": "(minecraft:[a-z_0-9]+)"', json.dumps(t)):
-                self.assertIn(item, allowed, "%s: item vanilla fora da sucata" % name)
+                self.assertIn(item, allowed, "%s: vanilla item outside the junk" % name)
 
 
 class Chances(unittest.TestCase):
     def test_each_item_chance_equals_config(self):
-        """Chance de cada sorteio no disco (Sorte 0) = configuração do gerador, em todos os temas e tiers."""
+        """Chance of each draw on disk (Luck 0) = the generator's configuration, in every theme and tier."""
         for th in G.RATES:
             for ti in G.TIERS:
                 want = {i: p / 1000 for _, i, p in G.item_chances(th, ti)}
@@ -177,8 +176,8 @@ class Chances(unittest.TestCase):
                             elif e["type"] == "minecraft:item":
                                 got[self._item_name(e)] = e["weight"] / tot
                 where = "%s/%s" % (th, ti)
-                self.assertEqual(set(got), set(want), where + ": itens no disco != configuração")
-                self.assertEqual(set(got_core), set(core), where + ": categorias no disco != configuração")
+                self.assertEqual(set(got), set(want), where + ": items on disk != configuration")
+                self.assertEqual(set(got_core), set(core), where + ": categories on disk != configuration")
                 for k in want:
                     self.assertAlmostEqual(got[k], want[k], delta=max(0.5e-5, 0.005 * want[k]),
                                            msg="%s %s" % (where, k))
@@ -198,9 +197,9 @@ class Chances(unittest.TestCase):
 
 
 class Overflow(unittest.TestCase):
-    """Nº de pilhas por container (distribuição exata, Sorte 0).
+    """Number of stacks per container (exact distribution, Luck 0).
 
-    Soma core + First Aid + mochilas + lanternas + sucata do AMC."""
+    Adds core + First Aid + backpacks + flashlights + AMC junk."""
     LIMIT = 1e-5
 
     def test_nine_slot_containers(self):
@@ -211,7 +210,7 @@ class Overflow(unittest.TestCase):
                     t = TABLES.get(os.path.join(G.MOD, "loot_table", th, "%s_%s.json" % (ti, kind)))
                     if t:
                         d = self._conv(d, self._dist(t))
-                self.assertLess(sum(d[10:]), self.LIMIT, "%s/%s: chance de mais de 9 pilhas" % (th, ti))
+                self.assertLess(sum(d[10:]), self.LIMIT, "%s/%s: chance of more than 9 stacks" % (th, ti))
 
     @staticmethod
     def _conv(a, b):
@@ -226,7 +225,7 @@ class Overflow(unittest.TestCase):
             return THROWABLE_STACK[re.search(r'"ThrowableId": "lrtactical:([a-z_0-9]+)"', json.dumps(e)).group(1)]
         if e["name"].startswith("firstaid:"):
             return FIRSTAID_STACK
-        return 64        # munição sai sempre dentro da pilha do calibre; os demais itens têm pilha >= o máximo sorteado
+        return 64        # ammo always fits the caliber's stack; the other items have a stack >= the max drawn
 
     def _entry(self, e):
         if e["type"] == "minecraft:empty":

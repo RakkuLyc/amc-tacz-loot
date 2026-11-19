@@ -1,17 +1,17 @@
 #!/usr/bin/env python3
-"""Mede quantos containers de cada tipo cada estrutura do AMC tem (-> docs/containers.json).
+"""Counts how many containers of each kind every AMC structure has (-> docs/containers.json).
 
-Com o servidor de teste rodando (RCON 25575): gera cada estrutura do AMC numa célula de 400x400 blocos com
-`/amcs spawn`, salva o mundo e lê os arquivos de região contando os block entities com LootTable, por tema e tipo.
-Uso: python3 -I tools/measure_containers.py <index.txt do AMC> <pasta do mundo (run/world)> [nomes,separados,por,vírgula [deslocamento]]"""
+With the test server running (RCON 25575): spawns each AMC structure in a 400x400-block cell with `/amcs spawn`,
+saves the world and reads the region files, counting the block entities that have a LootTable, by theme and tier.
+Usage: python3 -I tools/measure_containers.py <AMC index.txt> <world folder (run/world)> [comma,separated,names [offset]]"""
 import collections, glob, json, os, struct, sys, zlib
 
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))   # com -I a pasta do script não entra no sys.path sozinha
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))   # with -I the script folder is not on sys.path by itself
 from rconlib import Rcon
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CONTAINERS = os.path.join(ROOT, "docs/containers.json")
-MAX_CHUNK = 64 << 20    # limite da descompressão de um chunk (64 MB; um chunk normal tem poucos MB)
+MAX_CHUNK = 64 << 20    # decompression limit for one chunk (64 MB; a normal chunk has a few MB)
 CATS = ["house", "pharmacy", "workshop", "gas_station", "building", "police_station", "special"]
 
 
@@ -23,13 +23,13 @@ def rcon(cmds):
 
 
 def category(type_):
-    # mesma regra do AMC: Structures.CATEGORIES, por início do tipo ("houses" -> house). Desde 16 Nov 2026 os prédios têm categoria por altura:
-    # "buildings_small" -> building_small (idem medium, large, immense).
+    # same rule as the AMC: Structures.CATEGORIES, by the start of the type ("houses" -> house). Since 16 Nov 2026
+    # buildings have a category by height: "buildings_small" -> building_small (same for medium, large, immense).
     if type_.startswith("buildings_"): return "building_" + type_[len("buildings_"):]
     for k in CATS:
         if type_.startswith(k) or type_.startswith(k + "s"):
             return k
-    raise SystemExit("tipo sem categoria: " + type_)
+    raise SystemExit("type without a category: " + type_)
 
 
 def nbt(b, p, t):
@@ -63,13 +63,13 @@ def nbt(b, p, t):
 def block_entities(world):
     for f in glob.glob(world + "/region/*.mca"):
         b = open(f, "rb").read()
-        if len(b) < 8192: continue  # região vazia (mundo novo)
+        if len(b) < 8192: continue  # empty region (new world)
         for i in range(1024):
             off = struct.unpack(">I", b"\0" + b[i * 4:i * 4 + 3])[0]
             if not off: continue
             pos = off * 4096; ln = struct.unpack(">I", b[pos:pos + 4])[0]
             z = zlib.decompressobj(); data = z.decompress(b[pos + 5:pos + 4 + ln], MAX_CHUNK)
-            if z.unconsumed_tail: sys.exit("%s: chunk maior que %d MB descompactado (arquivo suspeito)" % (f, MAX_CHUNK >> 20))
+            if z.unconsumed_tail: sys.exit("%s: chunk larger than %d MB uncompressed (suspicious file)" % (f, MAX_CHUNK >> 20))
             n = struct.unpack(">H", data[1:3])[0]
             root, _ = nbt(data, 3 + n, 10)
             yield from root.get("block_entities", [])
@@ -85,7 +85,7 @@ def main(index, world, only=None, offset=0):
     for (cat, name), r in zip(names, rcon(cmds)):
         m = re.search(r"box (-?\d+),(-?\d+) \.\. (-?\d+),(-?\d+).*?(\d+) containers with loot", r)
         if not m:
-            print("FALHOU", name, r); continue
+            print("FAILED", name, r); continue
         boxes[name] = tuple(int(g) for g in m.groups())
     rcon(["save-all flush"])
     res = {n: collections.Counter() for n in boxes}
@@ -101,10 +101,10 @@ def main(index, world, only=None, offset=0):
     out = {}
     for n, c in sorted(res.items()):
         total = sum(c.values())
-        ok = "ok" if total == boxes[n][4] else "DIFERENTE do informado (%d)" % boxes[n][4]
+        ok = "ok" if total == boxes[n][4] else "DIFFERENT from the reported count (%d)" % boxes[n][4]
         out[n] = {"theme": theme.get(n), "tiers": dict(sorted(c.items())), "total": total}
         print("%-34s %-14s %4d %s  %s" % (n, theme.get(n), total, dict(sorted(c.items())), ok))
-    if only is not None:  # repetição de algumas estruturas: junta ao resultado anterior
+    if only is not None:  # re-measuring some structures: merge into the previous result
         old = json.load(open(CONTAINERS)); old.update(out); out = dict(sorted(old.items()))
     json.dump(out, open(CONTAINERS, "w"), indent=1)
 

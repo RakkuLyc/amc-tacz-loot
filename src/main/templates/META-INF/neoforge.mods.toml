@@ -1,4 +1,4 @@
-# Mod só de dados: "lowcodefml" é o carregador para mods sem código Java.
+# Data-only mod: "lowcodefml" is the loader for mods without Java code.
 modLoader="lowcodefml"
 loaderVersion="${loader_version_range}"
 license="${mod_license}"
@@ -27,8 +27,8 @@ description='''${mod_description}'''
 [[dependencies.${mod_id}]]
     modId="abandonedmoderncity"
     type="required"
-    versionRange="[1.0.0,)"  # o AMC 1.0.0 tem o tema police_station; builds antigas do 0.1.0 podiam não ter
-    ordering="AFTER"  # carrega depois do AMC: as tabelas deste mod (mesmos caminhos) prevalecem
+    versionRange="[1.0.0,)"  # AMC 1.0.0 has the police_station theme; old 0.1.0 builds might not
+    ordering="AFTER"  # loads after the AMC: this mod's tables (same paths) win
     side="BOTH"
 
 [[dependencies.${mod_id}]]
@@ -45,7 +45,7 @@ description='''${mod_description}'''
     ordering="NONE"
     side="BOTH"
 
-# First Aid é opcional: as entradas dele ficam em arquivos com a condição neoforge:mod_loaded.
+# First Aid is optional: its entries live in files with the neoforge:mod_loaded condition.
 [[dependencies.${mod_id}]]
     modId="firstaid"
     type="optional"
@@ -53,7 +53,8 @@ description='''${mod_description}'''
     ordering="NONE"
     side="BOTH"
 
-# Sophisticated Backpacks e TCT Flashlight (mochilas e lanternas nas casas) também são opcionais: tabelas e loot modifiers com a condição neoforge:mod_loaded.
+# Sophisticated Backpacks and TCT Flashlight (backpacks and flashlights in houses) are optional too: tables and loot
+# modifiers with the neoforge:mod_loaded condition.
 [[dependencies.${mod_id}]]
     modId="sophisticatedbackpacks"
     type="optional"

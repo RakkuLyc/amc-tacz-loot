@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
-"""Extrai do jar da LesRaisins os itens consumíveis (-> docs/lr_catalog.json): cura, fome, pilha, durabilidade.
-Uso: python3 -I tools/lr_catalog.py <lesraisins.jar>"""
+"""Extracts the consumable items from the LesRaisins jar (-> docs/lr_catalog.json): healing, food, stack, durability.
+Usage: python3 -I tools/lr_catalog.py <lesraisins.jar>"""
 import json, sys, zipfile
 import os
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from jsonc import jsonc
 
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))   # raiz do projeto: grava em docs/ de qualquer pasta
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))   # project root: writes into docs/ from any folder
 
 z = zipfile.ZipFile(sys.argv[1]); out = {}
 for n in sorted(z.namelist()):

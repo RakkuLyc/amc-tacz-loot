@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
-"""Extrai do jar do TACZ o catálogo de armas, munições e attachments -> docs/tacz_catalog.json.
-Uso: python3 -I tools/tacz_catalog.py <tacz.jar>"""
+"""Extracts the catalog of guns, ammo and attachments from the TACZ jar -> docs/tacz_catalog.json.
+Usage: python3 -I tools/tacz_catalog.py <tacz.jar>"""
 import json, sys, zipfile, collections
 import os
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from jsonc import jsonc
 
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))   # raiz do projeto: grava em docs/ de qualquer pasta
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))   # project root: writes into docs/ from any folder
 
 def main(jar):
     z = zipfile.ZipFile(jar); names = set(z.namelist())
@@ -21,7 +21,8 @@ def main(jar):
                           "fire_mode": [m.upper() for m in d["fire_mode"]]}
     for a in ids("ammo"): cat["ammo"][a] = {"stack": load(base + "index/ammo/%s.json" % a).get("stack_size")}
     for t in ids("attachments"): cat["attachments"][t] = {"type": load(base + "index/attachments/%s.json" % t)["type"]}
-    # fabricáveis na mesa de armeiro (receita no pacote padrão): critério de "item normal", em vez de adivinhar pelo nome
+    # craftable at the gunsmith table (recipe in the default pack): the criterion for a "normal item", instead of guessing
+    # by the name
     made = set()
     for n in names:
         if "/data/tacz/recipe/" in n and n.endswith(".json"):
@@ -35,9 +36,9 @@ def main(jar):
         for i, v in cat[k].items(): v["craftable"] = (kind, "tacz:" + i) in made
     json.dump(cat, open(os.path.join(ROOT, "docs/tacz_catalog.json"), "w"), indent=1)
     g = cat["guns"]
-    for k in cat: print(k, "fabricáveis:", sum(v["craftable"] for v in cat[k].values()), "de", len(cat[k]))
-    print("armas", len(g), "| sem munição:", [k for k, v in g.items() if not v["ammo"]])
-    print("modos de tiro:", dict(collections.Counter(m for v in g.values() for m in v["fire_mode"])))
+    for k in cat: print(k, "craftable:", sum(v["craftable"] for v in cat[k].values()), "of", len(cat[k]))
+    print("guns", len(g), "| without ammo:", [k for k, v in g.items() if not v["ammo"]])
+    print("fire modes:", dict(collections.Counter(m for v in g.values() for m in v["fire_mode"])))
     print("ak47/m4a1/qr_24/urgi:", {k: (g[k]["ammo"], g[k]["fire_mode"]) for k in ("ak47", "m4a1", "qr_24", "urgi")})
 
 main(sys.argv[1])

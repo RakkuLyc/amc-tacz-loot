@@ -20,7 +20,7 @@ neoForge {
     version = project.neo_version
 
     runs {
-        // Servidor de teste: ./gradlew runServer  (jars dos outros mods em run/mods)
+        // Test server: ./gradlew runServer  (jars of the other mods in run/mods)
         server {
             server()
             programArgument '--nogui'
@@ -37,7 +37,7 @@ neoForge {
     }
 }
 
-// Mod só de dados: não há código Java, o jar contém apenas data/ e META-INF/neoforge.mods.toml.
+// Data-only mod: there is no Java code; the jar holds only data/ and META-INF/neoforge.mods.toml.
 var generateModMetadata = tasks.register("generateModMetadata", ProcessResources) {
     var replaceProperties = [
             minecraft_version      : minecraft_version,
