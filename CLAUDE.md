@@ -1,453 +1,100 @@
-# AMC TACZ Loot — regras de trabalho (obrigatórias)
+# AMC TACZ Loot — working rules and current state
 
-Seguem as regras do projeto Abandoned Modern City, por escolha do usuário (13 Nov 2026):
-1. **Perguntar ao longo do caminho**: decisões de design, números e estilo são do usuário; com mais de uma solução, apresentar opções.
-2. **Gerar o `.jar` a cada mudança pequena/média** (`./gradlew build` → `build/libs/`) e dizer o que mudou nele.
-3. **GitHub** (`gh`): commits frequentes e claros; atualizar o repositório a cada jar testável.
-4. **Iterativo**: etapas pequenas e testáveis; ao fim de cada uma, resumo + próximo passo recomendado.
-5. **Não passar à próxima etapa antes de o usuário testar e aprovar a atual.**
-6. **Documentação sempre atualizada** (este arquivo, `README.md`) no mesmo commit da mudança.
+## Working rules (mandatory; chosen by the user on 13 Nov 2026, same as the Abandoned Modern City project)
+1. **Ask along the way**: design decisions, numbers and style belong to the user; when there is more than one solution,
+   present options.
+2. **Build the `.jar` after every small/medium change** (`./gradlew build` → `build/libs/`) and say what changed in it.
+3. **GitHub** (`gh`): frequent, clear commits; update the repository with every testable jar (push only when the user
+   asks).
+4. **Iterative**: small, testable steps; at the end of each one, a summary + the recommended next step.
+5. **Do not move to the next step before the user tests and approves the current one.**
+6. **Documentation always up to date** (this file, `README.md`) in the same commit as the change.
+The user is not a programmer: explain in plain language. The user's own global rules (`~/.claude/CLAUDE.md`) also apply.
 
-## O que é
-Mod **só de dados** (NeoForge 1.21.1, `modLoader="lowcodefml"`, sem Java) que injeta loot nas tabelas do AMC
-(`abandonedmoderncity:chests/<tema>/<chest|barrel|pot>[_hard]`): armas, munições e attachments do TACZ, itens de cura do
-First Aid e da LesRaisins. Mod id `amctaczloot`. Recomeçado do zero em 13 Nov 2026 (a versão anterior foi apagada).
+## What it is
+A **data-only** mod (NeoForge 1.21.1, `modLoader="lowcodefml"`, no Java), mod id `amctaczloot`, that adds loot to the
+Abandoned Modern City (AMC) container tables (`abandonedmoderncity:chests/<theme>/<chest|barrel|pot>[_hard]`): TACZ
+guns, ammo, attachments and ammo boxes; LesRaisins healing, grenades, C4 and melee weapons; optional items from First
+Aid, Sophisticated Backpacks and TCT Flashlight. It also **overrides the 36 AMC tables with junk only**, so no useful
+vanilla item is left. Themes: building, police_station, pharmacy, house, workshop, gas_station. Decorated pots get
+nothing from the mod. The history of every decision (13 to 18 Nov 2026) is in `docs/HISTORY.md`.
 
-## ESTADO ATUAL (versão 1.0.1; **17 Nov 2026: etapa de armas por nível, delegacia 2x, attachments e munição por nível testada e aprovada pelo usuário** — "Testado e aprovado, pode fechar essa etapa"; push em `d5b5945`) — o que está valendo; as seções abaixo desta são HISTÓRICO e podem citar números já substituídos
-- **Armas** (17 Nov 2026, reformulado; chance por baú comum / difícil, Sorte 0): **prédio 16,8% / 28,1% (1 a cada 5,95 / 3,6 baús), barris 0,6% / 1,0%** (antes 12% / 20% / 0,4% / 0,7%);
-  **delegacia: 2x o prédio (17 Nov 2026) = 33,6% / 56,2% (1 a cada 3 / 1,8), barris 1,2% / 2,0%**, com a mesma divisão por categoria e nível do prédio (perfil "police" removido). **7 categorias** (o DMR do TACZ conta como **fuzil**, 26 armas) e **5 níveis fixos** (Comum, Incomum, Raro, Épico, Lendário):
-  `GUN_CAT_ONE_IN` (prédio, "1 a cada N baús": pistola 25, smg 29, fuzil 42, escopeta 42, metralhadora 65, sniper 60, explosiva 70; a soma é 16,84%), `GUN_LEVELS` (arma -> nível, do arquivo
-  do usuário "Reformular o sistema de classificação de raridade de armas"; **escolhas minhas aprovadas**: golden deagle = Épico, springfield1873 = Incomum), `LEVEL_W` por ARMA (16/8/4/2/1: cada nível metade do anterior;
-  "Opção A"). Armas sem nível quebram `gun_weights` (assert). Delegacia: ver a seção "Delegacia 2x" no fim (a primeira versão, que mantinha a divisão antiga da delegacia, foi substituída no mesmo dia).
-  Arma cai **com 50% do pente cheio** (`GunCurrentAmmoCount` = ammo_amount x 0,5 arredondado para cima: 17 -> 9, pente de 1 -> 1; `HasBulletInBarrel` = false), **exceto a minigun** (sem pente definido, nasce com 0).
-- **Attachments** (REDEFINIDOS em 17 Nov 2026, "Opção B, 16/8/4/2/1, incluir todos, os 4 que não estão nos meus arquivos de fora"): chance de QUALQUER attachment por container = **1,2 x a chance de arma** (`ATT_FRACTION_OF_GUN`;
-  "em torno de 20% mais comuns que armas"): prédio baú 20,2%, difícil 33,7%, barris 0,7% / 1,2%; delegacia (= 2x o prédio) 40,3% / 67,4% / 1,4% / 2,4%. Arma e attachment são **pools independentes** (`CORE_POOLS`): no baú difícil da
-  delegacia a soma passa de 100%. Qual sai: peso por NÍVEL de cada um dos **109 attachments** da classificação do usuário (cor do concreto SOBRE o baú nas estruturas `.nbt` dele; `docs/attachments_rarity.json`, gerado por
-  `tools/att_from_nbt.py <pasta structures>`): Comum 22 itens (cinza-claro, peso 16), Incomum 3 (lima, 8), Raro 14 (azul-claro, 4), Épico 12 (magenta, 2), Lendário 5 (amarelo, 1), **Mítico** 1 (laranja, 0,5: só `ammo_mod_he`),
-  **Sem raridade** 52 (baú sem concreto: empunhaduras, lasers, bocas de cano, coronhas; peso do Incomum, 8). Itens por família: miras 40 (com nível), pente estendido 17 (sem Incomum; Lendários = ammo_mod_i/hp/slug/fmj), e as 4 famílias sem nível.
-  Incluídos os 9 listados que o TACZ não deixa fabricar (4 `oem_stock_*`, `stock_psg`, 4 miras `sight_*_rifle`). **De fora** (fabricáveis, não estão nos arquivos dele): `ammo_mod_overpressure_recoil`, `stock_heavy_spas_12`, `stock_moe`,
-  `stock_tactical_spas_12`. Chance de cada item por baú de prédio: Comum 0,368%, Incomum/sem raridade 0,184%, Raro 0,092%, Épico 0,046%, Lendário 0,023%, Mítico 0,012% (delegacia: o dobro).
-- **Barris** (16 Nov): nos tiers `barrel` e `barrel_hard` a chance de **cura LesRaisins, First Aid, comida (leite e pão) e granadas/armas brancas é METADE da do baú**, em todos os temas
-  (inclusive farmácia). Armas, munição e attachments têm redução própria nos barris (RATES: 3% a 25% da do baú). Sucata no barril: 30% com 1–2 pilhas. `BARREL_ITEM_MULT = 0.5`.
-- **Munição** (pool próprio; 17 Nov 2026): **delegacia = mesmas chances do prédio**: baú 52%, difícil 86,6%, barris 6,2% / 11,4% (antes da delegacia: 80 / 100 / 20 / 36%). Oficina inalterada (4 / 7 / 1,5 / 3%), mas usa a mesma mistura de calibres.
-  **Calibre por NÍVEL** (usuário, `tacz_ammo.nbt` -> `docs/ammo_rarity.json`, via `tools/att_from_nbt.py`; `AMMO_LEVEL_W` 16/8/4/2/1 por calibre): Comum 9mm, .45 ACP, .22 WMR, 4.6x30; Incomum 7.62x39, 5.56, 7.92x57, 12g;
-  Raro 5.7x28, 5.8x42, 5.45, 7.62x54, .338, .45-70, .357; Épico .300 BLK, .308, .500, .30-06, .50 AE, 40mm, foguete RPG; Lendário .50 BMG (**peso 1,35, pilha 21-30**, ajuste de 17 Nov). Fatia das pilhas: Comum 11,5% cada, Incomum 5,8%, Raro 2,9%, Épico 1,4%, Lendário 0,97%.
-  Chance por baú de prédio de >= 1 pilha: Comum 11,1%, Incomum 5,8%, Raro 2,9%, Épico 1,5%, .50 BMG 1,0% (1 a cada 100; era 0,74% / 1 a cada 134). 1 a 3 pilhas, tamanho cheio (9mm 24-50). Balas por acerto ~65,6.
-  **Cada acerto de munição dá 1 a 3 pilhas de calibres sorteados** (o mesmo calibre pode repetir), com balas por pilha proporcionais à pilha máxima, **no
-  tamanho original** (9mm 24–50 com pilha 60; 12g 14–30; .308 19–40; 22wmr 26–53; 40mm e foguete 2–5). `AMMO_STACKS = (1, 3)`, `AMMO_SIZE = 1.0`.
-  **Total de balas por baú de prédio ~31 (dobro da versão de 1 pilha); delegacia ~48.**
-- **Cura LesRaisins** (chance de CADA item por container, independente; mesma em todos os temas exceto farmácia; "raridade dobrada" em 16 Nov = chances x0,5): Comuns vaseline,
-  ibuprofen, amoxicillin, golden star **4,6% cada**; Incomuns blood pack **2,3%**, CAR **2,1%**; **Raros** AI-2 e CMS **1,0%**; **Épico** SURV12 **0,5%**.
-  **Farmácia = valores congelados "como estava"** (`HEAL_PHARMACY_FIXED`): comuns 9,2%, blood pack 9,0%, CAR 8,5%, AI-2 8,0%, CMS 7,0%, SURV12 4,0%.
-- **Comida** (17 Nov 2026): leite condensado **4%** por baú (1–3 unidades), só em prédios e casas; pão **16%** por baú (**1–5**), só em casas. Nos barris metade (leite 2%, pão 8%). Antes: leite 8%, pão 20% com 4–12.
-- **Equipamento LesRaisins** (chance de CADA item por container, independente; todos os temas **exceto farmácia**; **na delegacia as chances dos throwable dobram**): M67 Grenade 9,2% (**3 a 5**; delegacia 18,4%),
-  RGN Grenade 4,1% (**2 a 4**; delegacia 8,2%), C4 Sticky Bomb 3,0% (1; delegacia 6,0%), Dagger / Karambit / Baseball Bat 2,0% cada (1, durabilidade cheia). Itens: `lrtactical:throwable` (`ThrowableId`) e
-  `lrtactical:melee` (`MeleeWeaponId`). O detonator **não** entra no loot (o C4 o entrega ao ser arremessado, confirmado pelo usuário). smoke/flash/molotov/flash shield de fora.
-- **First Aid** (opcional, tabela própria com `neoforge:mod_loaded`; chance de CADA item por container, independente, mesma em todos os temas exceto farmácia; x0,5 em 16 Nov):
-  plaster **7,5%** (4–14 un., "Muito comum"); bandage, adrenaline injector, painkillers **4,6%** (Comuns; bandage 2–10); defibrillator **2,1%** (Incomum); **Raro** morphine **1,0%**;
-  **Épico** morphine injector **0,5%**. **Farmácia congelada**: plaster 15%, comuns 9,2%, morphine 8,2%, defibrillator 8,2%, injector 4,0%. `FA_CHANCE`, `FA_CLASS`, `FA_COUNT`.
-  Classes (mais comum -> mais rara): Muito comum, Comum, Incomum, Raro, **Épico** (nova, 16 Nov). Raro = base 4,0% e Épico = 2,0% LR (e 2,0% / 1,0% FA) antes de x0,5: valores meus.
-- **Sucata** vanilla (stick, 4 sementes, carne podre, osso, papel, tigela, garrafa, olho de aranha) nas 36 tabelas do AMC sobrescritas; sem itens vanilla úteis (única exceção: pão).
-- **AMC com baús sorteados** (16 Nov 2026): os nomes das tabelas não mudaram (6 temas x chest/barrel/pot x _hard), então o mod não precisou de ajuste. Os 10 prédios
-  `building_*` perderam os baús do modelo e ganharam baús sorteados por cópia (pequeno 12–28, grande 38–65, mais 30% dos barris viram baús); rampa e delegacia não mudaram.
-  `docs/containers.json` foi medido de novo (média de 6 cópias). O spawn agora usa categorias por altura (`building_small`, `building_large`...): `measure_containers.py` ajustado.
-  **18 Nov 2026: medido de novo com o AMC 1.0.0** (cópia única para as 40 estruturas sem baús sorteados; média de 5-6 cópias para as 12 com baús sorteados):
-  as 3 `workshop_medium_*` passaram de 1 para 4 baús (commit c03dd5c do AMC); nos prédios as médias variaram dentro do ruído de 6 cópias. Só a prévia muda.
-- **Sem itens de cura** (LesRaisins e First Aid) em **oficina, posto de gasolina e delegacia** (16 Nov, `HEAL_EXCLUDED_THEMES`; esses temas não têm tabela `_firstaid`). O leite continua.
-- **Leite condensado: 1 a 3 unidades** por acerto (antes 2 a 4), **só em prédios (`building`) e casas** (16 Nov; fora de farmácia, delegacia, oficina e posto).
-- **Ferramentas vanilla só na oficina** (16 Nov, `TOOLS`, opção A = metade nos barris): picareta de ferro e isqueiro **Raros** (baú 1,0% / barril 0,5%, durabilidade restante 40–65%);
-  picareta de netherite **Lendária** (classe nova, 10x mais rara que o Épico: baú 0,05% / barril 0,025%, inteira). Exceções vanilla permitidas: pão e essas 3 ferramentas.
-  Resolução dos sorteios por item: `ITEM_RES = 100` (1 em 100.000).
-- **Vasos** não recebem nada do mod. Temas: building, police_station, pharmacy, house, workshop, gas_station (o AMC removeu `building_large`).
-- **Ferramentas**: `gen_loot.py` (prévia / `--write`), `sample_items.py` (chance por item num servidor de teste), `rcon.py` e `rconlib.py`
-  (RCON), `measure_containers.py`, `tacz_catalog.py`, `lr_catalog.py`, `att_from_nbt.py`; testes em `tests/` (`python3 -m unittest -v`). O `sample_loot.py` foi removido (18 Nov 2026).
+## Current state (version 2.0.0, 18 Nov 2026)
+- **Requires** AMC 1.0.0+ (`[1.0.0,)`; the game refuses to load the mod with AMC 0.1.0, tested), TACZ 1.2.0+,
+  LesRaisins 0.4.3+. **Optional**: First Aid 1.3.5+, Sophisticated Backpacks 3.26.21+ (needs NeoForge 21.1.229+), TCT
+  Flashlight 5.0+. Author `RakkuLyc`, license MIT (`LICENSE`).
+- **All numbers live in the top block of `tools/gen_loot.py`**; the loot values per item are summarized in `README.md`.
+  Main values (per container, Luck 0, chest / hard chest): guns building 16.8% / 28.1%, police station 33.6% / 56.2%;
+  attachments = 1.2x guns; ammo 52% / 86.6% in building and police station (1 to 3 stacks), workshop 4% / 7%; ammo boxes
+  1 in 14 / 20 / 30 (building, police station); LesRaisins healing 0.5-4.6% per item (pharmacy 4.0-9.2%), none in
+  workshop, gas station, police station; First Aid 0.5-7.5% (pharmacy 4.0-15%); M67/RGN/C4 9.2/4.1/3.0% in buildings,
+  2x in the police station; melee 2.0/2.0/1.5% everywhere except the pharmacy; milk 4% (building, house), bread 16%
+  (house); workshop tools 1.0/1.0/0.05%; backpacks 1 in 13 to 1 in 79 and flashlights 1 in 10/16/16 (houses). Barrels:
+  per-item chances halved, except backpacks (same as chests); guns/ammo/attachments much rarer (RATES).
+- Gun rarity: 7 categories (`GUN_CAT_ONE_IN`) x 5 levels (`GUN_LEVELS`, `LEVEL_W` 16/8/4/2/1). Calibers by level
+  (`docs/ammo_rarity.json`, `AMMO_LEVEL_W`, .50 BMG 1.35 and 21-30 rounds); attachments by level (109 items,
+  `docs/attachments_rarity.json`, `ATT_LEVEL_W`). Guns spawn with half a magazine (minigun 0).
+- The level names in the data stay in Portuguese (Comum, Incomum, Raro, Épico, Lendário, Mítico, Sem raridade =
+  Common, Uncommon, Rare, Epic, Legendary, Mythic, unrated): the generator reads them from `docs/*.json`.
+- The user's source `.nbt` structures (for `tools/att_from_nbt.py`) no longer exist on disk (18 Nov 2026); the rarity
+  files in `docs/` are the only copies (safe in git).
+- **Pre-release review (18 Nov 2026)**, branch `revisao-pre-lancamento`, not merged or pushed: bugs fixed (RCON reading
+  of long replies, sampler with exact counts, tools writing `docs/` from any folder), automated tests, Gradle
+  distribution checksum, dead code removed, `gen_loot.py` reorganized and translated, containers re-measured with AMC
+  1.0.0, English documentation. The loot did not change (the 128 generated files are identical; only `mods.toml` changed:
+  author, AMC range, version). Pending for the user: merge, push, release 2.0.0, repository visibility, and the final
+  rewrite of the commit email (needs a force push and moving the release tags).
 
-## HISTÓRICO — Decisões do usuário (13 Nov 2026)
-- Só o pacote padrão do TACZ (70 armas); o Gunpowder Revolution (`hamster`) fica de fora por ora.
-- Armas/munição/attachments em `building` (o tema `building_large` foi removido do AMC em 14 Nov 2026, commit `72d07b3`); **a delegacia recebe mais armas**: o AMC ganhou o tema `police_station` (commit `27ae583` do AMC, 13 Nov 2026).
-- Cura: farmácia bastante; casas, oficinas e postos um pouco; oficinas também com pouca munição.
-- **Vasos (`pot`) não recebem nada** (ver fatos).
-- **Sem itens vanilla úteis (14 Nov 2026):** as tabelas do mod nunca tiveram item vanilla; os vanilla dos containers vinham das tabelas
-  do próprio AMC (94 tipos). O mod agora **sobrescreve as 42 tabelas do AMC** (mesmos caminhos, `data/abandonedmoderncity/loot_table/chests/`)
-  só com **sucata**, a mesma lista em todos os temas: stick, wheat/beetroot/melon/pumpkin seeds, rotten_flesh, bone, paper, bowl,
-  glass_bottle, spider_eye. Quantidade (bloco `JUNK_SHAPE` do gerador): baú 2–4 pilhas, barril/vaso 30% de ter 1–2 (vaso 1); tiers
-  `_hard` iguais (o prêmio vem do mod). Sem efeito de Sorte. Escolha do usuário entre mudar o AMC, sobrescrever pelo mod ou deixar.
-- TACZ, LesRaisins e AMC são obrigatórios; **só o First Aid é opcional** (`neoforge:mod_loaded`).
-- Loot generoso, mas sem abundância. Toda tabela com `weight`, `quality` e `rolls`/`bonus_rolls` para a Sorte funcionar.
-- Repositório: mesmo nome (`RakkuLyc/amc-tacz-loot`), novo e vazio (antigo apagado e recriado em 14 Nov 2026).
+## Verified facts (checked in the jars, the Minecraft source or in game; details in `docs/HISTORY.md`)
+- Injection: `neoforge:add_table` global loot modifiers filtered by `neoforge:loot_table_id`, listed in
+  `data/neoforge/loot_modifiers/global_loot_modifiers.json` (`replace:false`). The AMC tables are overridden by path;
+  `mods.toml` declares `ordering="AFTER"` for the AMC.
+- TACZ items are generic (`tacz:modern_kinetic_gun`, `tacz:ammo`, `tacz:attachment`, `tacz:ammo_box`) with the id in
+  `minecraft:custom_data` (`GunId`, `AmmoId`, `AttachmentId`, `Level`). **Numbers another mod reads must be written as
+  SNBT text**: a small JSON number becomes a byte (`5b`) and TACZ only reads `GunCurrentAmmoCount` as an integer (the
+  empty-magazine bug of 1.0.0).
+- LesRaisins: `lrtactical:consumable` (`ConsumableId`), `lrtactical:throwable` (`ThrowableId`), `lrtactical:melee`
+  (`MeleeWeaponId`). Grenade max stack 3, C4 1. First Aid items are plain `firstaid:<id>` (max stack 16).
+- Optional mods: the table AND the loot modifier need `neoforge:conditions` `mod_loaded`; without the mod the server
+  starts normally and nothing from it appears (tested).
+- Luck: effective weight = `floor(weight + quality*Luck)`, rolls = `rolls + floor(bonus_rolls*Luck)`; `quality` is 25%
+  of the weight per level. `random_chance` ignores Luck. The console `/loot` and RCON tests are always Luck 0.
+- A container with more stacks than slots keeps the first ones and loses the excess, picked at random
+  (`LootTable.fill`). Dispensers and droppers (9 slots) get the AMC `barrel` table: worst case about 1 in 300,000;
+  chests and barrels (27 slots) not affected in practice. Pots: `unpackLootTable(null)` (no Luck, 1 slot): left out.
+- RCON (`RconClient`): the server reads one packet per network read and splits replies longer than 4096 bytes;
+  `tools/rconlib.py` handles both.
+- In a real chest Minecraft splits stacks into pieces over random slots (`shuffleAndSplitItems`); `/loot insert` does
+  not, and it merges equal stacks.
 
-## Fatos verificados (nos jars/log, não de memória)
-- Injeção: GLM nativo `neoforge:add_table` + condição `neoforge:loot_table_id` (campo `loot_table_id`); registrado em
-  `data/neoforge/loot_modifiers/global_loot_modifiers.json` (`replace:false`). Funciona (teste de 13 Nov 2026).
-- TACZ: itens genéricos `tacz:modern_kinetic_gun` / `tacz:ammo` / `tacz:attachment`; o ID fica em
-  `minecraft:custom_data` (`GunId`, `AmmoId`, `AttachmentId`, valores `tacz:<id>`). Ao criar uma arma o próprio TACZ
-  (`GunItemBuilder`) grava `GunId`, `GunFireMode` (nome do enum em maiúsculas: `SEMI`/`AUTO`/`BURST`),
-  `GunCurrentAmmoCount`, `HasBulletInBarrel` e `HeatAmount`. Catálogo (70 armas com tipo, munição e modos de tiro;
-  25 munições; 128 attachments) em `docs/tacz_catalog.json`, gerado por `tools/tacz_catalog.py`.
-  Itens elegíveis = os que têm receita na mesa de armeiro do pacote padrão (`craftable` no catálogo: 70 armas, 25 munições,
-  104 de 128 attachments; ficam de fora `oem_*`, `*_default` e variantes embutidas). Critério objetivo, não pelo nome.
-  Os JSON de dados do jar têm comentários `/* */` (o parser do catálogo trata); `minigun` não tem `ammo_amount`.
-  **Verificado pelo usuário no jogo (13 Nov 2026):** uma arma só com `GunId`+`GunFireMode` atira e a munição/attachment/cura funcionam.
-  **Não verificado:** as armas geradas agora também levam `GunCurrentAmmoCount: 0` e `HasBulletInBarrel: false`; recarregar com a munição que vem junto está por testar.
-- LesRaisins: itens de cura são `lrtactical:consumable` com `custom_data.ConsumableId = "lrtactical:<id>"`.
-  Cura > 0 (`docs/lr_catalog.json`): `ai2`, `amoxycillin`, `blood_pack`, `carfak`, `cms`, `goldenstar`, `ibuprofen`, `surv12`,
-  `vaseline`; `condensed_milk` só dá fome (fora do loot de cura). Os com durabilidade (`max_durability` > 0) saem 1 por vez.
-- First Aid: itens normais `firstaid:` `plaster`, `bandage`, `painkillers`, `morphine`, `morphine_injector`,
-  `adrenaline_injector`, `defibrillator`.
-- Item de mod opcional: a **tabela** e o **GLM** que o citam precisam de `"neoforge:conditions":[{"type":"neoforge:mod_loaded","modid":"firstaid"}]`;
-  sem o First Aid o servidor sobe normalmente (testado).
-- Sorte (bytecode do Minecraft 1.21.1): peso efetivo = `floor(weight + quality*Sorte)`; rolagens = `rolls + floor(bonus_rolls*Sorte)`.
-  `bonus_rolls` < 1 não faz nada na Sorte I; `quality` é a alavanca que responde já na Sorte I. O AMC usa `setLootTable(chave, seed)`
-  (carregamento preguiçoso: lê `player.getLuck()` ao abrir baús e barris). `random_chance` ignora Sorte: não usar para decidir
-  se há loot; usar `minecraft:empty` com `quality` negativo. O `/loot` do console **não aplica Sorte** (`LootCommand` não a usa):
-  testes por RCON são sempre com Sorte 0; Sorte > 0 só por conta analítica e no jogo (`/effect give @s minecraft:luck`).
-- **Vasos**: `DecoratedPotBlockEntity.getTheItem()` chama `unpackLootTable(null)` (sem jogador, **sem Sorte**), e quando a tabela
-  gera mais itens que espaços o Minecraft não preenche nada (`"Tried to over-fill a container"`): num vaso (1 espaço) isso
-  esvaziaria também o item do AMC. Por isso o mod não injeta em vasos.
-- Entrada aninhada `minecraft:loot_table` com `value` = id de tabela ou tabela inline funciona (testado; é como a arma vem
-  com sua munição). Entradas compostas (group etc.) não têm peso.
-- A delegacia (63 containers) tem o tema próprio `police_station` no AMC (mesmas tabelas vanilla de `building`). Containers por
-  estrutura e tipo medidos no jogo: `docs/containers.json` (`tools/measure_containers.py`; confere com o total do AMC).
+## How to test
+- **Automated tests (no server):** `python3 -m unittest -v` (`tests/test_loot.py`: files = generator, determinism,
+  table structure, optional-mod conditions, loot modifiers, the 36 AMC tables, IDs in the catalogs, chance of each item
+  = configuration, 9-slot overflow below 1 in 100,000).
+- **Generator:** `python3 -I tools/gen_loot.py` (preview), `--write` (rewrites the data and runs `check()`).
+- **Build:** `JAVA_HOME=/usr/lib/jvm/java-21-openjdk ./gradlew build -Dorg.gradle.java.installations.paths=$JAVA_HOME`
+  (the system's default Java is 27, too new for Gradle). Never ship a jar built right after a `-Pneo_version` run
+  without checking `META-INF/neoforge.mods.toml` (`versionRange="[21.1.219,)"`).
+- **Test server:** `run/mods/` holds the AMC 1.0.0 jar (`../AbandonedModernCity/build/libs/`), TACZ, LesRaisins, First
+  Aid, Sophisticated Backpacks + Core and TCT Flashlight + Core (`run/` is not versioned). With the optional mods start
+  it with `./gradlew runServer -Pneo_version=21.1.264` (same Java options); RCON on 127.0.0.1:25575, password `teste`
+  (or the `AMC_RCON_PASSWORD` environment variable). Commands: `python3 -I tools/rcon.py "<command>" ...`.
+  **Always stop it with `python3 -I tools/rcon.py stop`** and check that port 25575 is free (`ss -ltn`).
+  **Never kill the user's Minecraft (the Prism launcher shows up as `bootstraplauncher`).**
+- **Chance per item:** `python3 -I tools/sample_items.py <theme/tier> [N] [filter] [--json out.json]` (exact counts; ammo
+  boxes per level `#L0/#L1/#L2`; raw `GunCurrentAmmoCount` text). Luck 0 only.
+- **Real Luck** only in game: `/amcs spawn police_station abandoned_police_station` twice, far apart, and open one with
+  `/effect give @s minecraft:luck infinite 2`.
+- Chunks generated before an AMC change keep the old table ids; opened containers have no table: test in a new world
+  or with `/amcs spawn`.
+- Known unrelated warning: `Couldn't load tag minecraft:placeable ... tacz:blood_strike_1`.
 
-## Números aprovados pelo usuário (13 Nov 2026, "Aprovo")
-- (Os totais por estrutura aprovados em 13 Nov foram substituídos pela mudança de 14 Nov, abaixo; as raridades e a Sorte continuam.)
-- Raridade das armas por tipo (peso): padrão pistol 10, smg 6, shotgun 6, rifle 4, dmr 2, sniper 1,5, mg 1, rpg 0,3; delegacia
-  pistol 8, smg 8, shotgun 8, rifle 6, dmr 2,5, sniper 1,5, mg 1, rpg 0,3 (rpg7, m320 e minigun entram, bem raros; munição
-  .50 BMG, 40mm e foguete ×0,15–0,4). A arma vem **descarregada**, e **sem** munição junto (mudou em 14 Nov, abaixo).
-- Cura: comuns (ibuprofen, blood_pack, vaseline; plaster, bandage) saem mais que as raras (ai2, carfak; defibrillator).
-- Sorte: `quality` = 25% da chance base por nível (×1,25 / ×1,5 / ×1,75 nas Sortes I/II/III); `bonus_rolls` só nos baús
-  difíceis (0,34: Sorte III) e comuns (0,2: Sorte V). Delegacia 5,7 → 7,1 → 8,3 → 11,9 armas.
-- Todos esses valores (inclusive a sucata) estão no bloco do topo de `tools/gen_loot.py`; mudar um número = editar a linha, `--write`, build.
-
-## Como testar
-- **Sorte de verdade só no jogo, abrindo containers reais** (o `/loot` nem o console aplicam Sorte): `/amcs spawn police_station
-  abandoned_police_station` duas vezes, longe uma da outra; abrir os baús de uma sem efeito e os da outra com
-  `/effect give @s minecraft:luck infinite 2`; comparar com a prévia (ruído grande numa só estrutura: procura-se diferença clara).
-- Chunks gerados antes de uma mudança no AMC guardam os ids antigos das tabelas (o id é gravado ao colocar o container);
-  containers já abertos não têm mais tabela. Testar em mundo novo ou com `/amcs spawn`.
-- O mod exige o AMC 1.0.0 ou mais novo (18 Nov 2026; antes `[0.1.0,)`, que aceitava builds antigas sem o tema `police_station`). O servidor de teste usa
-  o jar de `../AbandonedModernCity/build/libs/abandonedmoderncity-1.0.0.jar`.
-- Build: `JAVA_HOME=/usr/lib/jvm/java-21-openjdk ./gradlew build -Dorg.gradle.java.installations.paths=$JAVA_HOME`
-  (o Java padrão do sistema é o 27, novo demais para o Gradle).
-- **Testes automáticos (sem servidor):** `python3 -m unittest -v` na raiz (`tests/test_loot.py`: arquivos = gerador, determinismo, estrutura das tabelas,
-  condições dos mods opcionais, loot modifiers, IDs nos catálogos, chance de cada item = configuração, estouro de container de 9 espaços < 1 em 100.000).
-- Para medir chance por item, use `python3 -I tools/sample_items.py <tema/tier> [N] [filtro] [--json saida.json]` (contagem exata por item; caixas de
-  munição por nível `#L0/#L1/#L2`). O RCON de todos os scripts fica em `tools/rconlib.py` (junta respostas
-  longas, que o Minecraft divide em pedaços de 4.096 bytes).
-- Servidor de teste: copiar para `run/mods/` os jars de `../AbandonedModernCity/libs` (TACZ, First Aid, LesRaisins) e o
-  jar do AMC; `run/server.properties` com RCON (porta 25575, senha `teste`; outra senha: variável de ambiente `AMC_RCON_PASSWORD`); `./gradlew runServer` (mesmas opções);
-  `python3 -I tools/rcon.py "setblock 0 100 0 minecraft:chest" "loot insert 0 100 0 loot <tabela>" "data get block 0 100 0 Items"`;
-  `... tools/rcon.py stop`. (`run/` não é versionado.)
-
-## Gerador (`tools/gen_loot.py`)
-- `python3 -I tools/gen_loot.py` imprime a **prévia** (esperado por estrutura, Sorte 0 a 3; chance de um baú ter algo do mod);
-  `--write` apaga e reescreve `src/main/resources/data/amctaczloot` e `global_loot_modifiers.json` e roda as verificações
-  de consistência. **Todos os números ficam no bloco do topo do script** (chances em ‰ por tema/tier, Sorte, raridade das armas).
-- Estrutura gerada: `<tema>/<tier>_core.json` (2 pools independentes: arma/attachment/cura LesRaisins e munição; TACZ+LesRaisins) e
-  `<tema>/<tier>_firstaid.json` (cura First Aid, com `neoforge:mod_loaded`); tabelas de escolha em `pick/`; um GLM
-  `neoforge:add_table` por tabela, filtrado por `neoforge:loot_table_id`. Temas: building, police_station,
-  pharmacy, house, workshop, gas_station; tiers chest, chest_hard, barrel, barrel_hard (sem pot).
-- Validação (13 Nov 2026): servidor real com AMC+TACZ+LesRaisins+First Aid, `tools/sample_loot.py <tema> <tier> [N]` amostra
-  centenas de baús: médias observadas batem com a prévia (Sorte 0). Dados: `tools/tacz_catalog.py`, `tools/lr_catalog.py`.
-- Sobrescrita das tabelas do AMC: `mods.toml` declara `ordering="AFTER"` para o AMC (o mod carrega depois, então os seus arquivos de
-  mesmo caminho prevalecem). **Testado (14 Nov 2026):** com o jar do AMC original (tabelas vanilla antigas) na pasta `mods`, 1.680
-  amostras de baús/barris dos 7 temas deram só sucata + itens do mod. **Não testado:** sem o `ordering` (não sei se é necessário) e
-  os vasos (arquivos gerados, não amostrados). A ordem entre mods não é uma garantia do Minecraft: se outro mod também sobrescrever
-  essas tabelas, o resultado depende da ordem de carga. As verificações do gerador falham se surgir qualquer item vanilla fora da lista de sucata.
-
-## Mudança de 14 Nov 2026 (pedido do usuário): mais armas, e o AMC mudou
-- O AMC removeu `building_large` (72d07b3), tirou 70% dos barris dos prédios e converteu o resto em baús (68e2d7c) e criou
-  containers difíceis em subsolos/terraços/sótãos (a783d70). **`docs/containers.json` foi medido de novo** com o AMC atual
-  (a crash building foi de 201 para 94 containers; prédios são quase só baús; a rampa ainda tem 242 barris).
-- Pedido: prédios **1 arma a cada 3–7 baús**; delegacia **1 arma a cada 3–4 baús "de forma garantida"**.
-  Implementado (Sorte 0, por baú; barris continuam raros): `building` baú 200‰ (1 em 5), baú difícil 333‰ (1 em 3);
-  `police_station` baú 250‰ (1 em 4), baú difícil 333‰ (1 em 3). Resultado: prédios 1 arma a cada **5,0** baús, delegacia a cada **3,6**.
-  Amostragem no servidor: baú de prédio 0,191 (esp. 0,200), difícil 0,332 (0,333); delegacia 0,259 (0,250), difícil 0,323 (0,333).
-- "Garantida": loot table é sorteio independente por container; **não existe garantia exata por estrutura** em mod só de dados.
-  O mais próximo é a probabilidade: na delegacia (Sorte 0) chance de pelo menos 4 armas 99%, 5: 98%, 6: 94%, 8: 76%.
-- Consequência (a vigiar): o total por prédio subiu muito (brutalista ~46 armas, rampa ~33, torre ~14, apartamentos ~2),
-  porque os prédios têm centenas de baús. Se for demais, baixar `gun` em `RATES["building"]` (1 em 7 = 143‰).
-
-## Munição (opção B, escolhida pelo usuário em 14 Nov 2026)
-- Pedido: a munição **não** vem mais junto da arma; é aleatória, com raridade por calibre conforme as armas que o usam.
-  Implementado: a tabela do núcleo tem **2 pools independentes** (arma/attachment/cura LR; e munição). `pick/gun_*` agora só tem armas.
-- Calibre: peso = soma das raridades (por tipo de arma) das armas que usam o calibre, com redutor extra em .50 BMG/.338/.45-70/.500
-  mag (×0,4–0,5) e 40mm/foguete (×0,15) — `ammo_weights()`. Mais comuns: 12g ~20%, 9mm ~18%, .45 ACP ~15% (prédio).
-- Quantidade = **o mesmo total de munição de antes** (solta + a que vinha com a arma): baú de prédio 26%, difícil 43,3%;
-  delegacia 40% / 58,3%; barris de prédio 3,1% / 5,7%, de delegacia 10% / 18%; oficina inalterada (4% / 7%, barril 1,5% / 3%).
-  Pilha: de 1/6 a 1/2 da pilha cheia do calibre (ex. 9mm 10–30 balas). Sorte: `quality` como as demais categorias.
-- Validado no servidor (3.000 baús de prédio): 0,270 pilhas/baú (esp. 0,260); calibres batem com a fatia esperada; dos baús
-  com arma só 26% têm alguma munição (= a chance geral) e só 3% a do calibre da arma (antes 100%).
-- Referência: a munição do Apocalypse Loot (Lost Cities) é ~8–14× maior por baú e tem faixa de raridade 14:1 (a nossa é ~270:1);
-  o usuário escolheu manter a nossa opção B. Simulação de 20 baús em `run/tmp/simulate_ammo.py` (não versionada).
-
-## Proposta C aplicada (15 Nov 2026) — substitui a raridade/quantidade de munição e as taxas de arma dos prédios
-- Feedback do usuário (screenshot da green tower: 14 armas, ~10 pilhas visíveis): armas ok, pouca munição. O inventário **funde pilhas
-  iguais**, então a contagem de pilhas na tela engana (9mm 55 > máx 50 de uma pilha).
-- **Raridade da munição igual** para todos os calibres que têm arma (23; `7.62x25` e `6.8x51 Fury` não têm arma e ficam fora).
-  **Quantidade por pilha** proporcional à pilha máxima, 9mm de referência 24–50 (`AMMO_REF`): pilha 60 → 24–50; 64 → 26–53; 50 → 20–42;
-  48 → 19–40; 42 → 17–35; 36 → 14–30; 30 → 12–25; 6 (40mm, foguete) → 2–5. Uma só tabela `pick/ammo` (sem perfil de arma).
-- **Armas dos prédios −40%** (baú comum 12% = 1 a cada 8,3; difícil 20% = 1 a cada 5; barris 0,4% / 0,7%). **Delegacia inalterada nas
-  armas** (25% / 33,3%, barris 3% / 6%). **Munição ×2** em prédio e delegacia: prédio baú 52%, difícil 86,6%, barris 6,2% / 11,4%;
-  delegacia baú 80%, **difícil 100% (teto, sem entrada `empty`: peso 0 não é válido)**, barris 20% / 36%. Oficina e demais temas inalterados.
-- Interpretação assumida: "deixe a quantidade de balas úteis como está" = manter os tamanhos de pilha definidos; os fatores −40% / ×2 foram
-  proposta minha (aprovada). Antes: green tower 18,1 armas / 408 balas / 16,7 úteis por arma; agora (esperado) 10,9 armas / 47,3 pilhas /
-  ~1.350 balas / ~40 úteis por arma; delegacia 9,4 armas, 33,3 pilhas.
-- Validado no servidor (Sorte 0): armas e munição por baú batem (prédio 0,120 e 0,542; delegacia 0,244 e 0,811; difícil 1,000); 23 calibres,
-  fatias 3,6–5,0% (esperado 4,35%); balas por pilha dentro dos intervalos acima. A seção "Munição (opção B)" acima ficou superada neste ponto.
-
-## Calibre misto, opção 2 (15 Nov 2026) — substitui "raridade igual" da proposta C
-- Feedback (crash building, ~66 baús, 3 armas, ~33 pilhas): munição como projetado (34,3 esperadas), mas **3 armas** (chance de ≤3: 3,6%) e,
-  com calibres todos iguais, só ~24% da munição serve às armas achadas (poucas armas cobrem poucos dos 23 calibres). Antes eu mostrara só a
-  média de "balas úteis por arma"; **a variação é grande e deve ser mostrada**.
-- Decisão do usuário (opção 2): a chance de cada calibre é **metade igual para todos e metade pela popularidade das armas** que o usam
-  (`AMMO_MIX_UNIFORM = 0.5`; popularidade = soma do peso por tipo das armas do tema). Tabelas `pick/ammo_default` e `pick/ammo_police`
-  (a delegacia usa os pesos de armas dela). Mais comuns (prédio): 12g 11,9%, 9mm 10,8%, .45 ACP 9,3%, 5.56 5,9%; mais raros ~2,4%
-  (40mm, foguete, .45-70, 7.92x57). Taxas de arma/munição e tamanhos de pilha da proposta C **inalterados**.
-- Validado no servidor: 100 rodadas de 66 baús (crash building): 7,5 armas, 34,8 pilhas, ~416 balas úteis, mediana 58 úteis/arma (antes 33),
-  38% da munição serve (antes 24%), 3% das rodadas com <20 úteis/arma (antes 16%). Calibres batem com o esperado (12g em prédio saiu 14,6%
-  contra 11,9% — ~3σ, pesos do arquivo conferidos; na delegacia saiu abaixo; tratado como ruído).
-
-## Cura LesRaisins e comida (15 Nov 2026) — substitui os pesos/fatias de cura anteriores
-- **Chance de cada item POR CONTAINER, independente dos outros** (não é fatia): vaseline 19,5%, ibuprofen 19%, amoxicillin 18%, golden star 17%
-  (Comuns); blood pack 9%, CAR 8,5%, AI-2 8%, CMS 7% (Incomuns); SURV12 **4%** (Raro; o usuário pediu 3% e depois "diminuir levemente a
-  raridade" — interpretado como um pouco mais comum). Soma 110% = ~1 item de cura LesRaisins por container (antes ~4%).
-  A mesma chance em todos os temas e tipos de container; `HEAL_LR`, `HEAL_CLASS`, `PHARMACY_MULT` no bloco do topo de `gen_loot.py`.
-- **Farmácia**: multiplicador **×2 só nos Incomuns e no Raro** (blood pack 18%, CAR 17%, AI-2 16%, CMS 14%, SURV12 8%); Comuns inalterados.
-  O ×2 é escolha minha (o usuário pediu um multiplicador sem valor).
-- **Comida**: leite condensado 8% por container, 2–4 unidades, em todos os temas (incluindo farmácia: suposição minha); **pão (vanilla,
-  exceção explícita do usuário) 20%, 4–12 unidades, só em casas**. O leite já restaura 6 de fome, saturação 1,6 e aplica o efeito Saturação
-  (2 s) no próprio item da LesRaisins (conferido no JSON). First Aid inalterado (continua por categoria, `fa`).
-- Implementação: cada item tem o seu próprio pool (item com `weight` = chance em ‰ e `quality` = 25% por nível de Sorte; entrada `empty` com o
-  resto); a tabela `pick/lr` deixou de existir. A verificação do gerador passou a aceitar `minecraft:bread` além da sucata.
-- Validado no servidor (Sorte 0): prédio (2.500 baús) vaseline 20,2%, SURV12 3,6%, leite 7,0% (2–4); casa (2.000) pão 20,1% (4–12, média 7,9);
-  farmácia (2.000) incomuns 13–18%, SURV12 7,3%; barril de oficina e baú difícil da delegacia com as mesmas chances do prédio; pão ausente em prédio.
-- Monte Carlo (Sorte 0): green tower ~100 curas LR (comuns 67 / incomuns 30 / SURV12 3,6), 7,3 pilhas de leite; rampa 439; casa 63 curas e
-  ~91 unidades de pão; farmácia grande 33,6. **Escala ~27× a anterior (3,6 curas na green tower)**; risco de estouro de container só em
-  dispenser/dropper (9 espaços): ~1 em 125.000–250.000 containers (o container fica vazio se estourar).
-
-## Opção C: cura LesRaisins x0,5 (15 Nov 2026)
-- Feedback: uma farmácia grande deu ~34 itens de cura (previsto ~41 com LR+First Aid+leite; não foi azar). Escolha do usuário: **tudo x0,5**
-  nas chances de cura LesRaisins (`HEAL_SCALE = 0.5`, aplicado por cima do multiplicador da farmácia; arredondado em ‰).
-- Chances por container agora: vaseline 9,8%, ibuprofen 9,5%, amoxicillin 9,0%, golden star 8,5% (Comuns); blood pack 4,5%, CAR 4,3%, AI-2 4,0%,
-  CMS 3,5% (Incomuns); SURV12 2,0% (Raro). Soma 0,55 por container. **Farmácia**: Incomuns e Raro com o ×2 antigo, então voltam aos valores
-  anteriores ao x0,5: blood pack 9,0%, CAR 8,5%, AI-2 8,0%, CMS 7,0%, SURV12 4,0%; Comuns como nos outros lugares (soma 0,733). Leite 8%, pão
-  20% (só casas) e First Aid **inalterados**.
-- Validado no servidor: prédio (3.000 baús) vaseline 9,7%, SURV12 1,9%; farmácia (2.500) incomuns 6,8–9,1%, SURV12 4,4%; casa pão 20,6%.
-- Monte Carlo (Sorte 0), curas LesRaisins: green tower 50 (39–62); brutalista 126; rampa 220; delegacia 35; casa 31; oficina 34; posto 17;
-  farmácia grande 16,9 (11–24); farmácia pequena 12,4 (7–18). Antes da mudança de 15 Nov eram 3,6 na green tower e 3,6 na farmácia grande.
-
-## Comuns da LesRaisins com a mesma chance (15 Nov 2026)
-- Pedido: "todos os itens comuns do LesRaisins com o mesmo peso". Os 4 Comuns (vaseline, ibuprofen, amoxicillin, golden star) agora têm 184‰ (18,4%)
-  antes do x0,5 = **9,2% por container** (média dos antigos 19,5/19/18/17; total dos Comuns inalterado em 36,8%). Incomuns, Raro, farmácia, leite,
-  pão e First Aid inalterados. Valor 18,4% escolhido por mim (o usuário não deu número).
-- Validado no servidor (Sorte 0): prédio (4.000 baús) comuns 8,8–9,9%; farmácia (3.000) 9,2–10,5%. Lição: **sempre mandar `tools/rcon.py stop` ao
-  fim de um teste**; um servidor esquecido faz o próximo falhar com "FAILED TO BIND TO PORT" e o amostrador mede o servidor antigo sem aviso
-  (aconteceu uma vez; o teste foi refeito). Para ver se há servidor aberto use `pgrep -f '[b]ootstraplauncher'` (o `pgrep` simples conta o próprio comando).
-
-## Munição em 1 a 3 pilhas de calibres diferentes (opção C, 15 Nov 2026)
-- Descoberta: no baú **real** o Minecraft já divide cada pilha em vários pedaços espalhados em slots aleatórios (`shuffleAndSplitItems`, só
-  quando há slots livres); o `/loot insert` dos testes NÃO faz isso. Antes da mudança um baú com munição tinha **1 calibre só em ~5 pedaços**
-  (~6 balas cada). Então "balas soltas espalhadas" já existia; o que faltava era mais de um calibre por baú.
-- Apocalypse Loot (referência): pool próprio de munição, cada rolagem = 1 pilha de um calibre por peso, 1–3 rolagens (2–5 nas tabelas mais ricas),
-  `bonus_rolls` 1,0, calibre pode repetir, pilhas grandes (9mm 21–57), sem truque de pilhas pequenas (conta com a divisão do Minecraft).
-- Escolha do usuário: **opção C** = a chance de o container ter munição não mudou (prédio baú 52% etc.), mas cada acerto sorteia calibres de
-  `pick/ammo_*` com `rolls` uniforme **1 a 3** (primeiro 2–3, depois o usuário pediu 1–3), pilhas a **50%** do tamanho para manter o total de balas
-  (2,0 pilhas x 0,5 = 1; com 2–3 pilhas seria 0,4). A escolha dos 50% foi minha (manter o total); se o usuário preferir 40% o total cai ~20%.
-- Validado no baú real (preenchimento real forçado com `execute if items`, 800 baús de prédio): 54% com munição; calibres diferentes por baú
-  com munição: 1 (37%), 2 (34%), 3 (29%), média 1,9; ~8 pedaços por baú; 16,4 balas por baú (esperado 15,7). Delegacia (500): 80% com munição,
-  22,9 balas (esperado 24,0). Risco de container de 9 espaços estourar (dispenser/dropper): 1 em 77.000 a 500.000.
-- Para testar o preenchimento real: `setblock ... chest{LootTable:"...",LootTableSeed:1L}` + `execute if items block ... container.0 minecraft:stone`
-  + `data get block ... Items`. **O Minecraft do Prism Launcher do usuário aparece como `bootstraplauncher` no `pgrep`: nunca matar; para saber se o
-  servidor de teste está aberto, use a porta 25575 (`ss -ltn`).**
-
-## Tamanho das pilhas de volta ao original (15 Nov 2026)
-- Pedido: "o tamanho das pilhas deve ser igual ao valor anterior, sem mudar" → `AMMO_SIZE = 1.0` (9mm 24–50 etc.), com 1 a 3 pilhas por acerto.
-- **Consequência (avisada ao usuário):** o total de balas por container dobrou (média 2,0 pilhas x tamanho cheio): baú de prédio 15,6 → ~31, delegacia
-  ~24 → ~48; green tower ~2.800 balas (antes ~1.400). Para voltar ao total antigo bastaria baixar a chance de munição em `RATES` ×0,5 (não aplicado).
-- Validado: tamanhos observados iguais aos esperados (9mm 24–50, 308 19–40, 22wmr 26–53, 338 12–25, 40mm 2–5; o 12g chegou a 36 por fusão de duas
-  pilhas no `/loot insert`, pilha cheia = 36); baú real (800 de prédio): 54% com munição, calibres 1/2/3 = 37/34/29%, 33,0 balas por baú (esperado 31,2);
-  delegacia (500): 80%, 46,4 balas (esperado 47,9).
-
-## First Aid por item e quantidades grandes (16 Nov 2026)
-- Classes pedidas pelo usuário: Muito comum = plaster; Comum (mesma categoria LesRaisins) = bandage, adrenaline injector, painkillers; Incomum = morphine,
-  defibrillator; Raro = morphine injector. Depois: "aumente drasticamente a quantidade da pilha": plaster **4–14**, bandage **2–10** (pilha máxima de ambos no
-  First Aid = 16, `stacksTo(16)` no registro; defibrillator tem durabilidade). O usuário não aprovou/ajustou os números de chance que propus; aplicados mesmo assim.
-- O sistema antigo (taxa por categoria `fa` + `pick/fa` com pesos) foi removido: o First Aid agora é um pool por item (como as curas LR). `fa` saiu de `RATES`.
-- Validado (Sorte 0): prédio (3.000 baús) plaster 13,5% (4–14), bandage 8,9% (2–10), comuns ~9%; farmácia incomuns 7,4–9,0%, injector 3,6%; barril de oficina igual
-  ao prédio; **sem o jar do First Aid o servidor sobe sem erros, sem itens `firstaid:` e com o resto do mod normal**.
-- Monte Carlo (unidades de First Aid): green tower ~199 (plaster 123, bandage 50), rampa ~872, casa ~125, delegacia ~138, farmácia grande ~52, pequena ~39.
-  **Escala ~38x a anterior (5 na green tower).** Risco de estourar um dispenser/dropper (9 espaços): ~1 em 5.000 (barril difícil da delegacia), 1 em 12.000
-  (barril da delegacia), 1 em 38.000 (barril de prédio); o container fica vazio se estourar.
-
-## Granadas, C4 e armas brancas da LesRaisins (16 Nov 2026)
-- Classificação do usuário: Comum = M67; Incomum = RGN; meio-termo (entre incomum e raro) = C4; Raro = Dagger, Karambit, Baseball Bat. Pedido final: "se baseie nos valores de
-  chance de cura do LesRaisins", M67 "sempre de 3 a 5" e RGN "no mínimo 2, no máximo 4". Valores: M67 9,2% (= comuns de cura), RGN 4,1% (média dos incomuns de cura),
-  C4 3,0% (ponto médio incomum-raro, escolha minha), raros 2,0% (= SURV12). Config: `GEAR`, `GEAR_EXCLUDED_THEMES`.
-- Pilha máxima das granadas = 3 (`stack_size` no JSON do item): o excedente de um sorteio de 5 vira outra pilha (stack splitter do loot). No baú real as unidades aparecem em pedaços de 1–2
-  espalhados pelos slots (total por baú continua 3–5 / 2–4).
-- Padrões de amostragem corrigidos: `sample_items.py` agora reconhece `ThrowableId` e `MeleeWeaponId`. Lição: **regex com id específico + `.*?` com `re.S` pega a contagem do item errado**; casar o item
-  genérico `\{count: N, Slot: Xb, ... id: "..."\}` e só depois filtrar.
-- Validado (prédio, 4.000 baús): M67 8,7% (3–5), RGN 4,6% (2–4), C4 3,0%, armas brancas 1,8–2,2%; farmácia 0 itens; 0 erros de carga.
-- Monte Carlo (Sorte 0): 100 baús ≈ 37 M67 (18–57), 12 RGN, 3 C4, 2 de cada arma branca (65% de chance de conseguir as 3); green tower ≈ 34 M67, 11 RGN, 2,7 C4, 5,5 armas brancas; rampa ≈ 147 M67.
-  Risco de estourar dispenser/dropper (9 espaços): ~1 em 1.200 no barril difícil da delegacia, 1 em 2.500 no barril da delegacia, 1 em 8.800 no barril de prédio.
-
-## Delegacia com throwable ×2 (16 Nov 2026)
-- Pedido: "na delegacia, dobre as chances dos throwable" (M67, RGN, C4; `GEAR_THEME_MULT = {"police_station": {"throwable": 2.0}}`) e "coloque itens melee nas casas também".
-  **As armas brancas já saíam nas casas** (regra: todos os temas menos a farmácia, 2% cada); nada foi alterado nelas, o usuário foi avisado e recebeu uma tabela de multiplicadores.
-- Validado (3.000 baús): delegacia M67 17,8%, RGN 8,9%, C4 6,1%, armas brancas 1,7–2,1%; casa e prédio inalterados; 0 erros de carga. Delegacia inteira (63 containers): ~46 M67, ~15,5 RGN, ~3,8 C4.
-- Risco de estourar dispenser/dropper (9 espaços) na delegacia: ~1 em 1.200 (barril) e 1 em 610 (barril difícil).
-
-## Raridade dobrada das curas e nova classe Épico (16 Nov 2026)
-- Pedido: "duplique a raridade dos itens de cura, mantenha a farmácia como está" (interpretado: itens 2x mais raros = chances x0,5, LesRaisins e First Aid, farmácia com os mesmos números de antes);
-  CMS, AI-2 e Morphine -> Raro; SURV12 e Morphine Injector -> nova classe **Épico**. Os números de Raro/Épico foram escolhas minhas. Leite, pão, equipamento e munição inalterados.
-- Config: `HEAL_RARITY_SCALE = 0.5`, `HEAL_PHARMACY_FIXED` (a antiga `PHARMACY_MULT` foi removida).
-- Validado (prédio, 8.000 baús): plaster 7,8%, comuns 4,2–5,3%, blood pack 2,2%, CAR 2,1%, AI-2 e CMS 0,9%, SURV12 0,6%, defibrillator 2,3%, morphine 1,1%, injector 0,5%; farmácia (3.000) idêntica
-  à anterior (CMS 6,8%, SURV12 4,0%, plaster 15,1%). 0 erros de carga.
-- Resultado esperado: green tower ~23 curas LesRaisins e ~98 unidades de First Aid (antes 50 e 199); 100 baús ~133 itens de cura no total; chance de 1+ item Épico em 100 baús 39% cada, Raro 63% cada.
-
-## Attachments por classe de raridade (16 Nov 2026)
-- Ideia do usuário: "ligeiramente mais raros que as armas", baseada no tipo de arma que o attachment aceita e nos seus atributos. Proposta (tabela) aprovada e aplicada sem mudanças.
-  Antes: att = 4% (baú de prédio, 1/3 da arma) e 1,2% nos barris (3x a arma), tipo com peso fixo e uniforme dentro do tipo. Agora: 9,6% e 0,3%.
-- Fatos: compatibilidade vem de `tacz_tags/attachments/allow_attachments/<arma>.json` (tags `#tacz:...` resolvidas recursivamente); atributos de `data/attachments/<id>_data.json` e zoom de
-  `assets/tacz/display/attachments/<id>_display.json`. 67 das 71 armas têm lista (`m320`, `minigun`, `rpg7`, `taurus943` não aceitam nenhum attachment); `sight_infitac_fmp13` não tem arquivo de dados.
-  As munições especiais (fmj, he, hp, i, slug...) são do tipo `extended_mag` no TACZ. Épicos: scope_mk5hd, scope_xl50, scope_mk4ert, scope_1873_6x, scope_1866_4x, muzzle_silencer_vulture,
-  muzzle_brake_timeless50, laser_peq6, stock_heavy_spas_12, stock_tactical_spas_12. Os pesos dos atributos e os cortes 40/30/20/10 são julgamento meu (aprovados pelo usuário).
-- Validado no servidor: prédio (8.000 baús) 9,6% com attachment, classes 67,8/22,2/8,1/1,9% (esperado 65,6/24,2/8,2/2,0); por item 0,155/0,069/0,037/0,019%; delegacia (3.000) 19,9%
-  (Épicos saíram abaixo do esperado, amostra pequena). Se o catálogo do TACZ mudar, rode `tools/att_rarity.py` (o gerador falha se as classes estiverem desatualizadas).
-
-## Armas nascem com 50% do pente (16 Nov 2026)
-- Pedido: "todas as armas, com exceção da minigun, passam a já spawnar com 50% do pente cheio". `GUN_SPAWN_AMMO_FRACTION = 0.5`, `GUN_SPAWN_AMMO_EXCLUDED = ("minigun",)`, `gun_spawn_ammo()`.
-  Pente = `ammo_amount` do TACZ (`docs/tacz_catalog.json`); só a minigun não tem. Arredondamento para CIMA (escolha minha): 22 armas têm pente ímpar; 4 têm pente de 1
-  (lonetrail, m320, rpg7, springfield1873) e nascem carregadas com 1. A bala na câmara (`HasBulletInBarrel`) continua false.
-- Validado no servidor: 1.280 armas amostradas (as 70 apareceram), todas com a contagem esperada; minigun 0; 0 erros de carga. **ERRO corrigido na 1.0.1:** na 1.0.0 o pente saía VAZIO no jogo (ver seção "Pente vazio na 1.0.0"); a aprovação anterior não tinha verificado o pente.
-- Isso interage com o pool de munição: a arma já traz balas, mas a munição de reserva continua sorteada à parte.
-
-## Barris com metade da chance (16 Nov 2026)
-- Pergunta do usuário: "a regra dos barris darem 50% a menos de loot ainda está ativa?" **Essa regra não existia neste mod** (pode ter sido do mod antigo, apagado). Existiam: barris com 3% a 25% das
-  armas/munição/attachments do baú, e a regra do AMC de remover 70% dos barris dos prédios (commit `68e2d7c` do AMC; vale só nos prédios). Pedido: "aplique barris com metade da chance nessas categorias".
-- Implementado em `item_chances`/`fa_chances` (parâmetro `tier`). Para a metade ser exata nas chances baixas (SURV12 barril 0,25%) os sorteios por item passaram a ter resolução 10x mais fina
-  (`ITEM_RES = 10`: peso total 10.000; `item_prob()` faz a conta real). A chance de sorteio de TODOS os itens por container não mudou nos baús.
-- Validado no servidor: prédio barril (6.000) M67 4,6%, leite 4,1%, plaster 4,2%, SURV12 0,3%; casa barril pão 9,3%; farmácia barril vaseline 4,4%, SURV12 1,9%; baú de prédio inalterado (M67 9,6%).
-- Efeito por estrutura (antes -> depois, cura LR / First Aid / granadas+brancas): oficina média 15,7->8,0 / 67->34 / 36->18; farmácia grande 16,9->9,9 / 53->31; casa 14,4->8,6 / 62->37; rampa
-  100,9->70,3 / 431->300; green tower (sem barris) inalterada. Risco de estourar dispenser/dropper diminui (menos itens por barril).
-
-## Pente vazio na 1.0.0 — corrigido na 1.0.1 (16 Nov 2026)
-- Sintoma relatado pelo usuário: armas do loot com o pente vazio (HUD `000`), embora `/data get entity @s SelectedItem` mostrasse `GunCurrentAmmoCount: 5b`.
-- **Causa (confirmada no bytecode):** o TACZ só lê o pente se a tag for **inteiro** (`GunItemDataAccessor.getCurrentAmmoCount`: `contains("GunCurrentAmmoCount", 3)`, 3 = TAG_INT). Um número
-  pequeno escrito como objeto JSON em `minecraft:custom_data` vira **byte** (`5b`), então o TACZ via 0.
-- **Correção:** `e_gun` grava o `custom_data` da arma como **texto SNBT** (`{GunId:"tacz:x",GunFireMode:"SEMI",GunCurrentAmmoCount:15,HasBulletInBarrel:0b}`), em que `15` é inteiro.
-- **Meu erro de teste:** as validações liam o valor com a regex `(\d+)` e ignoravam o sufixo de tipo (`b`, `s`, `L`). Agora: conferir também o **tipo** de toda tag numérica que outro mod lê.
-  Validado (baú real, 1.200 baús): 405 armas, 66 modelos, todas com o pente inteiro e na quantidade certa.
-- Regra geral: para qualquer número dentro de `custom_data` que outro mod lê, usar SNBT (ou conferir no bytecode o tipo que ele espera).
-
-## AMC: baús sorteados por cópia (verificação de 16 Nov 2026)
-- AMC `26ab892`..`fc3961a`: baús salvos nos modelos dos 10 prédios removidos e sorteados por cópia (`core/ChestDraw`, faixas por classe de altura), "hard" para os sorteados no subsolo
-  ou no terraço, barris que guardam algo continuam barris; categorias de spawn por altura. `Palette.lootTable` continua `chests/<tema>/<tier>[_hard]` e `LOOT_THEMES` igual:
-  **nenhuma mudança necessária no mod**. Jar do AMC usado na medição idêntico (cmp) ao da instância do usuário.
-- Contagem média (sem vasos), antiga -> nova: apartamentos 10->23, esqueleto 17->22, pequeno 24->26, azulado 16->61, apocalíptico 49->66, torre 71->102, torre verde 91->80,
-  crash 94->94, largo 161->93, brutalista 229->133; rampa 399 e delegacia 63 iguais. Como as chances são por baú, a sensação por baú não muda; o total por prédio sim
-  (ex.: armas no brutalista 27,5->16,0; no azulado 2,0->7,3).
-
-## Curas fora de oficina/posto/delegacia e leite 1–3 (16 Nov 2026)
-- Validado no servidor (1.500 containers cada): baú da delegacia, barril de oficina e barril de posto sem nenhuma cura LesRaisins nem First Aid; leite presente com 1–3; baú de prédio
-  com as curas normais. 41 tabelas e 36 loot modifiers (sem as 12 tabelas `_firstaid` desses 3 temas). 0 erros de carga.
-- Leite só em prédios e casas (16 Nov): validado (1.200 containers cada): farmácia, delegacia, oficina e posto sem leite; prédio 7,5% e casa 8,1%, com 1–3.
-
-## Ferramentas vanilla na oficina (16 Nov 2026)
-- Pedido: Raros picareta de ferro e isqueiro (40–65% de durabilidade), Lendário picareta de netherite (100%); proposta com opção A (barris com metade, como a regra dos barris) aprovada.
-  `set_damage` usa a fração de durabilidade RESTANTE (1,0 = inteira).
-- Validado (3.000 baús e 3.000 barris de oficina): ferro 1,07% / 0,43%, isqueiro 0,93% / 0,60%, durabilidade observada 41–66% (o isqueiro tem 64 usos: o arredondamento chega a 65,6%).
-  Netherite não saiu em 6.000 amostras (esperado ~2,25; chance de zero ~10%): conferida só pelos pesos da tabela (0,050% / 0,025%). Por oficina: ferro e isqueiro 27% (média) / 19% (pequena);
-  netherite ~1 a cada 64 oficinas médias.
-
-## Leite 4% e pão 16% com 1–5 (17 Nov 2026)
-- Pedido do usuário (números dele): leite condensado 8% -> 4% e pão 20% -> 16%, quantidade do pão 4–12 -> 1–5; barris proporcionais (metade: leite 2%, pão 8%). Só `FOOD` em `tools/gen_loot.py`; mudaram 8 tabelas (`building` e `house`, `chest`/`chest_hard`/`barrel`/`barrel_hard` `_core`).
-- Validado no servidor (3.000 containers cada, Sorte 0): baú de prédio leite 3,6%; baú de casa leite 3,7% e pão 16,0% (1–5, média 3,0); barril de prédio leite 1,9%; barril de casa leite 1,6% e pão 7,8%. Sem erros de carga.
-
-## Reformulação da raridade das armas: categorias + 5 níveis (17 Nov 2026, v1.0.1)
-- Pedido do usuário (arquivo na [user's desktop] + "Categorize essas dmr como rifle mesmo" + "Opção A, manter 16,8%, pode aplicar"): DMR vira fuzil; 5 níveis por categoria; chance total por categoria no prédio = os "1 a cada N" dele.
-- Peso por arma = fatia da categoria x LEVEL_W[nível] / soma dos pesos da categoria (soma total 100.000). Nível por arma em `GUN_LEVELS` (todas as 70 armas; golden deagle Épico e springfield1873 Incomum foram escolha minha).
-- Efeitos colaterais (comunicados): (1) total de armas do prédio 12% -> 16,8%; (2) attachments do prédio congelados (não sobem); (3) a munição segue a popularidade das armas (`ammo_weights` usa `gun_weights`): fatias de calibre
-  mudaram (prédio: 12g 11,9->9,2%, .45 ACP 9,3->6,6%, .50 AE 4,3->2,6%, 40mm e foguete 2,4->4,3%, 4.6x30 3,8->6,1%); a chance total de munição por container NÃO mudou; (4) `docs/attachments_rarity.json`
-  (que usou os pesos antigos de arma como "popularidade") NÃO foi regenerado.
-- Chances resultantes (prédio, baú): Comum 5,68%, Incomum 5,21%, Raro 2,83%, Épico 2,77%, Lendário 0,31% (1 a cada 319); 100 baús: 27% de ter >= 1 Lendário. Por arma (Opção A): fuzil Comum 0,30% (1/333) ... fuzil Lendário 0,019% (1/5.334);
-  explosivas (só Épico) 0,714% cada (1/140).
-- Validado no servidor (Sorte 0, 0 erros de carga): 40.000 baús de prédio -> 6.716 armas (esperado 6.736), níveis 5,70/5,27/2,62/2,89/0,31%; 80.000 baús -> por categoria dentro de 2 desvios; delegacia 20.000 baús -> 5.035 armas
-  (esperado 5.000), níveis Comum 10,0 / Incomum 7,7 / Raro 5,0 / Épico 2,1 / Lendário 0,34%. Um desvio de -2,5 desvios nos fuzis na 1a amostra sumiu na 2a (ruído).
-
-## Delegacia: armas 2x o prédio (17 Nov 2026, v1.0.1)
-- Pedido do usuário: "na delegacia, as chances de todas as armas, independentemente de categoria e nível de raridade, serão multiplicadas por 2". Delegacia usa o mesmo perfil do prédio: baú 336‰, difícil 562‰, barril 12‰, barril difícil 20‰ (`RATES["police_station"]`).
-- **Attachments da delegacia: continuam como estavam** (200/266/24/48‰ explícitos em `att`; "continuará 2x", mas na verdade são 2,08x / 1,66x / 8x / 8x os do prédio) e **a chance de munição por container também** (80 / 100 / 20 / 36%).
-  A mistura de calibres da delegacia agora é a MESMA do prédio (`pick/ammo_default`; `ammo_police` e `gun_police` deixaram de existir). Usuário: "munições e attachments, veremos com mais calma depois".
-- Validado no servidor (Sorte 0, 0 erros de carga): baú 40.000 -> 33,38% de arma (esperado 33,6%); baú difícil 20.000 -> 55,98% (56,2%); barril 60.000 -> 1,21% (1,2%); barril difícil 40.000 -> 1,93% (2,0%).
-  Anexos medidos 20,1 / 26,3 / 2,4 / 5,0%. Níveis no baú: Comum 11,5%, Incomum 10,3%, Raro 5,5%, Épico 5,5%, Lendário 0,57% (esperado 0,62%, 1 a cada 160 baús).
-
-## Attachments redefinidos pelas estruturas do usuário (17 Nov 2026, v1.0.1)
-- Arquivo `[user's desktop]/TACZ_attachments.txt` + 7 `.nbt` (`.../[user's test instance]/.../generated/minecraft/structures/`: base = legenda de cores; tacz_scopes, tacz_extended_mag com nível; grip, laser, muzzle, stock sem).
-  Escolhas do usuário: sem raridade = peso do Incomum (opção B), níveis 16/8/4/2/1 (Mítico 0,5 foi proposta minha, aceita), incluir os 9 não fabricáveis, deixar de fora os 4 fabricáveis não listados. `stock_m4ss` estava duplicado (conta 1).
-- Removidos `tools/att_rarity.py` e `docs/attachments_proposta.csv` (classificação antiga por 2 fatores, substituída). A regra antiga "0,8 x arma" e o congelamento dos anexos do prédio acabaram.
-- Validado no servidor (Sorte 0, 0 erros de carga): prédio baú 80.000 -> anexos 20,25% (esperado 20,2%), armas 16,83%; difícil 30.000 -> 33,78% / 28,40%; barril 60.000 -> 0,69% / 0,61%; delegacia baú 40.000 -> 40,33% / 33,45%, difícil
-  30.000 -> 66,85% / 56,07%, barril 60.000 -> 1,44% / 1,15%. Níveis (prédio baú, medido/esperado): Comum 8,01/8,10, sem raridade 9,63/9,58, Raro 1,30/1,29, Épico 0,55/0,55, Lendário 0,131/0,115, Mítico 0,018/0,012 (14 `ammo_mod_he` em 80.000 baús).
-
-## Munição por nível + delegacia com a chance de munição do prédio (17 Nov 2026, v1.0.1)
-- Pedido do usuário: classificou os 23 calibres por cor de concreto em `tacz_ammo.nbt` (mesma regra dos anexos), "pesos 16/8/4/2/1" e "pode aplicar a delegacia junto" (munição da delegacia = chances do prédio). As quantidades dentro dos baús dele são só o tamanho cheio da pilha
-  (7.92x57 estava 34 em vez de 36: digitação, ignorado). Calibres 7.62x25 e 6.8x51 Fury (sem arma no loot) continuam fora. A mistura antiga (50% igual + 50% popularidade das armas) e `AMMO_MIX_UNIFORM` foram removidas; `ammo_police` não existe mais.
-- Validado no servidor (Sorte 0, 0 erros de carga): prédio baú 60.000 -> 51,87% com munição (esperado 52%), 34,06 balas/container (34,1); delegacia baú 60.000 -> 52,06% / 34,03; difícil 30.000 -> 86,3% (86,6%) em prédio e delegacia; delegacia barril 60.000 -> 6,16%
-  (6,2%), barril difícil 40.000 -> 11,26% (11,4%). Por calibre (prédio baú, medido/esperado): 9mm 11,2/11,1, 12g 5,71/5,76, .308 1,47/1,48, 40mm 1,39/1,48, foguete 1,52/1,48, .50 BMG 442 vezes em 60.000 (447 esperado).
-- Consequência (comunicada): barris da delegacia perdem munição (barril 11,8 -> 4,1 balas, difícil 21,2 -> 7,5); baú 47,1 -> 34,1. Prédio sobe ~11% em balas por container (calibres de pilha grande ficaram mais comuns).
-- Ajuste no mesmo dia (usuário: ".50 BMG 21-30; diminuir um pouco a raridade do Lendário: 1/100 em vez de 1/134"): `AMMO_LEVEL_W["Lendário"]` 1 -> 1,35 (único Lendário é o .50 BMG; os outros 22 calibres perdem ~0,2% de fatia) e `AMMO_RANGE_OVERRIDE = {"50bmg": (21, 30)}`
-  (antes 12-25; pilha máxima 30). Validado (80.000 baús cada, Sorte 0): prédio 1,03% (824 baús, pilhas 21-30, média 25,5), delegacia 1,00% (803; esperado 1,00%). Uma pilha de 16 apareceu na delegacia: dois sorteios do mesmo calibre no mesmo baú se
-  somam no `/loot insert` (limite 30), artefato do teste, não da tabela.
-
-## Mochilas (Sophisticated Backpacks) e lanternas (TCT Flashlight) nas casas — versão 1.1.0 (17 Nov 2026)
-- Pedido do usuário: duas dependências OPCIONAIS; níveis em `backpacks.nbt` e `flashlight.nbt` (mesma pasta `structures` das outras); "itens exclusivos das casas"; "1 a cada N" é a chance, por baú, de **CADA ITEM** daquele nível (a 1a versão, que lia o número como o do nível inteiro dividido entre os itens, foi CORRIGIDA pelo usuário no mesmo dia).
-  Mochilas (**VALORES FINAIS, 17 Nov 2026, por item**): Comum 1/9, Incomum 1/14, Raro 1/20, Épico 1/30, Lendário 1/54. Lanternas: Incomum 1/10, Raro 1/16. (Antes: 15/30/45/75/120 e 30/45.) Config: `LEVEL_FAMILIES` e `BACKPACK_COMPONENTS` em `tools/gen_loot.py`.
-- Itens por nível: Comum `copper_backpack`; Incomum `iron_backpack`, `stack_upgrade_tier_1`; Raro `gold_backpack`, `advanced_pickup_upgrade`, `stack_upgrade_tier_2`; Épico `diamond_backpack`, `stack_upgrade_tier_3`; Lendário `netherite_backpack`, `inception_upgrade`,
-  `stack_upgrade_tier_4`. Lanternas: Incomum `flashlight_off`; Raro `headlamp_helmet`, `night_vision_goggles_helmet`. As mochilas saem com os componentes dos baús do usuário (`sophisticatedcore:number_of_upgrade_slots` / `number_of_inventory_slots`: 1/45, 2/54, 3/81, 5/108, 7/120).
-- Escolhas minhas (não respondidas pelo usuário): itens SEPARADOS (nenhuma mochila vem com upgrade dentro); itens não classificados ficam de fora (mochila básica `backpack`, demais upgrades, `battery`, `lantern`, `flashlight` acesa); baú difícil = baú; barris com metade (BARREL_ITEM_MULT).
-- Tabelas `house/<tier>_backpacks` e `house/<tier>_flashlight` (um pool independente por ITEM) + 8 loot modifiers no total (4 por família), com `neoforge:conditions` `mod_loaded` (`sophisticatedbackpacks` / `flashlight`); o mod ganhou 2 dependências opcionais no `neoforge.mods.toml`; versão 1.0.1 -> 1.1.0.
-  O `check()` do gerador exige a condição `mod_loaded` em qualquer tabela com item desses mods. Total agora 47 tabelas e 44 loot modifiers.
-- Teste: o servidor de dev (NeoForge 21.1.219) NÃO carrega o Sophisticated Backpacks (exige >= 21.1.229): para testar com os mods rode `./gradlew runServer -Pneo_version=21.1.264` (versão da instância do usuário; só no teste, `gradle.properties` não mudou) e copie para `run/mods/`
-  `sophisticatedbackpacks` e `sophisticatedcore` (libs do AMC) e `flashlight-5.0` e `tctcore-2.3` (da instância MAZ 2.0.0). Aviso conhecido e alheio ao mod: `Couldn't load tag minecraft:placeable ... tacz:blood_strike_1`.
-- Validado no servidor (Sorte 0), versão final (chance por ITEM): SEM os mods opcionais: 0 erros de carga e nenhum item deles. COM os mods: 0 erros; casa baú 60.000 -> medido/esperado: cobre 6,64/6,67%, ferro 3,20/3,33, stack1 3,33/3,33, ouro 2,20/2,22,
-  diamante 1,31/1,33, netherite 0,88/0,83, inception 0,83/0,83, Flashlight 3,24/3,33, Headlamp 2,23/2,22, NVG 2,19/2,22; baú difícil 30.000 e barril 60.000 (metade) batem; prédio, delegacia, oficina, posto e farmácia: nenhum desses itens; os 5 tipos de mochila saem
-  com os componentes certos. Qualquer item de mochila por baú de casa 22,6%; qualquer lanterna 7,6%. Risco de estourar barril de 9 espaços na casa: 1 em 38 milhões -> 1 em 5,4 milhões (enumeração exata; método diferente do antigo).
-- Bateria da lanterna: `flashlight:battery` é fabricável (5 por 1 bloco de redstone + ferro) e é ingrediente da Flashlight, Headlamp e NVG; o código guarda `BatteryFlashlight`, mas NÃO foi verificado se/como gasta carga: testar no jogo.
-- **Valores finais (17 Nov 2026, "quero mudar todas as raridades")**: validado (60.000 baús de casa, medido/esperado): cobre 11,07/11,11%, ferro 7,16/7,14, ouro 4,96/5,00, diamante 3,35/3,33, netherite 1,86/1,85, Flashlight 10,09/10,00, Headlamp 6,16/6,25;
-  baú difícil 30.000 e barril 60.000 (metade) batem; 0 erros de carga. Qualquer item de mochila por baú de casa 41,9%; qualquer lanterna 20,9%. Risco de estourar barril de 9 espaços na casa: 1 em ~1 milhão (enumeração exata).
-- **17 Nov 2026: etapa das mochilas e lanternas (v1.1.0) testada e aprovada pelo usuário** ("Testado e aprovado, pode fechar essa etapa"). Ainda sem push (commits `7c88fc0`, `5f1439b`, `99db0db`, `29de190`) e sem release no GitHub.
-
-## Caixas de munição do TACZ: ferro, ouro, diamante (17 Nov 2026, v1.1.0)
-- Pedido do usuário: iron ammo box (Incomum), gold (Raro), diamond (Épico); "Opção B, apenas prédios e delegacia, delegacia com as mesmas chances". Item `tacz:ammo_box` vazio com `custom_data` `{Level:0|1|2}` em SNBT (Level inteiro; mesma forma das receitas do TACZ). Config `AMMO_BOX` em `tools/gen_loot.py`.
-- Chance de CADA caixa por baú (baú difícil = baú; barris metade): ferro 1/14 (7,14%), ouro 1/20 (5%), diamante 1/30 (3,33%) = os mesmos números das mochilas; qualquer caixa 14,7% por baú. Só `building` e `police_station`, sem condição de mod (TACZ obrigatório). Não incluídas: casa, oficina, posto, farmácia.
-- Validado no servidor (Sorte 0, 0 erros de carga): prédio baú 60.000 -> ferro 7,10 / ouro 5,07 / diamante 3,33%; baú difícil 30.000 -> 7,11 / 4,98 / 3,29; barril 60.000 -> 3,62 / 2,64 / 1,70 (esperado 3,57 / 2,5 / 1,67); delegacia baú 60.000 -> 7,09 / 4,98 / 3,34 e barril 3,57 / 2,65 / 1,62;
-  casa e oficina: nenhuma. `Level` sai inteiro (`{Level: 1}`, sem sufixo de byte). Capacidade das caixas NÃO verificada (config do TACZ). Risco de estourar barril de 9 espaços (enumeração exata, sem e com as caixas): prédio barril difícil 1 em 534 mil -> 1 em 302 mil; delegacia barril difícil 1 em 1,6 milhão -> 1 em 724 mil.
-- **17 Nov 2026: etapa das caixas de munição (v1.1.0) testada e aprovada pelo usuário** ("Testado e aprovado, pode fechar essa etapa"). Estado: v1.1.0 completa e aprovada; ainda sem push (commits `7c88fc0` a `743107a`) e sem release no GitHub.
-
-## Taco de baseball levemente mais raro que a dagger (18 Nov 2026)
-- Pedido do usuário ("levemente mais raro que a dagger") e escolha "Opção B": taco de baseball 2,0% -> **1,5%** por baú (1 a cada 67; barril 1,0% -> 0,75%, 1 a cada 133); dagger e karambit ficam em 2,0% / 1,0%. `GEAR["baseball_bat"]["p"]` 20 -> 15; vale em todos os temas com armas brancas (todos menos a farmácia); baú difícil = baú.
-- Validado no servidor (Sorte 0, 0 erros de carga): prédio baú 60.000 -> taco 1,55%, dagger 1,9%, karambit 2,0%; casa barril 60.000 -> 0,76% / 1,0% / 0,9%; delegacia baú difícil 30.000 -> 1,55% / 2,1% / 2,0%.
-- O jar `amctaczloot-1.1.0.jar` reconstruído difere do anexado ao release v1.1.0 (que ainda tem o taco a 2,0%): o release NÃO foi atualizado.
-- **Versão 1.1.1 (18 Nov 2026):** `mod_version` 1.1.0 -> 1.1.1 só para publicar o taco a 1,5% (o jar anexado ao release v1.1.0 ainda tinha 2,0%); jar `amctaczloot-1.1.1.jar` (carrega sem erros; mochilas continuam saindo). Push e release v1.1.1 feitos a pedido do usuário.
-
-## Throwables só no prédio e na delegacia (18 Nov 2026)
-- Pedido do usuário: "manter os throwable apenas no prédio e na delegacia". `THROWABLE_THEMES = ("building", "police_station")` em `tools/gen_loot.py`: M67 (3-5), RGN (2-4) e C4 saem SÓ nesses dois temas, com as mesmas chances de antes (prédio baú 9,2 / 4,1 / 3,0%, barril metade; delegacia o dobro);
-  casa, oficina, posto e farmácia ficam sem throwables. As armas brancas (dagger, karambit, taco) continuam em todos os temas menos a farmácia. Mudaram 12 tabelas (casa, oficina e posto).
-- Validado no servidor (Sorte 0, 0 erros de carga, 20.000 baús cada): prédio M67 8,8% / RGN 4,1% / C4 3,1%; delegacia 18,6% / 8,2% / 5,8%; casa, oficina (barril) e posto: nenhum throwable, armas brancas presentes (dagger ~2%, taco ~1,5%); farmácia (5.000): nada.
-- O jar `amctaczloot-1.1.1.jar` reconstruído difere do anexado ao release v1.1.1 (que ainda tem throwables nos outros temas); release NÃO atualizado.
-
-## Mochilas: raridade POR ITEM e sem Inception (18 Nov 2026)
-- Pedido do usuário ("Nova atualização das raridades das mochilas e upgrades"): "1 a cada N" de CADA item, por baú de casa (baú difícil = baú; barril metade): Copper Backpack 13, Iron 20, Gold 32, Diamond 45, Netherite 57; Stack Upgrade tier 1 26, tier 2 52, tier 3 63, tier 4 79; Advanced Pickup 29.
-  **Inception Upgrade removido** (era Lendário 1/54). Os níveis Comum a Lendário deixaram de ditar a chance (cada item tem a sua). `LEVEL_FAMILIES` em `tools/gen_loot.py` virou `item -> (nível, N)`; lanternas inalteradas (Flashlight 10, Headlamp 16, NVG 16).
-- Validado no servidor (Sorte 0, 0 erros de carga, casa baú 60.000, medido/esperado): copper 7,58/7,69%, iron 4,97/5,00, gold 2,98/3,12, diamond 2,27/2,22, netherite 1,77/1,75, stack1 3,77/3,85, stack2 1,94/1,92, stack3 1,57/1,59, stack4 1,25/1,27, pickup 3,43/3,45; baú difícil 30.000 e barril 60.000 batem; Inception 0.
-- O jar `amctaczloot-1.1.1.jar` reconstruído difere do anexado ao release v1.1.1; release NÃO atualizado.
-- **Barris das mochilas (18 Nov 2026):** pedido do usuário "raridade das mochilas permanece a mesma dos baús nos barris" e, em seguida, "e dos upgrades também": a família `backpacks` (5 mochilas + 4 upgrades) tem nos barris a MESMA chance do baú (`barrel_mult=1.0` em `LEVEL_FAMILIES`). As lanternas seguem com metade nos barris.
-  Validado (casa barril 60.000 / barril difícil 30.000, Sorte 0): copper 7,89 / 7,71%, iron 5,07 / 4,79, gold 3,01 / 3,19, diamond 2,21 / 2,19, netherite 1,76 / 1,82, stack1 3,86 / 3,79, stack2 1,97 / 1,99, stack3 1,60 / 1,67, stack4 1,17 / 1,30, pickup 3,48 / 3,27 (esperado igual ao baú);
-  Flashlight no barril 4,89 / 4,80% (metade de 10%). Risco de estourar barril de 9 espaços na casa: 1 em 8,8 milhões (enumeração exata), média 1,26 pilhas.
-
-## Versão 1.1.2 (18 Nov 2026)
-- `mod_version` 1.1.1 -> 1.1.2 para publicar: throwables só em prédio e delegacia, mochilas e upgrades com raridade por item e sem Inception, mochilas/upgrades com a mesma chance do baú nos barris. Jar `amctaczloot-1.1.2.jar` (carrega sem erros; Inception ausente; mochilas e armas brancas saem; throwables fora das casas).
-  Push e release v1.1.2 feitos a pedido do usuário; o release v1.1.1 (e o v1.1.0) continuam publicados com o conteúdo antigo.
-- **18 Nov 2026: etapa das mochilas, throwables e v1.1.2 testada e aprovada pelo usuário** ("Testado e aprovado, pode fechar essa etapa"). Próxima etapa (pré-lançamento): revisão de código, segurança, otimização, bugs e tradução dos documentos para inglês.
-- Prompt da etapa pré-lançamento: `[local prompt file]` (fora do repositório). O usuário vai executá-lo depois do reset do limite de uso (18 Nov 2026, 14:40). Estado do projeto: v1.1.2 publicada; nada pendente de push (os commits locais de documentação `c767fb6` e posteriores ainda não foram enviados).
+## Generator (`tools/gen_loot.py`) and data
+- Writes `data/amctaczloot/loot_table/<theme>/<tier>_core.json` (gun, attachment and ammo pools + one pool per item),
+  `<tier>_firstaid.json`, `house/<tier>_backpacks.json`, `house/<tier>_flashlight.json`, the pick tables in `pick/`,
+  one loot modifier per table, and the 36 junk tables in `data/abandonedmoderncity/loot_table/chests/`. Tiers chest,
+  chest_hard, barrel, barrel_hard (no pot). 47 tables, 44 loot modifiers.
+- Inputs in `docs/`: `tacz_catalog.json` (`tools/tacz_catalog.py <tacz.jar>`), `ammo_rarity.json` and
+  `attachments_rarity.json` (`tools/att_from_nbt.py <structures folder>`), `containers.json` (preview only;
+  `tools/measure_containers.py <AMC index.txt> run/world [names [offset]]`; for structures with drawn chests the file
+  holds the mean of several copies: measured with AMC 1.0.0 on 18 Nov 2026), `lr_catalog.json` (reference only).
