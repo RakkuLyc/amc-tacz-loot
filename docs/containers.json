@@ -8,7 +8,7 @@
   },
   "total": 95.4,
   "copies_measured": 6,
-  "note": "m\u00e9dia de c\u00f3pias (ba\u00fas sorteados por c\u00f3pia desde 16 Nov 2026; medido com o AMC 1.0.0 em 18 Nov 2026)"
+  "note": "mean over copies (chests drawn per copy since 16 Nov 2026; measured with AMC 1.0.0 on 18 Nov 2026)"
  },
  "abandoned_garage_house": {
   "theme": "house",
@@ -38,7 +38,7 @@
   },
   "total": 74.5,
   "copies_measured": 6,
-  "note": "m\u00e9dia de c\u00f3pias (ba\u00fas sorteados por c\u00f3pia desde 16 Nov 2026; medido com o AMC 1.0.0 em 18 Nov 2026)"
+  "note": "mean over copies (chests drawn per copy since 16 Nov 2026; measured with AMC 1.0.0 on 18 Nov 2026)"
  },
  "abandoned_house": {
   "theme": "house",
@@ -101,7 +101,7 @@
   },
   "total": 63,
   "copies_measured": 5,
-  "note": "m\u00e9dia de c\u00f3pias (ba\u00fas sorteados por c\u00f3pia desde 16 Nov 2026; medido com o AMC 1.0.0 em 18 Nov 2026)"
+  "note": "mean over copies (chests drawn per copy since 16 Nov 2026; measured with AMC 1.0.0 on 18 Nov 2026)"
  },
  "abandoned_pool_house": {
   "theme": "house",
@@ -122,7 +122,7 @@
   },
   "total": 399,
   "copies_measured": 5,
-  "note": "m\u00e9dia de c\u00f3pias (ba\u00fas sorteados por c\u00f3pia desde 16 Nov 2026; medido com o AMC 1.0.0 em 18 Nov 2026)"
+  "note": "mean over copies (chests drawn per copy since 16 Nov 2026; measured with AMC 1.0.0 on 18 Nov 2026)"
  },
  "abandoned_small_building": {
   "theme": "building",
@@ -131,7 +131,7 @@
   },
   "total": 27.4,
   "copies_measured": 5,
-  "note": "m\u00e9dia de c\u00f3pias (ba\u00fas sorteados por c\u00f3pia desde 16 Nov 2026; medido com o AMC 1.0.0 em 18 Nov 2026)"
+  "note": "mean over copies (chests drawn per copy since 16 Nov 2026; measured with AMC 1.0.0 on 18 Nov 2026)"
  },
  "abandoned_suburban_house": {
   "theme": "house",
@@ -174,7 +174,7 @@
   },
   "total": 92.9,
   "copies_measured": 6,
-  "note": "m\u00e9dia de c\u00f3pias (ba\u00fas sorteados por c\u00f3pia desde 16 Nov 2026; medido com o AMC 1.0.0 em 18 Nov 2026)"
+  "note": "mean over copies (chests drawn per copy since 16 Nov 2026; measured with AMC 1.0.0 on 18 Nov 2026)"
  },
  "apartment_building": {
   "theme": "building",
@@ -183,7 +183,7 @@
   },
   "total": 20.2,
   "copies_measured": 6,
-  "note": "m\u00e9dia de c\u00f3pias (ba\u00fas sorteados por c\u00f3pia desde 16 Nov 2026; medido com o AMC 1.0.0 em 18 Nov 2026)"
+  "note": "mean over copies (chests drawn per copy since 16 Nov 2026; measured with AMC 1.0.0 on 18 Nov 2026)"
  },
  "apocalyptic_building_57x45": {
   "theme": "building",
@@ -193,7 +193,7 @@
   },
   "total": 66.9,
   "copies_measured": 6,
-  "note": "m\u00e9dia de c\u00f3pias (ba\u00fas sorteados por c\u00f3pia desde 16 Nov 2026; medido com o AMC 1.0.0 em 18 Nov 2026)"
+  "note": "mean over copies (chests drawn per copy since 16 Nov 2026; measured with AMC 1.0.0 on 18 Nov 2026)"
  },
  "bluish_building": {
   "theme": "building",
@@ -202,7 +202,7 @@
   },
   "total": 52.6,
   "copies_measured": 5,
-  "note": "m\u00e9dia de c\u00f3pias (ba\u00fas sorteados por c\u00f3pia desde 16 Nov 2026; medido com o AMC 1.0.0 em 18 Nov 2026)"
+  "note": "mean over copies (chests drawn per copy since 16 Nov 2026; measured with AMC 1.0.0 on 18 Nov 2026)"
  },
  "brutalist_u_building_75x58": {
   "theme": "building",
@@ -212,7 +212,7 @@
   },
   "total": 136.2,
   "copies_measured": 5,
-  "note": "m\u00e9dia de c\u00f3pias (ba\u00fas sorteados por c\u00f3pia desde 16 Nov 2026; medido com o AMC 1.0.0 em 18 Nov 2026)"
+  "note": "mean over copies (chests drawn per copy since 16 Nov 2026; measured with AMC 1.0.0 on 18 Nov 2026)"
  },
  "gas_station_blue": {
   "theme": "gas_station",
@@ -412,7 +412,7 @@
   },
   "total": 18.6,
   "copies_measured": 6,
-  "note": "m\u00e9dia de c\u00f3pias (ba\u00fas sorteados por c\u00f3pia desde 16 Nov 2026; medido com o AMC 1.0.0 em 18 Nov 2026)"
+  "note": "mean over copies (chests drawn per copy since 16 Nov 2026; measured with AMC 1.0.0 on 18 Nov 2026)"
  },
  "tower": {
   "theme": "building",
@@ -423,7 +423,7 @@
   },
   "total": 132.7,
   "copies_measured": 6,
-  "note": "m\u00e9dia de c\u00f3pias (ba\u00fas sorteados por c\u00f3pia desde 16 Nov 2026; medido com o AMC 1.0.0 em 18 Nov 2026)"
+  "note": "mean over copies (chests drawn per copy since 16 Nov 2026; measured with AMC 1.0.0 on 18 Nov 2026)"
  },
  "workshop_medium_blue_black": {
   "theme": "workshop",
