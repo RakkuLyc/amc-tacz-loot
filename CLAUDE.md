@@ -38,8 +38,9 @@ nothing from the mod. The history of every decision (13 to 18 Nov 2026) is in `d
   `docs/attachments_rarity.json`, `ATT_LEVEL_W`). Guns spawn with half a magazine (minigun 0).
 - The level names in the data stay in Portuguese (Comum, Incomum, Raro, Épico, Lendário, Mítico, Sem raridade =
   Common, Uncommon, Rare, Epic, Legendary, Mythic, unrated): the generator reads them from `docs/*.json`.
-- The user's source `.nbt` structures (for `tools/att_from_nbt.py`) no longer exist on disk (18 Nov 2026); the rarity
-  files in `docs/` are the only copies (safe in git).
+- The user's source `.nbt` structures (for `tools/att_from_nbt.py`) no longer exist anywhere (searched the whole disk and both
+  trash bins on 19 Nov 2026; the user has no backup). `docs/ammo_rarity.json` and `docs/attachments_rarity.json` are the only
+  copies (safe in git): to change a level, edit the JSON directly. The normal path of `att_from_nbt.py` was never re-tested.
 - **Pre-release review (18 Nov 2026)**, branch `revisao-pre-lancamento`, not merged or pushed: bugs fixed (RCON reading
   of long replies, sampler with exact counts, tools writing `docs/` from any folder), automated tests, Gradle
   distribution checksum, dead code removed, `gen_loot.py` reorganized and translated, containers re-measured with AMC
