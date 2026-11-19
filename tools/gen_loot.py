@@ -809,7 +809,8 @@ def check(base, gl, tables, glms, junk):
         for name in re.findall(r'"name": "(minecraft:[a-z_0-9]+)"', json.dumps(t)):
             if name not in allowed:
                 errs.append("item vanilla fora da sucata em %s: %s" % (n, name))
-    # lista explícita (não derivada de JUNK_SHAPE): se um tier sumir da sucata, a tabela vanilla do AMC voltaria sem aviso
+    # lista explícita (não derivada de JUNK_SHAPE): se um tier sumir da sucata, a tabela vanilla do AMC voltaria
+    # sem aviso
     amc_tiers = ("chest", "chest_hard", "barrel", "barrel_hard", "pot", "pot_hard")
     expect = {"%s/%s" % (th, ti) for th in RATES for ti in amc_tiers}
     if set(junk) != expect:

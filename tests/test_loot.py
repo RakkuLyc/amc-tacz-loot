@@ -4,12 +4,14 @@
 Rodar na raiz do projeto:  python3 -m unittest -v
 
 O que é conferido:
-- os arquivos em src/main/resources/data são exatamente o que o gerador produz agora (nada editado à mão, nada esquecido)
+- os arquivos em src/main/resources/data são exatamente o que o gerador produz agora (nada editado à mão, nada
+  esquecido)
   e duas gerações seguidas são idênticas (determinismo);
 - estrutura de toda tabela: pesos inteiros > 0, sinais do `quality` (Sorte) e soma zero nos pools com `empty`;
 - condição `neoforge:mod_loaded` em toda tabela e loot modifier com item de mod opcional;
 - loot modifiers listados, existentes e apontando só para as 36 tabelas do AMC;
-- IDs internos (GunId, AmmoId, ...) existem nos catálogos; nenhum item vanilla fora da sucata e das exceções; nenhum vaso;
+- IDs internos (GunId, AmmoId, ...) existem nos catálogos; nenhum item vanilla fora da sucata e das exceções;
+  nenhum vaso; as 36 tabelas do AMC sobrescritas;
 - a chance de cada item no disco é a da configuração do gerador;
 - risco de estourar um container de 9 espaços (dispenser/dropper recebem a tabela `barrel`) abaixo de 1 em 100.000.
 
@@ -95,7 +97,8 @@ class Structure(unittest.TestCase):
                     else:
                         self.assertGreaterEqual(q, 0, where + ": item com quality negativo")
                 if any(e["type"] == "minecraft:empty" for e in p["entries"]):
-                    self.assertEqual(sum(e.get("quality", 0) for e in p["entries"]), 0, where + ": soma dos quality != 0")
+                    self.assertEqual(sum(e.get("quality", 0) for e in p["entries"]), 0,
+                                     where + ": soma dos quality != 0")
 
     def test_optional_mods_have_condition(self):
         for name, t in TABLES.items():
@@ -123,13 +126,21 @@ class Structure(unittest.TestCase):
     def test_ids_exist_in_catalogs(self):
         lr = load(os.path.join(ROOT, "docs/lr_catalog.json"))
         known = {"GunId": G.TZ["guns"], "AmmoId": G.TZ["ammo"], "AttachmentId": G.TZ["attachments"], "ConsumableId": lr,
-                 "ThrowableId": THROWABLE_STACK, "MeleeWeaponId": {i for i, d in G.GEAR.items() if d["item"] == "melee"}}
+                 "ThrowableId": THROWABLE_STACK,
+                 "MeleeWeaponId": {i for i, d in G.GEAR.items() if d["item"] == "melee"}}
+        pattern = (r'(GunId|AmmoId|AttachmentId|ConsumableId|ThrowableId|MeleeWeaponId)'
+                   r'\\?"?\s*:\s*\\?"[a-z]+:([a-z_0-9]+)')
+        found = 0
         for name, t in TABLES.items():
-            for kind, iid in re.findall(r'(GunId|AmmoId|AttachmentId|ConsumableId|ThrowableId|MeleeWeaponId)\\?"?\s*:\s*\\?"[a-z]+:([a-z_0-9]+)', json.dumps(t)):
+            for kind, iid in re.findall(pattern, json.dumps(t)):
+                found += 1
                 self.assertIn(iid, known[kind], "%s: %s=%s fora do catálogo" % (name, kind, iid))
+        self.assertGreater(found, 400, "a busca de IDs internos não encontrou quase nada: expressão quebrada?")
 
     def test_all_36_amc_tables_overridden(self):
-        """As 36 tabelas do AMC (6 temas x 6 tiers, lista fixa aqui) existem como sucata; sem uma delas o loot vanilla volta."""
+        """As 36 tabelas do AMC (6 temas x 6 tiers, lista fixa aqui) existem como sucata.
+
+        Sem uma delas o loot vanilla do AMC voltaria."""
         themes = ("building", "police_station", "pharmacy", "house", "workshop", "gas_station")
         tiers = ("chest", "chest_hard", "barrel", "barrel_hard", "pot", "pot_hard")
         want = {os.path.join(G.AMC, "loot_table/chests", th, ti + ".json") for th in themes for ti in tiers}
@@ -169,7 +180,8 @@ class Chances(unittest.TestCase):
                 self.assertEqual(set(got), set(want), where + ": itens no disco != configuração")
                 self.assertEqual(set(got_core), set(core), where + ": categorias no disco != configuração")
                 for k in want:
-                    self.assertAlmostEqual(got[k], want[k], delta=max(0.5e-5, 0.005 * want[k]), msg="%s %s" % (where, k))
+                    self.assertAlmostEqual(got[k], want[k], delta=max(0.5e-5, 0.005 * want[k]),
+                                           msg="%s %s" % (where, k))
                 for k in core:
                     self.assertAlmostEqual(got_core[k], core[k], places=9, msg="%s [%s]" % (where, k))
 
@@ -186,7 +198,9 @@ class Chances(unittest.TestCase):
 
 
 class Overflow(unittest.TestCase):
-    """Nº de pilhas por container (distribuição exata, Sorte 0): core + First Aid + mochilas + lanternas + sucata do AMC."""
+    """Nº de pilhas por container (distribuição exata, Sorte 0).
+
+    Soma core + First Aid + mochilas + lanternas + sucata do AMC."""
     LIMIT = 1e-5
 
     def test_nine_slot_containers(self):
@@ -246,7 +260,8 @@ class Overflow(unittest.TestCase):
             d = [1.0]
             for _ in range(k):
                 d = self._conv(d, one)
-            out = [(out[i] if i < len(out) else 0) + pk * (d[i] if i < len(d) else 0) for i in range(max(len(out), len(d)))]
+            out = [(out[i] if i < len(out) else 0) + pk * (d[i] if i < len(d) else 0)
+                   for i in range(max(len(out), len(d)))]
         chance = 1.0
         for c in p.get("conditions", []):
             if c["condition"] == "minecraft:random_chance":
